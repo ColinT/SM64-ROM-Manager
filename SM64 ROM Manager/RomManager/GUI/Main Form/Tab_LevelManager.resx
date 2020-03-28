@@ -517,7 +517,7 @@
     <value>5</value>
   </data>
   <data name="ButtonX_EditFast3D.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="ButtonX_EditFast3D.Location" type="System.Drawing.Point, System.Drawing">
     <value>5, 75</value>
