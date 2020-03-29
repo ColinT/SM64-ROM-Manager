@@ -3158,7 +3158,12 @@ namespace SM64_ROM_Manager.LevelEditor
 
         private void ButtonItem_GeolayoutScriptDumps_Click(object sender, EventArgs e)
         {
+            var frm = new FormScriptDumps();
 
+            foreach (var kvp in GeolayoutScriptDumps)
+                frm.AddGeolayoutScript(kvp.Key, kvp.Value);
+
+            frm.Show();
         }
 
     }
