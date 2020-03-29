@@ -3142,7 +3142,7 @@ namespace SM64_ROM_Manager.LevelEditor
             var frm = new TextureEditor(Rommgr, otherTextures_Categories.ToArray());
 
             // Update textures
-            frm.TextureReplaced += (_,__) =>
+            frm.TextureReplaced += (_, __) =>
             {
                 maps.UpdateTexturesOfCurrentModel(dic);
                 dic = maps.TakeSnapshotOfCurrentModelTextures();
