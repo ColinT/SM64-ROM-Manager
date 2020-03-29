@@ -37,7 +37,6 @@
             this.ribbonControl1 = new DevComponents.DotNetBar.RibbonControl();
             this.bar1 = new DevComponents.DotNetBar.Bar();
             this.SliderItem_Zoom = new DevComponents.DotNetBar.SliderItem();
-            this.buttonItem1 = new DevComponents.DotNetBar.ButtonItem();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ScriptTree)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bar1)).BeginInit();
@@ -51,7 +50,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(5, 31);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(774, 402);
+            this.panel1.Size = new System.Drawing.Size(790, 445);
             this.panel1.TabIndex = 0;
             // 
             // RichTextBoxEx_Script
@@ -68,9 +67,8 @@
             this.RichTextBoxEx_Script.ReadOnly = true;
             this.RichTextBoxEx_Script.Rtf = "{\\rtf1\\ansi\\ansicpg1252\\deff0\\deflang1031{\\fonttbl{\\f0\\fnil\\fcharset0 Consolas;}}" +
     "\r\n\\viewkind4\\uc1\\pard\\f0\\fs17\\par\r\n}\r\n";
-            this.RichTextBoxEx_Script.Size = new System.Drawing.Size(579, 402);
+            this.RichTextBoxEx_Script.Size = new System.Drawing.Size(595, 445);
             this.RichTextBoxEx_Script.TabIndex = 0;
-            this.RichTextBoxEx_Script.ZoomFactor = 1.2F;
             // 
             // ScriptTree
             // 
@@ -88,7 +86,7 @@
             this.ScriptTree.NodesConnector = this.nodeConnector1;
             this.ScriptTree.NodeStyle = this.elementStyle1;
             this.ScriptTree.PathSeparator = ";";
-            this.ScriptTree.Size = new System.Drawing.Size(195, 402);
+            this.ScriptTree.Size = new System.Drawing.Size(195, 445);
             this.ScriptTree.Styles.Add(this.elementStyle1);
             this.ScriptTree.TabIndex = 1;
             this.ScriptTree.Text = "advTree1";
@@ -117,7 +115,7 @@
             this.ribbonControl1.Location = new System.Drawing.Point(5, 1);
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.Padding = new System.Windows.Forms.Padding(0, 0, 0, 3);
-            this.ribbonControl1.Size = new System.Drawing.Size(774, 30);
+            this.ribbonControl1.Size = new System.Drawing.Size(790, 30);
             this.ribbonControl1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.ribbonControl1.SystemText.MaximizeRibbonText = "&Maximize the Ribbon";
             this.ribbonControl1.SystemText.MinimizeRibbonText = "Mi&nimize the Ribbon";
@@ -146,11 +144,10 @@
             this.bar1.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.bar1.IsMaximized = false;
             this.bar1.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.SliderItem_Zoom,
-            this.buttonItem1});
-            this.bar1.Location = new System.Drawing.Point(5, 433);
+            this.SliderItem_Zoom});
+            this.bar1.Location = new System.Drawing.Point(5, 476);
             this.bar1.Name = "bar1";
-            this.bar1.Size = new System.Drawing.Size(774, 26);
+            this.bar1.Size = new System.Drawing.Size(790, 22);
             this.bar1.Stretch = true;
             this.bar1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.bar1.TabIndex = 2;
@@ -159,23 +156,21 @@
             // SliderItem_Zoom
             // 
             this.SliderItem_Zoom.ItemAlignment = DevComponents.DotNetBar.eItemAlignment.Far;
+            this.SliderItem_Zoom.LabelWidth = 75;
             this.SliderItem_Zoom.Maximum = 500;
+            this.SliderItem_Zoom.Minimum = 5;
             this.SliderItem_Zoom.Name = "SliderItem_Zoom";
             this.SliderItem_Zoom.Step = 5;
-            this.SliderItem_Zoom.Text = "Zoom:";
+            this.SliderItem_Zoom.Text = "Zoom: 100%";
             this.SliderItem_Zoom.TrackMarker = false;
             this.SliderItem_Zoom.Value = 100;
-            // 
-            // buttonItem1
-            // 
-            this.buttonItem1.Name = "buttonItem1";
-            this.buttonItem1.Text = "100%";
+            this.SliderItem_Zoom.ValueChanged += new System.EventHandler(this.SliderItem_Zoom_ValueChanged);
             // 
             // FormScriptDumps
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 461);
+            this.ClientSize = new System.Drawing.Size(800, 500);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.ribbonControl1);
             this.Controls.Add(this.bar1);
@@ -202,6 +197,5 @@
         private DevComponents.DotNetBar.RibbonControl ribbonControl1;
         private DevComponents.DotNetBar.Bar bar1;
         private DevComponents.DotNetBar.SliderItem SliderItem_Zoom;
-        private DevComponents.DotNetBar.ButtonItem buttonItem1;
     }
 }

@@ -3160,8 +3160,11 @@ namespace SM64_ROM_Manager.LevelEditor
         {
             var frm = new FormScriptDumps();
 
+            foreach (var area in CLevel.Areas)
+                frm.AddAreaGeolayoutScript(area.AreaID, area.Geolayout.Geolayoutscript);
+
             foreach (var kvp in GeolayoutScriptDumps)
-                frm.AddGeolayoutScript(kvp.Key, kvp.Value);
+                frm.AddObjectGeolayoutScript(kvp.Key, kvp.Value);
 
             frm.Show();
         }

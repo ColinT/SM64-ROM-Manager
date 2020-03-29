@@ -20,7 +20,7 @@ namespace SM64_ROM_Manager.LevelEditor
 
         // F i e l d s
 
-        private readonly Dictionary<byte, Geolayoutscript> dicGeolayoutScripts = new Dictionary<byte, Geolayoutscript>();
+        private readonly Dictionary<int, Geolayoutscript> dicGeolayoutScripts = new Dictionary<int, Geolayoutscript>();
 
         // D e f a u l t   N o d e s
 
@@ -52,17 +52,29 @@ namespace SM64_ROM_Manager.LevelEditor
             parent.Nodes.Add(n);
         }
 
-        public void AddGeolayoutScript(byte modelID, Geolayoutscript script)
+        public void AddAreaGeolayoutScript(byte areaID, Geolayoutscript script)
+        {
+            int id = areaID * -1;
+
+            dicGeolayoutScripts.Add(id, script);
+            AddSriptNode(
+                id,
+                $"Area {TextFromValue(areaID)} ({TextFromValue(script.FirstOrDefault()?.RomAddress ?? 0)})",
+                nGeolayoutScripts.Text + id.ToString(),
+                nGeolayoutScripts);
+        }
+
+        public void AddObjectGeolayoutScript(byte modelID, Geolayoutscript script)
         {
             dicGeolayoutScripts.Add(modelID, script);
             AddSriptNode(
-                modelID,
+                (int)modelID,
                 $"{TextFromValue(modelID, charCount:3)} ({TextFromValue(script.FirstOrDefault()?.RomAddress ?? 0)})",
                 nGeolayoutScripts.Text + modelID.ToString(),
                 nGeolayoutScripts);
         }
 
-        private void ShowGeolayoutScript(byte modelID)
+        private void ShowGeolayoutScript(int modelID)
         {
             var sw = new StringWriter();
 
@@ -79,11 +91,21 @@ namespace SM64_ROM_Manager.LevelEditor
 
         private void ScriptTree_AfterNodeSelect(object sender, AdvTreeNodeEventArgs e)
         {
-            if (e.Node.Parent == nGeolayoutScripts && e.Node.Tag is byte)
-            {
-                ShowGeolayoutScript((byte)e.Node.Tag);
-            }
+            if (e.Node.Parent == nGeolayoutScripts)
+                ShowGeolayoutScript((int)e.Node.Tag);
+            else
+                RichTextBoxEx_Script.Text = string.Empty;
         }
 
+        private void ButtonItem_ZoomTo100Percent_Click(object sender, EventArgs e)
+        {
+            SliderItem_Zoom.Value = 100;
+        }
+
+        private void SliderItem_Zoom_ValueChanged(object sender, EventArgs e)
+        {
+            RichTextBoxEx_Script.ZoomFactor = (float)SliderItem_Zoom.Value / 100;
+            SliderItem_Zoom.Text = "Zoom: " + SliderItem_Zoom.Value.ToString() + "%";
+        }
     }
 }
