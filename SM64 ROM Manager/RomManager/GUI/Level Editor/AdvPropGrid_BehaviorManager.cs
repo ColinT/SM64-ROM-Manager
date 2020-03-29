@@ -503,7 +503,7 @@ namespace SM64_ROM_Manager.LevelEditor
 
         private void ProvideBParamContentList(object osender, EventArgs e)
         {
-            var sender = osender as ContentSelectorEditor.ComboBoxEditor;
+            var sender = osender as ContentSelectorEditor.ComboBoxEditor;            
             uint addr = CurBehavAddr;
             string bpname = "";
 
