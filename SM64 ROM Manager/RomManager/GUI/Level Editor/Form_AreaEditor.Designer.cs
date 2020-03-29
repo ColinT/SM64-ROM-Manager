@@ -1114,11 +1114,6 @@ namespace SM64_ROM_Manager.LevelEditor
             resources.ApplyResources(this.AdvPropertyGrid1, "AdvPropertyGrid1");
             this.AdvPropertyGrid1.GridLinesColor = System.Drawing.Color.WhiteSmoke;
             this.AdvPropertyGrid1.Name = "AdvPropertyGrid1";
-            this.SuperTooltip1.SetSuperTooltip(this.AdvPropertyGrid1, ((DevComponents.DotNetBar.SuperTooltipInfo)(resources.GetObject("AdvPropertyGrid1.SuperTooltip"))));
-            this.AdvPropertyGrid1.SystemText.AlphabeticalToolbarTooltip = resources.GetString("AdvPropertyGrid1.SystemText.AlphabeticalToolbarTooltip");
-            this.AdvPropertyGrid1.SystemText.CategorizeToolbarTooltip = resources.GetString("AdvPropertyGrid1.SystemText.CategorizeToolbarTooltip");
-            this.AdvPropertyGrid1.SystemText.ErrorSettingPropertyValueTooltip = resources.GetString("AdvPropertyGrid1.SystemText.ErrorSettingPropertyValueTooltip");
-            this.AdvPropertyGrid1.SystemText.SearchBoxWatermarkText = resources.GetString("AdvPropertyGrid1.SystemText.SearchBoxWatermarkText");
             this.AdvPropertyGrid1.PropertyValueChanged += new System.ComponentModel.PropertyChangedEventHandler(this.AdvPropertyGrid1_PropertyValueChanged);
             this.AdvPropertyGrid1.PropertyValueChanging += new DevComponents.DotNetBar.PropertyValueChangingEventHandler(this.AdvPropertyGrid1_PropertyValueChanging);
             // 
