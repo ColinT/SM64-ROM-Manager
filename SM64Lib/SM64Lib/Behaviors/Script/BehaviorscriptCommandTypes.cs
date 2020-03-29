@@ -1,5 +1,4 @@
-﻿
-namespace SM64Lib.Behavior.Script
+﻿namespace SM64Lib.Behaviors.Script
 {
     public enum BehaviorscriptCommandTypes
     {

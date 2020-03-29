@@ -127,10 +127,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="SM64Lib\Behavior\Script\Behaviorscript.cs" />
-    <Compile Include="SM64Lib\Behavior\Script\BehaviorscriptCommand.cs" />
-    <Compile Include="SM64Lib\Behavior\Script\BehaviorscriptCommandCollection.cs" />
-    <Compile Include="SM64Lib\Behavior\Script\BehaviorscriptCommandTypes.cs" />
+    <Compile Include="SM64Lib\Behaviors\Behavior.cs" />
+    <Compile Include="SM64Lib\Behaviors\BehaviorCreationTypes.cs" />
+    <Compile Include="SM64Lib\Behaviors\Script\Behaviorscript.cs" />
+    <Compile Include="SM64Lib\Behaviors\Script\BehaviorscriptCommand.cs" />
+    <Compile Include="SM64Lib\Behaviors\Script\BehaviorscriptCommandCollection.cs" />
+    <Compile Include="SM64Lib\Behaviors\Script\BehaviorscriptCommandTypes.cs" />
     <Compile Include="SM64Lib\Configuration\CustomObjectConfig.cs" />
     <Compile Include="SM64Lib\Configuration\LevelAreaConfig.cs" />
     <Compile Include="SM64Lib\Configuration\LevelConfig.cs" />
