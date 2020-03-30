@@ -158,9 +158,9 @@
             this.SliderItem_Zoom.ItemAlignment = DevComponents.DotNetBar.eItemAlignment.Far;
             this.SliderItem_Zoom.LabelWidth = 75;
             this.SliderItem_Zoom.Maximum = 500;
-            this.SliderItem_Zoom.Minimum = 5;
+            this.SliderItem_Zoom.Minimum = 10;
             this.SliderItem_Zoom.Name = "SliderItem_Zoom";
-            this.SliderItem_Zoom.Step = 5;
+            this.SliderItem_Zoom.Step = 10;
             this.SliderItem_Zoom.Text = "Zoom: 100%";
             this.SliderItem_Zoom.TrackMarker = false;
             this.SliderItem_Zoom.Value = 100;

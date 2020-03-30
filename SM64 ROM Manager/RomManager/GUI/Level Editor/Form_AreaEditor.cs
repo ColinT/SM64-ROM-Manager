@@ -41,6 +41,7 @@ using SM64Lib.TextValueConverter;
 using Z.Collections.Extensions;
 using Z.Core.Extensions;
 using SM64Lib.Geolayout.Script;
+using SM64Lib.Model.Fast3D.DisplayLists.Script;
 
 namespace SM64_ROM_Manager.LevelEditor
 {
@@ -65,6 +66,8 @@ namespace SM64_ROM_Manager.LevelEditor
         internal List<string> MyLevelsList { get; private set; } = new List<string>();
         internal List<byte> KnownModelIDs { get; private set; } = new List<byte>();
         internal Dictionary<byte, Geolayoutscript> GeolayoutScriptDumps { get; private set; } = new Dictionary<byte, Geolayoutscript>();
+        internal Dictionary<byte, DisplayListScript[]> ObjectDisplaylistScriptDumps { get; private set; } = new Dictionary<byte, DisplayListScript[]>();
+        internal Dictionary<byte, DisplayListScript[]> AreaDisplaylistScriptDumps { get; private set; } = new Dictionary<byte, DisplayListScript[]>();
 
         // Modules
         internal ObjectControlling objectControlling;
@@ -276,6 +279,7 @@ namespace SM64_ROM_Manager.LevelEditor
                 CircularProgress1.Stop();
             }
         }
+
         public Form_AreaEditor(SM64Lib.RomManager rommgr, Level Level, byte LevelID, byte AreaID)
         {
             Timer_ListViewEx_Objects_SelectionChanged = new System.Timers.Timer() { AutoReset = false, SynchronizingObject = this, Interval = 40 };
@@ -333,6 +337,9 @@ namespace SM64_ROM_Manager.LevelEditor
 
             // Resume drawing
             ResumeLayout();
+
+            // Add event to remember loaded area displaylist dumps
+            General.LoadedAreaVisualMapDisplayLists += (dls) => Invoke(new Action(() => AreaDisplaylistScriptDumps.Add(CArea.AreaID, dls.Select((n) => n.Script).ToArray())));
         }
 
         internal void ButtonItem10_Click(object sender, EventArgs e)
@@ -344,10 +351,9 @@ namespace SM64_ROM_Manager.LevelEditor
         {
             maps.ReleaseBuffers();
 
-            foreach (var item in GeolayoutScriptDumps)
-            {
-                item.Value.Close();
-            }
+            GeolayoutScriptDumps.ForEach((n) => n.Value.Close());
+            ObjectDisplaylistScriptDumps.ForEach((m) => m.Value.ForEach((n) => n.Close()));
+            AreaDisplaylistScriptDumps.ForEach((m) => m.Value.ForEach((n) => n.Close()));
         }
 
         internal async void Form_AreaEditor_Shown(object sender, EventArgs e)
@@ -615,11 +621,12 @@ namespace SM64_ROM_Manager.LevelEditor
             AddObject3DWithRendererIfNotNull(mdl, obj.ModelID);
         }
 
-        private async Task LoadDisplaylist(Geopointer pointer, Object3D mdl)
+        private async Task<DisplayList> LoadDisplaylist(Geopointer pointer, Object3D mdl)
         {
             var dl = new DisplayList();
             await dl.TryFromStreamAsync(pointer, Rommgr, default);
             await dl.TryToObject3DAsync(mdl, Rommgr, default);
+            return dl;
         }
 
         private void AddObject3DWithRendererIfNotNull(Object3D mdl, byte modelID)
@@ -631,43 +638,41 @@ namespace SM64_ROM_Manager.LevelEditor
             }
         }
 
-        private async Task ParseGeolayoutAndLoadModels(SM64Lib.Geolayout.Script.Geolayoutscript glscript, byte modelID)
+        private async Task ParseGeolayoutAndLoadModels(Geolayoutscript glscript, byte modelID)
         {
             var mdlScale = System.Numerics.Vector3.One;
             int mdlScaleNodeIndex = -1;
             int nodeIndex = 0;
             var mdl = new Object3D();
-            foreach (SM64Lib.Geolayout.Script.GeolayoutCommand fegmd in glscript)
+            var dls = new List<DisplayList>();
+
+            foreach (GeolayoutCommand fegmd in glscript)
             {
                 var gmd = fegmd;
                 switch (gmd.CommandType)
                 {
-                    case SM64Lib.Geolayout.Script.GeolayoutCommandTypes.LoadDisplaylist:
+                    case GeolayoutCommandTypes.LoadDisplaylist:
                         {
                             byte geolayer = cgLoadDisplayList.GetDrawingLayer(ref gmd);
                             int segAddr = cgLoadDisplayList.GetSegGeopointer(ref gmd);
                             if (segAddr > 0)
                             {
-                                await LoadDisplaylist(new Geopointer(geolayer, segAddr, mdlScale, System.Numerics.Vector3.Zero), mdl);
+                                dls.Add(await LoadDisplaylist(new Geopointer(geolayer, segAddr, mdlScale, System.Numerics.Vector3.Zero), mdl));
                             }
-
                             break;
                         }
-
-                    case SM64Lib.Geolayout.Script.GeolayoutCommandTypes.LoadDisplaylistWithOffset:
+                    case GeolayoutCommandTypes.LoadDisplaylistWithOffset:
                         {
                             byte geolayer = cgLoadDisplayListWithOffset.GetDrawingLayer(ref gmd);
                             int segAddr = Conversions.ToInteger(cgLoadDisplayListWithOffset.GetSegGeopointer(ref gmd));
                             if (segAddr > 0)
                             {
                                 var geop = new Geopointer(geolayer, segAddr, mdlScale, cgLoadDisplayListWithOffset.GetOffset(ref gmd));
-                                await LoadDisplaylist(geop, mdl);
+                                dls.Add(await LoadDisplaylist(geop, mdl));
                             }
-
                             break;
                         }
-
-                    case SM64Lib.Geolayout.Script.GeolayoutCommandTypes.Scale2:
+                    case GeolayoutCommandTypes.Scale2:
                         {
                             gmd.Position = 4;
                             uint scale = gmd.ReadUInt32();
@@ -675,14 +680,12 @@ namespace SM64_ROM_Manager.LevelEditor
                             mdlScaleNodeIndex = nodeIndex;
                             break;
                         }
-
-                    case SM64Lib.Geolayout.Script.GeolayoutCommandTypes.StartOfNode:
+                    case GeolayoutCommandTypes.StartOfNode:
                         {
                             nodeIndex += 1;
                             break;
                         }
-
-                    case SM64Lib.Geolayout.Script.GeolayoutCommandTypes.EndOfNode:
+                    case GeolayoutCommandTypes.EndOfNode:
                         {
                             nodeIndex -= 1;
                             break;
@@ -695,6 +698,9 @@ namespace SM64_ROM_Manager.LevelEditor
                     mdlScale = System.Numerics.Vector3.One;
                 }
             }
+
+            if (dls.Any())
+                ObjectDisplaylistScriptDumps.Add(modelID, dls.Select((n) => n.Script).ToArray());
 
             AddObject3DWithRendererIfNotNull(mdl, modelID);
         }
@@ -3165,6 +3171,12 @@ namespace SM64_ROM_Manager.LevelEditor
 
             foreach (var kvp in GeolayoutScriptDumps)
                 frm.AddObjectGeolayoutScript(kvp.Key, kvp.Value);
+
+            foreach (var kvp in AreaDisplaylistScriptDumps)
+                frm.AddAreaDisplaylistScripts(kvp.Key, kvp.Value);
+
+            foreach (var kvp in ObjectDisplaylistScriptDumps)
+                frm.AddObjectDisplaylistScripts(kvp.Key, kvp.Value);
 
             frm.Show();
         }
