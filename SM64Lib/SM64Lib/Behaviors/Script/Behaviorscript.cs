@@ -1,5 +1,4 @@
-﻿
-using SM64Lib.Data;
+﻿using SM64Lib.Data;
 
 namespace SM64Lib.Behaviors.Script
 {
@@ -8,8 +7,29 @@ namespace SM64Lib.Behaviors.Script
 
         public void Read(BinaryData data, int address)
         {
+            bool ende = false;
+
+            Close();
+            Clear();
             data.Position = address;
-            //...
+
+            while (!ende)
+            {
+                // Get command infos
+                var cmdType = (BehaviorscriptCommandTypes)data.ReadByte();
+                int cmdLength = BehaviorscriptCommand.GetCommandLength(cmdType);
+                bool isEndCmd = BehaviorscriptCommand.IsEndCommand(cmdType);
+
+                // Reset position
+                data.Position -= 1;
+
+                // Read full command
+                byte[] buf = new byte[cmdLength];
+                data.Read(buf);
+
+                // Create & add command
+                Add(new BehaviorscriptCommand(buf));
+            }
         }
 
         public void Write(BinaryData data, int address)
@@ -17,16 +37,11 @@ namespace SM64Lib.Behaviors.Script
             data.Position = address;
 
             foreach (BehaviorscriptCommand command in this)
-                data.Write(command.ToArray());
-        }
-
-        public static int GetCommandLength(BehaviorscriptCommandTypes type)
-        {
-            switch (type)
             {
-                //...
-                default:
-                    throw new System.Exception("Command type not found!");
+                var cmdLength = BehaviorscriptCommand.GetCommandLength(command.CommandType);
+                if (command.Length != cmdLength)
+                    command.SetLength(cmdLength);
+                data.Write(command.ToArray());
             }
         }
 
