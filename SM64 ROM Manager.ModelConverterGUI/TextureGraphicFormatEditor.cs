@@ -51,7 +51,6 @@ namespace SM64_ROM_Manager.ModelConverterGUI
             LoadDisplayListTypes();
             LoadN64TextureFormatTypes();
             LoadRotateFlip();
-            LoadFaceCullingModes();
             base.UpdateAmbientColors();
             hasInit = true;
             ResumeLayout();
@@ -94,12 +93,6 @@ namespace SM64_ROM_Manager.ModelConverterGUI
             }
 
             ComboBoxEx_RotateFlip.SelectedIndex = 0;
-        }
-
-        private void LoadFaceCullingModes()
-        {
-            ComboBoxEx_FaceCullingMode.Items.Add(new ComboItem() { Text = "None", Tag = FaceCullingMode.NoCulling });
-            ComboBoxEx_FaceCullingMode.Items.Add(new ComboItem() { Text = "Back", Tag = FaceCullingMode.Back });
         }
 
         private void LoadTexturesFromModel()
@@ -222,6 +215,7 @@ namespace SM64_ROM_Manager.ModelConverterGUI
                 CheckBoxX_EnableClampS.Checked = curEntry.EnableClampS;
                 CheckBoxX_EnableClampT.Checked = curEntry.EnableClampT;
                 CheckBoxX_EnableCrystalEffect.Checked = curEntry.EnableCrystalEffect;
+                CheckBoxX_EnableTwoSidedFaces.Checked = curEntry.FaceCullingMode != FaceCullingMode.Back;
                 ComboBoxEx_RotateFlip.SelectedItem = GetRotateFlipComboItem(curEntry.RotateFlip);
 
                 foreach (ComboItem item in ComboBoxEx_SelectDisplaylist.Items)
@@ -240,12 +234,6 @@ namespace SM64_ROM_Manager.ModelConverterGUI
                                 ComboBoxEx_SelectDisplaylist.SelectedItem = item;
                             break;
                     }
-                }
-
-                foreach (ComboItem item in ComboBoxEx_FaceCullingMode.Items)
-                {
-                    if((FaceCullingMode)item.Tag == curEntry.FaceCullingMode)
-                        ComboBoxEx_FaceCullingMode.SelectedItem = item;
                 }
 
                 bool enTexTools = !colorImages.Contains(curItem.ImageIndex);
@@ -316,7 +304,7 @@ namespace SM64_ROM_Manager.ModelConverterGUI
                     curEntry.EnableClampT = CheckBoxX_EnableClampT.Checked;
                     curEntry.EnableCrystalEffect = CheckBoxX_EnableCrystalEffect.Checked;
                     curEntry.RotateFlip = (RotateFlipType)((ComboItem)ComboBoxEx_RotateFlip.SelectedItem).Tag;
-                    curEntry.FaceCullingMode = (FaceCullingMode)((ComboItem)ComboBoxEx_FaceCullingMode.SelectedItem).Tag;
+                    curEntry.FaceCullingMode = CheckBoxX_EnableTwoSidedFaces.Checked ? FaceCullingMode.NoCulling : FaceCullingMode.Back;
 
                     var selDL = ((ComboItem)ComboBoxEx_SelectDisplaylist.SelectedItem).Tag;
                     if (selDL is DefaultGeolayers)

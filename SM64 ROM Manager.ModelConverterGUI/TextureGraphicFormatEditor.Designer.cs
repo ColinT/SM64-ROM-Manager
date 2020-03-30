@@ -57,12 +57,11 @@ namespace SM64_ROM_Manager.ModelConverterGUI
             this.LabelX6 = new DevComponents.DotNetBar.LabelX();
             this.LabelX7 = new DevComponents.DotNetBar.LabelX();
             this.Panel1 = new System.Windows.Forms.Panel();
-            this.ComboBoxEx_FaceCullingMode = new DevComponents.DotNetBar.Controls.ComboBoxEx();
-            this.labelX8 = new DevComponents.DotNetBar.LabelX();
+            this.CheckBoxX_EnableTwoSidedFaces = new DevComponents.DotNetBar.Controls.CheckBoxX();
+            this.LabelX_CollisionType = new DevComponents.DotNetBar.LabelX();
             this.ContextMenuBar1 = new DevComponents.DotNetBar.ContextMenuBar();
             this.ButtonItem_CM_SelDL = new DevComponents.DotNetBar.ButtonItem();
             this.ButtonItem1 = new DevComponents.DotNetBar.ButtonItem();
-            this.LabelX_CollisionType = new DevComponents.DotNetBar.LabelX();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox1)).BeginInit();
             this.Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ContextMenuBar1)).BeginInit();
@@ -294,12 +293,11 @@ namespace SM64_ROM_Manager.ModelConverterGUI
             this.Panel1.BackColor = System.Drawing.Color.Transparent;
             this.Panel1.Controls.Add(this.CheckBoxX_EnableClampT);
             this.Panel1.Controls.Add(this.CheckBoxX_EnableMirrorT);
-            this.Panel1.Controls.Add(this.ComboBoxEx_FaceCullingMode);
             this.Panel1.Controls.Add(this.ComboBoxEx_RotateFlip);
             this.Panel1.Controls.Add(this.Button_SaveColsettings);
-            this.Panel1.Controls.Add(this.labelX8);
             this.Panel1.Controls.Add(this.LabelX3);
             this.Panel1.Controls.Add(this.PictureBox1);
+            this.Panel1.Controls.Add(this.CheckBoxX_EnableTwoSidedFaces);
             this.Panel1.Controls.Add(this.CheckBoxX_EnableCrystalEffect);
             this.Panel1.Controls.Add(this.LabelX_CollisionType);
             this.Panel1.Controls.Add(this.CheckBoxX_EnableClampS);
@@ -318,26 +316,27 @@ namespace SM64_ROM_Manager.ModelConverterGUI
             resources.ApplyResources(this.Panel1, "Panel1");
             this.Panel1.Name = "Panel1";
             // 
-            // ComboBoxEx_FaceCullingMode
+            // CheckBoxX_EnableTwoSidedFaces
             // 
-            resources.ApplyResources(this.ComboBoxEx_FaceCullingMode, "ComboBoxEx_FaceCullingMode");
-            this.ComboBoxEx_FaceCullingMode.DisplayMember = "Text";
-            this.ComboBoxEx_FaceCullingMode.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.ComboBoxEx_FaceCullingMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ComboBoxEx_FaceCullingMode.ForeColor = System.Drawing.Color.Black;
-            this.ComboBoxEx_FaceCullingMode.FormattingEnabled = true;
-            this.ComboBoxEx_FaceCullingMode.Name = "ComboBoxEx_FaceCullingMode";
-            this.ComboBoxEx_FaceCullingMode.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.ComboBoxEx_FaceCullingMode.SelectedIndexChanged += new System.EventHandler(this.ControlsOccusUpdateTextureListItemSettings);
-            // 
-            // labelX8
-            // 
-            resources.ApplyResources(this.labelX8, "labelX8");
+            resources.ApplyResources(this.CheckBoxX_EnableTwoSidedFaces, "CheckBoxX_EnableTwoSidedFaces");
             // 
             // 
             // 
-            this.labelX8.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX8.Name = "labelX8";
+            this.CheckBoxX_EnableTwoSidedFaces.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.CheckBoxX_EnableTwoSidedFaces.FocusCuesEnabled = false;
+            this.CheckBoxX_EnableTwoSidedFaces.Name = "CheckBoxX_EnableTwoSidedFaces";
+            this.CheckBoxX_EnableTwoSidedFaces.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.CheckBoxX_EnableTwoSidedFaces.CheckedChanged += new System.EventHandler(this.ControlsOccusUpdateTextureListItemSettings);
+            // 
+            // LabelX_CollisionType
+            // 
+            resources.ApplyResources(this.LabelX_CollisionType, "LabelX_CollisionType");
+            // 
+            // 
+            // 
+            this.LabelX_CollisionType.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.LabelX_CollisionType.Name = "LabelX_CollisionType";
+            this.LabelX_CollisionType.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeXP;
             // 
             // ContextMenuBar1
             // 
@@ -365,16 +364,6 @@ namespace SM64_ROM_Manager.ModelConverterGUI
             this.ButtonItem1.Name = "ButtonItem1";
             resources.ApplyResources(this.ButtonItem1, "ButtonItem1");
             this.ButtonItem1.Click += new System.EventHandler(this.ButtonItem_EditCustomDisplaylists_Click);
-            // 
-            // LabelX_CollisionType
-            // 
-            resources.ApplyResources(this.LabelX_CollisionType, "LabelX_CollisionType");
-            // 
-            // 
-            // 
-            this.LabelX_CollisionType.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.LabelX_CollisionType.Name = "LabelX_CollisionType";
-            this.LabelX_CollisionType.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeXP;
             // 
             // TextureGraphicFormatEditor
             // 
@@ -467,8 +456,7 @@ namespace SM64_ROM_Manager.ModelConverterGUI
 
         private DevComponents.DotNetBar.ButtonItem ButtonItem_EditCustomDisplaylists;
         private DevComponents.DotNetBar.ButtonItem ButtonItem1;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx ComboBoxEx_FaceCullingMode;
-        private DevComponents.DotNetBar.LabelX labelX8;
         private DevComponents.DotNetBar.LabelX LabelX_CollisionType;
+        private DevComponents.DotNetBar.Controls.CheckBoxX CheckBoxX_EnableTwoSidedFaces;
     }
 }

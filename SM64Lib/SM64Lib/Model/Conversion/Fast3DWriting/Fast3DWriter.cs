@@ -1894,7 +1894,7 @@ namespace SM64Lib.Model.Conversion.Fast3DWriting
             needToResetCrystalEffectCommands = false;
         }
 
-        private void ImpMaterialCmds(Material mat, ref bool needToReShiftTMEM, ref bool hasCrystalEffectEnabled, ref bool needToResetCrystalEffectCommands)
+        private void ImpMaterialCmds(Material mat, ref bool needToReShiftTMEM, ref bool hasCrystalEffectEnabled, ref bool needToResetCrystalEffectCommands, ref bool disabledBackfaceCulling)
         {
             if (mat.EnableCrystalEffect && !hasCrystalEffectEnabled)
             {
@@ -1916,10 +1916,16 @@ namespace SM64Lib.Model.Conversion.Fast3DWriting
                 ImpF3D($"F0 00 00 00 01 {Hex(num >> 8 & 0xFF)} {Hex(num & 0xFF)} 00");
             }
 
-            if ((mat.FaceCullingMode & FaceCullingMode.Back) != FaceCullingMode.Back)
+            if (((mat.FaceCullingMode & FaceCullingMode.Back) != FaceCullingMode.Back) && !disabledBackfaceCulling)
+            {
                 ImpF3D($"B6 00 00 00 00 00 20 00"); // Disable back face culling
-            //if ((mat.FaceCullingMode & FaceCullingMode.Front) == FaceCullingMode.Front)
-            //    ImpF3D($"B7 00 00 00 00 00 10 00"); // Enable front face culling
+                disabledBackfaceCulling = true;
+            }
+            else if (disabledBackfaceCulling)
+            {
+                ImpF3D($"B7 00 00 00 00 00 20 00"); // Enable back face culling
+                disabledBackfaceCulling = false;
+            }
 
             if (mat.HasTexture)
             {
@@ -2030,7 +2036,7 @@ namespace SM64Lib.Model.Conversion.Fast3DWriting
             bool needToRevertShiftTMEM = false;
             Material lastMaterial = null;
             uint lastFBColor = default;
-            bool hasCrystalEffectEnabled, needToResetCrystalEffectCommands;
+            bool hasCrystalEffectEnabled, needToResetCrystalEffectCommands, disabledBackfaceCulling;            
             bool ciEnabled;
             var citextypes = new[] { N64Codec.CI4, N64Codec.CI8 };
             string lastCmdFC;
@@ -2192,6 +2198,7 @@ namespace SM64Lib.Model.Conversion.Fast3DWriting
                 enabledVertexColors = false;
                 hasCrystalEffectEnabled = false;
                 needToResetCrystalEffectCommands = false;
+                disabledBackfaceCulling = false;
                 ciEnabled = false;
                 lastMaterial = null;
                 lastFBColor = default;
@@ -2247,7 +2254,7 @@ namespace SM64Lib.Model.Conversion.Fast3DWriting
                             }
                         }
 
-                        ImpMaterialCmds(mp.Material, ref needToRevertShiftTMEM, ref hasCrystalEffectEnabled, ref needToResetCrystalEffectCommands);
+                        ImpMaterialCmds(mp.Material, ref needToRevertShiftTMEM, ref hasCrystalEffectEnabled, ref needToResetCrystalEffectCommands, ref disabledBackfaceCulling);
                     }
 
                     int grpOff = 0;
