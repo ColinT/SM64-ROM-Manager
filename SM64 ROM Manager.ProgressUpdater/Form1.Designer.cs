@@ -37,303 +37,184 @@ namespace SM64_ROM_Manager.ProgressUpdater
         [DebuggerStepThrough()]
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
-            var resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            Panel1 = new Panel();
-            ButtonX_PasteClipboard = new DevComponents.DotNetBar.ButtonX();
-            ButtonX_PasteClipboard.Click += new EventHandler(ButtonX1_Click);
-            PictureBox1 = new PictureBox();
-            Panel2 = new Panel();
-            ButtonX_Upload = new DevComponents.DotNetBar.ButtonX();
-            ButtonX_Upload.Click += new EventHandler(ButtonX_Upload_Click);
-            LabelX5 = new DevComponents.DotNetBar.LabelX();
-            LabelX2 = new DevComponents.DotNetBar.LabelX();
-            TextBoxX_WebDavUploadPwd = new DevComponents.DotNetBar.Controls.TextBoxX();
-            TextBoxX_ProxPwd = new DevComponents.DotNetBar.Controls.TextBoxX();
-            LabelX3 = new DevComponents.DotNetBar.LabelX();
-            TextBoxX_WebDavUploadUri = new DevComponents.DotNetBar.Controls.TextBoxX();
-            LabelX4 = new DevComponents.DotNetBar.LabelX();
-            TextBoxX_WebDavUploadUsr = new DevComponents.DotNetBar.Controls.TextBoxX();
-            LabelX6 = new DevComponents.DotNetBar.LabelX();
-            TextBoxX_Version = new DevComponents.DotNetBar.Controls.TextBoxX();
-            LabelX1 = new DevComponents.DotNetBar.LabelX();
-            TextBoxX_ProxUsr = new DevComponents.DotNetBar.Controls.TextBoxX();
-            StyleManager1 = new DevComponents.DotNetBar.StyleManager(components);
-            Panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)PictureBox1).BeginInit();
-            Panel2.SuspendLayout();
-            SuspendLayout();
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            this.Panel1 = new System.Windows.Forms.Panel();
+            this.ButtonX_PasteClipboard = new DevComponents.DotNetBar.ButtonX();
+            this.PictureBox1 = new System.Windows.Forms.PictureBox();
+            this.Panel2 = new System.Windows.Forms.Panel();
+            this.ButtonX_SetupWebDav = new DevComponents.DotNetBar.ButtonX();
+            this.circularProgress1 = new DevComponents.DotNetBar.Controls.CircularProgress();
+            this.ButtonX_DiscordSetup = new DevComponents.DotNetBar.ButtonX();
+            this.ButtonX_Upload = new DevComponents.DotNetBar.ButtonX();
+            this.LabelX6 = new DevComponents.DotNetBar.LabelX();
+            this.StyleManager1 = new DevComponents.DotNetBar.StyleManager(this.components);
+            this.ComboBoxEx_Version = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.Panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PictureBox1)).BeginInit();
+            this.Panel2.SuspendLayout();
+            this.SuspendLayout();
             // 
             // Panel1
             // 
-            Panel1.BackColor = Color.Transparent;
-            Panel1.Controls.Add(ButtonX_PasteClipboard);
-            Panel1.Controls.Add(PictureBox1);
-            Panel1.Controls.Add(Panel2);
-            Panel1.Dock = DockStyle.Fill;
-            Panel1.Location = new Point(0, 0);
-            Panel1.Name = "Panel1";
-            Panel1.Size = new Size(694, 508);
-            Panel1.TabIndex = 0;
+            this.Panel1.BackColor = System.Drawing.Color.Transparent;
+            this.Panel1.Controls.Add(this.ButtonX_PasteClipboard);
+            this.Panel1.Controls.Add(this.PictureBox1);
+            this.Panel1.Controls.Add(this.Panel2);
+            this.Panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Panel1.Location = new System.Drawing.Point(0, 0);
+            this.Panel1.Name = "Panel1";
+            this.Panel1.Size = new System.Drawing.Size(694, 508);
+            this.Panel1.TabIndex = 0;
             // 
             // ButtonX_PasteClipboard
             // 
-            ButtonX_PasteClipboard.AccessibleRole = AccessibleRole.PushButton;
-            ButtonX_PasteClipboard.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            ButtonX_PasteClipboard.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            ButtonX_PasteClipboard.Location = new Point(562, 3);
-            ButtonX_PasteClipboard.Name = "ButtonX_PasteClipboard";
-            ButtonX_PasteClipboard.Size = new Size(129, 23);
-            ButtonX_PasteClipboard.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            ButtonX_PasteClipboard.TabIndex = 0;
-            ButtonX_PasteClipboard.Text = "Paste from Clipboard";
+            this.ButtonX_PasteClipboard.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.ButtonX_PasteClipboard.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.ButtonX_PasteClipboard.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.ButtonX_PasteClipboard.Location = new System.Drawing.Point(562, 3);
+            this.ButtonX_PasteClipboard.Name = "ButtonX_PasteClipboard";
+            this.ButtonX_PasteClipboard.Size = new System.Drawing.Size(129, 23);
+            this.ButtonX_PasteClipboard.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.ButtonX_PasteClipboard.TabIndex = 0;
+            this.ButtonX_PasteClipboard.Text = "Paste from Clipboard";
+            this.ButtonX_PasteClipboard.Click += new System.EventHandler(this.ButtonX1_Click);
             // 
             // PictureBox1
             // 
-            PictureBox1.Dock = DockStyle.Fill;
-            PictureBox1.Location = new Point(200, 0);
-            PictureBox1.Name = "PictureBox1";
-            PictureBox1.Size = new Size(494, 508);
-            PictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            PictureBox1.TabIndex = 0;
-            PictureBox1.TabStop = false;
+            this.PictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.PictureBox1.Location = new System.Drawing.Point(200, 0);
+            this.PictureBox1.Name = "PictureBox1";
+            this.PictureBox1.Size = new System.Drawing.Size(494, 508);
+            this.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.PictureBox1.TabIndex = 0;
+            this.PictureBox1.TabStop = false;
             // 
             // Panel2
             // 
-            Panel2.Controls.Add(ButtonX_Upload);
-            Panel2.Controls.Add(LabelX5);
-            Panel2.Controls.Add(LabelX2);
-            Panel2.Controls.Add(TextBoxX_WebDavUploadPwd);
-            Panel2.Controls.Add(TextBoxX_ProxPwd);
-            Panel2.Controls.Add(LabelX3);
-            Panel2.Controls.Add(TextBoxX_WebDavUploadUri);
-            Panel2.Controls.Add(LabelX4);
-            Panel2.Controls.Add(TextBoxX_WebDavUploadUsr);
-            Panel2.Controls.Add(LabelX6);
-            Panel2.Controls.Add(TextBoxX_Version);
-            Panel2.Controls.Add(LabelX1);
-            Panel2.Controls.Add(TextBoxX_ProxUsr);
-            Panel2.Dock = DockStyle.Left;
-            Panel2.Location = new Point(0, 0);
-            Panel2.Name = "Panel2";
-            Panel2.Size = new Size(200, 508);
-            Panel2.TabIndex = 1;
+            this.Panel2.Controls.Add(this.ComboBoxEx_Version);
+            this.Panel2.Controls.Add(this.ButtonX_SetupWebDav);
+            this.Panel2.Controls.Add(this.circularProgress1);
+            this.Panel2.Controls.Add(this.ButtonX_DiscordSetup);
+            this.Panel2.Controls.Add(this.ButtonX_Upload);
+            this.Panel2.Controls.Add(this.LabelX6);
+            this.Panel2.Dock = System.Windows.Forms.DockStyle.Left;
+            this.Panel2.Location = new System.Drawing.Point(0, 0);
+            this.Panel2.Name = "Panel2";
+            this.Panel2.Size = new System.Drawing.Size(200, 508);
+            this.Panel2.TabIndex = 1;
+            // 
+            // ButtonX_SetupWebDav
+            // 
+            this.ButtonX_SetupWebDav.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.ButtonX_SetupWebDav.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ButtonX_SetupWebDav.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.ButtonX_SetupWebDav.Location = new System.Drawing.Point(3, 3);
+            this.ButtonX_SetupWebDav.Name = "ButtonX_SetupWebDav";
+            this.ButtonX_SetupWebDav.Size = new System.Drawing.Size(194, 23);
+            this.ButtonX_SetupWebDav.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.ButtonX_SetupWebDav.TabIndex = 14;
+            this.ButtonX_SetupWebDav.Text = "Setup WebDav Client";
+            this.ButtonX_SetupWebDav.Click += new System.EventHandler(this.ButtonX_SetupWebDav_Click);
+            // 
+            // circularProgress1
+            // 
+            this.circularProgress1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.circularProgress1.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.circularProgress1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.circularProgress1.Location = new System.Drawing.Point(63, 217);
+            this.circularProgress1.Name = "circularProgress1";
+            this.circularProgress1.ProgressBarType = DevComponents.DotNetBar.eCircularProgressType.Dot;
+            this.circularProgress1.SetVisibleStateOnStart = true;
+            this.circularProgress1.SetVisibleStateOnStop = true;
+            this.circularProgress1.Size = new System.Drawing.Size(75, 75);
+            this.circularProgress1.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeXP;
+            this.circularProgress1.TabIndex = 13;
+            // 
+            // ButtonX_DiscordSetup
+            // 
+            this.ButtonX_DiscordSetup.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.ButtonX_DiscordSetup.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ButtonX_DiscordSetup.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.ButtonX_DiscordSetup.Location = new System.Drawing.Point(3, 32);
+            this.ButtonX_DiscordSetup.Name = "ButtonX_DiscordSetup";
+            this.ButtonX_DiscordSetup.Size = new System.Drawing.Size(194, 23);
+            this.ButtonX_DiscordSetup.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.ButtonX_DiscordSetup.TabIndex = 12;
+            this.ButtonX_DiscordSetup.Text = "Setup Discord Bot";
+            this.ButtonX_DiscordSetup.Click += new System.EventHandler(this.ButtonX_DiscordSetup_Click);
             // 
             // ButtonX_Upload
             // 
-            ButtonX_Upload.AccessibleRole = AccessibleRole.PushButton;
-            ButtonX_Upload.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            ButtonX_Upload.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            ButtonX_Upload.Location = new Point(3, 465);
-            ButtonX_Upload.Name = "ButtonX_Upload";
-            ButtonX_Upload.Size = new Size(194, 40);
-            ButtonX_Upload.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            ButtonX_Upload.TabIndex = 10;
-            ButtonX_Upload.Text = "Upload";
-            // 
-            // LabelX5
-            // 
-            LabelX5.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            // 
-            // 
-            // 
-            LabelX5.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            LabelX5.Location = new Point(3, 113);
-            LabelX5.Name = "LabelX5";
-            LabelX5.Size = new Size(194, 23);
-            LabelX5.TabIndex = 1;
-            LabelX5.Text = "WebDav Password:";
-            // 
-            // LabelX2
-            // 
-            LabelX2.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            // 
-            // 
-            // 
-            LabelX2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            LabelX2.Location = new Point(3, 223);
-            LabelX2.Name = "LabelX2";
-            LabelX2.Size = new Size(194, 23);
-            LabelX2.TabIndex = 1;
-            LabelX2.Text = "Proxy Password:";
-            // 
-            // TextBoxX_WebDavUploadPwd
-            // 
-            TextBoxX_WebDavUploadPwd.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            TextBoxX_WebDavUploadPwd.BackColor = Color.White;
-            // 
-            // 
-            // 
-            TextBoxX_WebDavUploadPwd.Border.Class = "TextBoxBorder";
-            TextBoxX_WebDavUploadPwd.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            TextBoxX_WebDavUploadPwd.DisabledBackColor = Color.White;
-            TextBoxX_WebDavUploadPwd.ForeColor = Color.Black;
-            TextBoxX_WebDavUploadPwd.Location = new Point(3, 142);
-            TextBoxX_WebDavUploadPwd.Name = "TextBoxX_WebDavUploadPwd";
-            TextBoxX_WebDavUploadPwd.PreventEnterBeep = true;
-            TextBoxX_WebDavUploadPwd.Size = new Size(194, 20);
-            TextBoxX_WebDavUploadPwd.TabIndex = 3;
-            TextBoxX_WebDavUploadPwd.UseSystemPasswordChar = true;
-            // 
-            // TextBoxX_ProxPwd
-            // 
-            TextBoxX_ProxPwd.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            TextBoxX_ProxPwd.BackColor = Color.White;
-            // 
-            // 
-            // 
-            TextBoxX_ProxPwd.Border.Class = "TextBoxBorder";
-            TextBoxX_ProxPwd.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            TextBoxX_ProxPwd.DisabledBackColor = Color.White;
-            TextBoxX_ProxPwd.ForeColor = Color.Black;
-            TextBoxX_ProxPwd.Location = new Point(3, 252);
-            TextBoxX_ProxPwd.Name = "TextBoxX_ProxPwd";
-            TextBoxX_ProxPwd.PreventEnterBeep = true;
-            TextBoxX_ProxPwd.Size = new Size(194, 20);
-            TextBoxX_ProxPwd.TabIndex = 5;
-            TextBoxX_ProxPwd.UseSystemPasswordChar = true;
-            // 
-            // LabelX3
-            // 
-            LabelX3.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            // 
-            // 
-            // 
-            LabelX3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            LabelX3.Location = new Point(3, 3);
-            LabelX3.Name = "LabelX3";
-            LabelX3.Size = new Size(194, 23);
-            LabelX3.TabIndex = 1;
-            LabelX3.Text = "WebDav Directory Address:";
-            // 
-            // TextBoxX_WebDavUploadUri
-            // 
-            TextBoxX_WebDavUploadUri.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            TextBoxX_WebDavUploadUri.BackColor = Color.White;
-            // 
-            // 
-            // 
-            TextBoxX_WebDavUploadUri.Border.Class = "TextBoxBorder";
-            TextBoxX_WebDavUploadUri.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            TextBoxX_WebDavUploadUri.DisabledBackColor = Color.White;
-            TextBoxX_WebDavUploadUri.ForeColor = Color.Black;
-            TextBoxX_WebDavUploadUri.Location = new Point(3, 32);
-            TextBoxX_WebDavUploadUri.Name = "TextBoxX_WebDavUploadUri";
-            TextBoxX_WebDavUploadUri.PreventEnterBeep = true;
-            TextBoxX_WebDavUploadUri.Size = new Size(194, 20);
-            TextBoxX_WebDavUploadUri.TabIndex = 1;
-            // 
-            // LabelX4
-            // 
-            LabelX4.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            // 
-            // 
-            // 
-            LabelX4.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            LabelX4.Location = new Point(3, 58);
-            LabelX4.Name = "LabelX4";
-            LabelX4.Size = new Size(194, 23);
-            LabelX4.TabIndex = 1;
-            LabelX4.Text = "WebDav Username:";
-            // 
-            // TextBoxX_WebDavUploadUsr
-            // 
-            TextBoxX_WebDavUploadUsr.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            TextBoxX_WebDavUploadUsr.BackColor = Color.White;
-            // 
-            // 
-            // 
-            TextBoxX_WebDavUploadUsr.Border.Class = "TextBoxBorder";
-            TextBoxX_WebDavUploadUsr.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            TextBoxX_WebDavUploadUsr.DisabledBackColor = Color.White;
-            TextBoxX_WebDavUploadUsr.ForeColor = Color.Black;
-            TextBoxX_WebDavUploadUsr.Location = new Point(3, 87);
-            TextBoxX_WebDavUploadUsr.Name = "TextBoxX_WebDavUploadUsr";
-            TextBoxX_WebDavUploadUsr.PreventEnterBeep = true;
-            TextBoxX_WebDavUploadUsr.Size = new Size(194, 20);
-            TextBoxX_WebDavUploadUsr.TabIndex = 2;
+            this.ButtonX_Upload.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.ButtonX_Upload.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ButtonX_Upload.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.ButtonX_Upload.Location = new System.Drawing.Point(3, 465);
+            this.ButtonX_Upload.Name = "ButtonX_Upload";
+            this.ButtonX_Upload.Size = new System.Drawing.Size(194, 40);
+            this.ButtonX_Upload.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.ButtonX_Upload.TabIndex = 10;
+            this.ButtonX_Upload.Text = "Upload";
+            this.ButtonX_Upload.Click += new System.EventHandler(this.ButtonX_Upload_Click);
             // 
             // LabelX6
             // 
-            LabelX6.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            this.LabelX6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             // 
             // 
             // 
-            LabelX6.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            LabelX6.Location = new Point(3, 278);
-            LabelX6.Name = "LabelX6";
-            LabelX6.Size = new Size(194, 23);
-            LabelX6.TabIndex = 1;
-            LabelX6.Text = "Version:";
-            // 
-            // TextBoxX_Version
-            // 
-            TextBoxX_Version.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            TextBoxX_Version.BackColor = Color.White;
-            // 
-            // 
-            // 
-            TextBoxX_Version.Border.Class = "TextBoxBorder";
-            TextBoxX_Version.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            TextBoxX_Version.DisabledBackColor = Color.White;
-            TextBoxX_Version.ForeColor = Color.Black;
-            TextBoxX_Version.Location = new Point(3, 307);
-            TextBoxX_Version.Name = "TextBoxX_Version";
-            TextBoxX_Version.PreventEnterBeep = true;
-            TextBoxX_Version.Size = new Size(194, 20);
-            TextBoxX_Version.TabIndex = 6;
-            TextBoxX_Version.WatermarkText = "e.g. 1.2.0.0";
-            // 
-            // LabelX1
-            // 
-            LabelX1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            // 
-            // 
-            // 
-            LabelX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            LabelX1.Location = new Point(3, 168);
-            LabelX1.Name = "LabelX1";
-            LabelX1.Size = new Size(194, 23);
-            LabelX1.TabIndex = 1;
-            LabelX1.Text = "Proxy Username:";
-            // 
-            // TextBoxX_ProxUsr
-            // 
-            TextBoxX_ProxUsr.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            TextBoxX_ProxUsr.BackColor = Color.White;
-            // 
-            // 
-            // 
-            TextBoxX_ProxUsr.Border.Class = "TextBoxBorder";
-            TextBoxX_ProxUsr.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            TextBoxX_ProxUsr.DisabledBackColor = Color.White;
-            TextBoxX_ProxUsr.ForeColor = Color.Black;
-            TextBoxX_ProxUsr.Location = new Point(3, 197);
-            TextBoxX_ProxUsr.Name = "TextBoxX_ProxUsr";
-            TextBoxX_ProxUsr.PreventEnterBeep = true;
-            TextBoxX_ProxUsr.Size = new Size(194, 20);
-            TextBoxX_ProxUsr.TabIndex = 4;
+            this.LabelX6.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.LabelX6.Location = new System.Drawing.Point(3, 61);
+            this.LabelX6.Name = "LabelX6";
+            this.LabelX6.Size = new System.Drawing.Size(194, 23);
+            this.LabelX6.TabIndex = 1;
+            this.LabelX6.Text = "Version:";
             // 
             // StyleManager1
             // 
-            StyleManager1.ManagerStyle = DevComponents.DotNetBar.eStyle.Office2016;
-            StyleManager1.MetroColorParameters = new DevComponents.DotNetBar.Metro.ColorTables.MetroColorGeneratorParameters(Color.FromArgb(Conversions.ToInteger(Conversions.ToByte(255)), Conversions.ToInteger(Conversions.ToByte(255)), Conversions.ToInteger(Conversions.ToByte(255))), Color.FromArgb(Conversions.ToInteger(Conversions.ToByte(128)), Conversions.ToInteger(Conversions.ToByte(57)), Conversions.ToInteger(Conversions.ToByte(123))));
+            this.StyleManager1.ManagerStyle = DevComponents.DotNetBar.eStyle.Office2016;
+            this.StyleManager1.MetroColorParameters = new DevComponents.DotNetBar.Metro.ColorTables.MetroColorGeneratorParameters(System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255))))), System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(57)))), ((int)(((byte)(123))))));
+            // 
+            // ComboBoxEx_Version
+            // 
+            this.ComboBoxEx_Version.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ComboBoxEx_Version.DisplayMember = "Text";
+            this.ComboBoxEx_Version.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.ComboBoxEx_Version.ForeColor = System.Drawing.Color.Black;
+            this.ComboBoxEx_Version.FormattingEnabled = true;
+            this.ComboBoxEx_Version.ItemHeight = 14;
+            this.ComboBoxEx_Version.Location = new System.Drawing.Point(4, 91);
+            this.ComboBoxEx_Version.Name = "ComboBoxEx_Version";
+            this.ComboBoxEx_Version.Size = new System.Drawing.Size(193, 20);
+            this.ComboBoxEx_Version.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.ComboBoxEx_Version.TabIndex = 15;
+            this.ComboBoxEx_Version.WatermarkText = "e.g. 1.2.0.0";
+            this.ComboBoxEx_Version.TextChanged += new System.EventHandler(this.TextBoxX_Version_TextChanged);
             // 
             // Form1
             // 
-            AcceptButton = ButtonX_Upload;
-            AutoScaleDimensions = new SizeF(6.0F, 13.0F);
-            AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(694, 508);
-            Controls.Add(Panel1);
-            Icon = (Icon)resources.GetObject("$this.Icon");
-            Name = "Form1";
-            StartPosition = FormStartPosition.CenterScreen;
-            Text = "SM64RM Progress Updater";
-            Panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)PictureBox1).EndInit();
-            Panel2.ResumeLayout(false);
-            ResumeLayout(false);
+            this.AcceptButton = this.ButtonX_Upload;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(694, 508);
+            this.Controls.Add(this.Panel1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Name = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "SM64RM Progress Updater";
+            this.Panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.PictureBox1)).EndInit();
+            this.Panel2.ResumeLayout(false);
+            this.ResumeLayout(false);
+
         }
 
         private Panel Panel1;
@@ -351,43 +232,24 @@ namespace SM64_ROM_Manager.ProgressUpdater
         private DevComponents.DotNetBar.ButtonX ButtonX_Upload;
 
 
-        private DevComponents.DotNetBar.LabelX LabelX1;
 
 
-        private DevComponents.DotNetBar.Controls.TextBoxX TextBoxX_ProxUsr;
 
 
-        private DevComponents.DotNetBar.LabelX LabelX2;
 
 
-        private DevComponents.DotNetBar.Controls.TextBoxX TextBoxX_ProxPwd;
 
 
-        private DevComponents.DotNetBar.LabelX LabelX5;
-
-
-        private DevComponents.DotNetBar.Controls.TextBoxX TextBoxX_WebDavUploadPwd;
-
-
-        private DevComponents.DotNetBar.LabelX LabelX3;
-
-
-        private DevComponents.DotNetBar.Controls.TextBoxX TextBoxX_WebDavUploadUri;
-
-
-        private DevComponents.DotNetBar.LabelX LabelX4;
-
-
-        private DevComponents.DotNetBar.Controls.TextBoxX TextBoxX_WebDavUploadUsr;
 
 
         private DevComponents.DotNetBar.ButtonX ButtonX_PasteClipboard;
 
 
-        private DevComponents.DotNetBar.Controls.TextBoxX TextBoxX_Version;
-
 
         private DevComponents.DotNetBar.LabelX LabelX6;
-
+        private DevComponents.DotNetBar.ButtonX ButtonX_DiscordSetup;
+        private DevComponents.DotNetBar.Controls.CircularProgress circularProgress1;
+        private DevComponents.DotNetBar.ButtonX ButtonX_SetupWebDav;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx ComboBoxEx_Version;
     }
 }
