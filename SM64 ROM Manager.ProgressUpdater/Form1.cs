@@ -48,6 +48,7 @@ namespace SM64_ROM_Manager.ProgressUpdater
             string pwd = TextBoxX_ProxPwd.Text;
             string vers = TextBoxX_Version.Text.Trim();
             string uri = TextBoxX_WebDavUploadUri.Text.Trim();
+
             if (string.IsNullOrEmpty(uri) || string.IsNullOrEmpty(vers))
             {
                 result = false;
@@ -87,6 +88,9 @@ namespace SM64_ROM_Manager.ProgressUpdater
                 {
                     msImage.Close();
                 }
+
+                // Upload to Discord
+                Discord.
             }
 
             return result;

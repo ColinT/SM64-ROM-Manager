@@ -11,6 +11,8 @@ using global::Pilz.Drawing.Drawing3D.OpenGLFactory.RenderingN;
 using global::Pilz.S3DFileParser;
 using global::SM64_ROM_Manager.SettingsManager;
 using global::SM64Lib.Levels;
+using Image = System.Drawing.Image;
+using Bitmap = System.Drawing.Bitmap;
 
 namespace SM64_ROM_Manager.LevelEditor
 {

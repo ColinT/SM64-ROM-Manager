@@ -35,6 +35,7 @@ namespace SM64_ROM_Manager.ModelConverterGUI
         [DebuggerStepThrough()]
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TextureGraphicFormatEditor));
             this.ListViewEx1 = new DevComponents.DotNetBar.Controls.ListViewEx();
             this.PictureBox1 = new System.Windows.Forms.PictureBox();
@@ -454,7 +455,6 @@ namespace SM64_ROM_Manager.ModelConverterGUI
         private DevComponents.DotNetBar.ButtonItem ButtonItem_CM_SelDL;
 
 
-        private DevComponents.DotNetBar.ButtonItem ButtonItem_EditCustomDisplaylists;
         private DevComponents.DotNetBar.ButtonItem ButtonItem1;
         private DevComponents.DotNetBar.LabelX LabelX_CollisionType;
         private DevComponents.DotNetBar.Controls.CheckBoxX CheckBoxX_EnableTwoSidedFaces;

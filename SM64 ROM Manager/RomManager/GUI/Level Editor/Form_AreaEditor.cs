@@ -42,6 +42,8 @@ using Z.Collections.Extensions;
 using Z.Core.Extensions;
 using SM64Lib.Geolayout.Script;
 using SM64Lib.Model.Fast3D.DisplayLists.Script;
+using Color = System.Drawing.Color;
+using Bitmap = System.Drawing.Bitmap;
 
 namespace SM64_ROM_Manager.LevelEditor
 {
@@ -1271,6 +1273,22 @@ namespace SM64_ROM_Manager.LevelEditor
             ListViewEx_Objects.ResumeLayout();
         }
 
+        internal void SelectItemsInList(ListViewEx list, ListViewItem[] items, bool deselectAllOtherItems)
+        {
+            list.SuspendLayout();
+
+            if (deselectAllOtherItems)
+                foreach (ListViewItem item in list.SelectedItems)
+                    item.Selected = false;
+
+            foreach (var item in items)
+                item.Selected = true;
+
+            items.LastOrDefault()?.EnsureVisible();
+
+            list.ResumeLayout();
+        }
+
         internal void SelectItemAtIndexInList(ListViewEx list, int index, bool deselectAllOtherItems)
         {
             for (int i = 0, loopTo = list.Items.Count - 1; i <= loopTo; i++)
@@ -1514,12 +1532,11 @@ namespace SM64_ROM_Manager.LevelEditor
         {
             if (DeselectAllObjects)
                 this.DeselectAllObjects(false);
+
             foreach (Managed3DObject obj in objs)
             {
                 if (obj is object)
-                {
                     obj.IsSelected = true;
-                }
             }
 
             ogl.UpdateOrbitCamera();
@@ -1531,6 +1548,7 @@ namespace SM64_ROM_Manager.LevelEditor
         {
             foreach (Managed3DObject obj in ManagedObjects)
                 obj.IsSelected = false;
+
             if (UpdateGLAndCamera)
             {
                 ogl.UpdateOrbitCamera();
@@ -2177,8 +2195,9 @@ namespace SM64_ROM_Manager.LevelEditor
                     // Change Object Combo by Name
                     foreach (Managed3DObject obj in SelectedObjects)
                         obj.ObjectCombo = dialog.SelectedObjectCombo.Name;
+
                     UpdateObjectListViewItems();
-                    AdvPropertyGrid1.RefreshPropertyValues();
+                    ShowObjectProperties();
                 }
             }
         }
@@ -2198,8 +2217,9 @@ namespace SM64_ROM_Manager.LevelEditor
                     // Change Object Combo by Name
                     foreach (Managed3DObject obj in SelectedObjects)
                         obj.BehaviorID = dialog.SelectedBehavior.BehaviorAddress;
+
                     UpdateObjectListViewItems();
-                    AdvPropertyGrid1.RefreshPropertyValues();
+                    ShowObjectProperties();
                 }
             }
         }
@@ -2230,8 +2250,10 @@ namespace SM64_ROM_Manager.LevelEditor
             var newobjects = new List<Managed3DObject>();
             var newlvis = new List<ListViewItem>();
             int objcount = 0;
+
             if (!int.TryParse(((BaseItem)sender).Text, out objcount))
                 objcount = 1;
+
             for (int i = 1, loopTo = objcount; i <= loopTo; i++)
             {
                 var newObjCmd = new LevelscriptCommand(LevelArea.DefaultNormal3DObject);
@@ -2250,8 +2272,11 @@ namespace SM64_ROM_Manager.LevelEditor
             // Store History Point
             this.StoreHistoryPoint(AreaEditorHistoryFunctions.Methodes["RemoveObjects"], AreaEditorHistoryFunctions.Methodes["AddObjects"], new object[] { CArea, ManagedObjects, newobjects, ListViewEx_Objects.Items, newlvis });
             ogl.Invalidate();
-        }
 
+            if (newlvis.Any())
+                SelectItemsInList(ListViewEx_Objects, newlvis.ToArray(), true);
+        }
+        
         internal void ResetObjToDefault(object sender, EventArgs e)
         {
             var oldObjects = new List<Managed3DObject>();
@@ -2586,8 +2611,10 @@ namespace SM64_ROM_Manager.LevelEditor
                 LevelscriptCommand newWarp = null;
                 IManagedLevelscriptCommand newManagedWarp = null;
                 var lvi = new ListViewItem();
+
                 for (int i = 2; i <= 4; i++)
                     lvi.SubItems.Add(new ListViewItem.ListViewSubItem());
+
                 switch (type)
                 {
                     case LevelscriptCommandTypes.ConnectedWarp:
@@ -2631,6 +2658,9 @@ namespace SM64_ROM_Manager.LevelEditor
                 var dicGroups = new Dictionary<ListViewItem, ListViewGroup>();
                 dicGroups.Add(lvi, lvi.Group);
                 this.StoreHistoryPoint(AreaEditorHistoryFunctions.Methodes["RemoveWarps"], AreaEditorHistoryFunctions.Methodes["AddWarps"], new object[] { CArea, ManagedWarps, new[] { newManagedWarp }, ListViewEx_Warps.Items, new[] { lvi }, dicGroups });
+
+                if (newWarp is object)
+                    SelectItemsInList(ListViewEx_Warps, new[] { lvi }, true);
             }
         }
 

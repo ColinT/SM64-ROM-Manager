@@ -43,6 +43,11 @@ namespace SM64_ROM_Manager.Publics
         private static ExcelPackage _SurfaceData;
         private static ExcelPackage _OtherData;
 
+        static General()
+        {
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+        }
+
         public static string MyDataPath
         {
             get

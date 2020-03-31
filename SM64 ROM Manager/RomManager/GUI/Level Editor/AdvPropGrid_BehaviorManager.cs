@@ -441,7 +441,7 @@ namespace SM64_ROM_Manager.LevelEditor
                 {
                     case var @case when @case == typeof(bool):
                         {
-                            if ((bool)e.TypedValue == true)
+                            if (e.TypedValue is object && (bool)e.TypedValue == true)
                             {
                                 e.StringValue = "Yes";
                             }
