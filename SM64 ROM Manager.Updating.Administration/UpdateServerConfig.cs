@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SM64_ROM_Manager.Updating
+namespace SM64_ROM_Manager.Updating.Administration
 {
-    public class UpdateServerInfo
+    public class UpdateServerConfig
     {
         public string ServerAdress { get; set; }
         public string PublicPackageBaseURL { get; set; }
@@ -16,7 +16,7 @@ namespace SM64_ROM_Manager.Updating
         public string Username { get; set; }
 
         [JsonProperty("Password")]
-        public string password;
+        private string password;
 
         [JsonIgnore]
         public string Password

@@ -5,7 +5,7 @@ using Microsoft.VisualBasic.CompilerServices;
 using global::Newtonsoft.Json.Linq;
 using Z.Collections.Extensions;
 
-namespace SM64_ROM_Manager.Updating
+namespace SM64_ROM_Manager.Updating.Administration.Packaging
 {
     internal class UpdatePackageManager
     {

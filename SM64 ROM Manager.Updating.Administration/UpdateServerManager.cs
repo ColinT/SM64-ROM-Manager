@@ -1,23 +1,35 @@
 ﻿using global::System.IO;
 using global::Newtonsoft.Json.Linq;
 
-namespace SM64_ROM_Manager.Updating
+namespace SM64_ROM_Manager.Updating.Administration
 {
-    public class UpdateInfoManager
+    public class UpdateServerManager
     {
         public UpdateInfo UpdateInfo { get; private set; }
+        public UpdateServerConfig Config { get; private set; }
 
-        public UpdateInfoManager()
+        public UpdateServerManager(UpdateServerConfig config)
         {
+            Config = config;
             NewInfo();
         }
 
-        public void Load(string filePath)
+        public void LoadInfoFromServer()
+        {
+
+        }
+
+        public void SaveInfoToServer()
+        {
+
+        }
+
+        public void LoadInfoFromFile(string filePath)
         {
             UpdateInfo = JObject.Parse(File.ReadAllText(filePath)).ToObject<UpdateInfo>();
         }
 
-        public void Save(string filePath)
+        public void SaveInfoToFile(string filePath)
         {
             File.WriteAllText(filePath, JObject.FromObject(UpdateInfo).ToString());
         }

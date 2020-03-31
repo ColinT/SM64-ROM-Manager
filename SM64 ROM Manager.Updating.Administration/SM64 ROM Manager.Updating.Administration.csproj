@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{B7BAD350-BB62-0C04-249C-28A92C6008CC}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>SM64_ROM_Manager.Updating</RootNamespace>
+    <RootNamespace>SM64_ROM_Manager.Updating.Administration</RootNamespace>
     <AssemblyName>SM64 ROM Manager.Updating.Administration</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>Windows</MyType>
@@ -93,11 +93,13 @@
     <Import Include="Z.IO.Extensions" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Discord\DiscordBot.cs" />
+    <Compile Include="Discord\DiscordBotConfig.cs" />
     <Compile Include="My Project\MyNamespace.Static.1.Designer.cs" />
     <Compile Include="My Project\MyNamespace.Static.2.Designer.cs" />
     <Compile Include="My Project\MyNamespace.Static.3.Designer.cs" />
-    <Compile Include="UpdateInfoManager.cs" />
-    <Compile Include="UpdatePackageManager.cs" />
+    <Compile Include="UpdateServerManager.cs" />
+    <Compile Include="Packaging\UpdatePackageManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="My Project\Application.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -113,9 +115,10 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="UpdatePackagePackager.cs" />
-    <Compile Include="UpdatePackageTemplate.cs" />
-    <Compile Include="UpdateServerInfo.cs" />
+    <Compile Include="Packaging\UpdatePackagePackager.cs" />
+    <Compile Include="Packaging\UpdatePackageTemplate.cs" />
+    <Compile Include="UpdateProject.cs" />
+    <Compile Include="UpdateServerConfig.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -143,6 +146,7 @@
       <Name>SM64 ROM Manager.Updating</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="..\SM64 ROM Manager.Updating.Client.Shared\SM64 ROM Manager.Updating.Client.Shared.projitems" Label="Shared" />
   <Import Project="..\SM64 ROM Manager.Updating.Administration.Shared\SM64 ROM Manager.Updating.Administration.Shared.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

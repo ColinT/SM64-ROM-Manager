@@ -3,7 +3,7 @@ using global::System.IO.Compression;
 using SM64_ROM_Manager.Updating.UpdateInstaller;
 using Z.IO.Extensions;
 
-namespace SM64_ROM_Manager.Updating
+namespace SM64_ROM_Manager.Updating.Administration.Packaging
 {
     public class UpdatePackagePackager
     {

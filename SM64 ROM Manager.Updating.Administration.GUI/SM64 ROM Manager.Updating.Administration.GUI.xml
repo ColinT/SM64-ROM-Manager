@@ -60,6 +60,11 @@
               Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
             </summary>
         </member>
+        <member name="P:SM64_ROM_Manager.Updating.Administration.GUI.My.Resources.Resources.icons8_discord_new_logo_32px">
+            <summary>
+              Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+            </summary>
+        </member>
         <member name="P:SM64_ROM_Manager.Updating.Administration.GUI.My.Resources.Resources.icons8_documents_folder_32px">
             <summary>
               Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
@@ -81,6 +86,11 @@
             </summary>
         </member>
         <member name="P:SM64_ROM_Manager.Updating.Administration.GUI.My.Resources.Resources.icons8_export_32px_3">
+            <summary>
+              Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:SM64_ROM_Manager.Updating.Administration.GUI.My.Resources.Resources.icons8_import_32px">
             <summary>
               Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
             </summary>
@@ -141,6 +151,16 @@
             </summary>
         </member>
         <member name="P:SM64_ROM_Manager.Updating.Administration.GUI.My.Resources.Resources.icons8_template_32px">
+            <summary>
+              Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:SM64_ROM_Manager.Updating.Administration.GUI.My.Resources.Resources.icons8_upload_32px">
+            <summary>
+              Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:SM64_ROM_Manager.Updating.Administration.GUI.My.Resources.Resources.icons8_upload_to_cloud_32px">
             <summary>
               Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
             </summary>
