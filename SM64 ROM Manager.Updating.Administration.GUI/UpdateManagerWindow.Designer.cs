@@ -77,6 +77,8 @@ namespace SM64_ROM_Manager.Updating.Administration.GUI
             this.RibbonTabItem_Project = new DevComponents.DotNetBar.RibbonTabItem();
             this.RibbonTabItem_Packages = new DevComponents.DotNetBar.RibbonTabItem();
             this.StyleManager1 = new DevComponents.DotNetBar.StyleManager(this.components);
+            this.ButtonItem_EditDescription = new DevComponents.DotNetBar.ButtonItem();
+            this.ButtonItem_ChangeVersion = new DevComponents.DotNetBar.ButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.SuperTabControl1)).BeginInit();
             this.SuperTabControl1.SuspendLayout();
             this.superTabControlPanel1.SuspendLayout();
@@ -265,8 +267,8 @@ namespace SM64_ROM_Manager.Updating.Administration.GUI
             this.RibbonControl_Main.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.RibbonControl_Main.CanCustomize = false;
             this.RibbonControl_Main.CaptionVisible = true;
-            this.RibbonControl_Main.Controls.Add(this.RibbonPanel_Project);
             this.RibbonControl_Main.Controls.Add(this.ribbonPanel_Package);
+            this.RibbonControl_Main.Controls.Add(this.RibbonPanel_Project);
             this.RibbonControl_Main.Dock = System.Windows.Forms.DockStyle.Top;
             this.RibbonControl_Main.ForeColor = System.Drawing.Color.Black;
             this.RibbonControl_Main.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
@@ -320,6 +322,7 @@ namespace SM64_ROM_Manager.Updating.Administration.GUI
             // 
             this.RibbonPanel_Project.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.RibbonPanel_Project.TabIndex = 2;
+            this.RibbonPanel_Project.Visible = false;
             // 
             // ribbonBar_Tools
             // 
@@ -546,7 +549,6 @@ namespace SM64_ROM_Manager.Updating.Administration.GUI
             // 
             this.ribbonPanel_Package.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.ribbonPanel_Package.TabIndex = 3;
-            this.ribbonPanel_Package.Visible = false;
             // 
             // ribbonBar_Discord
             // 
@@ -565,7 +567,7 @@ namespace SM64_ROM_Manager.Updating.Administration.GUI
             this.ribbonBar_Discord.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.ButtonItem_PostMsgInDiscord});
             this.ribbonBar_Discord.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
-            this.ribbonBar_Discord.Location = new System.Drawing.Point(322, 0);
+            this.ribbonBar_Discord.Location = new System.Drawing.Point(435, 0);
             this.ribbonBar_Discord.Name = "ribbonBar_Discord";
             this.ribbonBar_Discord.Size = new System.Drawing.Size(110, 97);
             this.ribbonBar_Discord.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -605,11 +607,13 @@ namespace SM64_ROM_Manager.Updating.Administration.GUI
             this.ribbonBar_PackageManagement.Dock = System.Windows.Forms.DockStyle.Left;
             this.ribbonBar_PackageManagement.DragDropSupport = true;
             this.ribbonBar_PackageManagement.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.ButtonItem_ChangeVersion,
+            this.ButtonItem_EditDescription,
             this.ButtonItem_RemovePackage});
             this.ribbonBar_PackageManagement.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
             this.ribbonBar_PackageManagement.Location = new System.Drawing.Point(234, 0);
             this.ribbonBar_PackageManagement.Name = "ribbonBar_PackageManagement";
-            this.ribbonBar_PackageManagement.Size = new System.Drawing.Size(88, 97);
+            this.ribbonBar_PackageManagement.Size = new System.Drawing.Size(201, 97);
             this.ribbonBar_PackageManagement.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.ribbonBar_PackageManagement.TabIndex = 1;
             this.ribbonBar_PackageManagement.Text = "Paketverwaltung";
@@ -687,13 +691,13 @@ namespace SM64_ROM_Manager.Updating.Administration.GUI
             // 
             // RibbonTabItem_Project
             // 
-            this.RibbonTabItem_Project.Checked = true;
             this.RibbonTabItem_Project.Name = "RibbonTabItem_Project";
             this.RibbonTabItem_Project.Panel = this.RibbonPanel_Project;
             this.RibbonTabItem_Project.Text = "Projekt";
             // 
             // RibbonTabItem_Packages
             // 
+            this.RibbonTabItem_Packages.Checked = true;
             this.RibbonTabItem_Packages.Name = "RibbonTabItem_Packages";
             this.RibbonTabItem_Packages.Panel = this.ribbonPanel_Package;
             this.RibbonTabItem_Packages.Text = "Pakete";
@@ -702,6 +706,26 @@ namespace SM64_ROM_Manager.Updating.Administration.GUI
             // 
             this.StyleManager1.ManagerStyle = DevComponents.DotNetBar.eStyle.Office2016;
             this.StyleManager1.MetroColorParameters = new DevComponents.DotNetBar.Metro.ColorTables.MetroColorGeneratorParameters(System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255))))), System.Drawing.Color.FromArgb(((int)(((byte)(183)))), ((int)(((byte)(71)))), ((int)(((byte)(42))))));
+            // 
+            // ButtonItem_EditDescription
+            // 
+            this.ButtonItem_EditDescription.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
+            this.ButtonItem_EditDescription.Image = global::SM64_ROM_Manager.Updating.Administration.GUI.My.Resources.Resources.icons8_edit_file_32px;
+            this.ButtonItem_EditDescription.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
+            this.ButtonItem_EditDescription.Name = "ButtonItem_EditDescription";
+            this.ButtonItem_EditDescription.SubItemsExpandWidth = 14;
+            this.ButtonItem_EditDescription.Text = "Beschreibung bearbeiten";
+            this.ButtonItem_EditDescription.Click += new System.EventHandler(this.ButtonItem_EditDescription_Click);
+            // 
+            // ButtonItem_ChangeVersion
+            // 
+            this.ButtonItem_ChangeVersion.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
+            this.ButtonItem_ChangeVersion.Image = global::SM64_ROM_Manager.Updating.Administration.GUI.My.Resources.Resources.icons8_edit_property_32px;
+            this.ButtonItem_ChangeVersion.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
+            this.ButtonItem_ChangeVersion.Name = "ButtonItem_ChangeVersion";
+            this.ButtonItem_ChangeVersion.SubItemsExpandWidth = 14;
+            this.ButtonItem_ChangeVersion.Text = "Version ändern";
+            this.ButtonItem_ChangeVersion.Click += new System.EventHandler(this.ButtonItem_ChangeVersion_Click);
             // 
             // UpdateManagerWindow
             // 
@@ -822,5 +846,7 @@ namespace SM64_ROM_Manager.Updating.Administration.GUI
         private ColumnHeader columnHeader_Name;
         private DevComponents.DotNetBar.RibbonBar ribbonBar_Discord;
         private DevComponents.DotNetBar.ButtonItem ButtonItem_PostMsgInDiscord;
+        private DevComponents.DotNetBar.ButtonItem ButtonItem_ChangeVersion;
+        private DevComponents.DotNetBar.ButtonItem ButtonItem_EditDescription;
     }
 }

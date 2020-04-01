@@ -9,6 +9,7 @@ using global::DevComponents.Editors;
 using Microsoft.VisualBasic.CompilerServices;
 using global::Microsoft.WindowsAPICodePack.Dialogs;
 using Z.Collections.Extensions;
+using System.Threading.Tasks;
 
 namespace SM64_ROM_Manager.Updating.Administration.GUI
 {
@@ -18,6 +19,7 @@ namespace SM64_ROM_Manager.Updating.Administration.GUI
         // C o n s t a n t s
 
         private const string FILTER_UPDATEINFO_CONFIGURATION = "Update-Info-Konfiguration (*.udic)|*.udic";
+        private const string FILTER_UPDATEPACKAGE = "ZIP-Archiv (*.zip)|*.zip";
 
         // F i e l d s
 
@@ -45,7 +47,7 @@ namespace SM64_ROM_Manager.Updating.Administration.GUI
             ribbonPanel_Package.Enabled = Enabled;
         }
 
-        private void CreateNewProject(string filePath)
+        private async Task CreateNewProject(string filePath)
         {
             var oldProject = General.CurProject;
             General.CurProject = new UpdateProject();
@@ -53,17 +55,17 @@ namespace SM64_ROM_Manager.Updating.Administration.GUI
             {
                 curProjectFilePath = filePath;
                 SaveProject(curProjectFilePath);
-                LoadManager();
+                await LoadManager();
             }
             else
                 General.CurProject = oldProject;
         }
 
-        private void OpenProject(string filePath)
+        private async Task OpenProject(string filePath)
         {
             curProjectFilePath = filePath;
             General.CurProject = UpdateProject.Load(filePath);
-            LoadManager();
+            await LoadManager();
         }
 
         private void SaveProject(string filePath)
@@ -71,44 +73,57 @@ namespace SM64_ROM_Manager.Updating.Administration.GUI
             General.CurProject.Save(filePath);
         }
 
-        private void LoadManager()
+        private async Task LoadManager()
         {
+            bool hasError;
+
             try
             {
                 manager = new UpdateServerManager(General.CurProject.UpdateServerConfig);
-                manager.LoadInfoFromServer();
 
-                LoadPackageList();
-                LoadUpdateInstallerInfos();
+                if (await manager.LoadInfoFromServer())
+                {
+                    await LoadPackageList();
+                    LoadUpdateInstallerInfos();
 
-                SetEnabledUiControls(true);
+                    hasError = false;
+                }
+                else
+                    hasError = true;
             }
             catch (Exception)
+            {
+                hasError = true;
+            }
+
+            if (hasError)
             {
                 MessageBoxEx.Show(this, "Ein Fehler ist aufgetreten beim laden des Servers.", string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 SetEnabledUiControls(false, true);
             }
+            else
+                SetEnabledUiControls(true);
         }
 
-        private void LoadPackageList()
+        private async Task LoadPackageList()
         {
             ListViewItem firstItem = null;
 
             ListViewEx_Packages.BeginUpdate();
             ListViewEx_Packages.Items.Clear();
 
-            foreach (var pkg in manager.UpdateInfo.Packages)
+            foreach (var pkgVersion in await manager.GetUpdatePackagesList())
             {
                 var item = new ListViewItem(new string[]
                 {
-                    pkg.Name,
-                    pkg.Version.Version.ToString(),
-                    pkg.Version.Channel.ToString(),
-                    pkg.Version.Build.ToString(),
+                    manager.GetPackageDescription(pkgVersion).name,
+                    pkgVersion.Version.ToString(),
+                    pkgVersion.Channel.ToString(),
+                    pkgVersion.Build.ToString(),
                     "Ja"
                 })
                 {
-                    Tag = pkg
+                    Tag = pkgVersion
                 };
 
                 ListViewEx_Packages.Items.Add(item);
@@ -128,6 +143,31 @@ namespace SM64_ROM_Manager.Updating.Administration.GUI
             TextBoxX_UpdateInstallerDownloadUrl.Text = manager.UpdateInfo.UpdateInstallerLink;
         }
 
+        private ApplicationVersion GetSelectedPackageVersion()
+        {
+            var items = ListViewEx_Packages.SelectedItems;
+            if (items.Count > 0)
+                return (ApplicationVersion)items[0].Tag;
+            else
+                return null;
+        }
+
+        private async Task<bool> UploadPackage(string filePath)
+        {
+            var success = false;
+            var resVersion = EditApplicationVersion();
+
+            if (!resVersion.canceled)
+            {
+                if (await manager.UploadPackage(filePath, resVersion.newVersion))
+                {
+                    success = true;
+                }
+            }
+
+            return success;
+        }
+
         // G u i
 
         private void SuperTabControl1_SelectedTabChanged(object sender, SuperTabStripSelectedTabChangedEventArgs e)
@@ -138,7 +178,7 @@ namespace SM64_ROM_Manager.Updating.Administration.GUI
         {
         }
 
-        private void UpdateManagerWindow_Load(object sender, EventArgs e)
+        private async void UpdateManagerWindow_Load(object sender, EventArgs e)
         {
             string[] args = Environment.GetCommandLineArgs();
 
@@ -146,13 +186,13 @@ namespace SM64_ROM_Manager.Updating.Administration.GUI
             {
                 try
                 {
-                    OpenProject(args[1]);
+                    await OpenProject(args[1]);
                 }
                 catch (Exception) { }
             }
         }
 
-        private void ButtonItem_NewProject_Click(object sender, EventArgs e)
+        private async void ButtonItem_NewProject_Click(object sender, EventArgs e)
         {
             var sfd_updateadministration_upa = new SaveFileDialog()
             {
@@ -160,11 +200,11 @@ namespace SM64_ROM_Manager.Updating.Administration.GUI
             };
             if (sfd_updateadministration_upa.ShowDialog() == DialogResult.OK)
             {
-                CreateNewProject(sfd_updateadministration_upa.FileName);
+                await CreateNewProject(sfd_updateadministration_upa.FileName);
             }
         }
 
-        private void ButtonItem_OpenProject_Click(object sender, EventArgs e)
+        private async void ButtonItem_OpenProject_Click(object sender, EventArgs e)
         {
             var ofd_updateadministration_upa = new OpenFileDialog()
             {
@@ -172,7 +212,7 @@ namespace SM64_ROM_Manager.Updating.Administration.GUI
             };
             if (ofd_updateadministration_upa.ShowDialog() == DialogResult.OK)
             {
-                OpenProject(ofd_updateadministration_upa.FileName);
+                await OpenProject(ofd_updateadministration_upa.FileName);
             }
         }
 
@@ -181,25 +221,25 @@ namespace SM64_ROM_Manager.Updating.Administration.GUI
             SaveProject(curProjectFilePath);
         }
 
-        private void ButtonItem_ProjectOptions_Click(object sender, EventArgs e)
+        private async void ButtonItem_ProjectOptions_Click(object sender, EventArgs e)
         {
             My.MyProject.Forms.UpdateServerInfoEditor.ShowDialog();
-            LoadManager();
+            await LoadManager();
         }
 
-        private void ButtonItem_UploadUpdateConfiguration_Click(object sender, EventArgs e)
+        private async void ButtonItem_UploadUpdateConfiguration_Click(object sender, EventArgs e)
         {
-            manager.SaveInfoToServer();
+            await manager.SaveInfoToServer();
         }
 
-        private void ButtonItem_ExportUpdateConfiguration_Click(object sender, EventArgs e)
+        private async void ButtonItem_ExportUpdateConfiguration_Click(object sender, EventArgs e)
         {
             var ofd_UpdateAdministration_UpdateConfiguration = new OpenFileDialog()
             {
                 Filter = FILTER_UPDATEINFO_CONFIGURATION
             };
             if (ofd_UpdateAdministration_UpdateConfiguration.ShowDialog() == DialogResult.OK)
-                manager.SaveInfoToFile(ofd_UpdateAdministration_UpdateConfiguration.FileName);
+                await manager.SaveInfoToFile(ofd_UpdateAdministration_UpdateConfiguration.FileName);
         }
 
         private void ButtonItem_OpenPackageCreationDialog_Click(object sender, EventArgs e)
@@ -208,20 +248,35 @@ namespace SM64_ROM_Manager.Updating.Administration.GUI
             frm.Show();
         }
 
-        private void ButtonItem_CreateAndUploadPackage_Click(object sender, EventArgs e)
+        private async void ButtonItem_CreateAndUploadPackage_Click(object sender, EventArgs e)
         {
-
+            var frm = new PackageCreationDialog(true);
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                if (await UploadPackage(frm.TempPackageFilePath))
+                    await LoadPackageList();
+            }
         }
 
-        private void ButtonItem_UploadExistingPackage_Click(object sender, EventArgs e)
+        private async void ButtonItem_UploadExistingPackage_Click(object sender, EventArgs e)
         {
-            //var frm = new ApplicationVersionInput();
-            //frm.ShowDialog();
+            var ofd_UpdateAdministration_UpdatePackage = new OpenFileDialog()
+            {
+                Filter = FILTER_UPDATEPACKAGE
+            };
+
+            if (ofd_UpdateAdministration_UpdatePackage.ShowDialog() == DialogResult.OK)
+            {
+                if(await UploadPackage(ofd_UpdateAdministration_UpdatePackage.FileName))
+                    await LoadPackageList();
+            }
         }
 
-        private void ButtonItem_RemovePackage_Click(object sender, EventArgs e)
+        private async void ButtonItem_RemovePackage_Click(object sender, EventArgs e)
         {
-
+            var version = GetSelectedPackageVersion();
+            if (await manager.DeletePackage(version))
+                await LoadPackageList();
         }
 
         private void TextBoxX_UpdateInstallerDownloadUrl_TextChanged(object sender, EventArgs e)
@@ -236,6 +291,52 @@ namespace SM64_ROM_Manager.Updating.Administration.GUI
         private void ButtonItem_PostMsgInDiscord_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private async void ButtonItem_ChangeVersion_Click(object sender, EventArgs e)
+        {
+            var version = GetSelectedPackageVersion();
+            var (newVersion, canceled) = EditApplicationVersion(version);
+
+            if (!canceled)
+            {
+                if (await manager.ChangePackageVersion(version, newVersion))
+                    await LoadPackageList();
+            }
+                
+        }
+
+        private (ApplicationVersion newVersion, bool canceled) EditApplicationVersion(ApplicationVersion inputVersion = default)
+        {
+            var frm = new ApplicationVersionInput()
+            {
+                Version = inputVersion.Version,
+                Channel = inputVersion.Channel,
+                Build = inputVersion.Build
+            };
+
+            if (frm.ShowDialog() == DialogResult.OK)
+                return (new ApplicationVersion(frm.Version, frm.Build, frm.Channel), false);
+            else
+                return (inputVersion, true);
+        }
+
+        private async void ButtonItem_EditDescription_Click(object sender, EventArgs e)
+        {
+            var version = GetSelectedPackageVersion();
+            var desc = manager.GetPackageDescription(version);
+
+            var frm = new PackageDescriptionEditor()
+            {
+                Titel = desc.name,
+                Description = desc.description
+            };
+
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                manager.SetPackageDescription(version, frm.Titel, frm.Description);
+                await LoadPackageList();
+            }
         }
     }
 }

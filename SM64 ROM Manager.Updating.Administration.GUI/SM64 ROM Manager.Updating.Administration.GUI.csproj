@@ -137,6 +137,12 @@
     <Import Include="Z.Collections.Extensions" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PackageDescriptionEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PackageDescriptionEditor.Designer.cs">
+      <DependentUpon>PackageDescriptionEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="General.cs" />
     <Compile Include="My Project\MyNamespace.Dynamic.Designer.cs" />
     <Compile Include="My Project\MyNamespace.Static.1.Designer.cs" />
@@ -195,6 +201,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="PackageDescriptionEditor.resx">
+      <DependentUpon>PackageDescriptionEditor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ApplicationVersionInput.resx">
       <DependentUpon>ApplicationVersionInput.cs</DependentUpon>
     </EmbeddedResource>
@@ -237,6 +246,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icons8_software_installer.ico" />
+    <None Include="Resources\icons8_checkmark_32px.png" />
     <None Include="Resources\icons8_discord_new_logo_32px.png" />
     <None Include="Resources\icons8_upload_to_cloud_32px.png" />
     <None Include="Resources\icons8_upload_32px.png" />

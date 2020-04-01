@@ -10,25 +10,37 @@ using Microsoft.VisualBasic.CompilerServices;
 using global::Microsoft.WindowsAPICodePack.Dialogs;
 using Z.Collections.Extensions;
 using SM64_ROM_Manager.Updating.Administration.Packaging;
+using System.Threading.Tasks;
 
 namespace SM64_ROM_Manager.Updating.Administration.GUI
 {
     public partial class PackageCreationDialog
     {
 
-        // C o n s t r u c t o r s
-
-        public PackageCreationDialog()
-        {
-            this.Shown += EditorWindow_Shown;
-            InitializeComponent();
-        }
-
         // C o n s t a n t s
 
         private const string FILTER_PACKAGE_TEMPLATE = "Update-Paket-Vorlagen (*.udpt)|*.udpt";
         private const string FILTER_PACKAGE_ZIP_PACKAGE = "ZIP-Paket (*.zip)|*.zip";
         private const string FILTER_PACKAGE_ADDON = "Anwendungserweiterung (*.dll)|*.dll";
+
+        // F i e l d s
+
+        private readonly bool isUploadingPackage;
+
+        // P r o p e r t i e s
+
+        public string TempPackageFilePath { get; private set; } = string.Empty;
+
+        // C o n s t r u c t o r s
+
+        public PackageCreationDialog(bool isUploadingPackage = false)
+        {
+            this.isUploadingPackage = isUploadingPackage;
+            Shown += EditorWindow_Shown;
+            InitializeComponent();
+            UpdateAmbientColors();
+            ButtonItem_UploadPackage.Visible = isUploadingPackage;
+        }
 
         // G e n e r a l   F e a t u r e s
 
@@ -181,14 +193,29 @@ namespace SM64_ROM_Manager.Updating.Administration.GUI
             ShowPackageFiles();
         }
 
-        private void ExportUpdatePackage()
+        private async Task<bool> ExportUpdatePackage(string filePath)
         {
-            var sfd_UpdateAdmin_ExportPkg = new SaveFileDialog() { Filter = FILTER_PACKAGE_ZIP_PACKAGE };
-            if (sfd_UpdateAdmin_ExportPkg.ShowDialog() == DialogResult.OK)
+            bool success = false;
+
+            try
             {
-                packageManager.ExportPackage(sfd_UpdateAdmin_ExportPkg.FileName);
-                MessageBox.Show(My.Resources.UpdatingAdministrationLangRes.MsgBox_PkgExportSuccess, My.Resources.UpdatingAdministrationLangRes.MsgBox_PkgExportSuccess_Titel, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                await Task.Run(() => packageManager.ExportPackage(filePath));
+                success = true;
             }
+            catch (Exception)
+            {
+                success = false;
+            }
+
+            return success;
+        }
+
+        private async Task<bool> ExportTempUpdatePackage()
+        {
+            var filePath = Path.GetTempFileName();
+            bool res = await ExportUpdatePackage(filePath);
+            if (res) TempPackageFilePath = filePath;
+            return res;
         }
 
         private void AddUpdateInstallerExtension()
@@ -248,9 +275,15 @@ namespace SM64_ROM_Manager.Updating.Administration.GUI
             RemovePackageFileFolder();
         }
 
-        private void ButtonItem_ButtonItem_Pkg_Export_Click(object sender, EventArgs e)
+        private async void ButtonItem_Pkg_Export_Click(object sender, EventArgs e)
         {
-            ExportUpdatePackage();
+            var sfd_UpdateAdmin_ExportPkg = new SaveFileDialog() { Filter = FILTER_PACKAGE_ZIP_PACKAGE };
+
+            if (sfd_UpdateAdmin_ExportPkg.ShowDialog() == DialogResult.OK)
+            {
+                if (await ExportUpdatePackage(sfd_UpdateAdmin_ExportPkg.FileName))
+                    MessageBox.Show(My.Resources.UpdatingAdministrationLangRes.MsgBox_PkgExportSuccess, My.Resources.UpdatingAdministrationLangRes.MsgBox_PkgExportSuccess_Titel, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }            
         }
 
         private void ButtonItem_Pkg_AddExtension_Click(object sender, EventArgs e)
@@ -261,6 +294,14 @@ namespace SM64_ROM_Manager.Updating.Administration.GUI
         private void ButtonItem_Pkg_RemoveExtension_Click(object sender, EventArgs e)
         {
             RemoveUpdateInstallerExtension();
+        }
+
+        private async void ButtonItem_UploadPackage_Click(object sender, EventArgs e)
+        {
+            if (await ExportTempUpdatePackage())
+                DialogResult = DialogResult.OK;
+            else
+                MessageBox.Show(My.Resources.UpdatingAdministrationLangRes.MsgBox_PkgExportSuccess, My.Resources.UpdatingAdministrationLangRes.MsgBox_PkgExportSuccess_Titel, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

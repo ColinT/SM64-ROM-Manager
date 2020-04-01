@@ -282,7 +282,7 @@ namespace SM64_ROM_Manager.Updating.Administration
             // Generate public downloadlink
             if (success)
             {
-                var pkgInfo = GetUpdateInfo(version);
+                var pkgInfo = GetOrCreateUpdatePackageInfo(version);
                 pkgInfo.Packagelink = Config.PublicPackageBaseURL + fileName;
             }
 
@@ -316,24 +316,65 @@ namespace SM64_ROM_Manager.Updating.Administration
             return fileName;
         }
 
-        public UpdatePackageInfo GetUpdateInfo(ApplicationVersion version)
+        private UpdatePackageInfo GetOrCreateUpdatePackageInfo(ApplicationVersion version)
         {
-            UpdatePackageInfo info;
+            var info = GetUpdatePackageInfo(version);
 
-            // Try getting existing package
-            info = UpdateInfo.Packages.FirstOrDefault((n) => n.Version == version);
-
-            // Create new package
             if (info == null)
-            {
-                info = new UpdatePackageInfo()
-                {
-                    Version = version
-                };
-                UpdateInfo.Packages.Add(info);
-            }
+                info = CreateUpdatePackageInfo(version);
 
             return info;
+        }
+
+        private UpdatePackageInfo GetUpdatePackageInfo(ApplicationVersion version)
+        {
+            return UpdateInfo.Packages.FirstOrDefault((n) => n.Version == version);
+        }
+
+        private UpdatePackageInfo CreateUpdatePackageInfo(ApplicationVersion version)
+        {
+            var info = new UpdatePackageInfo()
+            {
+                Version = version
+            };
+            UpdateInfo.Packages.Add(info);
+            return info;
+        }
+
+        public (string name, string description) GetPackageDescription(ApplicationVersion version)
+        {
+            var pkg = GetUpdatePackageInfo(version);
+            return (pkg?.Name, pkg.Changelog);
+        }
+
+        public void SetPackageDescription(ApplicationVersion version, string name, string description)
+        {
+            var pkg = GetOrCreateUpdatePackageInfo(version);
+            pkg.Name = name;
+            pkg.Changelog = description;
+        }
+
+        public async Task<bool> ChangePackageVersion(ApplicationVersion currentVersion, ApplicationVersion newVersion)
+        {
+            bool success = false;
+
+            // Get file names
+            var currentFilename = BuildPackageFilename(currentVersion);
+            var newFilename = BuildPackageFilename(newVersion);
+
+            // Move
+            var response = await client.Move(currentFilename, newFilename);
+
+            // Change package info version, if exists
+            if (response.IsSuccessful)
+            {
+                var pkg = GetUpdatePackageInfo(currentVersion);
+                if (pkg is object)
+                    pkg.Version = newVersion;
+                success = true;
+            }
+
+            return success;
         }
     }
 }
