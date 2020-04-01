@@ -371,15 +371,7 @@ namespace SM64_ROM_Manager.Updating.Administration.GUI
         private void ButtonItem_PostMsgInDiscord_Click(object sender, EventArgs e)
         {
             if (discordBot == null)
-            {
-                bool hasLoaded = false;
-                discordBot = new DiscordBot(General.CurProject.DiscordBotConfig);
-                discordBot.GotReady += (_,__) => hasLoaded = true;
-                ProgressControls(true);
-                while (hasLoaded)
-                    Application.DoEvents();
-                ProgressControls(false);
-            }
+                LoadDiscordBot();
 
             if (discordBot is object)
             {
@@ -388,6 +380,36 @@ namespace SM64_ROM_Manager.Updating.Administration.GUI
                 var frm = new DiscordPostDialog(discordBot, desc.name, desc.description, version);
                 frm.ShowDialog();
             }
+            else
+                MessageBoxEx.Show(this, "Offenbar ist ein Fehler ist aufgetreten beim Laden des Discord-Bots.", string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        private void LoadDiscordBot()
+        {
+            if (discordBot is object)
+                discordBot.Stop();
+
+            discordBot = new DiscordBot(General.CurProject.DiscordBotConfig);
+
+            bool hasLoaded = false;
+            bool hasError = false;
+
+            discordBot.GotReady += (sender, e) => hasLoaded = true;
+            discordBot.LoggedMsg += (sender, msg, isError) => 
+            {
+                if (isError)
+                    hasError = true;
+            };
+
+            discordBot.Start();
+
+            ProgressControls(true);
+            while (!hasLoaded && !hasError)
+                Application.DoEvents();
+            ProgressControls(false);
+
+            if (hasError)
+                discordBot = null;
         }
 
         private async void ButtonItem_ChangeVersion_Click(object sender, EventArgs e)
@@ -412,6 +434,16 @@ namespace SM64_ROM_Manager.Updating.Administration.GUI
             {
                 manager.SetPackageDescription(version, frm.Titel, frm.Description);
                 await LoadPackageList();
+            }
+        }
+
+        private void ButtonItem_BotSettings_Click(object sender, EventArgs e)
+        {
+            var frm = new DiscordBotSettingsWindow(General.CurProject.DiscordBotConfig);
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                if (discordBot is object)
+                    LoadDiscordBot();
             }
         }
     }

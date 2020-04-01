@@ -113,7 +113,10 @@ namespace SM64_ROM_Manager.Updating.Administration.Discord
                 msg += "@everyone\n\n";
 
             // Add version as titel
-            msg += $"**Update:** {appName} **__{version.ToString()}__**";
+            var versionString = version.ToString();
+            if (version.Channel == Channels.Stable && version.Build == 1)
+                versionString = versionString.Remove(versionString.IndexOf(" "));
+            msg += $"**Update:** {appName} **Version __{versionString}__**";
 
             // Add titel
             if (!string.IsNullOrEmpty(versionName))
@@ -121,7 +124,7 @@ namespace SM64_ROM_Manager.Updating.Administration.Discord
 
             // Add message
             if (!string.IsNullOrEmpty(message))
-                msg += "\n\nChangelog:\n> " + message;
+                msg += "\n\n " + message;
 
             // Add changelog
             if (addChangelog && !string.IsNullOrEmpty(changelog))
@@ -132,10 +135,10 @@ namespace SM64_ROM_Manager.Updating.Administration.Discord
                 while (sr.Peek() != -1)
                 {
                     var line = await sr.ReadLineAsync();
-                    await sw.WriteLineAsync($"|{line}");
+                    await sw.WriteLineAsync($"> {line}");
                 }
 
-                msg += "\n\n" + sw.ToString();
+                msg += "\n\nChangelog:\n" + sw.ToString();
                 sr.Close();
                 sw.Close();
             }

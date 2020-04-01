@@ -56,6 +56,8 @@
             this.advTree1.BackgroundStyle.Class = "TreeBorderKey";
             this.advTree1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.advTree1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.advTree1.DragDropEnabled = false;
+            this.advTree1.DragDropNodeCopyEnabled = false;
             this.advTree1.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
             this.advTree1.Location = new System.Drawing.Point(0, 0);
             this.advTree1.Name = "advTree1";
@@ -112,7 +114,7 @@
             this.checkBoxX_AddChangelog.Checked = true;
             this.checkBoxX_AddChangelog.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxX_AddChangelog.CheckValue = "Y";
-            this.checkBoxX_AddChangelog.Location = new System.Drawing.Point(114, 3);
+            this.checkBoxX_AddChangelog.Location = new System.Drawing.Point(322, 3);
             this.checkBoxX_AddChangelog.Name = "checkBoxX_AddChangelog";
             this.checkBoxX_AddChangelog.Size = new System.Drawing.Size(141, 23);
             this.checkBoxX_AddChangelog.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -128,7 +130,7 @@
             this.checkBoxX_PingAtEveryone.Checked = true;
             this.checkBoxX_PingAtEveryone.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxX_PingAtEveryone.CheckValue = "Y";
-            this.checkBoxX_PingAtEveryone.Location = new System.Drawing.Point(3, 3);
+            this.checkBoxX_PingAtEveryone.Location = new System.Drawing.Point(211, 3);
             this.checkBoxX_PingAtEveryone.Name = "checkBoxX_PingAtEveryone";
             this.checkBoxX_PingAtEveryone.Size = new System.Drawing.Size(105, 23);
             this.checkBoxX_PingAtEveryone.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -220,6 +222,7 @@
             this.Controls.Add(this.advTree1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "DiscordPostDialog";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Aktuallisierungspost auf Discord";
             this.TopLeftCornerSize = 0;
             this.TopRightCornerSize = 0;

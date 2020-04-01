@@ -80,6 +80,7 @@ namespace SM64_ROM_Manager.Updating.Administration.GUI
             this.RibbonTabItem_Project = new DevComponents.DotNetBar.RibbonTabItem();
             this.RibbonTabItem_Packages = new DevComponents.DotNetBar.RibbonTabItem();
             this.StyleManager1 = new DevComponents.DotNetBar.StyleManager(this.components);
+            this.ButtonItem_BotSettings = new DevComponents.DotNetBar.ButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.SuperTabControl1)).BeginInit();
             this.SuperTabControl1.SuspendLayout();
             this.superTabControlPanel1.SuspendLayout();
@@ -587,11 +588,12 @@ namespace SM64_ROM_Manager.Updating.Administration.GUI
             this.ribbonBar_Discord.Dock = System.Windows.Forms.DockStyle.Left;
             this.ribbonBar_Discord.DragDropSupport = true;
             this.ribbonBar_Discord.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.ButtonItem_PostMsgInDiscord});
+            this.ButtonItem_PostMsgInDiscord,
+            this.ButtonItem_BotSettings});
             this.ribbonBar_Discord.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
             this.ribbonBar_Discord.Location = new System.Drawing.Point(435, 0);
             this.ribbonBar_Discord.Name = "ribbonBar_Discord";
-            this.ribbonBar_Discord.Size = new System.Drawing.Size(110, 97);
+            this.ribbonBar_Discord.Size = new System.Drawing.Size(193, 97);
             this.ribbonBar_Discord.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.ribbonBar_Discord.TabIndex = 2;
             this.ribbonBar_Discord.Text = "Discord";
@@ -749,6 +751,16 @@ namespace SM64_ROM_Manager.Updating.Administration.GUI
             this.StyleManager1.ManagerStyle = DevComponents.DotNetBar.eStyle.Office2016;
             this.StyleManager1.MetroColorParameters = new DevComponents.DotNetBar.Metro.ColorTables.MetroColorGeneratorParameters(System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255))))), System.Drawing.Color.FromArgb(((int)(((byte)(183)))), ((int)(((byte)(71)))), ((int)(((byte)(42))))));
             // 
+            // ButtonItem_BotSettings
+            // 
+            this.ButtonItem_BotSettings.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
+            this.ButtonItem_BotSettings.Image = global::SM64_ROM_Manager.Updating.Administration.GUI.My.Resources.Resources.icons8_administrative_tools_32px;
+            this.ButtonItem_BotSettings.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
+            this.ButtonItem_BotSettings.Name = "ButtonItem_BotSettings";
+            this.ButtonItem_BotSettings.SubItemsExpandWidth = 14;
+            this.ButtonItem_BotSettings.Text = "Discord Bot-Einstellungen";
+            this.ButtonItem_BotSettings.Click += new System.EventHandler(this.ButtonItem_BotSettings_Click);
+            // 
             // UpdateManagerWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -871,5 +883,6 @@ namespace SM64_ROM_Manager.Updating.Administration.GUI
         private DevComponents.DotNetBar.ButtonItem ButtonItem_ChangeVersion;
         private DevComponents.DotNetBar.ButtonItem ButtonItem_EditDescription;
         private DevComponents.DotNetBar.Controls.CircularProgress circularProgress1;
+        private DevComponents.DotNetBar.ButtonItem ButtonItem_BotSettings;
     }
 }

@@ -33,6 +33,9 @@ namespace SM64_ROM_Manager.Updating.Administration.GUI
             InitializeComponent();
             UpdateAmbientColors();
 
+            textBoxX_AppName.Text = General.CurProject.DiscordBotConfig.DefaultAppName;
+            textBoxX_Msg.Text = General.CurProject.DiscordBotConfig.DefaultUpdateMessage;
+
             LoadBgrTree();
         }
 
@@ -51,7 +54,7 @@ namespace SM64_ROM_Manager.Updating.Administration.GUI
                     Expanded = true
                 };
 
-                foreach (var channel in bot.GetTextChannels(guild.Key))
+                foreach (var channel in bot.GetTextChannels(guild.Key).OrderBy((n) => n.Value))
                 {
                     var nChannel = new Node()
                     {
