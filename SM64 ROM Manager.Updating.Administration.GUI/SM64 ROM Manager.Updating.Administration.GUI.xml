@@ -4,6 +4,23 @@
         <name>SM64 ROM Manager.Updating.Administration.GUI</name>
     </assembly>
     <members>
+        <member name="F:SM64_ROM_Manager.Updating.Administration.GUI.DiscordPostDialog.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:SM64_ROM_Manager.Updating.Administration.GUI.DiscordPostDialog.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:SM64_ROM_Manager.Updating.Administration.GUI.DiscordPostDialog.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
         <member name="T:SM64_ROM_Manager.Updating.Administration.GUI.My.Resources.Resources">
             <summary>
               Eine stark typisierte Ressourcenklasse zum Suchen von lokalisierten Zeichenfolgen usw.
@@ -36,6 +53,11 @@
             </summary>
         </member>
         <member name="P:SM64_ROM_Manager.Updating.Administration.GUI.My.Resources.Resources.icons8_checkmark_16px">
+            <summary>
+              Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:SM64_ROM_Manager.Updating.Administration.GUI.My.Resources.Resources.icons8_checkmark_32px">
             <summary>
               Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
             </summary>
@@ -81,6 +103,11 @@
             </summary>
         </member>
         <member name="P:SM64_ROM_Manager.Updating.Administration.GUI.My.Resources.Resources.icons8_edit_property_32px">
+            <summary>
+              Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:SM64_ROM_Manager.Updating.Administration.GUI.My.Resources.Resources.icons8_email_send_16px">
             <summary>
               Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
             </summary>

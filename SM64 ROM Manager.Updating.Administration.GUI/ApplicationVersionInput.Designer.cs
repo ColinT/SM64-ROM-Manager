@@ -36,6 +36,7 @@ namespace SM64_ROM_Manager.Updating.Administration.GUI
         [DebuggerStepThrough()]
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ApplicationVersionInput));
             this.TextBoxX_Version = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.ComboBoxEx_Channel = new DevComponents.DotNetBar.Controls.ComboBoxEx();

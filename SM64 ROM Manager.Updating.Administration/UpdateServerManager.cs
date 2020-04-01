@@ -20,7 +20,6 @@ namespace SM64_ROM_Manager.Updating.Administration
         private const string PKG_FILENAME_RCDEFINITION = "rc";
         private const string PKG_FILENAME_RELEASEDEFINITION = "r";
 
-        private static bool settedProxy = false;
         private WebDavClient client;
         public UpdateInfo UpdateInfo { get; private set; }
         public UpdateServerConfig Config { get; private set; }
@@ -98,11 +97,15 @@ namespace SM64_ROM_Manager.Updating.Administration
                 // Remove configs of non-existing packages
                 await ClearUpdateInfo();
 
+                // Update Packagelinks
+                UpdatePackageLinks();
+
                 // Write
-                var raw = JObject.FromObject(UpdateInfo).ToString();
+                var raw = UpdateInfo.ToString();
                 var ms = new MemoryStream();
                 var sw = new StreamWriter(ms);
                 await sw.WriteAsync(raw);
+                await sw.FlushAsync();
 
                 // Upload
                 ms.Position = 0;
@@ -129,8 +132,11 @@ namespace SM64_ROM_Manager.Updating.Administration
             // Remove configs of non-existing packages
             await ClearUpdateInfo();
 
+            // Update Packagelinks
+            UpdatePackageLinks();
+
             // Write
-            File.WriteAllText(filePath, JObject.FromObject(UpdateInfo).ToString());
+            File.WriteAllText(filePath, UpdateInfo.ToString());
         }
 
         public void NewInfo()
@@ -157,6 +163,17 @@ namespace SM64_ROM_Manager.Updating.Administration
                 UpdateInfo.Packages.Remove(info);
         }
 
+        private void UpdatePackageLinks()
+        {
+            foreach (var info in UpdateInfo.Packages)
+                UpdatePackageLink(info);
+        }
+
+        private void UpdatePackageLink(UpdatePackageInfo info)
+        {
+            info.Packagelink = Config.PublicPackageBaseURL + BuildPackageFilename(info.Version);
+        }
+
         public async Task<IEnumerable<ApplicationVersion>> GetUpdatePackagesList()
         {
             var pkgs = new List<ApplicationVersion>();
@@ -167,7 +184,7 @@ namespace SM64_ROM_Manager.Updating.Administration
                 foreach (var resource in response.Resources)
                 {
                     var fileName = Path.GetFileName(resource.Uri);
-                    if (!string.IsNullOrEmpty(fileName) && fileName.ToLower() == Config.UpdateInfoFilename && LikeString(fileName, "pkg*.*.*.*.zip", CompareMethod.Text))
+                    if (!string.IsNullOrEmpty(fileName) && fileName.ToLower() != Config.UpdateInfoFilename && LikeString(fileName, "pkg*.*.*.*.zip", CompareMethod.Text))
                     {
                         var appVersion = new ApplicationVersion();
                         bool allowAdd = true;
@@ -235,7 +252,7 @@ namespace SM64_ROM_Manager.Updating.Administration
                                 }
 
                                 // Get build
-                                var defBuild = def.Remove(def.IndexOf(pkgFilenameDef));
+                                var defBuild = def.Substring(pkgFilenameDef.Length);
                                 appVersion.Build = Convert.ToInt32(defBuild);
                             }
                             else
@@ -344,7 +361,7 @@ namespace SM64_ROM_Manager.Updating.Administration
         public (string name, string description) GetPackageDescription(ApplicationVersion version)
         {
             var pkg = GetUpdatePackageInfo(version);
-            return (pkg?.Name, pkg.Changelog);
+            return (pkg?.Name, pkg?.Changelog);
         }
 
         public void SetPackageDescription(ApplicationVersion version, string name, string description)

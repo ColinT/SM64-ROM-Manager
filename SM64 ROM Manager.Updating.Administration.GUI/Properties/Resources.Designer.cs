@@ -203,6 +203,16 @@ namespace SM64_ROM_Manager.Updating.Administration.GUI.My.Resources {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_email_send_16px {
+            get {
+                object obj = ResourceManager.GetObject("icons8_email_send_16px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_export_32px_3 {
             get {
                 object obj = ResourceManager.GetObject("icons8_export_32px_3", resourceCulture);

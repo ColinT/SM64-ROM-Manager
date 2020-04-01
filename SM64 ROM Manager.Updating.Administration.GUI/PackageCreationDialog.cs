@@ -33,6 +33,10 @@ namespace SM64_ROM_Manager.Updating.Administration.GUI
 
         // C o n s t r u c t o r s
 
+        public PackageCreationDialog() : this(false)
+        {
+        }
+
         public PackageCreationDialog(bool isUploadingPackage = false)
         {
             this.isUploadingPackage = isUploadingPackage;
@@ -59,6 +63,15 @@ namespace SM64_ROM_Manager.Updating.Administration.GUI
             }
 
             RibbonControl_Main.RecalcLayout();
+        }
+
+        private void ProgressControls(bool enabled)
+        {
+            if (enabled)
+                circularProgress1.Start();
+            else
+                circularProgress1.Stop();
+            Enabled = !enabled;
         }
 
         // G e n e r a l   G u i
@@ -196,6 +209,7 @@ namespace SM64_ROM_Manager.Updating.Administration.GUI
         private async Task<bool> ExportUpdatePackage(string filePath)
         {
             bool success = false;
+            ProgressControls(true);
 
             try
             {
@@ -207,6 +221,7 @@ namespace SM64_ROM_Manager.Updating.Administration.GUI
                 success = false;
             }
 
+            ProgressControls(false);
             return success;
         }
 
@@ -282,7 +297,7 @@ namespace SM64_ROM_Manager.Updating.Administration.GUI
             if (sfd_UpdateAdmin_ExportPkg.ShowDialog() == DialogResult.OK)
             {
                 if (await ExportUpdatePackage(sfd_UpdateAdmin_ExportPkg.FileName))
-                    MessageBox.Show(My.Resources.UpdatingAdministrationLangRes.MsgBox_PkgExportSuccess, My.Resources.UpdatingAdministrationLangRes.MsgBox_PkgExportSuccess_Titel, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show(this, My.Resources.UpdatingAdministrationLangRes.MsgBox_PkgExportSuccess, My.Resources.UpdatingAdministrationLangRes.MsgBox_PkgExportSuccess_Titel, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }            
         }
 
@@ -301,7 +316,7 @@ namespace SM64_ROM_Manager.Updating.Administration.GUI
             if (await ExportTempUpdatePackage())
                 DialogResult = DialogResult.OK;
             else
-                MessageBox.Show(My.Resources.UpdatingAdministrationLangRes.MsgBox_PkgExportSuccess, My.Resources.UpdatingAdministrationLangRes.MsgBox_PkgExportSuccess_Titel, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show(this, My.Resources.UpdatingAdministrationLangRes.MsgBox_PkgExportSuccess, My.Resources.UpdatingAdministrationLangRes.MsgBox_PkgExportSuccess_Titel, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

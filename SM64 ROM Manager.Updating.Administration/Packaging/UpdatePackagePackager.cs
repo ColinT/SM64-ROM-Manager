@@ -21,10 +21,7 @@ namespace SM64_ROM_Manager.Updating.Administration.Packaging
 
             // Ensure package directory exists and is empty
             if (packageDir.Exists)
-            {
-                packageDir.Delete();
-            }
-
+                packageDir.Delete(true);
             packageDir.Create();
 
             // Copy local data to temp data directory
@@ -40,6 +37,10 @@ namespace SM64_ROM_Manager.Updating.Administration.Packaging
                 File.Copy(fAddOn, Path.Combine(addOnsDir.FullName, $"installer_addon_{curAddOnID}.dll"));
                 curAddOnID += 1;
             }
+
+            // Ensure destination file doesn't exist
+            if (File.Exists(exportPath))
+                File.Delete(exportPath);
 
             // Export to ZIP
             ZipFile.CreateFromDirectory(packageDir.FullName, exportPath);

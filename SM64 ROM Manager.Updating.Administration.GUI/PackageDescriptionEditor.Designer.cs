@@ -40,13 +40,13 @@ namespace SM64_ROM_Manager.Updating.Administration.GUI
             this.LayoutControl1 = new DevComponents.DotNetBar.Layout.LayoutControl();
             this.ButtonX_Cancel = new DevComponents.DotNetBar.ButtonX();
             this.ButtonX_Okay = new DevComponents.DotNetBar.ButtonX();
+            this.textBoxX1 = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.textBoxX2 = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.layoutControlItem1 = new DevComponents.DotNetBar.Layout.LayoutControlItem();
+            this.layoutControlItem2 = new DevComponents.DotNetBar.Layout.LayoutControlItem();
             this.LayoutSpacerItem1 = new DevComponents.DotNetBar.Layout.LayoutSpacerItem();
             this.LayoutControlItem5 = new DevComponents.DotNetBar.Layout.LayoutControlItem();
             this.LayoutControlItem6 = new DevComponents.DotNetBar.Layout.LayoutControlItem();
-            this.textBoxX1 = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.layoutControlItem1 = new DevComponents.DotNetBar.Layout.LayoutControlItem();
-            this.textBoxX2 = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.layoutControlItem2 = new DevComponents.DotNetBar.Layout.LayoutControlItem();
             this.LayoutControl1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -101,6 +101,63 @@ namespace SM64_ROM_Manager.Updating.Administration.GUI
             this.ButtonX_Okay.TabIndex = 4;
             this.ButtonX_Okay.Text = "Okay";
             // 
+            // textBoxX1
+            // 
+            this.textBoxX1.BackColor = System.Drawing.Color.White;
+            // 
+            // 
+            // 
+            this.textBoxX1.Border.Class = "TextBoxBorder";
+            this.textBoxX1.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.textBoxX1.DisabledBackColor = System.Drawing.Color.White;
+            this.textBoxX1.ForeColor = System.Drawing.Color.Black;
+            this.textBoxX1.Location = new System.Drawing.Point(84, 4);
+            this.textBoxX1.Margin = new System.Windows.Forms.Padding(0);
+            this.textBoxX1.Name = "textBoxX1";
+            this.textBoxX1.PreventEnterBeep = true;
+            this.textBoxX1.Size = new System.Drawing.Size(296, 20);
+            this.textBoxX1.TabIndex = 0;
+            // 
+            // textBoxX2
+            // 
+            this.textBoxX2.BackColor = System.Drawing.Color.White;
+            // 
+            // 
+            // 
+            this.textBoxX2.Border.Class = "TextBoxBorder";
+            this.textBoxX2.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.textBoxX2.DisabledBackColor = System.Drawing.Color.White;
+            this.textBoxX2.ForeColor = System.Drawing.Color.Black;
+            this.textBoxX2.Location = new System.Drawing.Point(84, 32);
+            this.textBoxX2.Margin = new System.Windows.Forms.Padding(0);
+            this.textBoxX2.Multiline = true;
+            this.textBoxX2.Name = "textBoxX2";
+            this.textBoxX2.PreventEnterBeep = true;
+            this.textBoxX2.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.textBoxX2.Size = new System.Drawing.Size(296, 193);
+            this.textBoxX2.TabIndex = 1;
+            // 
+            // layoutControlItem1
+            // 
+            this.layoutControlItem1.Control = this.textBoxX1;
+            this.layoutControlItem1.Height = 28;
+            this.layoutControlItem1.MinSize = new System.Drawing.Size(120, 0);
+            this.layoutControlItem1.Name = "layoutControlItem1";
+            this.layoutControlItem1.Text = "Titel:";
+            this.layoutControlItem1.Width = 100;
+            this.layoutControlItem1.WidthType = DevComponents.DotNetBar.Layout.eLayoutSizeType.Percent;
+            // 
+            // layoutControlItem2
+            // 
+            this.layoutControlItem2.Control = this.textBoxX2;
+            this.layoutControlItem2.Height = 100;
+            this.layoutControlItem2.HeightType = DevComponents.DotNetBar.Layout.eLayoutSizeType.Percent;
+            this.layoutControlItem2.MinSize = new System.Drawing.Size(120, 0);
+            this.layoutControlItem2.Name = "layoutControlItem2";
+            this.layoutControlItem2.Text = "Beschreibung:";
+            this.layoutControlItem2.Width = 100;
+            this.layoutControlItem2.WidthType = DevComponents.DotNetBar.Layout.eLayoutSizeType.Percent;
+            // 
             // LayoutSpacerItem1
             // 
             this.LayoutSpacerItem1.Height = 31;
@@ -124,65 +181,8 @@ namespace SM64_ROM_Manager.Updating.Administration.GUI
             this.LayoutControlItem6.Name = "LayoutControlItem6";
             this.LayoutControlItem6.Width = 83;
             // 
-            // textBoxX1
-            // 
-            this.textBoxX1.BackColor = System.Drawing.Color.White;
-            // 
-            // 
-            // 
-            this.textBoxX1.Border.Class = "TextBoxBorder";
-            this.textBoxX1.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.textBoxX1.DisabledBackColor = System.Drawing.Color.White;
-            this.textBoxX1.ForeColor = System.Drawing.Color.Black;
-            this.textBoxX1.Location = new System.Drawing.Point(84, 4);
-            this.textBoxX1.Margin = new System.Windows.Forms.Padding(0, 0, 0, 0);
-            this.textBoxX1.Name = "textBoxX1";
-            this.textBoxX1.PreventEnterBeep = true;
-            this.textBoxX1.Size = new System.Drawing.Size(296, 20);
-            this.textBoxX1.TabIndex = 0;
-            // 
-            // layoutControlItem1
-            // 
-            this.layoutControlItem1.Control = this.textBoxX1;
-            this.layoutControlItem1.Height = 28;
-            this.layoutControlItem1.MinSize = new System.Drawing.Size(120, 0);
-            this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Text = "Titel:";
-            this.layoutControlItem1.Width = 100;
-            this.layoutControlItem1.WidthType = DevComponents.DotNetBar.Layout.eLayoutSizeType.Percent;
-            // 
-            // textBoxX2
-            // 
-            this.textBoxX2.BackColor = System.Drawing.Color.White;
-            // 
-            // 
-            // 
-            this.textBoxX2.Border.Class = "TextBoxBorder";
-            this.textBoxX2.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.textBoxX2.DisabledBackColor = System.Drawing.Color.White;
-            this.textBoxX2.ForeColor = System.Drawing.Color.Black;
-            this.textBoxX2.Location = new System.Drawing.Point(84, 32);
-            this.textBoxX2.Margin = new System.Windows.Forms.Padding(0);
-            this.textBoxX2.Multiline = true;
-            this.textBoxX2.Name = "textBoxX2";
-            this.textBoxX2.PreventEnterBeep = true;
-            this.textBoxX2.Size = new System.Drawing.Size(296, 193);
-            this.textBoxX2.TabIndex = 1;
-            // 
-            // layoutControlItem2
-            // 
-            this.layoutControlItem2.Control = this.textBoxX2;
-            this.layoutControlItem2.Height = 100;
-            this.layoutControlItem2.HeightType = DevComponents.DotNetBar.Layout.eLayoutSizeType.Percent;
-            this.layoutControlItem2.MinSize = new System.Drawing.Size(120, 0);
-            this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Text = "Beschreibung:";
-            this.layoutControlItem2.Width = 100;
-            this.layoutControlItem2.WidthType = DevComponents.DotNetBar.Layout.eLayoutSizeType.Percent;
-            // 
             // PackageDescriptionEditor
             // 
-            this.AcceptButton = this.ButtonX_Okay;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.ButtonX_Cancel;

@@ -10,6 +10,7 @@ using Microsoft.VisualBasic.CompilerServices;
 using global::Microsoft.WindowsAPICodePack.Dialogs;
 using Z.Collections.Extensions;
 using System.Threading.Tasks;
+using SM64_ROM_Manager.Updating.Administration.Discord;
 
 namespace SM64_ROM_Manager.Updating.Administration.GUI
 {
@@ -18,20 +19,23 @@ namespace SM64_ROM_Manager.Updating.Administration.GUI
 
         // C o n s t a n t s
 
-        private const string FILTER_UPDATEINFO_CONFIGURATION = "Update-Info-Konfiguration (*.udic)|*.udic";
+        private const string FILTER_UPDATEINFO_CONFIGURATION = "JSON (*.json)|*.json";
+        private const string FILTER_UPDATEPROJECT = "Update-Info-Konfiguration (*.udic)|*.udic";
         private const string FILTER_UPDATEPACKAGE = "ZIP-Archiv (*.zip)|*.zip";
 
         // F i e l d s
 
         private string curProjectFilePath;
         private UpdateServerManager manager = null;
+        private DiscordBot discordBot = null;
 
         // C o n s t r u c t o r s
 
         public UpdateManagerWindow()
         {
-            this.Shown += EditorWindow_Shown;
+            this.Shown += UpdateManagerWindow_Shown;
             this.Load += UpdateManagerWindow_Load;
+            this.FormClosing += UpdateManagerWindow_FormClosing;
             InitializeComponent();
             UpdateAmbientColors();
             SetEnabledUiControls(false);
@@ -39,12 +43,22 @@ namespace SM64_ROM_Manager.Updating.Administration.GUI
 
         // F e a t u r e s
 
+        private void ProgressControls(bool enabled)
+        {
+            if (enabled)
+                circularProgress1.Start();
+            else
+                circularProgress1.Stop();
+            Enabled = !enabled;
+        }
+
         private void SetEnabledUiControls(bool enabled, bool setProjectOptionsAlwayToTrue = false)
         {
             ribbonBar_Options.Enabled = enabled || setProjectOptionsAlwayToTrue;
-            ribbonBar_Tools.Enabled = enabled;
+            ButtonItem_SaveProject.Enabled = enabled || setProjectOptionsAlwayToTrue;
             ribbonBar_UpdateConfiguration.Enabled = enabled;
-            ribbonPanel_Package.Enabled = Enabled;
+            ribbonPanel_Package.Enabled = enabled;
+            SuperTabControl1.Enabled = enabled;
         }
 
         private async Task CreateNewProject(string filePath)
@@ -76,6 +90,7 @@ namespace SM64_ROM_Manager.Updating.Administration.GUI
         private async Task LoadManager()
         {
             bool hasError;
+            ProgressControls(true);
 
             try
             {
@@ -103,20 +118,24 @@ namespace SM64_ROM_Manager.Updating.Administration.GUI
             }
             else
                 SetEnabledUiControls(true);
+
+            ProgressControls(false);
         }
 
         private async Task LoadPackageList()
         {
             ListViewItem firstItem = null;
 
+            ProgressControls(true);
             ListViewEx_Packages.BeginUpdate();
             ListViewEx_Packages.Items.Clear();
 
             foreach (var pkgVersion in await manager.GetUpdatePackagesList())
             {
+                var name = manager.GetPackageDescription(pkgVersion).name;
                 var item = new ListViewItem(new string[]
                 {
-                    manager.GetPackageDescription(pkgVersion).name,
+                    string.IsNullOrEmpty(name) ? "<Kein Titel>" : name,
                     pkgVersion.Version.ToString(),
                     pkgVersion.Channel.ToString(),
                     pkgVersion.Build.ToString(),
@@ -133,6 +152,7 @@ namespace SM64_ROM_Manager.Updating.Administration.GUI
             }
 
             ListViewEx_Packages.EndUpdate();
+            ProgressControls(false);
 
             if (firstItem is object)
                 firstItem.Selected = true;
@@ -159,12 +179,63 @@ namespace SM64_ROM_Manager.Updating.Administration.GUI
 
             if (!resVersion.canceled)
             {
+                ProgressControls(true);
                 if (await manager.UploadPackage(filePath, resVersion.newVersion))
-                {
                     success = true;
-                }
+                ProgressControls(false);
             }
 
+            return success;
+        }
+
+        private (ApplicationVersion newVersion, bool canceled) EditApplicationVersion()
+        {
+            return EditApplicationVersion(new ApplicationVersion());
+        }
+
+        private (ApplicationVersion newVersion, bool canceled) EditApplicationVersion(ApplicationVersion inputVersion)
+        {
+            var frm = new ApplicationVersionInput()
+            {
+                Version = inputVersion.Version,
+                Channel = inputVersion.Channel,
+                Build = inputVersion.Build
+            };
+
+            if (frm.ShowDialog() == DialogResult.OK)
+                return (new ApplicationVersion(frm.Version, frm.Build, frm.Channel), false);
+            else
+                return (inputVersion, true);
+        }
+
+        private async Task<bool> DeletePackage(ApplicationVersion version)
+        {
+            ProgressControls(true);
+            bool success = await manager.DeletePackage(version);
+            ProgressControls(false);
+            return success;
+        }
+
+        private async Task<bool> SaveInfoToServer()
+        {
+            ProgressControls(true);
+            bool success = await manager.SaveInfoToServer();
+            ProgressControls(false);
+            return success;
+        }
+
+        private async Task<bool> ChangePackageVersion(ApplicationVersion version)
+        {
+            bool success = false;
+            var (newVersion, canceled) = EditApplicationVersion(version);
+
+            if (!canceled)
+            {
+                ProgressControls(true);
+                success = await manager.ChangePackageVersion(version, newVersion);
+                ProgressControls(false);
+            }
+            
             return success;
         }
 
@@ -174,7 +245,7 @@ namespace SM64_ROM_Manager.Updating.Administration.GUI
         {
         }
 
-        private void EditorWindow_Shown(object sender, EventArgs e)
+        private void UpdateManagerWindow_Shown(object sender, EventArgs e)
         {
         }
 
@@ -190,6 +261,12 @@ namespace SM64_ROM_Manager.Updating.Administration.GUI
                 }
                 catch (Exception) { }
             }
+        }
+
+        private void UpdateManagerWindow_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (discordBot is object)
+                discordBot.Stop();
         }
 
         private async void ButtonItem_NewProject_Click(object sender, EventArgs e)
@@ -229,17 +306,17 @@ namespace SM64_ROM_Manager.Updating.Administration.GUI
 
         private async void ButtonItem_UploadUpdateConfiguration_Click(object sender, EventArgs e)
         {
-            await manager.SaveInfoToServer();
+            await SaveInfoToServer();
         }
 
         private async void ButtonItem_ExportUpdateConfiguration_Click(object sender, EventArgs e)
         {
-            var ofd_UpdateAdministration_UpdateConfiguration = new OpenFileDialog()
+            var sfd_UpdateAdministration_UpdateConfiguration = new SaveFileDialog()
             {
                 Filter = FILTER_UPDATEINFO_CONFIGURATION
             };
-            if (ofd_UpdateAdministration_UpdateConfiguration.ShowDialog() == DialogResult.OK)
-                await manager.SaveInfoToFile(ofd_UpdateAdministration_UpdateConfiguration.FileName);
+            if (sfd_UpdateAdministration_UpdateConfiguration.ShowDialog() == DialogResult.OK)
+                await manager.SaveInfoToFile(sfd_UpdateAdministration_UpdateConfiguration.FileName);
         }
 
         private void ButtonItem_OpenPackageCreationDialog_Click(object sender, EventArgs e)
@@ -275,7 +352,7 @@ namespace SM64_ROM_Manager.Updating.Administration.GUI
         private async void ButtonItem_RemovePackage_Click(object sender, EventArgs e)
         {
             var version = GetSelectedPackageVersion();
-            if (await manager.DeletePackage(version))
+            if (await DeletePackage(version))
                 await LoadPackageList();
         }
 
@@ -286,39 +363,38 @@ namespace SM64_ROM_Manager.Updating.Administration.GUI
 
         private void ListViewEx_Packages_SelectedIndexChanged(object sender, EventArgs e)
         {
+            var anySelected = ListViewEx_Packages.SelectedItems.Count > 0;
+            ribbonBar_Discord.Enabled = anySelected;
+            ribbonBar_PackageManagement.Enabled = anySelected;
         }
 
         private void ButtonItem_PostMsgInDiscord_Click(object sender, EventArgs e)
         {
+            if (discordBot == null)
+            {
+                bool hasLoaded = false;
+                discordBot = new DiscordBot(General.CurProject.DiscordBotConfig);
+                discordBot.GotReady += (_,__) => hasLoaded = true;
+                ProgressControls(true);
+                while (hasLoaded)
+                    Application.DoEvents();
+                ProgressControls(false);
+            }
 
+            if (discordBot is object)
+            {
+                var version = GetSelectedPackageVersion();
+                var desc = manager.GetPackageDescription(version);
+                var frm = new DiscordPostDialog(discordBot, desc.name, desc.description, version);
+                frm.ShowDialog();
+            }
         }
 
         private async void ButtonItem_ChangeVersion_Click(object sender, EventArgs e)
         {
             var version = GetSelectedPackageVersion();
-            var (newVersion, canceled) = EditApplicationVersion(version);
-
-            if (!canceled)
-            {
-                if (await manager.ChangePackageVersion(version, newVersion))
-                    await LoadPackageList();
-            }
-                
-        }
-
-        private (ApplicationVersion newVersion, bool canceled) EditApplicationVersion(ApplicationVersion inputVersion = default)
-        {
-            var frm = new ApplicationVersionInput()
-            {
-                Version = inputVersion.Version,
-                Channel = inputVersion.Channel,
-                Build = inputVersion.Build
-            };
-
-            if (frm.ShowDialog() == DialogResult.OK)
-                return (new ApplicationVersion(frm.Version, frm.Build, frm.Channel), false);
-            else
-                return (inputVersion, true);
+            if (await ChangePackageVersion(version))
+                await LoadPackageList();
         }
 
         private async void ButtonItem_EditDescription_Click(object sender, EventArgs e)

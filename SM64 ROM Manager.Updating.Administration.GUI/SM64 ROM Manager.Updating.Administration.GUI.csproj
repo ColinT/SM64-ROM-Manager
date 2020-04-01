@@ -137,6 +137,12 @@
     <Import Include="Z.Collections.Extensions" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DiscordPostDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DiscordPostDialog.Designer.cs">
+      <DependentUpon>DiscordPostDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="PackageDescriptionEditor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -201,6 +207,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="DiscordPostDialog.resx">
+      <DependentUpon>DiscordPostDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PackageDescriptionEditor.resx">
       <DependentUpon>PackageDescriptionEditor.cs</DependentUpon>
     </EmbeddedResource>
@@ -246,6 +255,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icons8_software_installer.ico" />
+    <None Include="Resources\icons8_email_send_16px.png" />
     <None Include="Resources\icons8_checkmark_32px.png" />
     <None Include="Resources\icons8_discord_new_logo_32px.png" />
     <None Include="Resources\icons8_upload_to_cloud_32px.png" />

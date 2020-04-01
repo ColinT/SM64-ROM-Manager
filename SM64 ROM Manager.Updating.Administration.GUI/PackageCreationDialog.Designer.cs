@@ -53,24 +53,26 @@ namespace SM64_ROM_Manager.Updating.Administration.GUI
             this.RibbonControl_Main = new DevComponents.DotNetBar.RibbonControl();
             this.RibbonPanel1 = new DevComponents.DotNetBar.RibbonPanel();
             this.RibbonBar_Pkg_Erweiterungen = new DevComponents.DotNetBar.RibbonBar();
-            this.RibbonBar_Pkg_Dateien = new DevComponents.DotNetBar.RibbonBar();
-            this.RibbonBar1 = new DevComponents.DotNetBar.RibbonBar();
-            this.RibbonBar3 = new DevComponents.DotNetBar.RibbonBar();
-            this.RibbonTabItem_Packaging = new DevComponents.DotNetBar.RibbonTabItem();
             this.ButtonItem_Pkg_AddExtension = new DevComponents.DotNetBar.ButtonItem();
             this.ButtonItem_Pkg_RemoveExtension = new DevComponents.DotNetBar.ButtonItem();
+            this.RibbonBar_Pkg_Dateien = new DevComponents.DotNetBar.RibbonBar();
             this.ButtonItem_Pkg_SelectFileFolder = new DevComponents.DotNetBar.ButtonItem();
             this.ButtonItem_Pkg_RemoveFileFolder = new DevComponents.DotNetBar.ButtonItem();
+            this.RibbonBar1 = new DevComponents.DotNetBar.RibbonBar();
             this.ButtonItem_Pkg_Export = new DevComponents.DotNetBar.ButtonItem();
             this.ButtonItem_UploadPackage = new DevComponents.DotNetBar.ButtonItem();
+            this.RibbonBar3 = new DevComponents.DotNetBar.RibbonBar();
             this.ButtonItem_Pkg_NewTemplate = new DevComponents.DotNetBar.ButtonItem();
             this.ButtonItem_Pkg_OpenTemplate = new DevComponents.DotNetBar.ButtonItem();
             this.ButtonItem_Pkg_SaveTemplate = new DevComponents.DotNetBar.ButtonItem();
             this.ButtonItem_Pkg_SaveTemplateAs = new DevComponents.DotNetBar.ButtonItem();
+            this.RibbonTabItem_Packaging = new DevComponents.DotNetBar.RibbonTabItem();
+            this.circularProgress1 = new DevComponents.DotNetBar.Controls.CircularProgress();
             ((System.ComponentModel.ISupportInitialize)(this.SuperTabControl1)).BeginInit();
             this.SuperTabControl1.SuspendLayout();
             this.SuperTabControlPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.AdvTree1)).BeginInit();
+            this.AdvTree1.SuspendLayout();
             this.SuperTabControlPanel4.SuspendLayout();
             this.Panel4.SuspendLayout();
             this.RibbonControl_Main.SuspendLayout();
@@ -137,6 +139,7 @@ namespace SM64_ROM_Manager.Updating.Administration.GUI
             // 
             this.AdvTree1.BackgroundStyle.Class = "TreeBorderKey";
             this.AdvTree1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.AdvTree1.Controls.Add(this.circularProgress1);
             this.AdvTree1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.AdvTree1.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
             this.AdvTree1.Location = new System.Drawing.Point(0, 0);
@@ -172,7 +175,7 @@ namespace SM64_ROM_Manager.Updating.Administration.GUI
             this.SuperTabControlPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.SuperTabControlPanel4.Location = new System.Drawing.Point(96, 0);
             this.SuperTabControlPanel4.Name = "SuperTabControlPanel4";
-            this.SuperTabControlPanel4.Size = new System.Drawing.Size(584, 472);
+            this.SuperTabControlPanel4.Size = new System.Drawing.Size(552, 394);
             this.SuperTabControlPanel4.TabIndex = 0;
             this.SuperTabControlPanel4.TabItem = this.SuperTabItem_Pkg_Extensions;
             // 
@@ -183,7 +186,7 @@ namespace SM64_ROM_Manager.Updating.Administration.GUI
             this.Panel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Panel4.Location = new System.Drawing.Point(0, 0);
             this.Panel4.Name = "Panel4";
-            this.Panel4.Size = new System.Drawing.Size(584, 472);
+            this.Panel4.Size = new System.Drawing.Size(552, 394);
             this.Panel4.TabIndex = 1;
             // 
             // ListViewEx_Files
@@ -205,7 +208,7 @@ namespace SM64_ROM_Manager.Updating.Administration.GUI
             this.ListViewEx_Files.HideSelection = false;
             this.ListViewEx_Files.Location = new System.Drawing.Point(0, 0);
             this.ListViewEx_Files.Name = "ListViewEx_Files";
-            this.ListViewEx_Files.Size = new System.Drawing.Size(584, 472);
+            this.ListViewEx_Files.Size = new System.Drawing.Size(552, 394);
             this.ListViewEx_Files.TabIndex = 0;
             this.ListViewEx_Files.UseCompatibleStateImageBehavior = false;
             this.ListViewEx_Files.View = System.Windows.Forms.View.Details;
@@ -323,6 +326,26 @@ namespace SM64_ROM_Manager.Updating.Administration.GUI
             // 
             this.RibbonBar_Pkg_Erweiterungen.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             // 
+            // ButtonItem_Pkg_AddExtension
+            // 
+            this.ButtonItem_Pkg_AddExtension.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
+            this.ButtonItem_Pkg_AddExtension.Image = global::SM64_ROM_Manager.Updating.Administration.GUI.My.Resources.Resources.icons8_merge_files_32px;
+            this.ButtonItem_Pkg_AddExtension.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
+            this.ButtonItem_Pkg_AddExtension.Name = "ButtonItem_Pkg_AddExtension";
+            this.ButtonItem_Pkg_AddExtension.SubItemsExpandWidth = 14;
+            this.ButtonItem_Pkg_AddExtension.Text = "Erweiterung hinzufügen";
+            this.ButtonItem_Pkg_AddExtension.Click += new System.EventHandler(this.ButtonItem_Pkg_AddExtension_Click);
+            // 
+            // ButtonItem_Pkg_RemoveExtension
+            // 
+            this.ButtonItem_Pkg_RemoveExtension.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
+            this.ButtonItem_Pkg_RemoveExtension.Image = global::SM64_ROM_Manager.Updating.Administration.GUI.My.Resources.Resources.icons8_delete_sign_32px_1;
+            this.ButtonItem_Pkg_RemoveExtension.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
+            this.ButtonItem_Pkg_RemoveExtension.Name = "ButtonItem_Pkg_RemoveExtension";
+            this.ButtonItem_Pkg_RemoveExtension.SubItemsExpandWidth = 14;
+            this.ButtonItem_Pkg_RemoveExtension.Text = "Erweiterung entfernen";
+            this.ButtonItem_Pkg_RemoveExtension.Click += new System.EventHandler(this.ButtonItem_Pkg_RemoveExtension_Click);
+            // 
             // RibbonBar_Pkg_Dateien
             // 
             this.RibbonBar_Pkg_Dateien.AutoOverflowEnabled = true;
@@ -356,6 +379,26 @@ namespace SM64_ROM_Manager.Updating.Administration.GUI
             // 
             this.RibbonBar_Pkg_Dateien.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             // 
+            // ButtonItem_Pkg_SelectFileFolder
+            // 
+            this.ButtonItem_Pkg_SelectFileFolder.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
+            this.ButtonItem_Pkg_SelectFileFolder.Image = global::SM64_ROM_Manager.Updating.Administration.GUI.My.Resources.Resources.icons8_opened_folder_32px;
+            this.ButtonItem_Pkg_SelectFileFolder.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
+            this.ButtonItem_Pkg_SelectFileFolder.Name = "ButtonItem_Pkg_SelectFileFolder";
+            this.ButtonItem_Pkg_SelectFileFolder.SubItemsExpandWidth = 14;
+            this.ButtonItem_Pkg_SelectFileFolder.Text = "Ordner auswählen";
+            this.ButtonItem_Pkg_SelectFileFolder.Click += new System.EventHandler(this.ButtonItem_Pkg_SelectFileFolder_Click);
+            // 
+            // ButtonItem_Pkg_RemoveFileFolder
+            // 
+            this.ButtonItem_Pkg_RemoveFileFolder.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
+            this.ButtonItem_Pkg_RemoveFileFolder.Image = global::SM64_ROM_Manager.Updating.Administration.GUI.My.Resources.Resources.icons8_delete_sign_32px_1;
+            this.ButtonItem_Pkg_RemoveFileFolder.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
+            this.ButtonItem_Pkg_RemoveFileFolder.Name = "ButtonItem_Pkg_RemoveFileFolder";
+            this.ButtonItem_Pkg_RemoveFileFolder.SubItemsExpandWidth = 14;
+            this.ButtonItem_Pkg_RemoveFileFolder.Text = "Ordner entfernen";
+            this.ButtonItem_Pkg_RemoveFileFolder.Click += new System.EventHandler(this.ButtonItem_Pkg_RemoveFileFolder_Click);
+            // 
             // RibbonBar1
             // 
             this.RibbonBar1.AutoOverflowEnabled = true;
@@ -388,6 +431,26 @@ namespace SM64_ROM_Manager.Updating.Administration.GUI
             // 
             // 
             this.RibbonBar1.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            // 
+            // ButtonItem_Pkg_Export
+            // 
+            this.ButtonItem_Pkg_Export.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
+            this.ButtonItem_Pkg_Export.Image = global::SM64_ROM_Manager.Updating.Administration.GUI.My.Resources.Resources.icons8_export_32px_3;
+            this.ButtonItem_Pkg_Export.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
+            this.ButtonItem_Pkg_Export.Name = "ButtonItem_Pkg_Export";
+            this.ButtonItem_Pkg_Export.SubItemsExpandWidth = 14;
+            this.ButtonItem_Pkg_Export.Text = "Paket exportieren";
+            this.ButtonItem_Pkg_Export.Click += new System.EventHandler(this.ButtonItem_Pkg_Export_Click);
+            // 
+            // ButtonItem_UploadPackage
+            // 
+            this.ButtonItem_UploadPackage.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
+            this.ButtonItem_UploadPackage.Image = global::SM64_ROM_Manager.Updating.Administration.GUI.My.Resources.Resources.icons8_checkmark_32px;
+            this.ButtonItem_UploadPackage.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
+            this.ButtonItem_UploadPackage.Name = "ButtonItem_UploadPackage";
+            this.ButtonItem_UploadPackage.SubItemsExpandWidth = 14;
+            this.ButtonItem_UploadPackage.Text = "Paket fertigstellen";
+            this.ButtonItem_UploadPackage.Click += new System.EventHandler(this.ButtonItem_UploadPackage_Click);
             // 
             // RibbonBar3
             // 
@@ -423,73 +486,6 @@ namespace SM64_ROM_Manager.Updating.Administration.GUI
             // 
             // 
             this.RibbonBar3.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            // 
-            // RibbonTabItem_Packaging
-            // 
-            this.RibbonTabItem_Packaging.Checked = true;
-            this.RibbonTabItem_Packaging.Name = "RibbonTabItem_Packaging";
-            this.RibbonTabItem_Packaging.Panel = this.RibbonPanel1;
-            this.RibbonTabItem_Packaging.Text = "Paketierung";
-            // 
-            // ButtonItem_Pkg_AddExtension
-            // 
-            this.ButtonItem_Pkg_AddExtension.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
-            this.ButtonItem_Pkg_AddExtension.Image = global::SM64_ROM_Manager.Updating.Administration.GUI.My.Resources.Resources.icons8_merge_files_32px;
-            this.ButtonItem_Pkg_AddExtension.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
-            this.ButtonItem_Pkg_AddExtension.Name = "ButtonItem_Pkg_AddExtension";
-            this.ButtonItem_Pkg_AddExtension.SubItemsExpandWidth = 14;
-            this.ButtonItem_Pkg_AddExtension.Text = "Erweiterung hinzufügen";
-            this.ButtonItem_Pkg_AddExtension.Click += new System.EventHandler(this.ButtonItem_Pkg_AddExtension_Click);
-            // 
-            // ButtonItem_Pkg_RemoveExtension
-            // 
-            this.ButtonItem_Pkg_RemoveExtension.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
-            this.ButtonItem_Pkg_RemoveExtension.Image = global::SM64_ROM_Manager.Updating.Administration.GUI.My.Resources.Resources.icons8_delete_sign_32px_1;
-            this.ButtonItem_Pkg_RemoveExtension.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
-            this.ButtonItem_Pkg_RemoveExtension.Name = "ButtonItem_Pkg_RemoveExtension";
-            this.ButtonItem_Pkg_RemoveExtension.SubItemsExpandWidth = 14;
-            this.ButtonItem_Pkg_RemoveExtension.Text = "Erweiterung entfernen";
-            this.ButtonItem_Pkg_RemoveExtension.Click += new System.EventHandler(this.ButtonItem_Pkg_RemoveExtension_Click);
-            // 
-            // ButtonItem_Pkg_SelectFileFolder
-            // 
-            this.ButtonItem_Pkg_SelectFileFolder.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
-            this.ButtonItem_Pkg_SelectFileFolder.Image = global::SM64_ROM_Manager.Updating.Administration.GUI.My.Resources.Resources.icons8_opened_folder_32px;
-            this.ButtonItem_Pkg_SelectFileFolder.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
-            this.ButtonItem_Pkg_SelectFileFolder.Name = "ButtonItem_Pkg_SelectFileFolder";
-            this.ButtonItem_Pkg_SelectFileFolder.SubItemsExpandWidth = 14;
-            this.ButtonItem_Pkg_SelectFileFolder.Text = "Ordner auswählen";
-            this.ButtonItem_Pkg_SelectFileFolder.Click += new System.EventHandler(this.ButtonItem_Pkg_SelectFileFolder_Click);
-            // 
-            // ButtonItem_Pkg_RemoveFileFolder
-            // 
-            this.ButtonItem_Pkg_RemoveFileFolder.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
-            this.ButtonItem_Pkg_RemoveFileFolder.Image = global::SM64_ROM_Manager.Updating.Administration.GUI.My.Resources.Resources.icons8_delete_sign_32px_1;
-            this.ButtonItem_Pkg_RemoveFileFolder.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
-            this.ButtonItem_Pkg_RemoveFileFolder.Name = "ButtonItem_Pkg_RemoveFileFolder";
-            this.ButtonItem_Pkg_RemoveFileFolder.SubItemsExpandWidth = 14;
-            this.ButtonItem_Pkg_RemoveFileFolder.Text = "Ordner entfernen";
-            this.ButtonItem_Pkg_RemoveFileFolder.Click += new System.EventHandler(this.ButtonItem_Pkg_RemoveFileFolder_Click);
-            // 
-            // ButtonItem_Pkg_Export
-            // 
-            this.ButtonItem_Pkg_Export.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
-            this.ButtonItem_Pkg_Export.Image = global::SM64_ROM_Manager.Updating.Administration.GUI.My.Resources.Resources.icons8_export_32px_3;
-            this.ButtonItem_Pkg_Export.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
-            this.ButtonItem_Pkg_Export.Name = "ButtonItem_Pkg_Export";
-            this.ButtonItem_Pkg_Export.SubItemsExpandWidth = 14;
-            this.ButtonItem_Pkg_Export.Text = "Paket exportieren";
-            this.ButtonItem_Pkg_Export.Click += new System.EventHandler(this.ButtonItem_Pkg_Export_Click);
-            // 
-            // ButtonItem_UploadPackage
-            // 
-            this.ButtonItem_UploadPackage.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
-            this.ButtonItem_UploadPackage.Image = global::SM64_ROM_Manager.Updating.Administration.GUI.My.Resources.Resources.icons8_checkmark_32px;
-            this.ButtonItem_UploadPackage.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
-            this.ButtonItem_UploadPackage.Name = "ButtonItem_UploadPackage";
-            this.ButtonItem_UploadPackage.SubItemsExpandWidth = 14;
-            this.ButtonItem_UploadPackage.Text = "Paket fertigstellen";
-            this.ButtonItem_UploadPackage.Click += new System.EventHandler(this.ButtonItem_UploadPackage_Click);
             // 
             // ButtonItem_Pkg_NewTemplate
             // 
@@ -531,6 +527,31 @@ namespace SM64_ROM_Manager.Updating.Administration.GUI
             this.ButtonItem_Pkg_SaveTemplateAs.Text = "Speichern unter";
             this.ButtonItem_Pkg_SaveTemplateAs.Click += new System.EventHandler(this.ButtonItem_Pkg_SaveTemplateAs_Click);
             // 
+            // RibbonTabItem_Packaging
+            // 
+            this.RibbonTabItem_Packaging.Checked = true;
+            this.RibbonTabItem_Packaging.Name = "RibbonTabItem_Packaging";
+            this.RibbonTabItem_Packaging.Panel = this.RibbonPanel1;
+            this.RibbonTabItem_Packaging.Text = "Paketierung";
+            // 
+            // circularProgress1
+            // 
+            this.circularProgress1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.circularProgress1.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.circularProgress1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.circularProgress1.Location = new System.Drawing.Point(239, 160);
+            this.circularProgress1.Name = "circularProgress1";
+            this.circularProgress1.ProgressBarType = DevComponents.DotNetBar.eCircularProgressType.Dot;
+            this.circularProgress1.SetVisibleStateOnStart = true;
+            this.circularProgress1.SetVisibleStateOnStop = true;
+            this.circularProgress1.Size = new System.Drawing.Size(75, 75);
+            this.circularProgress1.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeXP;
+            this.circularProgress1.TabIndex = 6;
+            this.circularProgress1.Visible = false;
+            // 
             // PackageCreationDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -547,6 +568,7 @@ namespace SM64_ROM_Manager.Updating.Administration.GUI
             this.SuperTabControl1.ResumeLayout(false);
             this.SuperTabControlPanel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.AdvTree1)).EndInit();
+            this.AdvTree1.ResumeLayout(false);
             this.SuperTabControlPanel4.ResumeLayout(false);
             this.Panel4.ResumeLayout(false);
             this.RibbonControl_Main.ResumeLayout(false);
@@ -674,5 +696,6 @@ namespace SM64_ROM_Manager.Updating.Administration.GUI
 
         private DevComponents.DotNetBar.ButtonItem ButtonItem_Pkg_RemoveFileFolder;
         private DevComponents.DotNetBar.ButtonItem ButtonItem_UploadPackage;
+        private DevComponents.DotNetBar.Controls.CircularProgress circularProgress1;
     }
 }
