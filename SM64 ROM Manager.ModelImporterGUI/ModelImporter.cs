@@ -331,12 +331,16 @@ namespace SM64_ROM_Manager.ModelImporterGUI
         {
             var editor = new PatchScripts.TweakProfileEditor();
             var profile = SelectedProfile();
+
             editor.Titel = profile.Name;
             editor.Description = profile.Description;
+            editor.Version = profile.Version;
+
             if (editor.ShowDialog(this) == DialogResult.OK)
             {
                 profile.Name = editor.Titel.Trim();
                 profile.Description = editor.Description.Trim();
+                profile.Version = editor.Version;
                 ((ComboItem)ComboBoxEx2.SelectedItem).Text = profile.Name;
                 ShowProfileInfo(SelectedProfile());
                 SaveProfile(profile);
@@ -345,8 +349,18 @@ namespace SM64_ROM_Manager.ModelImporterGUI
 
         private void ShowProfileInfo(ImporterProfile preset)
         {
-            LabelX_PatchName.Text = preset?.Name;
-            LabelX_Description.Text = preset?.Description;
+            if (preset is object)
+            {
+                LabelX_PatchName.Text = preset.Name;
+                LabelX_Description.Text = preset.Description;
+                labelX_Version.Text = $"Version {preset.Version}";
+            }
+            else
+            {
+                LabelX_PatchName.Text = string.Empty;
+                LabelX_Description.Text = string.Empty;
+                labelX_Version.Text = string.Empty;
+            }
         }
 
         private void Flyout1_PrepareContent(object sender, EventArgs e)

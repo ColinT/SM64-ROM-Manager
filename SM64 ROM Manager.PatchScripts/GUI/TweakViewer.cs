@@ -149,6 +149,8 @@ namespace SM64_ROM_Manager.PatchScripts
         private void LoadTweak(PatchProfile patch)
         {
             LabelX_PatchName.Text = patch.Name;
+            labelX_Version.Text = $"Version {patch.Version}";
+
             if (!string.IsNullOrEmpty(LabelX_Description.Text))
             {
                 LabelX_Description.Text = patch.Description;
@@ -166,8 +168,7 @@ namespace SM64_ROM_Manager.PatchScripts
         private void LoadScriptsList(PatchProfile patch)
         {
             ComboBoxEx_Scripts.Items.Clear();
-            LabelX_PatchName.Text = $"Name: {patch.Name}";
-            LabelX_Description.Text = string.IsNullOrEmpty(patch.Name) ? "No description available." : patch.Description;
+
             foreach (PatchScript script in patch.Scripts)
             {
                 var item = new ComboItem();
@@ -282,14 +283,17 @@ namespace SM64_ROM_Manager.PatchScripts
             var editor = new TweakProfileEditor()
             {
                 Titel = patch.Name,
-                Description = patch.Description
+                Description = patch.Description,
+                Version = patch.Version
             };
             if (editor.ShowDialog(this) == DialogResult.OK)
             {
                 string oldName = patch.Name;
                 string oldDescription = patch.Description;
+
                 patch.Name = editor.Titel.Trim();
                 patch.Description = editor.Description.Trim();
+                patch.Version = editor.Version;
 
                 if ((oldName ?? "") != (patch.Name ?? ""))
                 {
@@ -319,7 +323,7 @@ namespace SM64_ROM_Manager.PatchScripts
         {
             ButtonItem btnItem = (ButtonItem)ItemListBox1.SelectedItem;
             PatchProfile patch = (PatchProfile)btnItem.Tag;
-            LoadScriptsList(patch);
+            LoadTweak(patch);
         }
 
         private void ComboBoxEx_Scripts_SelectedIndexChanged(object sender, EventArgs e)
