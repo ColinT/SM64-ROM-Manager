@@ -42,18 +42,18 @@ namespace SM64_ROM_Manager.PatchScripts
             this.ButtonX2 = new DevComponents.DotNetBar.ButtonX();
             this.ButtonX1 = new DevComponents.DotNetBar.ButtonX();
             this.LayoutControl1 = new DevComponents.DotNetBar.Layout.LayoutControl();
+            this.textBoxX3 = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.LayoutControlItem1 = new DevComponents.DotNetBar.Layout.LayoutControlItem();
             this.LayoutControlItem2 = new DevComponents.DotNetBar.Layout.LayoutControlItem();
+            this.layoutControlItem5 = new DevComponents.DotNetBar.Layout.LayoutControlItem();
             this.LayoutSpacerItem1 = new DevComponents.DotNetBar.Layout.LayoutSpacerItem();
             this.LayoutControlItem3 = new DevComponents.DotNetBar.Layout.LayoutControlItem();
             this.LayoutControlItem4 = new DevComponents.DotNetBar.Layout.LayoutControlItem();
-            this.textBoxX3 = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.layoutControlItem5 = new DevComponents.DotNetBar.Layout.LayoutControlItem();
             this.superValidator1 = new DevComponents.DotNetBar.Validator.SuperValidator();
-            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.highlighter1 = new DevComponents.DotNetBar.Validator.Highlighter();
             this.requiredFieldValidator1 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
             this.customValidator1 = new DevComponents.DotNetBar.Validator.CustomValidator();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.highlighter1 = new DevComponents.DotNetBar.Validator.Highlighter();
             this.LayoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
@@ -99,7 +99,6 @@ namespace SM64_ROM_Manager.PatchScripts
             // 
             this.ButtonX2.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.ButtonX2.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.ButtonX2.DialogResult = System.Windows.Forms.DialogResult.No;
             this.ButtonX2.Image = global::SM64_ROM_Manager.PatchScripts.MyIcons.icons8_checkmark_16px;
             this.ButtonX2.Location = new System.Drawing.Point(213, 317);
             this.ButtonX2.Margin = new System.Windows.Forms.Padding(0);
@@ -154,6 +153,24 @@ namespace SM64_ROM_Manager.PatchScripts
             this.LayoutControl1.Size = new System.Drawing.Size(375, 345);
             this.LayoutControl1.TabIndex = 5;
             // 
+            // textBoxX3
+            // 
+            this.textBoxX3.BackColor = System.Drawing.Color.White;
+            // 
+            // 
+            // 
+            this.textBoxX3.Border.Class = "TextBoxBorder";
+            this.textBoxX3.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.textBoxX3.DisabledBackColor = System.Drawing.Color.White;
+            this.textBoxX3.ForeColor = System.Drawing.Color.Black;
+            this.textBoxX3.Location = new System.Drawing.Point(4, 289);
+            this.textBoxX3.Margin = new System.Windows.Forms.Padding(0);
+            this.textBoxX3.Name = "textBoxX3";
+            this.textBoxX3.PreventEnterBeep = true;
+            this.textBoxX3.Size = new System.Drawing.Size(367, 20);
+            this.textBoxX3.TabIndex = 2;
+            this.superValidator1.SetValidator1(this.textBoxX3, this.customValidator1);
+            // 
             // LayoutControlItem1
             // 
             this.LayoutControlItem1.Control = this.TextBoxX1;
@@ -176,6 +193,17 @@ namespace SM64_ROM_Manager.PatchScripts
             this.LayoutControlItem2.TextPosition = DevComponents.DotNetBar.Layout.eLayoutPosition.Top;
             this.LayoutControlItem2.Width = 100;
             this.LayoutControlItem2.WidthType = DevComponents.DotNetBar.Layout.eLayoutSizeType.Percent;
+            // 
+            // layoutControlItem5
+            // 
+            this.layoutControlItem5.Control = this.textBoxX3;
+            this.layoutControlItem5.Height = 45;
+            this.layoutControlItem5.MinSize = new System.Drawing.Size(120, 0);
+            this.layoutControlItem5.Name = "layoutControlItem5";
+            this.layoutControlItem5.Text = "Version:";
+            this.layoutControlItem5.TextPosition = DevComponents.DotNetBar.Layout.eLayoutPosition.Top;
+            this.layoutControlItem5.Width = 100;
+            this.layoutControlItem5.WidthType = DevComponents.DotNetBar.Layout.eLayoutSizeType.Percent;
             // 
             // LayoutSpacerItem1
             // 
@@ -200,50 +228,12 @@ namespace SM64_ROM_Manager.PatchScripts
             this.LayoutControlItem4.Name = "LayoutControlItem4";
             this.LayoutControlItem4.Width = 83;
             // 
-            // textBoxX3
-            // 
-            this.textBoxX3.BackColor = System.Drawing.Color.White;
-            // 
-            // 
-            // 
-            this.textBoxX3.Border.Class = "TextBoxBorder";
-            this.textBoxX3.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.textBoxX3.DisabledBackColor = System.Drawing.Color.White;
-            this.textBoxX3.ForeColor = System.Drawing.Color.Black;
-            this.textBoxX3.Location = new System.Drawing.Point(4, 289);
-            this.textBoxX3.Margin = new System.Windows.Forms.Padding(0);
-            this.textBoxX3.Name = "textBoxX3";
-            this.textBoxX3.PreventEnterBeep = true;
-            this.textBoxX3.Size = new System.Drawing.Size(367, 20);
-            this.textBoxX3.TabIndex = 2;
-            this.superValidator1.SetValidator1(this.textBoxX3, this.customValidator1);
-            // 
-            // layoutControlItem5
-            // 
-            this.layoutControlItem5.Control = this.textBoxX3;
-            this.layoutControlItem5.Height = 45;
-            this.layoutControlItem5.MinSize = new System.Drawing.Size(120, 0);
-            this.layoutControlItem5.Name = "layoutControlItem5";
-            this.layoutControlItem5.Text = "Version:";
-            this.layoutControlItem5.TextPosition = DevComponents.DotNetBar.Layout.eLayoutPosition.Top;
-            this.layoutControlItem5.Width = 100;
-            this.layoutControlItem5.WidthType = DevComponents.DotNetBar.Layout.eLayoutSizeType.Percent;
-            // 
             // superValidator1
             // 
             this.superValidator1.ContainerControl = this;
             this.superValidator1.ErrorProvider = this.errorProvider1;
             this.superValidator1.Highlighter = this.highlighter1;
             this.superValidator1.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
-            // 
-            // errorProvider1
-            // 
-            this.errorProvider1.ContainerControl = this;
-            this.errorProvider1.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider1.Icon")));
-            // 
-            // highlighter1
-            // 
-            this.highlighter1.ContainerControl = this;
             // 
             // requiredFieldValidator1
             // 
@@ -254,6 +244,16 @@ namespace SM64_ROM_Manager.PatchScripts
             // 
             this.customValidator1.ErrorMessage = "Your error message here.";
             this.customValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            this.errorProvider1.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider1.Icon")));
+            // 
+            // highlighter1
+            // 
+            this.highlighter1.ContainerControl = this;
+            this.highlighter1.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
             // 
             // TweakProfileEditor
             // 

@@ -20,7 +20,7 @@ namespace SM64_ROM_Manager.PatchScripts
 
         private void CustomValidator1_ValidateValue(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
         {
-            e.IsValid = LikeOperator.LikeString(e.ControlToValidate.Text, "*.*.*.*", CompareMethod.Text);
+            e.IsValid = LikeOperator.LikeString(e.ControlToValidate.Text, "#*.#*.#*.#*", CompareMethod.Text);
         }
 
         public string Titel
