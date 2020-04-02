@@ -218,7 +218,8 @@ namespace SM64_ROM_Manager.ModelImporterGUI
             var files = Directory.GetFiles(General.MyImporterPresetsPath, "*", SearchOption.AllDirectories);
             foreach (string f in files)
             {
-                if ((Path.GetExtension(f).ToLower() ?? "") == ".xml")
+                var ext = Path.GetExtension(f);
+                if (ext == ".json" || ext == ".xml")
                 {
                     var preset = mgr.Read(f);
                     presets.Add(preset);

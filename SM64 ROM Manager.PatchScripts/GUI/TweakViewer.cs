@@ -108,7 +108,7 @@ namespace SM64_ROM_Manager.PatchScripts
             string pathTweaks = General.MyTweaksPath;
             var mgr = new PatchingManager();
             myPatchs.Clear();
-            foreach (string f in Directory.GetFiles(pathTweaks, "*.xml", SearchOption.AllDirectories))
+            foreach (string f in Directory.GetFiles(pathTweaks, "*.xml", SearchOption.AllDirectories).Concat(Directory.GetFiles(pathTweaks, "*.json", SearchOption.AllDirectories)))
             {
                 var p = mgr.Read(f);
                 myPatchs.Add(p);
@@ -290,13 +290,14 @@ namespace SM64_ROM_Manager.PatchScripts
                 string oldDescription = patch.Description;
                 patch.Name = editor.Titel.Trim();
                 patch.Description = editor.Description.Trim();
+
                 if ((oldName ?? "") != (patch.Name ?? ""))
                 {
-                    // Rename File
-                    string newFileName = Path.Combine(Path.GetDirectoryName(patch.FileName), editor.Titel + Path.GetExtension(patch.FileName));
-                    newFileName = EnsureFileNameIsNotUsed(newFileName);
-                    File.Move(patch.FileName, newFileName);
-                    patch.FileName = newFileName;
+                    //// Rename File
+                    //string newFileName = Path.Combine(Path.GetDirectoryName(patch.FileName), editor.Titel + Path.GetExtension(patch.FileName));
+                    //newFileName = EnsureFileNameIsNotUsed(newFileName);
+                    //File.Move(patch.FileName, newFileName);
+                    //patch.FileName = newFileName;
 
                     // Update Title in ListBox
                     ItemListBox1.SelectedItem.Text = patch.Name;
