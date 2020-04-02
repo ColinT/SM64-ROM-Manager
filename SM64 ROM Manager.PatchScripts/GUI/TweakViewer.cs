@@ -124,16 +124,18 @@ namespace SM64_ROM_Manager.PatchScripts
             bool enableFilter = !string.IsNullOrEmpty(Filter.Trim());
             string filterLower = Filter.ToLower();
             ItemListBox1.Items.Clear();
+
             foreach (PatchProfile patch in myPatchs)
             {
                 if (enableFilter && !patch.Name.ToLower().Contains(filterLower) && patch.Scripts.Where(n => n.Name.ToLower().Contains(filterLower)).Count() == 0)
-                {
                     continue;
-                }
 
-                var btnItem = new ButtonItem();
-                btnItem.Text = patch.Name;
-                btnItem.Tag = patch;
+                var btnItem = new ButtonItem
+                {
+                    Text = patch.Name,
+                    Tag = patch,
+                    ForeColor = GetTweakColor(patch)
+                };
                 btnItem.MouseUp += ItemListBox1_ItemMouseClick;
                 ItemListBox1.Items.Add(btnItem);
             }
@@ -144,6 +146,21 @@ namespace SM64_ROM_Manager.PatchScripts
             }
 
             ItemListBox1.Refresh();
+        }
+
+        private Color GetTweakColor(PatchProfile patch)
+        {
+            switch (true)
+            {
+                case object _ when patch.FileName.StartsWith(Path.Combine(General.MyTweaksPath, dbmgr.Preferences.CategoryPaths[TweakDatabaseCategories.Reviewed])):
+                    return default;
+                case object _ when patch.FileName.StartsWith(Path.Combine(General.MyTweaksPath, dbmgr.Preferences.CategoryPaths[TweakDatabaseCategories.Experimental])):
+                    return Color.Orange;
+                case object _ when patch.FileName.StartsWith(Path.Combine(General.MyTweaksPath, dbmgr.Preferences.CategoryPaths[TweakDatabaseCategories.Uploads])):
+                    return Color.OrangeRed;
+                default:
+                    return Color.DarkViolet;
+            }
         }
 
         private void LoadTweak(PatchProfile patch)
@@ -229,12 +246,13 @@ namespace SM64_ROM_Manager.PatchScripts
             ComboBoxEx_Scripts.SelectedItem = comboItem;
         }
 
-        private void AddNewPatch(string name, string description, string firstScriptName)
+        private void AddNewPatch(string name, string description, Version version, string firstScriptName)
         {
             var patch = new PatchProfile()
             {
                 Name = name,
-                Description = description
+                Description = description,
+                Version = version
             };
             var script = new PatchScript() { Name = firstScriptName };
             patch.Scripts.Add(script);
@@ -381,11 +399,12 @@ namespace SM64_ROM_Manager.PatchScripts
             var frm = new TweakProfileEditor()
             {
                 Titel = "New Profile",
-                Description = string.Empty
+                Description = string.Empty,
+                Version = new Version("1.0.0.0")
             };
             if (frm.ShowDialog() == DialogResult.OK)
             {
-                AddNewPatch(frm.Titel, frm.Description, "New Script");
+                AddNewPatch(frm.Titel, frm.Description, frm.Version, "New Script");
             }
         }
 
