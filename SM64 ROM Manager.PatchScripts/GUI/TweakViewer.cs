@@ -10,6 +10,8 @@ using global::DevComponents.DotNetBar;
 using global::DevComponents.Editors;
 using Microsoft.VisualBasic.CompilerServices;
 using global::SM64_ROM_Manager.Publics;
+using Microsoft.VisualBasic;
+using static Microsoft.VisualBasic.CompilerServices.LikeOperator;
 
 namespace SM64_ROM_Manager.PatchScripts
 {
@@ -122,16 +124,16 @@ namespace SM64_ROM_Manager.PatchScripts
         private void LoadTweakList(string Filter = "")
         {
             bool enableFilter = !string.IsNullOrEmpty(Filter.Trim());
-            string filterLower = Filter.ToLower();
+            Filter = $"*{Filter}*";
             ItemListBox1.Items.Clear();
 
             foreach (PatchProfile patch in myPatchs)
             {
-                if (enableFilter && !patch.Name.ToLower().Contains(filterLower) && patch.Scripts.Where(n => n.Name.ToLower().Contains(filterLower)).Count() == 0)
-                    continue;
-
-                var btnItem = GetButtonItemFromPatch(patch);
-                ItemListBox1.Items.Add(btnItem);
+                if (!enableFilter || LikeString(patch.Name, Filter, CompareMethod.Text) || patch.Scripts.Where(n => LikeString(n.Name, Filter, CompareMethod.Text)).Any())
+                {
+                    var btnItem = GetButtonItemFromPatch(patch);
+                    ItemListBox1.Items.Add(btnItem);
+                }
             }
 
             if (ItemListBox1.Items.Count > 0)
