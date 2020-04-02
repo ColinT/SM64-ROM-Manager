@@ -128,6 +128,9 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="SM64Lib\Behaviors\Behavior.cs" />
+    <Compile Include="SM64Lib\Behaviors\BehaviorBank.cs" />
+    <Compile Include="SM64Lib\Behaviors\BehaviorBankConfig.cs" />
+    <Compile Include="SM64Lib\Behaviors\BehaviorConfig.cs" />
     <Compile Include="SM64Lib\Behaviors\BehaviorCreationTypes.cs" />
     <Compile Include="SM64Lib\Behaviors\Script\Behaviorscript.cs" />
     <Compile Include="SM64Lib\Behaviors\Script\BehaviorscriptCommand.cs" />

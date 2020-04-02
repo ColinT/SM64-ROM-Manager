@@ -10,12 +10,18 @@ namespace SM64Lib.Behaviors
 {
     public class Behavior
     {
-
+        public BehaviorConfig Config { get; private set; }
+        public int Address { get; private set; }
         public Behaviorscript Script { get; private set; }
 
         public Behavior()
         {
             CreateNewBehaviorscript();
+        }
+
+        public Behavior(BehaviorConfig config) : this()
+        {
+            Config = config;
         }
 
         public Behavior(BehaviorCreationTypes behaviorCreationType) : this()
@@ -48,6 +54,7 @@ namespace SM64Lib.Behaviors
 
         public void Read(BinaryData data, int address)
         {
+            Address = address;
             CreateNewBehaviorscript();
             Script.Read(data, address);
             ParseScript();
@@ -55,6 +62,7 @@ namespace SM64Lib.Behaviors
         
         public void Write(BinaryData data, int address)
         {
+            Address = address;
             TakeoverSettingsToScript();
             Script.Write(data, address);
         }
