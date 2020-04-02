@@ -130,13 +130,7 @@ namespace SM64_ROM_Manager.PatchScripts
                 if (enableFilter && !patch.Name.ToLower().Contains(filterLower) && patch.Scripts.Where(n => n.Name.ToLower().Contains(filterLower)).Count() == 0)
                     continue;
 
-                var btnItem = new ButtonItem
-                {
-                    Text = patch.Name,
-                    Tag = patch,
-                    ForeColor = GetTweakColor(patch)
-                };
-                btnItem.MouseUp += ItemListBox1_ItemMouseClick;
+                var btnItem = GetButtonItemFromPatch(patch);
                 ItemListBox1.Items.Add(btnItem);
             }
 
@@ -269,7 +263,8 @@ namespace SM64_ROM_Manager.PatchScripts
             var btnItem = new ButtonItem()
             {
                 Text = patch.Name,
-                Tag = patch
+                Tag = patch,
+                ForeColor = GetTweakColor(patch)
             };
             btnItem.MouseUp += ItemListBox1_ItemMouseClick;
             return btnItem;
