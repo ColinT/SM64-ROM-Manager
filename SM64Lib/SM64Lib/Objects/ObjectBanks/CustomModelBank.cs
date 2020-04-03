@@ -12,7 +12,7 @@ namespace SM64Lib.Objects.ModelBanks
 {
     public class CustomModelBank
     {
-        public ObjectBankConfig Config { get; private set; } = new ObjectBankConfig();
+        public ObjectModelConfig Config { get; private set; } = new ObjectModelConfig();
         public List<CustomModel> Models { get; private set; } = new List<CustomModel>();
         public SegmentedBank CurSeg { get; private set; } = null;
         public bool NeedToSave { get; set; } = false;
@@ -116,12 +116,12 @@ namespace SM64Lib.Objects.ModelBanks
             data.Position = posBefore;
         }
 
-        public void ReadFromSeg(RomManager rommgr, byte bankID, ObjectBankConfig config)
+        public void ReadFromSeg(RomManager rommgr, byte bankID, ObjectModelConfig config)
         {
             ReadFromSeg(rommgr, rommgr.GetSegBank(bankID), config);
         }
 
-        public void ReadFromSeg(RomManager rommgr, SegmentedBank seg, ObjectBankConfig config)
+        public void ReadFromSeg(RomManager rommgr, SegmentedBank seg, ObjectModelConfig config)
         {
             Stream s;
             BinaryData data;

@@ -4,7 +4,7 @@ namespace SM64Lib.Objects.ModelBanks
 {
     public class CustomModel
     {
-        public CustomObjectConfig Config { get; set; } = new CustomObjectConfig();
+        public CustomModelConfig Config { get; set; } = new CustomModelConfig();
         public Geolayout.Geolayout Geolayout { get; set; } = null;
         public Model.ObjectModel Model { get; set; } = null;
         public byte ModelID { get; set; } = 0;

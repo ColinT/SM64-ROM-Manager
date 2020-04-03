@@ -136,11 +136,11 @@
     <Compile Include="SM64Lib\Behaviors\Script\BehaviorscriptCommand.cs" />
     <Compile Include="SM64Lib\Behaviors\Script\BehaviorscriptCommandCollection.cs" />
     <Compile Include="SM64Lib\Behaviors\Script\BehaviorscriptCommandTypes.cs" />
-    <Compile Include="SM64Lib\Configuration\CustomObjectConfig.cs" />
+    <Compile Include="SM64Lib\Configuration\CustomModelConfig.cs" />
     <Compile Include="SM64Lib\Configuration\LevelAreaConfig.cs" />
     <Compile Include="SM64Lib\Configuration\LevelConfig.cs" />
     <Compile Include="SM64Lib\Configuration\MusicConfiguration.cs" />
-    <Compile Include="SM64Lib\Configuration\ObjectBankConfig.cs" />
+    <Compile Include="SM64Lib\Configuration\ObjectModelConfig.cs" />
     <Compile Include="SM64Lib\Configuration\RomConfig.cs" />
     <Compile Include="SM64Lib\Data\BinaryFile.cs" />
     <Compile Include="SM64Lib\Data\System\Bits.cs" />

@@ -8,7 +8,7 @@ namespace SM64Lib.Configuration
     public class RomConfig
     {
         public Dictionary<byte, LevelConfig> LevelConfigs { get; private set; } = new Dictionary<byte, LevelConfig>();
-        public ObjectBankConfig GlobalObjectBankConfig { get; private set; } = new ObjectBankConfig();
+        public ObjectModelConfig GlobalObjectBankConfig { get; private set; } = new ObjectModelConfig();
         public MusicConfiguration MusicConfig { get; private set; } = new MusicConfiguration();
         public string SelectedTextProfileInfo { get; set; } = string.Empty;
 
