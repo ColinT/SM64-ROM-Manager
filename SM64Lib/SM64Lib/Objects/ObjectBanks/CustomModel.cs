@@ -1,8 +1,8 @@
 ﻿using global::SM64Lib.Configuration;
 
-namespace SM64Lib.ObjectBanks
+namespace SM64Lib.ModelBanks
 {
-    public class CustomObject
+    public class CustomModel
     {
         public CustomObjectConfig Config { get; set; } = new CustomObjectConfig();
         public Geolayout.Geolayout Geolayout { get; set; } = null;
@@ -52,23 +52,23 @@ namespace SM64Lib.ObjectBanks
             }
         }
 
-        public CustomObject()
+        public CustomModel()
         {
             GenerateNewGeolayout();
         }
 
-        public CustomObject(Model.ObjectModel mdl)
+        public CustomModel(Model.ObjectModel mdl)
         {
             GenerateNewGeolayout();
             Model = mdl;
         }
 
-        public CustomObject(Geolayout.Geolayout geo)
+        public CustomModel(Geolayout.Geolayout geo)
         {
             Geolayout = geo;
         }
 
-        public CustomObject(Geolayout.Geolayout geo, Model.ObjectModel mdl)
+        public CustomModel(Geolayout.Geolayout geo, Model.ObjectModel mdl)
         {
             Geolayout = geo;
             Model = mdl;

@@ -8,12 +8,12 @@ using global::SM64Lib.Levels.Script;
 using global::SM64Lib.Levels.Script.Commands;
 using global::SM64Lib.SegmentedBanking;
 
-namespace SM64Lib.ObjectBanks
+namespace SM64Lib.ModelBanks
 {
-    public class CustomObjectBank
+    public class CustomModelBank
     {
         public ObjectBankConfig Config { get; private set; } = new ObjectBankConfig();
-        public List<CustomObject> Objects { get; private set; } = new List<CustomObject>();
+        public List<CustomModel> Models { get; private set; } = new List<CustomModel>();
         public SegmentedBank CurSeg { get; private set; } = null;
         public bool NeedToSave { get; set; } = false;
         public Levelscript Levelscript { get; private set; } = new Levelscript();
@@ -47,13 +47,13 @@ namespace SM64Lib.ObjectBanks
             Config.CustomObjectConfigs.Clear();
 
             // Calculate space of Levelscript
-            lvlScriptLength = (uint)(General.HexRoundUp1(Objects.Count * 8 + 4));
+            lvlScriptLength = (uint)(General.HexRoundUp1(Models.Count * 8 + 4));
 
             // Start Custom Objects
             data.Position = offset + lvlScriptLength;
-            for (int i = 0, loopTo = Objects.Count - 1; i <= loopTo; i++)
+            for (int i = 0, loopTo = Models.Count - 1; i <= loopTo; i++)
             {
-                var obj = Objects[i];
+                var obj = Models[i];
 
                 // Write Object Model
                 obj.ModelBankOffset = Conversions.ToInteger(data.Position - offset);
@@ -85,7 +85,7 @@ namespace SM64Lib.ObjectBanks
             int lastPosition = Conversions.ToInteger(data.Position);
 
             // Create Levelscript
-            foreach (CustomObject obj in Objects)
+            foreach (CustomModel obj in Models)
                 Levelscript.Add(new LevelscriptCommand($"22 08 00 {obj.ModelID.ToString("X")} {bankID.ToString("X")} {Conversion.Hex(obj.GeolayoutBankOffset >> 16 & 0xFF)} {Conversion.Hex(obj.GeolayoutBankOffset >> 8 & 0xFF)} {Conversion.Hex(obj.GeolayoutBankOffset & 0xFF)}"));
             Levelscript.Add(new LevelscriptCommand("07 04 00 00"));
             Levelscript.Write(data, offset);
@@ -104,7 +104,7 @@ namespace SM64Lib.ObjectBanks
         {
             long posBefore = data.Position;
 
-            foreach (CustomObject obj in Objects)
+            foreach (CustomModel obj in Models)
             {
                 foreach (int dest in obj.Config.CollisionPointerDestinations)
                 {
@@ -144,7 +144,7 @@ namespace SM64Lib.ObjectBanks
                 switch (cmd.CommandType)
                 {
                     case LevelscriptCommandTypes.LoadPolygonWithGeo:
-                        var obj = new CustomObject() { Config = config.GetCustomObjectConfig(i) };
+                        var obj = new CustomModel() { Config = config.GetCustomObjectConfig(i) };
 
                         // Load Model ID & Geolayout Offset
                         obj.ModelID = clLoadPolygonWithGeo.GetModelID(cmd);
@@ -170,7 +170,7 @@ namespace SM64Lib.ObjectBanks
                             obj.Model.FromBinaryData(data, 0, seg.BankAddress, obj.ModelBankOffset, f3d_length, obj.Geolayout.Geopointers.ToArray(), colPointer);
 
                             // Add Object to list
-                            Objects.Add(obj);
+                            Models.Add(obj);
                         }
 
                         break;

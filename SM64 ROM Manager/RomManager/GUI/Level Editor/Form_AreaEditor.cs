@@ -35,7 +35,7 @@ using global::SM64Lib.Levels.Script;
 using global::SM64Lib.Levels.Script.Commands;
 using global::SM64Lib.Model.Fast3D.DisplayLists;
 using global::SM64Lib.N64Graphics;
-using global::SM64Lib.ObjectBanks;
+using global::SM64Lib.ModelBanks;
 using global::SM64Lib.SegmentedBanking;
 using SM64Lib.TextValueConverter;
 using Z.Collections.Extensions;
@@ -598,15 +598,15 @@ namespace SM64_ROM_Manager.LevelEditor
             }
 
             // Load local objects
-            if (CLevel.EnableLocalObjectBank && CLevel.LocalObjectBank.Objects.Any())
+            if (CLevel.EnableLocalObjectBank && CLevel.LocalObjectBank.Models.Any())
             {
                 await LoadCustomObjectBankModels(CLevel.LocalObjectBank);
             }
         }
 
-        private async Task LoadCustomObjectBankModels(CustomObjectBank objBank)
+        private async Task LoadCustomObjectBankModels(CustomModelBank objBank)
         {
-            foreach (CustomObject obj in objBank.Objects)
+            foreach (CustomModel obj in objBank.Models)
             {
                 if (!ObjectModels.ContainsKey(obj.ModelID))
                 {
@@ -615,7 +615,7 @@ namespace SM64_ROM_Manager.LevelEditor
             }
         }
 
-        private async Task LoadCustomObjectBankModel(CustomObject obj)
+        private async Task LoadCustomObjectBankModel(CustomModel obj)
         {
             var mdl = new Object3D();
             foreach (Geopointer gp in obj.Geolayout.Geopointers)

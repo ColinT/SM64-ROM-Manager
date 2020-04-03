@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace SM64Lib.ObjectBanks.Data
+namespace SM64Lib.ModelBanks.Data
 {
     public class ObjectBankData
     {

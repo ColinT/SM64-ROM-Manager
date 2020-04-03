@@ -31,7 +31,7 @@ using global::SM64Lib.Geolayout;
 using global::SM64Lib.Levels;
 using global::SM64Lib.Levels.Script.Commands;
 using global::SM64Lib.Music;
-using global::SM64Lib.ObjectBanks;
+using global::SM64Lib.ModelBanks;
 using global::SM64Lib.Script;
 using SM64Lib.TextValueConverter;
 using Z.Core.Extensions;
@@ -833,8 +833,8 @@ namespace SM64_ROM_Manager
         public void OpenObjectBankDataEditor()
         {
             var editor = new SM64_ROM_Manager.ObjectBankDataEditor(SM64Lib.General.ObjectBankData);
-            var removedObds = new List<SM64Lib.ObjectBanks.Data.ObjectBankData>();
-            var changedObds = new List<SM64Lib.ObjectBanks.Data.ObjectBankData>();
+            var removedObds = new List<SM64Lib.ModelBanks.Data.ObjectBankData>();
+            var changedObds = new List<SM64Lib.ModelBanks.Data.ObjectBankData>();
 
             // Watch for removed and changed Obds
             editor.RemovedObjectBankData += obd => removedObds.Add(obd);
@@ -847,7 +847,7 @@ namespace SM64_ROM_Manager
             SaveObjectBankData();
 
             // Set removed and changed Obds in Levels to Null
-            void setObdsToNull(List<SM64Lib.ObjectBanks.Data.ObjectBankData> dic, bool remove) { if (RomManager is object) { foreach (Level lvl in RomManager.Levels) { foreach (byte bankID in lvl.LoadedObjectBanks.Keys.ToArray()) { foreach (SM64Lib.ObjectBanks.Data.ObjectBankData obd in dic) { var curObd = lvl.GetObjectBankData(bankID); if (curObd == obd) { lvl.ChangeObjectBankData(bankID, remove ? null : curObd); } } } } } };
+            void setObdsToNull(List<SM64Lib.ModelBanks.Data.ObjectBankData> dic, bool remove) { if (RomManager is object) { foreach (Level lvl in RomManager.Levels) { foreach (byte bankID in lvl.LoadedObjectBanks.Keys.ToArray()) { foreach (SM64Lib.ModelBanks.Data.ObjectBankData obd in dic) { var curObd = lvl.GetObjectBankData(bankID); if (curObd == obd) { lvl.ChangeObjectBankData(bankID, remove ? null : curObd); } } } } } };
             setObdsToNull(removedObds, true);
             setObdsToNull(changedObds, false);
 

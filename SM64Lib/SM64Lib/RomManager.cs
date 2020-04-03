@@ -14,7 +14,7 @@ using global::SM64Lib.Data.System;
 using global::SM64Lib.EventArguments;
 using global::SM64Lib.Levels;
 using global::SM64Lib.Music;
-using global::SM64Lib.ObjectBanks;
+using global::SM64Lib.ModelBanks;
 using global::SM64Lib.SegmentedBanking;
 
 namespace SM64Lib
@@ -53,7 +53,7 @@ namespace SM64Lib
         public bool IsSM64EditorMode { get; private set; } = false;
         public Text.Profiles.TextProfileInfo TextInfoProfile { get; set; }
         public MusicList MusicList { get; private set; } = new MusicList();
-        public CustomObjectBank GlobalObjectBank { get; set; } = new CustomObjectBank();
+        public CustomModelBank GlobalObjectBank { get; set; } = new CustomModelBank();
         public ILevelManager LevelManager { get; private set; }
         public RomConfig RomConfig { get; private set; }
 
@@ -573,7 +573,7 @@ namespace SM64Lib
                 SetSegBank(seg);
 
                 // Load Object Bank
-                GlobalObjectBank = new CustomObjectBank();
+                GlobalObjectBank = new CustomModelBank();
                 GlobalObjectBank.ReadFromSeg(this, seg, RomConfig.GlobalObjectBankConfig);
             }
             else
@@ -587,7 +587,7 @@ namespace SM64Lib
 
         public void CreateNewGlobalObjectBank()
         {
-            GlobalObjectBank = new CustomObjectBank();
+            GlobalObjectBank = new CustomModelBank();
         }
 
         public void GenerateGlobalObjectBank()

@@ -3,7 +3,7 @@ using global::System.IO;
 using System.Linq;
 using global::Newtonsoft.Json.Linq;
 
-namespace SM64Lib.ObjectBanks.Data
+namespace SM64Lib.ModelBanks.Data
 {
     public class ObjectBankDataListCollection : Dictionary<byte, ObjectBankDataList>
     {

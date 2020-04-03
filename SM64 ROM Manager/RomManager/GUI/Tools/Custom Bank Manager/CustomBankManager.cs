@@ -5,7 +5,7 @@ using global::DevComponents.DotNetBar;
 using Microsoft.VisualBasic.CompilerServices;
 using global::Pilz.S3DFileParser;
 using global::SM64Lib;
-using global::SM64Lib.ObjectBanks;
+using global::SM64Lib.ModelBanks;
 using SM64Lib.TextValueConverter;
 using Z.Collections.Extensions;
 
@@ -16,7 +16,7 @@ namespace SM64_ROM_Manager
 
         // C o n s t r u c t o r s
 
-        public CustomBankManager(RomManager rommgr, CustomObjectBank objBank)
+        public CustomBankManager(RomManager rommgr, CustomModelBank objBank)
         {
 
             // G U I
@@ -37,8 +37,8 @@ namespace SM64_ROM_Manager
         // P r i v a t e   M e m b e r s
 
         private RomManager rommgr;
-        private CustomObjectBank objBank;
-        private CustomObject curObj = null;
+        private CustomModelBank objBank;
+        private CustomModel curObj = null;
         private readonly Dictionary<SM64Lib.Model.Fast3D.Fast3DBuffer, object> knownVisualMaps = new Dictionary<SM64Lib.Model.Fast3D.Fast3DBuffer, object>();
         private readonly Dictionary<SM64Lib.Model.Collision.CollisionMap, object> knownCollisionMaps = new Dictionary<SM64Lib.Model.Collision.CollisionMap, object>();
 
@@ -63,13 +63,13 @@ namespace SM64_ROM_Manager
         {
             ItemListBox1.SuspendLayout();
             ItemListBox1.Items.Clear();
-            foreach (CustomObject obj in objBank.Objects)
+            foreach (CustomModel obj in objBank.Models)
                 AddItemToList(obj);
             ItemListBox1.ResumeLayout();
             ItemListBox1.Refresh();
         }
 
-        private string TextForButtonItem(CustomObject obj)
+        private string TextForButtonItem(CustomModel obj)
         {
             string txt = $"Model-ID: {TextValueConverter.TextFromValue(obj.ModelID, charCount: 3)}";
             if (!string.IsNullOrEmpty(obj.Config.Name))
@@ -80,20 +80,20 @@ namespace SM64_ROM_Manager
             return txt;
         }
 
-        private ButtonItem AddItemToList(CustomObject obj)
+        private ButtonItem AddItemToList(CustomModel obj)
         {
             var item = new ButtonItem()
             {
                 Text = TextForButtonItem(obj),
                 Tag = obj
             };
-            item.CheckedChanged += (sender, e) => { if (((ButtonItem)sender).Checked) LoadCustomObject((CustomObject)((ButtonItem)sender).Tag); };
+            item.CheckedChanged += (sender, e) => { if (((ButtonItem)sender).Checked) LoadCustomObject((CustomModel)((ButtonItem)sender).Tag); };
             item.MouseUp += (sender, e) => { if (e.Button == MouseButtons.Right) { bool hasCollision = obj.Model.Collision is object; ButtonItem_ImportCollision.Enabled = hasCollision; ButtonItem_RemoveCollision.Enabled = hasCollision; ButtonItem_ShowCollision.Enabled = hasCollision; ButtonItem_CopyCollisionPointer.Enabled = hasCollision; CM_Object.Popup(Cursor.Position); } };
             ItemListBox1.Items.Add(item);
             return item;
         }
 
-        private void LoadCustomObject(CustomObject obj)
+        private void LoadCustomObject(CustomModel obj)
         {
             curObj = obj;
             LayoutGroups_Enabled = true;
@@ -104,18 +104,18 @@ namespace SM64_ROM_Manager
 
         private void CreateCustomObject()
         {
-            var obj = new CustomObject();
+            var obj = new CustomModel();
             ButtonItem item;
             if (ImportNewModel(obj))
             {
-                objBank.Objects.Add(obj);
+                objBank.Models.Add(obj);
                 item = AddItemToList(obj);
                 item.RaiseClick();
                 ObjectAdded?.Invoke(this, new EventArgs());
             }
         }
 
-        private bool ImportNewModel(CustomObject obj, bool checkVisualMap = true, bool checkCollision = true)
+        private bool ImportNewModel(CustomModel obj, bool checkVisualMap = true, bool checkCollision = true)
         {
             if (obj is object)
             {
@@ -145,17 +145,17 @@ namespace SM64_ROM_Manager
             return false;
         }
 
-        private void RemoveCollision(CustomObject curObj)
+        private void RemoveCollision(CustomModel curObj)
         {
             curObj.Model.Collision = null;
         }
 
-        private void RemoveKnownVisualMap(CustomObject curObj)
+        private void RemoveKnownVisualMap(CustomModel curObj)
         {
             knownVisualMaps.RemoveIfContainsKey(curObj.Model.Fast3DBuffer);
         }
 
-        private void RemoveKnownCollisionMap(CustomObject curObj)
+        private void RemoveKnownCollisionMap(CustomModel curObj)
         {
             if (curObj.Model.Collision is object)
             {
@@ -163,7 +163,7 @@ namespace SM64_ROM_Manager
             }
         }
 
-        private void RemoveKnownMaps(CustomObject curObj)
+        private void RemoveKnownMaps(CustomModel curObj)
         {
             RemoveKnownVisualMap(curObj);
             RemoveKnownCollisionMap(curObj);
@@ -172,7 +172,7 @@ namespace SM64_ROM_Manager
         private void RemoveCurObject()
         {
             RemoveKnownMaps(curObj);
-            objBank.Objects.Remove(curObj);
+            objBank.Models.Remove(curObj);
             var itr = new List<BaseItem>();
             foreach (ButtonItem item in ItemListBox1.Items)
             {
@@ -192,7 +192,7 @@ namespace SM64_ROM_Manager
         private void UpdateButtonItems()
         {
             ButtonItem selItem = (ButtonItem)ItemListBox1.SelectedItem;
-            void updateItem(ButtonItem btn) { if (btn is object) { btn.Text = TextForButtonItem((CustomObject)btn.Tag); } };
+            void updateItem(ButtonItem btn) { if (btn is object) { btn.Text = TextForButtonItem((CustomModel)btn.Tag); } };
             if (selItem is object)
             {
                 updateItem(selItem);
@@ -212,7 +212,7 @@ namespace SM64_ROM_Manager
             preview.Show();
         }
 
-        private void ShowVisualMap(CustomObject customObj)
+        private void ShowVisualMap(CustomModel customObj)
         {
             Object3D obj;
             var key = customObj.Model.Fast3DBuffer;
@@ -229,7 +229,7 @@ namespace SM64_ROM_Manager
             ShowModel(obj);
         }
 
-        private void ShowCollision(CustomObject customObj)
+        private void ShowCollision(CustomModel customObj)
         {
             Object3D obj;
             var key = customObj.Model.Collision;
@@ -246,7 +246,7 @@ namespace SM64_ROM_Manager
             ShowModel(obj);
         }
 
-        private void CopyCollisionPointer(CustomObject customObj)
+        private void CopyCollisionPointer(CustomModel customObj)
         {
             Clipboard.SetText(TextValueConverter.TextFromValue(customObj.CollisionPointer));
         }

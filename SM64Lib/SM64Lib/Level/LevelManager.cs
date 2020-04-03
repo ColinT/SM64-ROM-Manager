@@ -376,7 +376,7 @@ namespace SM64Lib.Levels
             // Generate & Write Local Object Bank
             uint localObjectBankRomStart = 0;
             uint localObjectBankRomEnd = 0;
-            bool writeLocalObjectBank = lvl.LocalObjectBank.Objects.Count > 0 && lvl.EnableLocalObjectBank;
+            bool writeLocalObjectBank = lvl.LocalObjectBank.Models.Count > 0 && lvl.EnableLocalObjectBank;
             if (writeLocalObjectBank)
             {
                 localObjectBankRomStart = curOff;
