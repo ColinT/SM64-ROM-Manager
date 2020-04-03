@@ -191,6 +191,8 @@
     <Compile Include="SM64Lib\Model\Fast3D\DisplayLists\DisplayListCollection.cs" />
     <Compile Include="SM64Lib\Model\Fog.cs" />
     <Compile Include="SM64Lib\Model\FogPreset.cs" />
+    <Compile Include="SM64Lib\Objects\ObjectBanks\CustomObject.cs" />
+    <Compile Include="SM64Lib\Objects\ObjectBanks\CustomObjectCollection.cs" />
     <Compile Include="SM64Lib\Objects\ObjectBanks\Data\ObjectBankDataCommand.cs" />
     <Compile Include="SM64Lib\Objects\ObjectBanks\Data\ObjectBankDataList.cs" />
     <Compile Include="SM64Lib\Objects\ObjectBanks\Data\ObjectBankDataListCollection.cs" />
