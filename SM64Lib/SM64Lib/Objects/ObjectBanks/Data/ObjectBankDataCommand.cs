@@ -1,6 +1,6 @@
 ﻿using global::Newtonsoft.Json;
 
-namespace SM64Lib.ModelBanks.Data
+namespace SM64Lib.Objects.ObjectBanks.Data
 {
     public class ObjectBankDataCommand
     {

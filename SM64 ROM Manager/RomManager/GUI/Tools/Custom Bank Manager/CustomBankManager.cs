@@ -5,9 +5,9 @@ using global::DevComponents.DotNetBar;
 using Microsoft.VisualBasic.CompilerServices;
 using global::Pilz.S3DFileParser;
 using global::SM64Lib;
-using global::SM64Lib.ModelBanks;
 using SM64Lib.TextValueConverter;
 using Z.Collections.Extensions;
+using SM64Lib.Objects.ModelBanks;
 
 namespace SM64_ROM_Manager
 {

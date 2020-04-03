@@ -6,9 +6,9 @@ using Microsoft.VisualBasic;
 using Microsoft.VisualBasic.CompilerServices;
 using global::SM64Lib.Levels.Script;
 using global::SM64Lib.Levels.Script.Commands;
-using global::SM64Lib.ModelBanks.Data;
+using global::SM64Lib.Objects.ObjectBanks.Data;
 using global::SM64Lib.SegmentedBanking;
-using SM64Lib.ModelBanks;
+using SM64Lib.Objects.ModelBanks;
 
 namespace SM64Lib.Levels
 {

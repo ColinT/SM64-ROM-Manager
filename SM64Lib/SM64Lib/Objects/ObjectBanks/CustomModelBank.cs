@@ -8,7 +8,7 @@ using global::SM64Lib.Levels.Script;
 using global::SM64Lib.Levels.Script.Commands;
 using global::SM64Lib.SegmentedBanking;
 
-namespace SM64Lib.ModelBanks
+namespace SM64Lib.Objects.ModelBanks
 {
     public class CustomModelBank
     {

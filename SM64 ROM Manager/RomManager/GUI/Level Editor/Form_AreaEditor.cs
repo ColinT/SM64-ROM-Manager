@@ -35,7 +35,6 @@ using global::SM64Lib.Levels.Script;
 using global::SM64Lib.Levels.Script.Commands;
 using global::SM64Lib.Model.Fast3D.DisplayLists;
 using global::SM64Lib.N64Graphics;
-using global::SM64Lib.ModelBanks;
 using global::SM64Lib.SegmentedBanking;
 using SM64Lib.TextValueConverter;
 using Z.Collections.Extensions;
@@ -44,6 +43,7 @@ using SM64Lib.Geolayout.Script;
 using SM64Lib.Model.Fast3D.DisplayLists.Script;
 using Color = System.Drawing.Color;
 using Bitmap = System.Drawing.Bitmap;
+using SM64Lib.Objects.ModelBanks;
 
 namespace SM64_ROM_Manager.LevelEditor
 {

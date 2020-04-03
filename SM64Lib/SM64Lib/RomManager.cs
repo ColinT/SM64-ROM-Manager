@@ -14,7 +14,7 @@ using global::SM64Lib.Data.System;
 using global::SM64Lib.EventArguments;
 using global::SM64Lib.Levels;
 using global::SM64Lib.Music;
-using global::SM64Lib.ModelBanks;
+using global::SM64Lib.Objects.ModelBanks;
 using global::SM64Lib.SegmentedBanking;
 
 namespace SM64Lib

@@ -1,6 +1,6 @@
 ﻿using global::SM64Lib.Configuration;
 
-namespace SM64Lib.ModelBanks
+namespace SM64Lib.Objects.ModelBanks
 {
     public class CustomModel
     {
