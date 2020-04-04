@@ -138,7 +138,7 @@ namespace SM64_ROM_Manager.ProgressUpdater
 
                     // Build embed
                     var embedBuilder = new EmbedBuilder();
-                    embedBuilder.ImageUrl = string.Format(settings.DiscordMsgBaseURL, newVersion.Major, newVersion.Minor, newVersion.Revision, newVersion.Build, newCounter);
+                    embedBuilder.ImageUrl = string.Format(settings.DiscordMsgBaseURL, newVersion.Major, newVersion.Minor, newVersion.Build, newVersion.Revision, newCounter);
                     var newEmbed = embedBuilder.Build();
 
                     // Send Message

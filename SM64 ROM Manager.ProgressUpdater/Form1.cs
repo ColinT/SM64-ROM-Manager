@@ -110,7 +110,7 @@ namespace SM64_ROM_Manager.ProgressUpdater
             Invoke(new Action(() => ComboBoxEx_Version.Items.Clear()));
 
             foreach (var version in await wdmgr.GetUsedVersions())
-                Invoke(new Action(() =>  ComboBoxEx_Version.Items.Add(version)));
+                Invoke(new Action(() => ComboBoxEx_Version.Items.Add(version)));
         }
 
         // G u i
@@ -134,11 +134,11 @@ namespace SM64_ROM_Manager.ProgressUpdater
                 {
                     if (dmgr is object && dmgr.IsReady)
                         await dmgr.SendMessage();
-                    MessageBoxEx.Show("Erfolgreich hochgeladen!", "Hochladen", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show(this, "Erfolgreich hochgeladen!", "Hochladen", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
-                    MessageBoxEx.Show("Fehler beim Hochladen!", "Hochladen", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBoxEx.Show(this, "Fehler beim Hochladen!", "Hochladen", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 circularProgress1.Stop();
                 Enabled = true;
