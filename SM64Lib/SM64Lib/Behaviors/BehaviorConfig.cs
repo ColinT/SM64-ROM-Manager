@@ -8,5 +8,6 @@ namespace SM64Lib.Behaviors
 {
     public class BehaviorConfig
     {
+        public int BankAddress { get; set; }
     }
 }
