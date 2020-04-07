@@ -13,6 +13,8 @@ namespace SM64Lib.Behaviors
         public BehaviorConfig Config { get; private set; }
         public int Address { get; private set; }
         public Behaviorscript Script { get; private set; }
+        public int CollisionPointer { get; set; }
+        public bool EnableCollisionPointer { get; set; }
 
         public Behavior()
         {
@@ -69,12 +71,48 @@ namespace SM64Lib.Behaviors
 
         private void ParseScript()
         {
-            //...
+            EnableCollisionPointer = false;
+
+            foreach (BehaviorscriptCommand cmd in Script)
+            {
+                switch (cmd.CommandType)
+                {
+                    case BehaviorscriptCommandTypes.x2E_SetHurtbox:
+                        CollisionPointer = BehaviorscriptCommandFunctions.X2E.GetCollisionPointer(cmd);
+                        EnableCollisionPointer = true;
+                        break;
+                }
+            }
         }
 
         private void TakeoverSettingsToScript()
         {
-            //...
+            // Update collision pointer
+            AddUpdateRemoveCmd(
+                BehaviorscriptCommandTypes.x2A_SetCollision,
+                EnableCollisionPointer,
+                () => BehaviorscriptCommandFactory.Build_x2E(CollisionPointer),
+                (cmd) => BehaviorscriptCommandFunctions.X2E.SetCollisionPointer(cmd, CollisionPointer));
+        }
+
+        private void AddUpdateRemoveCmd(BehaviorscriptCommandTypes cmdType, bool conditionAddUpdate, Func<BehaviorscriptCommand> createCmd, Action<BehaviorscriptCommand> updateCmd)
+        {
+            var cmd = Script.FirstOfType(cmdType);
+            if (cmd is object)
+            {
+                if (conditionAddUpdate)
+                    updateCmd(cmd);
+                else
+                {
+                    Script.Remove(cmd);
+                    cmd.Close();
+                }
+            }
+            else if (conditionAddUpdate)
+            {
+                cmd = createCmd();
+                Script.Insert(1, cmd);
+            }
         }
 
     }

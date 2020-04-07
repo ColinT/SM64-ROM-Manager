@@ -899,5 +899,22 @@ namespace SM64Lib
             return sb.ToArray();
         }
 
+        public BinaryData GetSegBankData(byte bankID)
+        {
+            BinaryData data;
+
+            // Get correct bank
+            if (bankID == 0)
+                data = GetBinaryRom(FileAccess.Read);
+            else
+            {
+                var seg = GetSegBank(bankID);
+                seg.ReadDataIfNull(this);
+                data = new BinaryStreamData(seg.Data);
+            }
+
+            return data;
+        }
+
     }
 }

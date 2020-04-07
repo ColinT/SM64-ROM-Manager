@@ -1,4 +1,6 @@
 ﻿using SM64Lib.Data;
+using System.Collections;
+using System.Linq;
 
 namespace SM64Lib.Behaviors.Script
 {
@@ -43,6 +45,16 @@ namespace SM64Lib.Behaviors.Script
                     command.SetLength(cmdLength);
                 data.Write(command.ToArray());
             }
+        }
+
+        public int IndexOfType(BehaviorscriptCommandTypes cmdType)
+        {
+            return IndexOf(this.FirstOrDefault(n => n.CommandType == cmdType));
+        }
+
+        public BehaviorscriptCommand FirstOfType(BehaviorscriptCommandTypes cmdType)
+        {
+            return (BehaviorscriptCommand)this.FirstOrDefault(n => n.CommandType == cmdType);
         }
 
     }

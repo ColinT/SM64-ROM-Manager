@@ -195,27 +195,26 @@
     <Reference Include="Ben.Demystifier, Version=0.1.0.0, Culture=neutral, PublicKeyToken=a6d206e05440431a, processorArchitecture=MSIL">
       <HintPath>..\packages\Ben.Demystifier.0.1.6\lib\net45\Ben.Demystifier.dll</HintPath>
     </Reference>
+    <Reference Include="DevComponents.DotNetBar.Design">
+      <HintPath>C:\DotNetBarNew\DevComponents.DotNetBar.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="DevComponents.DotNetBar.Layout, Version=14.1.0.37, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\DotNetBarNew\DevComponents.DotNetBar.Layout.dll</HintPath>
+    </Reference>
+    <Reference Include="DevComponents.DotNetBar.Layout.Design, Version=14.1.0.37, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\DotNetBarNew\DevComponents.DotNetBar.Layout.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="DevComponents.DotNetBar.Schedule, Version=14.1.0.37, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\DotNetBarNew\DevComponents.DotNetBar.Schedule.dll</HintPath>
+    </Reference>
+    <Reference Include="DevComponents.DotNetBar2, Version=14.1.0.37, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\DotNetBarNew\DevComponents.DotNetBar2.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.VisualBasic" />
-    <Reference Include="DevComponents.DotNetBar.Design, Version=14.0.0.3, Culture=neutral, PublicKeyToken=2c9ff1fddc42653c, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Shared Libs\DotNetBarNew\DevComponents.DotNetBar.Design.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="DevComponents.DotNetBar.Layout, Version=14.0.0.3, Culture=neutral, PublicKeyToken=c39c3242a43eee2b, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Shared Libs\DotNetBarNew\DevComponents.DotNetBar.Layout.dll</HintPath>
-    </Reference>
-    <Reference Include="DevComponents.DotNetBar.Layout.Design">
-      <HintPath>..\Shared Libs\DotNetBarNew\DevComponents.DotNetBar.Layout.Design.dll</HintPath>
-    </Reference>
-    <Reference Include="DevComponents.DotNetBar.Schedule, Version=14.0.0.3, Culture=neutral, PublicKeyToken=c39c3242a43eee2b, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Shared Libs\DotNetBarNew\DevComponents.DotNetBar.Schedule.dll</HintPath>
-    </Reference>
-    <Reference Include="DevComponents.DotNetBar2, Version=14.0.0.3, Culture=neutral, PublicKeyToken=c39c3242a43eee2b, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Shared Libs\DotNetBarNew\DevComponents.DotNetBar2.dll</HintPath>
-    </Reference>
     <Reference Include="drsPwEnc">
       <HintPath>..\Shared Libs\drsPwEnc.dll</HintPath>
     </Reference>
@@ -455,6 +454,12 @@
     </Compile>
     <Compile Include="RomManager\GUI\Other\ThankYouForm.cs">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RomManager\GUI\Tools\BehaviorBankManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RomManager\GUI\Tools\BehaviorBankManager.Designer.cs">
+      <DependentUpon>BehaviorBankManager.cs</DependentUpon>
     </Compile>
     <Compile Include="RomManager\GUI\Tools\Custom Bank Manager\AddressListEditor.Designer.cs">
       <DependentUpon>AddressListEditor.cs</DependentUpon>
@@ -799,6 +804,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="RomManager\GUI\Other\ThankYouForm.resx">
       <DependentUpon>ThankYouForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RomManager\GUI\Tools\BehaviorBankManager.resx">
+      <DependentUpon>BehaviorBankManager.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="RomManager\GUI\Tools\Custom Bank Manager\AddressListEditor.de.resx">
       <DependentUpon>AddressListEditor.cs</DependentUpon>

@@ -135,6 +135,8 @@
     <Compile Include="SM64Lib\Behaviors\Script\Behaviorscript.cs" />
     <Compile Include="SM64Lib\Behaviors\Script\BehaviorscriptCommand.cs" />
     <Compile Include="SM64Lib\Behaviors\Script\BehaviorscriptCommandCollection.cs" />
+    <Compile Include="SM64Lib\Behaviors\Script\BehaviorscriptCommandFactory.cs" />
+    <Compile Include="SM64Lib\Behaviors\Script\BehaviorscriptCommandFunctions.cs" />
     <Compile Include="SM64Lib\Behaviors\Script\BehaviorscriptCommandTypes.cs" />
     <Compile Include="SM64Lib\Configuration\CustomModelConfig.cs" />
     <Compile Include="SM64Lib\Configuration\LevelAreaConfig.cs" />
