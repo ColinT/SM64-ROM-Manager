@@ -34,30 +34,30 @@ namespace SM64_ROM_Manager
             this.ButtonItem_AddBehav = new DevComponents.DotNetBar.ButtonItem();
             this.ButtonItem_RemoveBehav = new DevComponents.DotNetBar.ButtonItem();
             this.AdvTree_Behaviors = new DevComponents.AdvTree.AdvTree();
+            this.columnHeader1 = new DevComponents.AdvTree.ColumnHeader();
+            this.columnHeader2 = new DevComponents.AdvTree.ColumnHeader();
             this.nodeConnector1 = new DevComponents.AdvTree.NodeConnector();
             this.elementStyle1 = new DevComponents.DotNetBar.ElementStyle();
             this.TabControl_Behav = new DevComponents.DotNetBar.TabControl();
-            this.TabItem_BehavProps = new DevComponents.DotNetBar.TabItem(this.components);
             this.tabControlPanel1 = new DevComponents.DotNetBar.TabControlPanel();
-            this.TabItem_BehavScript = new DevComponents.DotNetBar.TabItem(this.components);
-            this.tabControlPanel2 = new DevComponents.DotNetBar.TabControlPanel();
-            this.richTextBoxEx1 = new DevComponents.DotNetBar.Controls.RichTextBoxEx();
             this.layoutControl1 = new DevComponents.DotNetBar.Layout.LayoutControl();
             this.TextBoxX_BehavName = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.layoutControlItem1 = new DevComponents.DotNetBar.Layout.LayoutControlItem();
             this.textBoxX_BehavColPtr = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.checkBoxX_BehavEnableColPtr = new DevComponents.DotNetBar.Controls.CheckBoxX();
+            this.layoutControlItem1 = new DevComponents.DotNetBar.Layout.LayoutControlItem();
             this.layoutControlItem2 = new DevComponents.DotNetBar.Layout.LayoutControlItem();
             this.layoutControlItem3 = new DevComponents.DotNetBar.Layout.LayoutControlItem();
-            this.columnHeader1 = new DevComponents.AdvTree.ColumnHeader();
-            this.columnHeader2 = new DevComponents.AdvTree.ColumnHeader();
+            this.TabItem_BehavProps = new DevComponents.DotNetBar.TabItem(this.components);
+            this.tabControlPanel2 = new DevComponents.DotNetBar.TabControlPanel();
+            this.RichTextBoxEx_Script = new DevComponents.DotNetBar.Controls.RichTextBoxEx();
+            this.TabItem_BehavScript = new DevComponents.DotNetBar.TabItem(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.bar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.AdvTree_Behaviors)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.TabControl_Behav)).BeginInit();
             this.TabControl_Behav.SuspendLayout();
             this.tabControlPanel1.SuspendLayout();
-            this.tabControlPanel2.SuspendLayout();
             this.layoutControl1.SuspendLayout();
+            this.tabControlPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // bar1
@@ -118,6 +118,18 @@ namespace SM64_ROM_Manager
             this.AdvTree_Behaviors.Styles.Add(this.elementStyle1);
             this.AdvTree_Behaviors.TabIndex = 2;
             // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Name = "columnHeader1";
+            this.columnHeader1.Text = "Name";
+            this.columnHeader1.Width.Relative = 60;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Name = "columnHeader2";
+            this.columnHeader2.Text = "Address";
+            this.columnHeader2.Width.Absolute = 80;
+            // 
             // nodeConnector1
             // 
             this.nodeConnector1.LineColor = System.Drawing.SystemColors.ControlText;
@@ -147,12 +159,6 @@ namespace SM64_ROM_Manager
             this.TabControl_Behav.Tabs.Add(this.TabItem_BehavProps);
             this.TabControl_Behav.Tabs.Add(this.TabItem_BehavScript);
             // 
-            // TabItem_BehavProps
-            // 
-            this.TabItem_BehavProps.AttachedControl = this.tabControlPanel1;
-            this.TabItem_BehavProps.Name = "TabItem_BehavProps";
-            this.TabItem_BehavProps.Text = "Properties";
-            // 
             // tabControlPanel1
             // 
             this.tabControlPanel1.Controls.Add(this.layoutControl1);
@@ -170,45 +176,6 @@ namespace SM64_ROM_Manager
             this.tabControlPanel1.Style.GradientAngle = 90;
             this.tabControlPanel1.TabIndex = 1;
             this.tabControlPanel1.TabItem = this.TabItem_BehavProps;
-            // 
-            // TabItem_BehavScript
-            // 
-            this.TabItem_BehavScript.AttachedControl = this.tabControlPanel2;
-            this.TabItem_BehavScript.Name = "TabItem_BehavScript";
-            this.TabItem_BehavScript.Text = "Script";
-            // 
-            // tabControlPanel2
-            // 
-            this.tabControlPanel2.Controls.Add(this.richTextBoxEx1);
-            this.tabControlPanel2.DisabledBackColor = System.Drawing.Color.Empty;
-            this.tabControlPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControlPanel2.Location = new System.Drawing.Point(0, 27);
-            this.tabControlPanel2.Name = "tabControlPanel2";
-            this.tabControlPanel2.Padding = new System.Windows.Forms.Padding(1);
-            this.tabControlPanel2.Size = new System.Drawing.Size(384, 360);
-            this.tabControlPanel2.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.tabControlPanel2.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
-            this.tabControlPanel2.Style.BorderColor.Color = System.Drawing.Color.FromArgb(((int)(((byte)(211)))), ((int)(((byte)(211)))), ((int)(((byte)(211)))));
-            this.tabControlPanel2.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right) 
-            | DevComponents.DotNetBar.eBorderSide.Bottom)));
-            this.tabControlPanel2.Style.GradientAngle = 90;
-            this.tabControlPanel2.TabIndex = 5;
-            this.tabControlPanel2.TabItem = this.TabItem_BehavScript;
-            // 
-            // richTextBoxEx1
-            // 
-            // 
-            // 
-            // 
-            this.richTextBoxEx1.BackgroundStyle.Class = "RichTextBoxBorder";
-            this.richTextBoxEx1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.richTextBoxEx1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.richTextBoxEx1.Location = new System.Drawing.Point(1, 1);
-            this.richTextBoxEx1.Name = "richTextBoxEx1";
-            this.richTextBoxEx1.Rtf = "{\\rtf1\\ansi\\ansicpg1252\\deff0\\deflang1031{\\fonttbl{\\f0\\fnil\\fcharset0 Microsoft S" +
-    "ans Serif;}}\r\n\\viewkind4\\uc1\\pard\\f0\\fs17\\par\r\n}\r\n";
-            this.richTextBoxEx1.Size = new System.Drawing.Size(382, 358);
-            this.richTextBoxEx1.TabIndex = 0;
             // 
             // layoutControl1
             // 
@@ -241,21 +208,11 @@ namespace SM64_ROM_Manager
             this.TextBoxX_BehavName.DisabledBackColor = System.Drawing.Color.White;
             this.TextBoxX_BehavName.ForeColor = System.Drawing.Color.Black;
             this.TextBoxX_BehavName.Location = new System.Drawing.Point(96, 4);
-            this.TextBoxX_BehavName.Margin = new System.Windows.Forms.Padding(0, 0, 0, 0);
+            this.TextBoxX_BehavName.Margin = new System.Windows.Forms.Padding(0);
             this.TextBoxX_BehavName.Name = "TextBoxX_BehavName";
             this.TextBoxX_BehavName.PreventEnterBeep = true;
             this.TextBoxX_BehavName.Size = new System.Drawing.Size(282, 20);
             this.TextBoxX_BehavName.TabIndex = 0;
-            // 
-            // layoutControlItem1
-            // 
-            this.layoutControlItem1.Control = this.TextBoxX_BehavName;
-            this.layoutControlItem1.Height = 28;
-            this.layoutControlItem1.MinSize = new System.Drawing.Size(120, 0);
-            this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Text = "Name:";
-            this.layoutControlItem1.Width = 100;
-            this.layoutControlItem1.WidthType = DevComponents.DotNetBar.Layout.eLayoutSizeType.Percent;
             // 
             // textBoxX_BehavColPtr
             // 
@@ -268,7 +225,7 @@ namespace SM64_ROM_Manager
             this.textBoxX_BehavColPtr.DisabledBackColor = System.Drawing.Color.White;
             this.textBoxX_BehavColPtr.ForeColor = System.Drawing.Color.Black;
             this.textBoxX_BehavColPtr.Location = new System.Drawing.Point(96, 32);
-            this.textBoxX_BehavColPtr.Margin = new System.Windows.Forms.Padding(0, 0, 0, 0);
+            this.textBoxX_BehavColPtr.Margin = new System.Windows.Forms.Padding(0);
             this.textBoxX_BehavColPtr.Name = "textBoxX_BehavColPtr";
             this.textBoxX_BehavColPtr.PreventEnterBeep = true;
             this.textBoxX_BehavColPtr.Size = new System.Drawing.Size(182, 20);
@@ -281,12 +238,22 @@ namespace SM64_ROM_Manager
             // 
             this.checkBoxX_BehavEnableColPtr.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.checkBoxX_BehavEnableColPtr.Location = new System.Drawing.Point(286, 32);
-            this.checkBoxX_BehavEnableColPtr.Margin = new System.Windows.Forms.Padding(0, 0, 0, 0);
+            this.checkBoxX_BehavEnableColPtr.Margin = new System.Windows.Forms.Padding(0);
             this.checkBoxX_BehavEnableColPtr.Name = "checkBoxX_BehavEnableColPtr";
             this.checkBoxX_BehavEnableColPtr.Size = new System.Drawing.Size(92, 20);
             this.checkBoxX_BehavEnableColPtr.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.checkBoxX_BehavEnableColPtr.TabIndex = 2;
             this.checkBoxX_BehavEnableColPtr.Text = "Enable";
+            // 
+            // layoutControlItem1
+            // 
+            this.layoutControlItem1.Control = this.TextBoxX_BehavName;
+            this.layoutControlItem1.Height = 28;
+            this.layoutControlItem1.MinSize = new System.Drawing.Size(120, 0);
+            this.layoutControlItem1.Name = "layoutControlItem1";
+            this.layoutControlItem1.Text = "Name:";
+            this.layoutControlItem1.Width = 100;
+            this.layoutControlItem1.WidthType = DevComponents.DotNetBar.Layout.eLayoutSizeType.Percent;
             // 
             // layoutControlItem2
             // 
@@ -306,17 +273,51 @@ namespace SM64_ROM_Manager
             this.layoutControlItem3.Name = "layoutControlItem3";
             this.layoutControlItem3.Width = 100;
             // 
-            // columnHeader1
+            // TabItem_BehavProps
             // 
-            this.columnHeader1.Name = "columnHeader1";
-            this.columnHeader1.Text = "Name";
-            this.columnHeader1.Width.Relative = 60;
+            this.TabItem_BehavProps.AttachedControl = this.tabControlPanel1;
+            this.TabItem_BehavProps.Name = "TabItem_BehavProps";
+            this.TabItem_BehavProps.Text = "Properties";
             // 
-            // columnHeader2
+            // tabControlPanel2
             // 
-            this.columnHeader2.Name = "columnHeader2";
-            this.columnHeader2.Text = "Address";
-            this.columnHeader2.Width.Absolute = 80;
+            this.tabControlPanel2.Controls.Add(this.RichTextBoxEx_Script);
+            this.tabControlPanel2.DisabledBackColor = System.Drawing.Color.Empty;
+            this.tabControlPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControlPanel2.Location = new System.Drawing.Point(0, 27);
+            this.tabControlPanel2.Name = "tabControlPanel2";
+            this.tabControlPanel2.Padding = new System.Windows.Forms.Padding(1);
+            this.tabControlPanel2.Size = new System.Drawing.Size(384, 360);
+            this.tabControlPanel2.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.tabControlPanel2.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
+            this.tabControlPanel2.Style.BorderColor.Color = System.Drawing.Color.FromArgb(((int)(((byte)(211)))), ((int)(((byte)(211)))), ((int)(((byte)(211)))));
+            this.tabControlPanel2.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right) 
+            | DevComponents.DotNetBar.eBorderSide.Bottom)));
+            this.tabControlPanel2.Style.GradientAngle = 90;
+            this.tabControlPanel2.TabIndex = 5;
+            this.tabControlPanel2.TabItem = this.TabItem_BehavScript;
+            // 
+            // RichTextBoxEx_Script
+            // 
+            // 
+            // 
+            // 
+            this.RichTextBoxEx_Script.BackgroundStyle.Class = "RichTextBoxBorder";
+            this.RichTextBoxEx_Script.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.RichTextBoxEx_Script.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.RichTextBoxEx_Script.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RichTextBoxEx_Script.Location = new System.Drawing.Point(1, 1);
+            this.RichTextBoxEx_Script.Name = "RichTextBoxEx_Script";
+            this.RichTextBoxEx_Script.Rtf = "{\\rtf1\\ansi\\ansicpg1252\\deff0\\deflang1031{\\fonttbl{\\f0\\fnil\\fcharset0 Consolas;}}" +
+    "\r\n\\viewkind4\\uc1\\pard\\f0\\fs17\\par\r\n}\r\n";
+            this.RichTextBoxEx_Script.Size = new System.Drawing.Size(382, 358);
+            this.RichTextBoxEx_Script.TabIndex = 0;
+            // 
+            // TabItem_BehavScript
+            // 
+            this.TabItem_BehavScript.AttachedControl = this.tabControlPanel2;
+            this.TabItem_BehavScript.Name = "TabItem_BehavScript";
+            this.TabItem_BehavScript.Text = "Script";
             // 
             // BehaviorBankManager
             // 
@@ -335,8 +336,8 @@ namespace SM64_ROM_Manager
             ((System.ComponentModel.ISupportInitialize)(this.TabControl_Behav)).EndInit();
             this.TabControl_Behav.ResumeLayout(false);
             this.tabControlPanel1.ResumeLayout(false);
-            this.tabControlPanel2.ResumeLayout(false);
             this.layoutControl1.ResumeLayout(false);
+            this.tabControlPanel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -353,7 +354,7 @@ namespace SM64_ROM_Manager
         private DevComponents.DotNetBar.TabItem TabItem_BehavProps;
         private DevComponents.DotNetBar.TabControlPanel tabControlPanel2;
         private DevComponents.DotNetBar.TabItem TabItem_BehavScript;
-        private DevComponents.DotNetBar.Controls.RichTextBoxEx richTextBoxEx1;
+        private DevComponents.DotNetBar.Controls.RichTextBoxEx RichTextBoxEx_Script;
         private DevComponents.DotNetBar.Layout.LayoutControl layoutControl1;
         private DevComponents.DotNetBar.Controls.TextBoxX TextBoxX_BehavName;
         private DevComponents.DotNetBar.Layout.LayoutControlItem layoutControlItem1;

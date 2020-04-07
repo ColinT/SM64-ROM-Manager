@@ -3,6 +3,7 @@ using global::System.IO;
 using Microsoft.VisualBasic.CompilerServices;
 using global::Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
+using SM64Lib.Behaviors;
 
 namespace SM64Lib.Configuration
 {
@@ -38,7 +39,7 @@ namespace SM64Lib.Configuration
         {
             var serializer = JsonSerializer.CreateDefault();
             serializer.PreserveReferencesHandling = PreserveReferencesHandling.All;
-            File.WriteAllText(filePath, JObject.FromObject(this).ToString(serializer));
+            File.WriteAllText(filePath, JObject.FromObject(this, serializer).ToString());
         }
     }
 }
