@@ -2,6 +2,7 @@
 using global::System.IO;
 using Microsoft.VisualBasic.CompilerServices;
 using global::Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 
 namespace SM64Lib.Configuration
 {
@@ -28,12 +29,16 @@ namespace SM64Lib.Configuration
 
         public static RomConfig Load(string filePath)
         {
-            return JObject.Parse(File.ReadAllText(filePath)).ToObject<RomConfig>();
+            var serializer = JsonSerializer.CreateDefault();
+            serializer.PreserveReferencesHandling = PreserveReferencesHandling.All;
+            return JObject.Parse(File.ReadAllText(filePath)).ToObject<RomConfig>(serializer);
         }
 
         public void Save(string filePath)
         {
-            File.WriteAllText(filePath, JObject.FromObject(this).ToString());
+            var serializer = JsonSerializer.CreateDefault();
+            serializer.PreserveReferencesHandling = PreserveReferencesHandling.All;
+            File.WriteAllText(filePath, JObject.FromObject(this).ToString(serializer));
         }
     }
 }
