@@ -108,7 +108,7 @@ namespace SM64_ROM_Manager.ProgressUpdater
                                 bool deleteMsg = false;
 
                                 bool checkMsgString(string strMsg) =>
-                                    LikeString(strMsg, string.Format(settings.DiscordMsgBaseURL, newVersion.Major, newVersion.Minor, newVersion.Revision, newVersion.Build, "*"), Microsoft.VisualBasic.CompareMethod.Text);
+                                    LikeString(strMsg, string.Format(settings.DiscordMsgBaseURL, newVersion.Major, newVersion.Minor, newVersion.Build, newVersion.Revision, "*"), Microsoft.VisualBasic.CompareMethod.Text);
                                 int getNewCounter(string strUrl) =>
                                     Convert.ToInt32(strUrl.Substring(strUrl.IndexOf(ParamCounterName) + ParamCounterName.Length));
 
