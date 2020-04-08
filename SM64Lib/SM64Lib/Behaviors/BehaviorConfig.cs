@@ -8,6 +8,7 @@ namespace SM64Lib.Behaviors
 {
     public class BehaviorConfig
     {
-        public int BankAddress { get; set; }
+        public int BankAddress { get; set; } = -1;
+        public bool IsVanilla { get; set; } = false;
     }
 }

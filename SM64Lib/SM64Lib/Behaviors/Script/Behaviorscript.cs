@@ -1,4 +1,5 @@
 ﻿using SM64Lib.Data;
+using System;
 using System.Collections;
 using System.Linq;
 
@@ -6,7 +7,6 @@ namespace SM64Lib.Behaviors.Script
 {
     public class Behaviorscript : BehaviorscriptCommandCollection
     {
-
         public void Read(BinaryData data, int address)
         {
             bool ende = false;
@@ -31,6 +31,8 @@ namespace SM64Lib.Behaviors.Script
 
                 // Create & add command
                 Add(new BehaviorscriptCommand(buf));
+                
+                ende = isEndCmd;
             }
         }
 

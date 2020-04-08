@@ -33,27 +33,46 @@ namespace SM64Lib.Behaviors
         {
             var data = new BinaryStreamData(seg.Data);
             data.Position = offset;
-            ReadBank(data, isVanilla);
+            ReadBank(data, isVanilla, seg.Length);
         }
 
         public void ReadBank(BinaryData data)
         {
-            ReadBank(data, false);
+            ReadBank(data, false, -1);
         }
 
-        private void ReadBank(BinaryData data, bool isVanilla)
+        private void ReadBank(BinaryData data, bool isVanilla, int endAddress)
         {
             // Clear current list
             Behaviors.Clear();
 
-            // Read Behaviors
-            foreach (var config in Config.BehaviorConfigs.OrderBy(n => n.BankAddress))
+            if (isVanilla)
             {
-                var bankOffset = config.BankAddress & 0xffffff;
-                var behav = new Behavior(config)
+                while (data.Position <= endAddress - 0x10)
                 {
-                    BankAddress = config.BankAddress
-                };
+                    var conf = new BehaviorConfig();
+                    Config.BehaviorConfigs.Add(conf);
+                    readBehavior(conf);
+                }
+            }
+            else
+            {
+                foreach (var config in Config.BehaviorConfigs.OrderBy(n => n.BankAddress))
+                    readBehavior(config);
+            }
+
+            void readBehavior(BehaviorConfig config)
+            {
+                int bankOffset;
+                Behavior behav = new Behavior(config);
+
+                if (isVanilla)
+                    bankOffset = (int)data.Position;
+                else
+                    bankOffset = config.BankAddress & 0xffffff;
+
+                if (isVanilla) behav.Config.IsVanilla = true;
+                behav.BankAddress = config.BankAddress;;
                 behav.Read(data, bankOffset);
                 Behaviors.Add(behav);
             }
@@ -64,7 +83,7 @@ namespace SM64Lib.Behaviors
             var segStream = new MemoryStream();
             var seg = new SegmentedBank(bankID, segStream);
             int lastPos = WriteToSeg(seg, offset, rommgr);
-            seg.Length = lastPos;
+            seg.Length = General.HexRoundUp1(lastPos);
             return seg;
         }
 
@@ -85,12 +104,13 @@ namespace SM64Lib.Behaviors
                     var newBankAddress = (int)data.Position - offset + segStartAddress;
                     if (newBankAddress != behav.Config.BankAddress)
                     {
-                        addressUpdates.Add(behav.Config.BankAddress, newBankAddress);
+                        if (behav.Config.BankAddress != -1)
+                            addressUpdates.Add(behav.Config.BankAddress, newBankAddress);
                         behav.Config.BankAddress = newBankAddress;
-                        behav.BankAddress = newBankAddress;
                     }
+                    behav.BankAddress = behav.Config.BankAddress;
                     behav.Write(data, (int)data.Position);
-                    data.RoundUpPosition();
+                    usedConfigs.Add(behav.Config);
                 }
 
                 // Add new configs
