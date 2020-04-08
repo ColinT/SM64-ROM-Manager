@@ -34,7 +34,7 @@ namespace SM64Lib.Behaviors.Script
             }
         }
 
-        public void Write(BinaryData data, int address)
+        public int Write(BinaryData data, int address)
         {
             data.Position = address;
 
@@ -45,6 +45,8 @@ namespace SM64Lib.Behaviors.Script
                     command.SetLength(cmdLength);
                 data.Write(command.ToArray());
             }
+
+            return (int)data.Position - address;
         }
 
         public int IndexOfType(BehaviorscriptCommandTypes cmdType)

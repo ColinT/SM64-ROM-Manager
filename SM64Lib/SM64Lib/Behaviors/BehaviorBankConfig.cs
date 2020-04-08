@@ -8,6 +8,7 @@ namespace SM64Lib.Behaviors
 {
     public class BehaviorBankConfig
     {
+        public bool IsVanilla { get; set; } = true;
         public List<BehaviorConfig> BehaviorConfigs { get; } = new List<BehaviorConfig>();
     }
 }

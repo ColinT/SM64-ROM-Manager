@@ -998,7 +998,7 @@ namespace SM64_ROM_Manager
         {
             var fp = RomManager.GetRomConfigFilePath();
             var fn = Path.GetFileName(fp);
-            var a = File.Exists(fp);
+            var a = RomManager.IsNewROM || File.Exists(fp);
             return (fn, a);
         }
 

@@ -11,12 +11,13 @@ namespace SM64Lib.Behaviors
     public class Behavior
     {
         public BehaviorConfig Config { get; private set; }
-        public int Address { get; private set; }
         public int BankAddress { get; internal set; }
         public Behaviorscript Script { get; private set; }
         public int CollisionPointer { get; set; }
         public bool EnableCollisionPointer { get; set; }
         public List<int> BehaviorAddressDestinations { get; set; } = new List<int>();
+        public bool IsVanilla { get; set; } = false;
+        public int FixedLength { get; set; } = -1;
 
         public Behavior()
         {
@@ -58,7 +59,6 @@ namespace SM64Lib.Behaviors
 
         public void Read(BinaryData data, int address)
         {
-            Address = address;
             CreateNewBehaviorscript();
             Script.Read(data, address);
             ParseScript();
@@ -66,9 +66,11 @@ namespace SM64Lib.Behaviors
         
         public void Write(BinaryData data, int address)
         {
-            Address = address;
             TakeoverSettingsToScript();
-            Script.Write(data, address);
+            var length = Script.Write(data, address);
+
+            if (FixedLength != -1 && length != FixedLength)
+                data.Position += FixedLength - length;
         }
 
         private void ParseScript()

@@ -43,7 +43,6 @@ namespace SM64Lib
         private readonly List<ushort> levelIDsToReset = new List<ushort>();
         private readonly List<Text.TextGroup> myTextGroups = new List<Text.TextGroup>();
         private string myGameName = null;
-        private bool isNewROM = false;
         private bool programVersion_loadedVersion = false;
 
         // P r o p e r t i e s
@@ -58,6 +57,7 @@ namespace SM64Lib
         public BehaviorBank GlobalBehaviorBank { get; set; } = null;
         public ILevelManager LevelManager { get; private set; }
         public RomConfig RomConfig { get; private set; }
+        public bool IsNewROM { get; private set; } = false;
 
         /// <summary>
         /// Gets or sets the lastly used program version for this ROM.
@@ -70,7 +70,7 @@ namespace SM64Lib
                 RomVersion ver;
                 if (!programVersion_loadedVersion)
                 {
-                    if (isNewROM)
+                    if (IsNewROM)
                     {
                         var romVerEventArgs = new RomVersionEventArgs(myProgramVersion);
                         WritingNewProgramVersion?.Invoke(this, romVerEventArgs);
@@ -306,7 +306,8 @@ namespace SM64Lib
                 General.HexRoundUp2(ref lastpos);
 
                 // Global Behavior Bank
-                SaveGlobalBehaviorBank();
+                SaveGlobalBehaviorBank(ref lastpos);
+                General.HexRoundUp2(ref lastpos);
 
                 // Levels
                 SaveLevels(lastpos); // If IgnoreNeedToSave OrElse Levels.NeedToSave Then
@@ -315,6 +316,8 @@ namespace SM64Lib
 
                 // Write Rom.config
                 SaveRomConfig();
+
+                IsNewROM = false;
                 RaiseAfterRomSave();
             }
         }
@@ -623,29 +626,67 @@ namespace SM64Lib
             seg.RomStart = offset;
 
             // Write Segmented Bank
-            var fs = new BinaryRom(this, FileAccess.ReadWrite);
-            seg.WriteData(fs.BaseStream);
-            offset = Conversions.ToInteger(fs.Position);
+            var rom = new BinaryRom(this, FileAccess.ReadWrite);
+            seg.WriteData(rom.BaseStream);
+            offset = Conversions.ToInteger(rom.Position);
 
             // Write Bank Address & Length to Rom
-            fs.Position = 0x120FFF0;
-            fs.Write(seg.RomStart);
-            fs.Write(seg.RomEnd);
-            fs.Close();
+            rom.Position = 0x120FFF0;
+            rom.Write(seg.RomStart);
+            rom.Write(seg.RomEnd);
+            rom.Close();
         }
 
         public void LoadGlobalBehaviorBank()
         {
+            var rom = GetBinaryRom(FileAccess.Read);
+
+            // Get Bank Address & Length from ROM
+            rom.Position = 0x2ABCD4;
+            var seg = new SegmentedBank(0x13)
+            {
+                RomStart = rom.ReadInt32(),
+                RomEnd = rom.ReadInt32()
+            };
+            seg.ReadData(rom.BaseStream);
+            rom.Close();
+
+            // Create new Config
             if (RomConfig.GlobalBehaviorBank == null)
                 RomConfig.GlobalBehaviorBank = new BehaviorBankConfig();
+
+            // Read Behavior Bank
             GlobalBehaviorBank = new BehaviorBank(RomConfig.GlobalBehaviorBank);
-            GlobalBehaviorBank.ReadBank(this);
+            if(RomConfig.GlobalBehaviorBank.IsVanilla)
+                GlobalBehaviorBank.ReadVanillaBank(seg);
+            else
+                GlobalBehaviorBank.ReadBank(seg, 0);
         }
 
-        private void SaveGlobalBehaviorBank()
+        private void SaveGlobalBehaviorBank(ref int offset)
         {
-            GlobalBehaviorBank.SaveBank(this, 0x00407000);
-            GlobalBehaviorBank.WriteBehaviorAddresss(this);
+            // Write Segmented Bank
+            var seg = GlobalBehaviorBank.WriteToSeg(0x13, 0, this);
+            SetSegBank(seg);
+
+            // Set Segmented Bank
+            seg.RomStart = offset;
+
+            // Write Segmented Bank
+            var rom = new BinaryRom(this, FileAccess.ReadWrite);
+            seg.WriteData(rom.BaseStream);
+            offset = Conversions.ToInteger(rom.Position);
+
+            // Write Bank Address & Length to ROM
+            rom.Position = 0x2ABCD4;
+            rom.Write(seg.RomStart);
+            rom.Write(seg.RomEnd);
+
+            // Write addresses
+            GlobalBehaviorBank.WriteBehaviorAddresss(rom);
+
+            rom.Close();
+            RomConfig.GlobalBehaviorBank.IsVanilla = false;
         }
 
         /// <summary>
@@ -721,7 +762,7 @@ namespace SM64Lib
             {
                 CreateROM();
                 PrepairROM();
-                isNewROM = true;
+                IsNewROM = true;
             }
 
             var br = new BinaryRom(this, FileAccess.Read);
