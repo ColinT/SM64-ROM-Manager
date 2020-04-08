@@ -95,6 +95,8 @@ namespace SM64_ROM_Manager.LevelEditor
         {
             var controls = new Control[FlowLayoutPanel_Textures.Controls.Count];
             FlowLayoutPanel_Textures.Controls.CopyTo(controls, 0);
+            FlowLayoutPanel_Textures.SuspendLayout();
+
             foreach (Control c in controls)
             {
                 if (c is PictureBox)
@@ -132,6 +134,8 @@ namespace SM64_ROM_Manager.LevelEditor
                 lbl.MouseClick += (sender, e) => PictureBox_MouseClick(pb, e);
                 FlowLayoutPanel_Textures.Controls.Add(pb);
             }
+
+            FlowLayoutPanel_Textures.ResumeLayout();
         }
 
         private void ButtonItem_Clicked(object sender, EventArgs e)
