@@ -80,6 +80,8 @@
             this.ScriptTree.BackgroundStyle.Class = "TreeBorderKey";
             this.ScriptTree.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.ScriptTree.Dock = System.Windows.Forms.DockStyle.Left;
+            this.ScriptTree.DragDropEnabled = false;
+            this.ScriptTree.DragDropNodeCopyEnabled = false;
             this.ScriptTree.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
             this.ScriptTree.Location = new System.Drawing.Point(0, 0);
             this.ScriptTree.Name = "ScriptTree";
@@ -177,6 +179,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormScriptDumps";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Tag = "800; 500";
             this.Text = "Script Dumps";
             this.TopLeftCornerSize = 0;
             this.TopRightCornerSize = 0;
