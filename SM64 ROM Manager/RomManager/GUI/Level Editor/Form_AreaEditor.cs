@@ -647,6 +647,9 @@ namespace SM64_ROM_Manager.LevelEditor
             int nodeIndex = 0;
             var mdl = new Object3D();
             var dls = new List<DisplayList>();
+            var offsets = new Stack<System.Numerics.Vector3>();
+            var curTotalOffset = System.Numerics.Vector3.Zero;
+            offsets.Push(curTotalOffset);
 
             foreach (GeolayoutCommand fegmd in glscript)
             {
@@ -658,20 +661,21 @@ namespace SM64_ROM_Manager.LevelEditor
                             byte geolayer = cgLoadDisplayList.GetDrawingLayer(ref gmd);
                             int segAddr = cgLoadDisplayList.GetSegGeopointer(ref gmd);
                             if (segAddr > 0)
-                            {
-                                dls.Add(await LoadDisplaylist(new Geopointer(geolayer, segAddr, mdlScale, System.Numerics.Vector3.Zero), mdl));
-                            }
+                                dls.Add(await LoadDisplaylist(new Geopointer(geolayer, segAddr, mdlScale, curTotalOffset), mdl));
                             break;
                         }
                     case GeolayoutCommandTypes.LoadDisplaylistWithOffset:
                         {
                             byte geolayer = cgLoadDisplayListWithOffset.GetDrawingLayer(ref gmd);
                             int segAddr = Conversions.ToInteger(cgLoadDisplayListWithOffset.GetSegGeopointer(ref gmd));
+                            var localOffset = cgLoadDisplayListWithOffset.GetOffset(ref gmd);
                             if (segAddr > 0)
                             {
-                                var geop = new Geopointer(geolayer, segAddr, mdlScale, cgLoadDisplayListWithOffset.GetOffset(ref gmd));
+                                var geop = new Geopointer(geolayer, segAddr, mdlScale, localOffset + curTotalOffset);
                                 dls.Add(await LoadDisplaylist(geop, mdl));
                             }
+                            else
+                                curTotalOffset += localOffset;
                             break;
                         }
                     case GeolayoutCommandTypes.Scale2:
@@ -683,15 +687,16 @@ namespace SM64_ROM_Manager.LevelEditor
                             break;
                         }
                     case GeolayoutCommandTypes.StartOfNode:
-                        {
-                            nodeIndex += 1;
-                            break;
-                        }
+                        nodeIndex += 1;
+                        offsets.Push(curTotalOffset);
+                        break;
                     case GeolayoutCommandTypes.EndOfNode:
-                        {
-                            nodeIndex -= 1;
-                            break;
-                        }
+                        nodeIndex -= 1;
+                        curTotalOffset = offsets.Pop();
+                        break;
+                    case GeolayoutCommandTypes.x10:
+                        curTotalOffset += cgLoadDisplayListWithOffset.GetOffset(ref gmd);
+                        break;
                 }
 
                 if (mdlScaleNodeIndex > -1 && mdlScaleNodeIndex > nodeIndex)
