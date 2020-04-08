@@ -16,6 +16,7 @@ using global::SM64Lib.Levels;
 using global::SM64Lib.Music;
 using global::SM64Lib.Objects.ModelBanks;
 using global::SM64Lib.SegmentedBanking;
+using SM64Lib.Behaviors;
 
 namespace SM64Lib
 {
@@ -54,6 +55,7 @@ namespace SM64Lib
         public Text.Profiles.TextProfileInfo TextInfoProfile { get; set; }
         public MusicList MusicList { get; private set; } = new MusicList();
         public CustomModelBank GlobalObjectBank { get; set; } = new CustomModelBank();
+        public BehaviorBank GlobalBehaviorBank { get; set; } = null;
         public ILevelManager LevelManager { get; private set; }
         public RomConfig RomConfig { get; private set; }
 
@@ -299,9 +301,12 @@ namespace SM64Lib
                 MusicList.Write(this, ref lastpos);
                 General.HexRoundUp2(ref lastpos);
 
-                // Global Object Bank
-                SaveGlobalObjectBank(ref lastpos);
+                // Global Model Bank
+                SaveGlobalModelBank(ref lastpos);
                 General.HexRoundUp2(ref lastpos);
+
+                // Global Behavior Bank
+                SaveGlobalBehaviorBank();
 
                 // Levels
                 SaveLevels(lastpos); // If IgnoreNeedToSave OrElse Levels.NeedToSave Then
@@ -558,7 +563,7 @@ namespace SM64Lib
         /// <summary>
         /// Loads the global object bank, if avaiable (WIP)
         /// </summary>
-        public void LoadGlobalObjectBank()
+        public void LoadGlobalModelBank()
         {
             var fs = new BinaryRom(this, FileAccess.Read);
 
@@ -607,7 +612,7 @@ namespace SM64Lib
             return seg;
         }
 
-        private void SaveGlobalObjectBank(ref int offset)
+        private void SaveGlobalModelBank(ref int offset)
         {
             var seg = GenerateAndGetGlobalObjectBank();
 
@@ -627,6 +632,20 @@ namespace SM64Lib
             fs.Write(seg.RomStart);
             fs.Write(seg.RomEnd);
             fs.Close();
+        }
+
+        public void LoadGlobalBehaviorBank()
+        {
+            if (RomConfig.GlobalBehaviorBank == null)
+                RomConfig.GlobalBehaviorBank = new BehaviorBankConfig();
+            GlobalBehaviorBank = new BehaviorBank(RomConfig.GlobalBehaviorBank);
+            GlobalBehaviorBank.ReadBank(this);
+        }
+
+        private void SaveGlobalBehaviorBank()
+        {
+            GlobalBehaviorBank.SaveBank(this, 0x00407000);
+            GlobalBehaviorBank.WriteBehaviorAddresss(this);
         }
 
         /// <summary>
@@ -904,14 +923,9 @@ namespace SM64Lib
             BinaryData data;
 
             // Get correct bank
-            if (bankID == 0)
-                data = GetBinaryRom(FileAccess.Read);
-            else
-            {
-                var seg = GetSegBank(bankID);
-                seg.ReadDataIfNull(this);
-                data = new BinaryStreamData(seg.Data);
-            }
+            var seg = GetSegBank(bankID);
+            seg.ReadDataIfNull(this);
+            data = new BinaryStreamData(seg.Data);
 
             return data;
         }

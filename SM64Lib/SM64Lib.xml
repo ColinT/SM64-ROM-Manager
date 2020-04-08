@@ -357,7 +357,7 @@
             </summary>
             <param name="StartAddress">At this position the Levels will be written in ROM.</param>
         </member>
-        <member name="M:SM64Lib.RomManager.LoadGlobalObjectBank">
+        <member name="M:SM64Lib.RomManager.LoadGlobalModelBank">
             <summary>
             Loads the global object bank, if avaiable (WIP)
             </summary>

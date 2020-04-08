@@ -593,18 +593,21 @@ namespace SM64_ROM_Manager
         public void LoadROM()
         {
             loadingROM = true;
-            StatusText = SM64_ROM_Manager.My.Resources.Form_Main_Resources.Status_LoadingRom;
+            StatusText = Form_Main_Resources.Status_LoadingRom;
             RomLoading?.Invoke();
 
-            // Load Global Object Banks
-            RomManager.LoadGlobalObjectBank();
+            // Load Global Behavior Bank
+            RomManager.LoadGlobalBehaviorBank();
+
+            // Load Global Model Banks
+            RomManager.LoadGlobalModelBank();
 
             // Load Levels
             RomManager.LoadLevels();
             RomLevelsLoaded?.Invoke();
 
             // Load Music
-            StatusText = SM64_ROM_Manager.My.Resources.Form_Main_Resources.Status_LoadingMusic;
+            StatusText = Form_Main_Resources.Status_LoadingMusic;
             RomManager.LoadMusic();
             RomMusicLoaded?.Invoke();
             StatusText = string.Empty;

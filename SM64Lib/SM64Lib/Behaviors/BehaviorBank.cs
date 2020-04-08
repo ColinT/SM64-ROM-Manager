@@ -25,12 +25,6 @@ namespace SM64Lib.Behaviors
             BinaryData data = null;
             var lastBankID = (byte)0xff;
 
-            void CloseDataIfZero()
-            {
-                if (data is BinaryRom)
-                    data.Close();
-            }
-
             foreach (var config in Config.BehaviorConfigs.OrderBy(n => n.BankAddress))
             {
                 var bankID = (byte)(config.BankAddress >> 24);
@@ -38,59 +32,54 @@ namespace SM64Lib.Behaviors
 
                 if (bankID != lastBankID)
                 {
-                    lastBankID = bankID;
-                    CloseDataIfZero();
-                    data = rommgr.GetSegBankData(bankID);
-
                     // Get correct bank
-                    if (bankID == 0)
-                        data = rommgr.GetBinaryRom(System.IO.FileAccess.Read);
-                    else
-                    {
-                        var seg = rommgr.GetSegBank(bankID);
-                        seg.ReadDataIfNull(rommgr);
-                        data = new BinaryStreamData(seg.Data);
-                    }
+                    lastBankID = bankID;
+                    data = rommgr.GetSegBankData(bankID);
                 }
 
                 // Read & Add Behavior
-                var behav = new Behavior(config);
+                var behav = new Behavior(config)
+                {
+                    BankAddress = config.BankAddress
+                };
                 behav.Read(data, bankOffset);
                 Behaviors.Add(behav);
             }
-
-            CloseDataIfZero();
         }
 
         public void SaveBank(RomManager rommgr, int segStartAddress)
         {
             var usedConfigs = new List<BehaviorConfig>();
-            var bankID = (byte)(segStartAddress >> 24);
-            var data = rommgr.GetSegBankData(bankID);
-            data.Position = segStartAddress & 0xffffff;
+            var addressUpdates = new Dictionary<int, int>();
 
-            // Save Behaviors to ROM
-            foreach (var behav in Behaviors)
+            if (Behaviors.Any())
             {
-                behav.Write(data, (int)data.Position);
-                data.RoundUpPosition();
-            }
+                var bankID = (byte)(segStartAddress >> 24);
+                var segStartOffset = segStartAddress & 0xffffff;
+                var data = rommgr.GetSegBankData(bankID);
+                data.Position = segStartOffset;
 
-            // Close/Save ROM
-            if (data is BinaryRom)
-                data.Close();
-            else
-            {
+                // Save Behaviors to ROM
+                foreach (var behav in Behaviors)
+                {
+                    var address = (int)data.Position;
+                    behav.Config.BankAddress = (int)data.Position - segStartOffset + segStartAddress; //(bankID << 24) | address;
+                    behav.BankAddress = behav.Config.BankAddress;
+                    behav.Write(data, (int)data.Position);
+                    data.RoundUpPosition();
+                }
+
+                // Save ROM
                 var seg = rommgr.GetSegBank(bankID);
                 seg.Length = General.HexRoundUp1((int)data.Position);
                 seg.WriteData(rommgr);
-            }
 
-            // Add new configs
-            foreach (var newConfig in usedConfigs)
-            {
-                if (!Config.BehaviorConfigs.Contains(newConfig))
-                    Config.BehaviorConfigs.Add(newConfig);
+                // Add new configs
+                foreach (var newConfig in usedConfigs)
+                {
+                    if (!Config.BehaviorConfigs.Contains(newConfig))
+                        Config.BehaviorConfigs.Add(newConfig);
+                }
             }
 
             // Delete unused configs
@@ -99,6 +88,45 @@ namespace SM64Lib.Behaviors
                 if (!usedConfigs.Contains(oldConfig))
                     Config.BehaviorConfigs.Remove(oldConfig);
             }
+
+            // Update addresses
+            if (Behaviors.Any())
+            {
+                foreach (var lvl in rommgr.Levels)
+                {
+                    foreach (var area in lvl.Areas)
+                    {
+                        foreach (var obj in area.Objects)
+                        {
+                            var behavAddr = Levels.Script.Commands.clNormal3DObject.GetSegBehaviorAddr(obj);
+                            foreach (var kvp in addressUpdates)
+                            {
+                                if (behavAddr == kvp.Key)
+                                    Levels.Script.Commands.clNormal3DObject.SetSegBehaviorAddr(obj, (uint)kvp.Value);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        public void WriteBehaviorAddresss(RomManager rommgr)
+        {
+            var data = rommgr.GetBinaryRom(System.IO.FileAccess.ReadWrite);
+
+            if (Behaviors.Any())
+            {
+                foreach (var behav in Behaviors)
+                {
+                    foreach (var dest in behav.BehaviorAddressDestinations)
+                    {
+                        data.Position = dest;
+                        data.Write(behav.Address);
+                    }
+                }
+            }
+
+            data.Close();
         }
     }
 }

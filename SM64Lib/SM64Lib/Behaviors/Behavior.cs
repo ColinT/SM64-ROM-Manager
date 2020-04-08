@@ -12,9 +12,11 @@ namespace SM64Lib.Behaviors
     {
         public BehaviorConfig Config { get; private set; }
         public int Address { get; private set; }
+        public int BankAddress { get; internal set; }
         public Behaviorscript Script { get; private set; }
         public int CollisionPointer { get; set; }
         public bool EnableCollisionPointer { get; set; }
+        public List<int> BehaviorAddressDestinations { get; set; } = new List<int>();
 
         public Behavior()
         {
