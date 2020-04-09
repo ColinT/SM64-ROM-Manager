@@ -26,6 +26,7 @@ namespace SM64Lib.Script
         {
             foreach (BaseCommand<eTypes> cmd in this)
                 cmd.Close();
+            Clear();
         }
     }
 }

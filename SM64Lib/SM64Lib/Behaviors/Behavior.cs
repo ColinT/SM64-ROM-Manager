@@ -15,7 +15,6 @@ namespace SM64Lib.Behaviors
         public int CollisionPointer { get; set; }
         public bool EnableCollisionPointer { get; set; }
         public List<int> BehaviorAddressDestinations { get; set; } = new List<int>();
-        public int FixedLength { get; set; } = -1;
 
         public Behavior()
         {
@@ -57,10 +56,15 @@ namespace SM64Lib.Behaviors
 
         public void Read(BinaryData data, int address)
         {
+            Read(data, address, false);
+        }
+
+        public void Read(BinaryData data, int address, bool setFixedSize)
+        {
             CreateNewBehaviorscript();
             Script.Read(data, address);
-            if (Config.IsVanilla)
-                FixedLength = (int)Script.Length;
+            if (setFixedSize)
+                Config.FixedLength = (int)Script.Length;
             ParseScript();
         }
         
@@ -71,11 +75,11 @@ namespace SM64Lib.Behaviors
 
             var length = Script.Write(data, address);
 
-            if (FixedLength != -1 && length != FixedLength)
-                data.Position -= length - FixedLength;
+            if (Config.FixedLength != -1 && length != Config.FixedLength)
+                data.Position -= length - Config.FixedLength;
         }
 
-        private void ParseScript()
+        public void ParseScript()
         {
             EnableCollisionPointer = false;
 

@@ -1,18 +1,19 @@
 ﻿using SM64Lib.Data;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace SM64Lib.Behaviors.Script
 {
     public class Behaviorscript : BehaviorscriptCommandCollection
     {
-        public void Read(BinaryData data, int address)
+        public bool Read(BinaryData data, int address)
         {
             bool ende = false;
-
-            Close();
-            Clear();
+            bool success = true;
+            var newCmds = new List<BehaviorscriptCommand>();
+            
             data.Position = address;
 
             while (!ende)
@@ -30,10 +31,26 @@ namespace SM64Lib.Behaviors.Script
                 data.Read(buf);
 
                 // Create & add command
-                Add(new BehaviorscriptCommand(buf));
+                try
+                {
+                    newCmds.Add(new BehaviorscriptCommand(buf));
+                }
+                catch (Exception)
+                {
+                    success = false;
+                }
                 
                 ende = isEndCmd;
             }
+
+            // Add new Cmds
+            if (success && newCmds.Any())
+            {
+                Close();
+                AddRange(newCmds.ToArray());
+            }
+
+            return success;
         }
 
         public int Write(BinaryData data, int address)

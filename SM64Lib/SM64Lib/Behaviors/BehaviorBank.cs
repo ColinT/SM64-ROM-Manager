@@ -75,7 +75,7 @@ namespace SM64Lib.Behaviors
                     bankOffset = config.BankAddress & 0xffffff;
 
                 if (isVanilla) behav.Config.IsVanilla = true;
-                behav.Read(data, bankOffset);
+                behav.Read(data, bankOffset, isVanilla);
                 Behaviors.Add(behav);
             }
         }

@@ -3,13 +3,18 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
+using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using DevComponents.AdvTree;
 using DevComponents.DotNetBar;
 using DevComponents.DotNetBar.Validator;
+using SM64_ROM_Manager.My.Resources;
 using SM64Lib;
 using SM64Lib.Behaviors;
+using SM64Lib.Behaviors.Script;
+using SM64Lib.Data;
 using static SM64Lib.TextValueConverter.TextValueConverter;
 using Timer = System.Timers.Timer;
 
@@ -181,11 +186,75 @@ namespace SM64_ROM_Manager
                 }
                 else if (IsEditScript)
                 {
-                    // ...
+                    RichTextBoxEx_Script.Text = GetScriptAsString(curBehav.Script);
                 }
 
                 loadingBehavior = false;
             }
+        }
+
+        private static string GetScriptAsString(Behaviorscript script)
+        {
+            var sw = new StringWriter();
+            
+            for (int i = 0; i < script.Count; i++)
+            {
+                var cmd = (BehaviorscriptCommand)script[i];
+                
+                if (i > 0)
+                    sw.WriteLine();
+
+                byte[] cmdArr = cmd.ToArray();
+                for (int i1 = 0; i1 < cmdArr.Length; i1++)
+                {
+                    if (i1 > 0) sw.Write(" ");
+                    sw.Write(cmdArr[i1].ToString("X2"));
+                }
+            }
+
+            return sw.ToString();
+        }
+
+        private static bool BuildScriptWithString(Behavior behav, string str)
+        {
+            var success = true;
+            var scriptBytes = new List<byte>();
+
+            // Get all single bytes
+            using (var sr = new StringReader(str))
+            {
+                while (success && sr.Peek() != -1)
+                {
+                    var line = sr.ReadLine();
+                    var bytes = line?.Trim().Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+
+                    if (bytes is object && bytes.Any())
+                    {
+                        foreach (var @byte in bytes)
+                        {
+                            var @byteTrimed = @byte.Trim();
+                            if (!string.IsNullOrEmpty(@byteTrimed))
+                            {
+                                if (byte.TryParse(@byteTrimed, System.Globalization.NumberStyles.HexNumber, null, out var b))
+                                    scriptBytes.Add(b);
+                                else
+                                    success = false;
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (success && scriptBytes.Count % 4 == 0 && (!behav.Config.IsVanilla || behav.Config.FixedLength >= scriptBytes.Count))
+            {
+                // Read script
+                using (var scriptData = new BinaryStreamData(new MemoryStream(scriptBytes.ToArray())))
+                    success = behav.Script.Read(scriptData, 0);
+            }
+            else
+                success = false;
+
+            return success;
         }
 
         private void SaveBehaviorProps()
@@ -201,8 +270,7 @@ namespace SM64_ROM_Manager
 
         private bool SaveBehaviorScript()
         {
-            // ...
-            return false;
+            return BuildScriptWithString(curBehav, RichTextBoxEx_Script.Text);
         }
 
         // G U I
@@ -220,6 +288,7 @@ namespace SM64_ROM_Manager
             else
                 curBehav = null;
             LoadBehavior();
+            highlighter_Script.SetHighlightColor(RichTextBoxEx_Script, eHighlightColor.None);
         }
 
         private void TabControl_Behav_SelectedTabChanged(object sender, TabStripTabChangedEventArgs e)
@@ -235,6 +304,10 @@ namespace SM64_ROM_Manager
         {
             bool res = SaveBehaviorScript();
             highlighter_Script.SetHighlightColor(RichTextBoxEx_Script, res ? eHighlightColor.None : eHighlightColor.Red);
+            if (res)
+                curBehav.ParseScript();
+            else
+                MessageBoxEx.Show(this, BehaviorBankManagerLangRes.Msg_ErrorCompilingScript, BehaviorBankManagerLangRes.Msg_ErrorCompilingScriptTitel, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void CheckBoxX_BehavEnableColPtr_CheckedChanged(object sender, EventArgs e)

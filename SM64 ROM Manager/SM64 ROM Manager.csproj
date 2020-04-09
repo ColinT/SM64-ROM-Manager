@@ -587,6 +587,16 @@
     <Compile Include="RomManager\GUI\Tools\TrajectoryEditor.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="RomManager\Language Resources\Behavior Bank Manager\BehaviorBankManagerLangRes.de.Designer.cs">
+      <DependentUpon>BehaviorBankManagerLangRes.de.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="RomManager\Language Resources\Behavior Bank Manager\BehaviorBankManagerLangRes.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BehaviorBankManagerLangRes.resx</DependentUpon>
+    </Compile>
     <Compile Include="RomManager\Language Resources\Coins Properties\LangResCoinsManager.de.Designer.cs">
       <DependentUpon>LangResCoinsManager.de.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -917,6 +927,16 @@
     </EmbeddedResource>
     <EmbeddedResource Include="RomManager\GUI\Tools\TrajectoryEditor.resx">
       <DependentUpon>TrajectoryEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RomManager\Language Resources\Behavior Bank Manager\BehaviorBankManagerLangRes.de.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>BehaviorBankManagerLangRes.de.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>SM64_ROM_Manager.My.Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RomManager\Language Resources\Behavior Bank Manager\BehaviorBankManagerLangRes.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>BehaviorBankManagerLangRes.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>SM64_ROM_Manager.My.Resources</CustomToolNamespace>
     </EmbeddedResource>
     <EmbeddedResource Include="RomManager\Language Resources\Coins Properties\LangResCoinsManager.de.resx">
       <Generator>ResXFileCodeGenerator</Generator>
