@@ -12,9 +12,9 @@ namespace SM64_ROM_Manager.PatchScripts
     public class TweakDatabaseManager
     {
         private static readonly drsPwEnc.drsPwEnc crypter = new drsPwEnc.drsPwEnc();
+        private static readonly Random random = new Random();
 
         private Dictionary<TweakDatabaseLoginTypes, WebDavClient> dicClients = new Dictionary<TweakDatabaseLoginTypes, WebDavClient>();
-
         public TweakDatabasePreferences Preferences { get; private set; }
 
         public TweakDatabaseManager(TweakDatabasePreferences pref)
@@ -142,13 +142,28 @@ namespace SM64_ROM_Manager.PatchScripts
             }
         }
 
-        public async Task<bool> Upload(string fileName)
-        {
-            var client = CreateClient(TweakDatabaseLoginTypes.UserUploads);
-            var fs = new FileStream(fileName, FileMode.Open, FileAccess.Read);
-            var result = await client.PutFile(Path.GetFileName(fileName), fs);
-            fs.Close();
-            return result.IsSuccessful;
-        }
+        //public async Task<bool> Upload(string path)
+        //{
+        //    var client = CreateClient(TweakDatabaseLoginTypes.UserUploads);
+        //    var fs = new FileStream(path, FileMode.Open, FileAccess.Read);
+        //    var result = await client.PutFile(Path.GetFileName(path), fs);
+        //    fs.Close();
+        //    return result.IsSuccessful;
+        //}
+
+        //public async Task<bool> GetUploadInfo(uint uploadID)
+        //{
+
+        //}
+
+        //private async Task<IEnumerable<uint>> GetAllUploadIDs()
+        //{
+
+        //}
+
+        //private async Task<int> GetNewUploadID()
+        //{
+
+        //}
     }
 }
