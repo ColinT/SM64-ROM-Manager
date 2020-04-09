@@ -11,7 +11,6 @@ namespace SM64Lib.Behaviors
     public class Behavior
     {
         public BehaviorConfig Config { get; private set; }
-        public int BankAddress { get; internal set; }
         public Behaviorscript Script { get; private set; }
         public int CollisionPointer { get; set; }
         public bool EnableCollisionPointer { get; set; }

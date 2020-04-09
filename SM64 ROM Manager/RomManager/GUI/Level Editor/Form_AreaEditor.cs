@@ -594,7 +594,7 @@ namespace SM64_ROM_Manager.LevelEditor
             if (Rommgr.HasGlobalObjectBank && CLevel.EnableGlobalObjectBank)
             {
                 Rommgr.GenerateGlobalObjectBank();
-                await LoadCustomObjectBankModels(Rommgr.GlobalObjectBank);
+                await LoadCustomObjectBankModels(Rommgr.GlobalModelBank);
             }
 
             // Load local objects

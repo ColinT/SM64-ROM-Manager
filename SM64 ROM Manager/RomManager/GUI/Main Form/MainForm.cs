@@ -659,7 +659,7 @@ namespace SM64_ROM_Manager
             }
             else
             {
-                Controller.OpenGlobalObjectBankManager();
+                Controller.OpenGlobalModelBankManager();
             }
         }
 
@@ -696,6 +696,11 @@ namespace SM64_ROM_Manager
         private void ButtonItem_HudOptions_Click(object sender, EventArgs e)
         {
             Controller.OpenHUDOptions();
+        }
+
+        private void ButtonItem_GlobalBehaviorBank_Click(object sender, EventArgs e)
+        {
+            Controller.OpenGlobalBehaviorManager();
         }
     }
 }

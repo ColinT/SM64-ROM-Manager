@@ -718,15 +718,24 @@ namespace SM64_ROM_Manager
             return RomManager;
         }
 
-        public void OpenGlobalObjectBankManager()
+        public void OpenGlobalModelBankManager()
         {
-            if (RomManager.GlobalObjectBank is null)
+            if (RomManager.GlobalModelBank is null)
             {
-                RomManager.CreateNewGlobalObjectBank();
+                RomManager.CreateNewGlobalModelBank();
             }
 
-            var mgr = new CustomBankManager(RomManager, RomManager.GlobalObjectBank);
+            var mgr = new CustomBankManager(RomManager, RomManager.GlobalModelBank);
             mgr.Show();
+        }
+
+        public void OpenGlobalBehaviorManager()
+        {
+            if (RomManager?.GlobalBehaviorBank is object)
+            {
+                var mgr = new BehaviorBankManager(RomManager);
+                mgr.Show();
+            }
         }
 
         public void OpenPluginManager()

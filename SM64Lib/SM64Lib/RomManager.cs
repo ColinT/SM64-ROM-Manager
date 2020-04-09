@@ -53,7 +53,7 @@ namespace SM64Lib
         public bool IsSM64EditorMode { get; private set; } = false;
         public Text.Profiles.TextProfileInfo TextInfoProfile { get; set; }
         public MusicList MusicList { get; private set; } = new MusicList();
-        public CustomModelBank GlobalObjectBank { get; set; } = new CustomModelBank();
+        public CustomModelBank GlobalModelBank { get; set; } = new CustomModelBank();
         public BehaviorBank GlobalBehaviorBank { get; set; } = null;
         public ILevelManager LevelManager { get; private set; }
         public RomConfig RomConfig { get; private set; }
@@ -126,7 +126,7 @@ namespace SM64Lib
         {
             get
             {
-                return GlobalObjectBank is object;
+                return GlobalModelBank is object;
             }
         }
 
@@ -588,21 +588,21 @@ namespace SM64Lib
                 SetSegBank(seg);
 
                 // Load Object Bank
-                GlobalObjectBank = new CustomModelBank();
-                GlobalObjectBank.ReadFromSeg(this, seg, RomConfig.GlobalObjectBankConfig);
+                GlobalModelBank = new CustomModelBank();
+                GlobalModelBank.ReadFromSeg(this, seg, RomConfig.GlobalObjectBankConfig);
             }
             else
             {
                 // Set Object Bank to Null
-                GlobalObjectBank = null;
+                GlobalModelBank = null;
             }
 
             fs.Close();
         }
 
-        public void CreateNewGlobalObjectBank()
+        public void CreateNewGlobalModelBank()
         {
-            GlobalObjectBank = new CustomModelBank();
+            GlobalModelBank = new CustomModelBank();
         }
 
         public void GenerateGlobalObjectBank()
@@ -612,12 +612,12 @@ namespace SM64Lib
 
         private SegmentedBank GenerateAndGetGlobalObjectBank()
         {
-            if (GlobalObjectBank is null)
+            if (GlobalModelBank is null)
             {
-                CreateNewGlobalObjectBank();
+                CreateNewGlobalModelBank();
             }
 
-            var seg = GlobalObjectBank.WriteToSeg(0x7);
+            var seg = GlobalModelBank.WriteToSeg(0x7);
             SetSegBank(seg);
             return seg;
         }
@@ -627,7 +627,7 @@ namespace SM64Lib
             var seg = GenerateAndGetGlobalObjectBank();
 
             // Write collision pointers
-            GlobalObjectBank.WriteCollisionPointers(this);
+            GlobalModelBank.WriteCollisionPointers(this);
 
             // Set Segmented Bank
             seg.RomStart = offset;

@@ -33,15 +33,15 @@ namespace SM64Lib.Behaviors
         {
             var data = new BinaryStreamData(seg.Data);
             data.Position = offset;
-            ReadBank(data, isVanilla, seg.Length);
+            ReadBank(data, isVanilla, seg.Length, (sbyte)seg.BankID);
         }
 
         public void ReadBank(BinaryData data)
         {
-            ReadBank(data, false, -1);
+            ReadBank(data, false, -1, -1);
         }
 
-        private void ReadBank(BinaryData data, bool isVanilla, int endAddress)
+        private void ReadBank(BinaryData data, bool isVanilla, int endAddress, sbyte bankID)
         {
             // Clear current list
             Behaviors.Clear();
@@ -67,12 +67,14 @@ namespace SM64Lib.Behaviors
                 Behavior behav = new Behavior(config);
 
                 if (isVanilla)
+                {
                     bankOffset = (int)data.Position;
+                    config.BankAddress = (bankID << 24) | bankOffset;
+                }
                 else
                     bankOffset = config.BankAddress & 0xffffff;
 
                 if (isVanilla) behav.Config.IsVanilla = true;
-                behav.BankAddress = config.BankAddress;;
                 behav.Read(data, bankOffset);
                 Behaviors.Add(behav);
             }
@@ -108,7 +110,6 @@ namespace SM64Lib.Behaviors
                             addressUpdates.Add(behav.Config.BankAddress, newBankAddress);
                         behav.Config.BankAddress = newBankAddress;
                     }
-                    behav.BankAddress = behav.Config.BankAddress;
                     behav.Write(data, (int)data.Position);
                     usedConfigs.Add(behav.Config);
                 }
@@ -167,7 +168,7 @@ namespace SM64Lib.Behaviors
                     foreach (var dest in behav.BehaviorAddressDestinations)
                     {
                         data.Position = dest;
-                        data.Write(behav.BankAddress);
+                        data.Write(behav.Config.BankAddress);
                     }
                 }
             }

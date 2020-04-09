@@ -10,5 +10,6 @@ namespace SM64Lib.Behaviors
     {
         public int BankAddress { get; set; } = -1;
         public bool IsVanilla { get; set; } = false;
+        public string Name { get; set; } = string.Empty;
     }
 }
