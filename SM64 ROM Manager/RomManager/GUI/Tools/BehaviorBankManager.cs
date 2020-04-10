@@ -54,7 +54,7 @@ namespace SM64_ROM_Manager
             StyleManager.UpdateAmbientColors(RichTextBoxEx_Script);
 
             // Default Nodes
-            AdvTree_Behaviors.Nodes.AddRange(new[] { nBehavVanilla, nBehavCustom });
+            AdvTree_Behaviors.Nodes.AddRange(new[] { nBehavCustom, nBehavVanilla });
 
             // Props-Timer
             Timer_PropsChanged = new Timer(1000) { SynchronizingObject = this, AutoReset = false };
@@ -77,7 +77,8 @@ namespace SM64_ROM_Manager
 
         private void Rommgr_AfterRomSave(RomManager sender, EventArgs e)
         {
-            LoadBehaviors(false);
+            UpdateAllNodes(false);
+            LoadBehavior();
         }
 
         // T i m e r   E v e n t s
@@ -190,6 +191,17 @@ namespace SM64_ROM_Manager
             }
         }
 
+        private void UpdateAllNodes(bool vanilla)
+        {
+            var nodes = GetNodeCollection(vanilla);
+
+            if (nodes is object)
+            {
+                foreach (Node n in nodes)
+                    UpdateNode(n);
+            }
+        }
+
         private void LoadBehavior()
         {
             var isBehav = curBehav is object;
@@ -205,10 +217,10 @@ namespace SM64_ROM_Manager
                     checkBoxX_BehavEnableColPtr.Checked = curBehav.EnableCollisionPointer;
                     textBoxX_BehavColPtr.Text = TextFromValue(curBehav.CollisionPointer);
                     checkBoxX_BehavEnableColPtr.Enabled = !curBehav.Config.IsVanilla;
-                    textBoxX_BehavColPtr.ReadOnly = curBehav.Config.IsVanilla;
                 }
                 else if (IsEditScript)
                 {
+                    curBehav.TakeoverSettingsToScript();
                     RichTextBoxEx_Script.Text = GetScriptAsString(curBehav.Script);
                 }
 
@@ -296,7 +308,13 @@ namespace SM64_ROM_Manager
 
         private bool SaveBehaviorScript()
         {
-            return BuildScriptWithString(curBehav, RichTextBoxEx_Script.Text);
+            var res = false;
+            if (!loadingBehavior)
+            {
+                res = BuildScriptWithString(curBehav, RichTextBoxEx_Script.Text);
+                if (res) curBehav.ParseScript();
+            }
+            return res;
         }
 
         private void RemoveBehavior(Behavior behav)
@@ -316,7 +334,7 @@ namespace SM64_ROM_Manager
         private void AddNewBehavior(BehaviorCreationTypes type)
         {
             // Create behavior
-            var behav = new Behavior();
+            var behav = new Behavior(type);
             bank.Behaviors.Add(behav);
 
             // Create Node

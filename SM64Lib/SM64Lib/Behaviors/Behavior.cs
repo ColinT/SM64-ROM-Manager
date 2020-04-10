@@ -16,13 +16,13 @@ namespace SM64Lib.Behaviors
         public bool EnableCollisionPointer { get; set; }
         public List<int> BehaviorAddressDestinations { get; set; } = new List<int>();
 
-        public Behavior()
+        public Behavior() : this(new BehaviorConfig())
         {
-            CreateNewBehaviorscript();
         }
 
-        public Behavior(BehaviorConfig config) : this()
+        public Behavior(BehaviorConfig config)
         {
+            CreateNewBehaviorscript();
             Config = config;
         }
 
@@ -45,6 +45,8 @@ namespace SM64Lib.Behaviors
                     Script.Add(new BehaviorscriptCommand("09 00 00 00"));
                     break;
             }
+
+            ParseScript();
         }
 
         private void CreateNewBehaviorscript()
@@ -87,7 +89,7 @@ namespace SM64Lib.Behaviors
             {
                 switch (cmd.CommandType)
                 {
-                    case BehaviorscriptCommandTypes.x2E_SetHurtbox:
+                    case BehaviorscriptCommandTypes.x2A_SetCollision:
                         CollisionPointer = BehaviorscriptCommandFunctions.X2E.GetCollisionPointer(cmd);
                         EnableCollisionPointer = true;
                         break;
@@ -95,7 +97,7 @@ namespace SM64Lib.Behaviors
             }
         }
 
-        private void TakeoverSettingsToScript()
+        public void TakeoverSettingsToScript()
         {
             // Update collision pointer
             AddUpdateRemoveCmd(
