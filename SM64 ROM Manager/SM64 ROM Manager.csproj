@@ -816,6 +816,9 @@
     <EmbeddedResource Include="RomManager\GUI\Other\ThankYouForm.resx">
       <DependentUpon>ThankYouForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="RomManager\GUI\Tools\BehaviorBankManager.de.resx">
+      <DependentUpon>BehaviorBankManager.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="RomManager\GUI\Tools\BehaviorBankManager.resx">
       <DependentUpon>BehaviorBankManager.cs</DependentUpon>
     </EmbeddedResource>

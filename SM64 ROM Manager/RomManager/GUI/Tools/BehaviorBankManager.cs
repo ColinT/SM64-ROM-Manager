@@ -37,18 +37,26 @@ namespace SM64_ROM_Manager
 
         // C o n s t r u c t o r
 
-        public BehaviorBankManager(BehaviorBank bank)
+        public BehaviorBankManager(BehaviorBank bank, RomManager rommgr)
         {
             this.bank = bank;
+            
+            // Add rom manager events
+            if (rommgr is object)
+                rommgr.AfterRomSave += Rommgr_AfterRomSave;
 
+            // Load behavior infos
             General.LoadBehaviorInfosIfEmpty();
 
+            // Components
             InitializeComponent();
             UpdateAmbientColors();
             StyleManager.UpdateAmbientColors(RichTextBoxEx_Script);
 
+            // Default Nodes
             AdvTree_Behaviors.Nodes.AddRange(new[] { nBehavVanilla, nBehavCustom });
 
+            // Props-Timer
             Timer_PropsChanged = new Timer(1000) { SynchronizingObject = this, AutoReset = false };
             Timer_PropsChanged.Elapsed += Timer_PropsChanged_Elapsed;
         }
@@ -63,6 +71,13 @@ namespace SM64_ROM_Manager
         private bool IsEditProps
         {
             get => TabControl_Behav.SelectedTab == TabItem_BehavProps;
+        }
+
+        // R o m M a n a g e r   E v e n t s
+
+        private void Rommgr_AfterRomSave(RomManager sender, EventArgs e)
+        {
+            LoadBehaviors(false);
         }
 
         // T i m e r   E v e n t s
@@ -298,6 +313,19 @@ namespace SM64_ROM_Manager
             
         }
 
+        private void AddNewBehavior(BehaviorCreationTypes type)
+        {
+            // Create behavior
+            var behav = new Behavior();
+            bank.Behaviors.Add(behav);
+
+            // Create Node
+            var n = GetNode(behav);
+            nBehavCustom.Nodes.Add(n);
+            n.EnsureVisible();
+            AdvTree_Behaviors.SelectedNode = n;
+        }
+
         // G U I
 
         private void BehaviorBankManager_Shown(object sender, EventArgs e)
@@ -351,15 +379,25 @@ namespace SM64_ROM_Manager
             SaveBehaviorProps();
         }
 
-        private void ButtonItem_AddBehav_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void ButtonItem_RemoveBehav_Click(object sender, EventArgs e)
         {
             if (curBehav is object && !curBehav.Config.IsVanilla && MessageBoxEx.Show(this, BehaviorBankManagerLangRes.Msg_RemoveBehavior, BehaviorBankManagerLangRes.Msg_RemoveBehaviorTitel, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 RemoveBehavior(curBehav);
+        }
+
+        private void ButtonItem_NewBehav_SolidObject_Click(object sender, EventArgs e)
+        {
+            AddNewBehavior(BehaviorCreationTypes.SolidObject);
+        }
+
+        private void RichTextBoxEx_Script_GotFocus(object sender, EventArgs e)
+        {
+            ButtonX_SaveScript.Shortcuts.Add(eShortcut.CtrlS);
+        }
+
+        private void RichTextBoxEx_Script_LostFocus(object sender, EventArgs e)
+        {
+            ButtonX_SaveScript.Shortcuts.Remove(eShortcut.CtrlS);
         }
     }
 }

@@ -733,7 +733,7 @@ namespace SM64_ROM_Manager
         {
             if (RomManager?.GlobalBehaviorBank is object)
             {
-                var mgr = new BehaviorBankManager(RomManager);
+                var mgr = new BehaviorBankManager(RomManager.GlobalBehaviorBank, RomManager);
                 mgr.Show();
             }
         }

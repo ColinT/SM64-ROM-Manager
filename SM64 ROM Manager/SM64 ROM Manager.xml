@@ -677,6 +677,16 @@
               Sucht eine lokalisierte Zeichenfolge, die Error at compiling script ähnelt.
             </summary>
         </member>
+        <member name="P:SM64_ROM_Manager.My.Resources.BehaviorBankManagerLangRes.Msg_RemoveBehavior">
+            <summary>
+              Sucht eine lokalisierte Zeichenfolge, die Sure that you want to remove this behavior? ähnelt.
+            </summary>
+        </member>
+        <member name="P:SM64_ROM_Manager.My.Resources.BehaviorBankManagerLangRes.Msg_RemoveBehaviorTitel">
+            <summary>
+              Sucht eine lokalisierte Zeichenfolge, die Remove Behavior ähnelt.
+            </summary>
+        </member>
         <member name="T:SM64_ROM_Manager.My.Resources.LangResCoinsManager">
             <summary>
               Eine stark typisierte Ressourcenklasse zum Suchen von lokalisierten Zeichenfolgen usw.
