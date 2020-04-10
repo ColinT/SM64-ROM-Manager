@@ -70,7 +70,7 @@ namespace SM64Lib.Behaviors
         
         public void Write(BinaryData data, int address)
         {
-            if (!Config.IsVanilla)
+            //if (!Config.IsVanilla)
                 TakeoverSettingsToScript();
 
             var length = Script.Write(data, address);
