@@ -195,6 +195,9 @@
     <Compile Include="SM64Lib\Model\FogPreset.cs" />
     <Compile Include="SM64Lib\Objects\ObjectBanks\CustomObject.cs" />
     <Compile Include="SM64Lib\Objects\ObjectBanks\CustomObjectCollection.cs" />
+    <Compile Include="SM64Lib\Objects\ObjectBanks\CustomObjectBehaviorProps.cs" />
+    <Compile Include="SM64Lib\Objects\ObjectBanks\CustomObjectExport.cs" />
+    <Compile Include="SM64Lib\Objects\ObjectBanks\CustomObjectModelProps.cs" />
     <Compile Include="SM64Lib\Objects\ObjectBanks\Data\ObjectBankDataCommand.cs" />
     <Compile Include="SM64Lib\Objects\ObjectBanks\Data\ObjectBankDataList.cs" />
     <Compile Include="SM64Lib\Objects\ObjectBanks\Data\ObjectBankDataListCollection.cs" />
@@ -204,7 +207,7 @@
     <Compile Include="SM64Lib\Model\Conversion\Fast3DWriting\DisplaylistProps.cs" />
     <Compile Include="SM64Lib\Model\Conversion\Fast3DParsing\TextureLoadedInfos.cs" />
     <Compile Include="SM64Lib\NPCs\CoinsManager.cs" />
-    <Compile Include="SM64Lib\Objects\ObjectBanks\CustomModel.cs" />
+    <Compile Include="SM64Lib\Objects\ModelBanks\CustomModel.cs" />
     <Compile Include="SM64Lib\Objects\StarNames.cs" />
     <Compile Include="SM64Lib\Model\ObjectInputSettings.cs" />
     <Compile Include="SM64Lib\RomManagerSettings.cs" />
@@ -244,7 +247,7 @@
     <Compile Include="SM64Lib\Music\MusicList.cs" />
     <Compile Include="SM64Lib\Music\MusicSequence.cs" />
     <Compile Include="SM64Lib\Music\InstrumentSetList.cs" />
-    <Compile Include="SM64Lib\Objects\ObjectBanks\CustomModelBank.cs" />
+    <Compile Include="SM64Lib\Objects\ModelBanks\CustomModelBank.cs" />
     <Compile Include="SM64Lib\Objects\ItemBoxContents\ItemBoxContentEntry.cs" />
     <Compile Include="SM64Lib\Objects\ItemBoxContents\ItemBoxContentManager.cs" />
     <Compile Include="SM64Lib\Objects\ItemBoxContents\ItemBoxContentTable.cs" />

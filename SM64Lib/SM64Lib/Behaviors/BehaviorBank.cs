@@ -173,5 +173,10 @@ namespace SM64Lib.Behaviors
                 }
             }
         }
+
+        public Behavior GetBehaviorByBankAddress(int bankAddress)
+        {
+            return Behaviors.FirstOrDefault(n => n.Config.BankAddress == bankAddress);
+        }
     }
 }

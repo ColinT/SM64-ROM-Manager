@@ -17,6 +17,7 @@ using global::SM64Lib.Music;
 using global::SM64Lib.Objects.ModelBanks;
 using global::SM64Lib.SegmentedBanking;
 using SM64Lib.Behaviors;
+using SM64Lib.Objects.ObjectBanks;
 
 namespace SM64Lib
 {
@@ -58,6 +59,8 @@ namespace SM64Lib
         public ILevelManager LevelManager { get; private set; }
         public RomConfig RomConfig { get; private set; }
         public bool IsNewROM { get; private set; } = false;
+        public CustomObjectCollection CustomObjects { get => RomConfig.GlobalObjectBank; }
+        public Text.TextGroup[] TextGroups { get => myTextGroups.ToArray(); }
 
         /// <summary>
         /// Gets or sets the lastly used program version for this ROM.
@@ -110,25 +113,11 @@ namespace SM64Lib
             }
         }
 
-        public Text.TextGroup[] TextGroups
-        {
-            get
-            {
-                return myTextGroups.ToArray();
-            }
-        }
-
         /// <summary>
         /// Gets if the current ROM has an user created global object bank.
         /// </summary>
         /// <returns></returns>
-        public bool HasGlobalObjectBank
-        {
-            get
-            {
-                return GlobalModelBank is object;
-            }
-        }
+        public bool HasGlobalObjectBank { get => GlobalModelBank is object; }
 
         // C o n s t r u c t o r s
 
@@ -311,6 +300,9 @@ namespace SM64Lib
                 // Global Model Bank
                 SaveGlobalModelBank(ref lastpos);
                 General.HexRoundUp2(ref lastpos);
+
+                // Custom Object Combos
+                CustomObjects.TakeoverProperties(this);
 
                 // Global Behavior Bank
                 SaveGlobalBehaviorBank(ref lastpos);
@@ -589,7 +581,7 @@ namespace SM64Lib
 
                 // Load Object Bank
                 GlobalModelBank = new CustomModelBank();
-                GlobalModelBank.ReadFromSeg(this, seg, RomConfig.GlobalObjectBankConfig);
+                GlobalModelBank.ReadFromSeg(this, seg, RomConfig.GlobalModelBank);
             }
             else
             {
@@ -657,10 +649,6 @@ namespace SM64Lib
             };
             seg.ReadData(rom.BaseStream);
             rom.Close();
-
-            // Create new Config
-            if (RomConfig.GlobalBehaviorBank == null)
-                RomConfig.GlobalBehaviorBank = new BehaviorBankConfig();
 
             // Read Behavior Bank
             GlobalBehaviorBank = new BehaviorBank(RomConfig.GlobalBehaviorBank);

@@ -4,16 +4,19 @@ using Microsoft.VisualBasic.CompilerServices;
 using global::Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using SM64Lib.Behaviors;
+using SM64Lib.Objects.ObjectBanks;
 
 namespace SM64Lib.Configuration
 {
     public class RomConfig
     {
         public Dictionary<byte, LevelConfig> LevelConfigs { get; private set; } = new Dictionary<byte, LevelConfig>();
-        public ObjectModelConfig GlobalObjectBankConfig { get; private set; } = new ObjectModelConfig();
-        public BehaviorBankConfig GlobalBehaviorBank { get; set; } = new BehaviorBankConfig();
         public MusicConfiguration MusicConfig { get; private set; } = new MusicConfiguration();
         public string SelectedTextProfileInfo { get; set; } = string.Empty;
+        [JsonProperty("GlobalObjectBankConfig")]
+        public ObjectModelConfig GlobalModelBank { get; private set; } = new ObjectModelConfig();
+        public BehaviorBankConfig GlobalBehaviorBank { get; private set; } = new BehaviorBankConfig();
+        public CustomObjectCollection GlobalObjectBank { get; private set; } = new CustomObjectCollection();
 
         public LevelConfig GetLevelConfig(ushort levelID)
         {
