@@ -15,6 +15,7 @@ using SM64Lib;
 using SM64Lib.Behaviors;
 using SM64Lib.Behaviors.Script;
 using SM64Lib.Data;
+using Z.Collections.Extensions;
 using static SM64Lib.TextValueConverter.TextValueConverter;
 using Timer = System.Timers.Timer;
 
@@ -29,16 +30,16 @@ namespace SM64_ROM_Manager
 
         // F i e l d s
 
-        private RomManager rommgr;
+        private BehaviorBank bank;
         private Behavior curBehav = null;
         private bool loadingBehavior = false;
         private Timer Timer_PropsChanged;
 
         // C o n s t r u c t o r
 
-        public BehaviorBankManager(RomManager rommgr)
+        public BehaviorBankManager(BehaviorBank bank)
         {
-            this.rommgr = rommgr;
+            this.bank = bank;
 
             General.LoadBehaviorInfosIfEmpty();
 
@@ -83,7 +84,7 @@ namespace SM64_ROM_Manager
                 AdvTree_Behaviors.BeginUpdate();
                 nodes.Clear();
 
-                foreach (var behav in rommgr.GlobalBehaviorBank.Behaviors)
+                foreach (var behav in bank.Behaviors)
                 {
                     if (behav.Config.IsVanilla == vanilla)
                         nodes.Add(GetNode(behav));
@@ -123,7 +124,7 @@ namespace SM64_ROM_Manager
             return n;
         }
 
-        private void UpdateNode(Behavior behav)
+        private Node FindNode(Behavior behav)
         {
             Node n = null;
             NodeCollection nodes = GetNodeCollection(behav.Config.IsVanilla);
@@ -137,7 +138,14 @@ namespace SM64_ROM_Manager
                 }
             }
 
-            UpdateNode(n);
+            return n;
+        }
+
+        private void UpdateNode(Behavior behav)
+        {
+            Node n = FindNode(behav);
+            if (n is object)
+                UpdateNode(n);
         }
 
         private void UpdateNode(Node n)
@@ -188,6 +196,9 @@ namespace SM64_ROM_Manager
                 {
                     RichTextBoxEx_Script.Text = GetScriptAsString(curBehav.Script);
                 }
+
+                ButtonItem_RemoveBehav.Enabled = !curBehav.Config.IsVanilla;
+                bar1.Refresh();
 
                 loadingBehavior = false;
             }
@@ -273,6 +284,20 @@ namespace SM64_ROM_Manager
             return BuildScriptWithString(curBehav, RichTextBoxEx_Script.Text);
         }
 
+        private void RemoveBehavior(Behavior behav)
+        {
+            Node n = FindNode(behav);
+
+            if (n is object)
+            {
+                n.Remove();
+                bank.Behaviors.RemoveIfContains(behav);
+                if (curBehav == behav) curBehav = null;
+            }
+
+            
+        }
+
         // G U I
 
         private void BehaviorBankManager_Shown(object sender, EventArgs e)
@@ -324,6 +349,17 @@ namespace SM64_ROM_Manager
         private void TextBoxX_BehavName_TextChanged(object sender, EventArgs e)
         {
             SaveBehaviorProps();
+        }
+
+        private void ButtonItem_AddBehav_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ButtonItem_RemoveBehav_Click(object sender, EventArgs e)
+        {
+            if (curBehav is object && !curBehav.Config.IsVanilla && MessageBoxEx.Show(this, BehaviorBankManagerLangRes.Msg_RemoveBehavior, BehaviorBankManagerLangRes.Msg_RemoveBehaviorTitel, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                RemoveBehavior(curBehav);
         }
     }
 }

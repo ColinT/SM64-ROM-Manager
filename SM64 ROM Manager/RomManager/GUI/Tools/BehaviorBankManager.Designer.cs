@@ -92,6 +92,7 @@ namespace SM64_ROM_Manager
             this.ButtonItem_AddBehav.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_plus_math_16px;
             this.ButtonItem_AddBehav.Name = "ButtonItem_AddBehav";
             this.ButtonItem_AddBehav.Text = "Add Behavior";
+            this.ButtonItem_AddBehav.Click += new System.EventHandler(this.ButtonItem_AddBehav_Click);
             // 
             // ButtonItem_RemoveBehav
             // 
@@ -99,6 +100,7 @@ namespace SM64_ROM_Manager
             this.ButtonItem_RemoveBehav.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_delete_sign_16px;
             this.ButtonItem_RemoveBehav.Name = "ButtonItem_RemoveBehav";
             this.ButtonItem_RemoveBehav.Text = "Remove Behavior";
+            this.ButtonItem_RemoveBehav.Click += new System.EventHandler(this.ButtonItem_RemoveBehav_Click);
             // 
             // AdvTree_Behaviors
             // 

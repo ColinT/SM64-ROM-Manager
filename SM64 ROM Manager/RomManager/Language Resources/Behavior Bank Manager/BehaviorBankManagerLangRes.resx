@@ -126,4 +126,10 @@
   <data name="Msg_ErrorCompilingScriptTitel" xml:space="preserve">
     <value>Error at compiling script</value>
   </data>
+  <data name="Msg_RemoveBehavior" xml:space="preserve">
+    <value>Sure that you want to remove this behavior?</value>
+  </data>
+  <data name="Msg_RemoveBehaviorTitel" xml:space="preserve">
+    <value>Remove Behavior</value>
+  </data>
 </root>

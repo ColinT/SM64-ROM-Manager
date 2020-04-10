@@ -81,5 +81,23 @@ namespace SM64_ROM_Manager.My.Resources {
                 return ResourceManager.GetString("Msg_ErrorCompilingScriptTitel", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Sure that you want to remove this behavior? ähnelt.
+        /// </summary>
+        internal static string Msg_RemoveBehavior {
+            get {
+                return ResourceManager.GetString("Msg_RemoveBehavior", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Remove Behavior ähnelt.
+        /// </summary>
+        internal static string Msg_RemoveBehaviorTitel {
+            get {
+                return ResourceManager.GetString("Msg_RemoveBehaviorTitel", resourceCulture);
+            }
+        }
     }
 }
