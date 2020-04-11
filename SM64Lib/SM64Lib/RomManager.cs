@@ -164,7 +164,10 @@ namespace SM64Lib
             if (request.Model == null)
             {
                 foreach (var lvl in Levels)
-                    checkModelBank(lvl.LocalObjectBank);
+                {
+                    if (lvl.LocalObjectBank is object)
+                        checkModelBank(lvl.LocalObjectBank);
+                }
             }
 
             void checkModelBank(CustomModelBank bank)
