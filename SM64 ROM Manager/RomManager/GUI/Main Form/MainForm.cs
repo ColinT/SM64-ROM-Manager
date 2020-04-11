@@ -702,5 +702,10 @@ namespace SM64_ROM_Manager
         {
             Controller.OpenGlobalBehaviorManager();
         }
+
+        private void ButtonItem_CustomObjects_Click(object sender, EventArgs e)
+        {
+            Controller.OpenCustomObjectsManager();
+        }
     }
 }

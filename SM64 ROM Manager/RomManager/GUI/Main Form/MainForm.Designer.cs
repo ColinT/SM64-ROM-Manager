@@ -55,53 +55,54 @@ namespace SM64_ROM_Manager
             this.TabItem_LevelManager = new DevComponents.DotNetBar.TabItem(this.components);
             this.Bar2 = new DevComponents.DotNetBar.Bar();
             this.ButtonItem2 = new DevComponents.DotNetBar.ButtonItem();
-            this.ButtonItem3 = new DevComponents.DotNetBar.ButtonItem();
-            this.ButtonItem_SaveRom = new DevComponents.DotNetBar.ButtonItem();
-            this.ButtonItem_LaunchROM = new DevComponents.DotNetBar.ButtonItem();
-            this.ButtonItem6 = new DevComponents.DotNetBar.ButtonItem();
             this.ButtonItem7 = new DevComponents.DotNetBar.ButtonItem();
             this.LabelItem2 = new DevComponents.DotNetBar.LabelItem();
-            this.ButtonItem8 = new DevComponents.DotNetBar.ButtonItem();
-            this.ButtonItem10 = new DevComponents.DotNetBar.ButtonItem();
-            this.ButtonItem11 = new DevComponents.DotNetBar.ButtonItem();
             this.LabelItem3 = new DevComponents.DotNetBar.LabelItem();
             this.ButtonItem_ModelImporter = new DevComponents.DotNetBar.ButtonItem();
-            this.ButtonItem17 = new DevComponents.DotNetBar.ButtonItem();
-            this.ButtonItem_TrajectoryEditor = new DevComponents.DotNetBar.ButtonItem();
-            this.ButtonItem14 = new DevComponents.DotNetBar.ButtonItem();
-            this.ButtonItem13 = new DevComponents.DotNetBar.ButtonItem();
-            this.ButtonItem15 = new DevComponents.DotNetBar.ButtonItem();
-            this.ButtonItem16 = new DevComponents.DotNetBar.ButtonItem();
-            this.ButtonItem18 = new DevComponents.DotNetBar.ButtonItem();
             this.ButtonItem_HudOptions = new DevComponents.DotNetBar.ButtonItem();
+            this.ButtonItem_CustomObjects = new DevComponents.DotNetBar.ButtonItem();
             this.ButtonItem22 = new DevComponents.DotNetBar.ButtonItem();
-            this.ButtonItem1 = new DevComponents.DotNetBar.ButtonItem();
-            this.ButtonItem9 = new DevComponents.DotNetBar.ButtonItem();
-            this.ButtonItem_M64ToMidiConverter = new DevComponents.DotNetBar.ButtonItem();
             this.ButtonItem12 = new DevComponents.DotNetBar.ButtonItem();
             this.ButtonItem23 = new DevComponents.DotNetBar.ButtonItem();
             this.ButtonItem_Bar_Plugins = new DevComponents.DotNetBar.ButtonItem();
-            this.ButtonItem20 = new DevComponents.DotNetBar.ButtonItem();
             this.ButtonItem558 = new DevComponents.DotNetBar.ButtonItem();
-            this.ButtonItem25 = new DevComponents.DotNetBar.ButtonItem();
-            this.ButtonItem5 = new DevComponents.DotNetBar.ButtonItem();
             this.ButtonItem19 = new DevComponents.DotNetBar.ButtonItem();
             this.ButtonItem4 = new DevComponents.DotNetBar.ButtonItem();
             this.ButtonItem_Bar_EnableExpertMode = new DevComponents.DotNetBar.ButtonItem();
-            this.ButtonItem27 = new DevComponents.DotNetBar.ButtonItem();
-            this.ButtonItem28 = new DevComponents.DotNetBar.ButtonItem();
-            this.ButtonItem29 = new DevComponents.DotNetBar.ButtonItem();
             this.ButtonItem24 = new DevComponents.DotNetBar.ButtonItem();
             this.ButtonItem_BugReport = new DevComponents.DotNetBar.ButtonItem();
             this.ButtonItem_FeatureRequest = new DevComponents.DotNetBar.ButtonItem();
             this.ButtonItem21 = new DevComponents.DotNetBar.ButtonItem();
             this.ButtonItem_Supporter = new DevComponents.DotNetBar.ButtonItem();
-            this.ButtonItem30 = new DevComponents.DotNetBar.ButtonItem();
             this.Bar1 = new DevComponents.DotNetBar.Bar();
             this.LabelItem1 = new DevComponents.DotNetBar.LabelItem();
             this.LabelItem_OtherInfoText = new DevComponents.DotNetBar.LabelItem();
             this.RibbonControl1 = new DevComponents.DotNetBar.RibbonControl();
+            this.ButtonItem14 = new DevComponents.DotNetBar.ButtonItem();
+            this.ButtonItem18 = new DevComponents.DotNetBar.ButtonItem();
             this.ButtonItem_GlobalBehaviorBank = new DevComponents.DotNetBar.ButtonItem();
+            this.ButtonItem3 = new DevComponents.DotNetBar.ButtonItem();
+            this.ButtonItem_SaveRom = new DevComponents.DotNetBar.ButtonItem();
+            this.ButtonItem_LaunchROM = new DevComponents.DotNetBar.ButtonItem();
+            this.ButtonItem6 = new DevComponents.DotNetBar.ButtonItem();
+            this.ButtonItem8 = new DevComponents.DotNetBar.ButtonItem();
+            this.ButtonItem10 = new DevComponents.DotNetBar.ButtonItem();
+            this.ButtonItem11 = new DevComponents.DotNetBar.ButtonItem();
+            this.ButtonItem17 = new DevComponents.DotNetBar.ButtonItem();
+            this.ButtonItem_TrajectoryEditor = new DevComponents.DotNetBar.ButtonItem();
+            this.ButtonItem13 = new DevComponents.DotNetBar.ButtonItem();
+            this.ButtonItem15 = new DevComponents.DotNetBar.ButtonItem();
+            this.ButtonItem16 = new DevComponents.DotNetBar.ButtonItem();
+            this.ButtonItem1 = new DevComponents.DotNetBar.ButtonItem();
+            this.ButtonItem9 = new DevComponents.DotNetBar.ButtonItem();
+            this.ButtonItem_M64ToMidiConverter = new DevComponents.DotNetBar.ButtonItem();
+            this.ButtonItem20 = new DevComponents.DotNetBar.ButtonItem();
+            this.ButtonItem25 = new DevComponents.DotNetBar.ButtonItem();
+            this.ButtonItem5 = new DevComponents.DotNetBar.ButtonItem();
+            this.ButtonItem27 = new DevComponents.DotNetBar.ButtonItem();
+            this.ButtonItem28 = new DevComponents.DotNetBar.ButtonItem();
+            this.ButtonItem29 = new DevComponents.DotNetBar.ButtonItem();
+            this.ButtonItem30 = new DevComponents.DotNetBar.ButtonItem();
             this.Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TabControl1)).BeginInit();
             this.TabControl1.SuspendLayout();
@@ -150,10 +151,9 @@ namespace SM64_ROM_Manager
             this.TabControlPanel1.DisabledBackColor = System.Drawing.Color.Empty;
             resources.ApplyResources(this.TabControlPanel1, "TabControlPanel1");
             this.TabControlPanel1.Name = "TabControlPanel1";
-            this.TabControlPanel1.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(239)))), ((int)(((byte)(255)))));
-            this.TabControlPanel1.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
+            this.TabControlPanel1.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.TabControlPanel1.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
-            this.TabControlPanel1.Style.BorderColor.Color = System.Drawing.Color.FromArgb(((int)(((byte)(146)))), ((int)(((byte)(165)))), ((int)(((byte)(199)))));
+            this.TabControlPanel1.Style.BorderColor.Color = System.Drawing.Color.FromArgb(((int)(((byte)(211)))), ((int)(((byte)(211)))), ((int)(((byte)(211)))));
             this.TabControlPanel1.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right) 
             | DevComponents.DotNetBar.eBorderSide.Bottom)));
             this.TabControlPanel1.Style.GradientAngle = 90;
@@ -178,10 +178,9 @@ namespace SM64_ROM_Manager
             this.TabControlPanel4.DisabledBackColor = System.Drawing.Color.Empty;
             resources.ApplyResources(this.TabControlPanel4, "TabControlPanel4");
             this.TabControlPanel4.Name = "TabControlPanel4";
-            this.TabControlPanel4.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(239)))), ((int)(((byte)(255)))));
-            this.TabControlPanel4.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
+            this.TabControlPanel4.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.TabControlPanel4.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
-            this.TabControlPanel4.Style.BorderColor.Color = System.Drawing.Color.FromArgb(((int)(((byte)(146)))), ((int)(((byte)(165)))), ((int)(((byte)(199)))));
+            this.TabControlPanel4.Style.BorderColor.Color = System.Drawing.Color.FromArgb(((int)(((byte)(211)))), ((int)(((byte)(211)))), ((int)(((byte)(211)))));
             this.TabControlPanel4.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right) 
             | DevComponents.DotNetBar.eBorderSide.Bottom)));
             this.TabControlPanel4.Style.GradientAngle = 90;
@@ -206,10 +205,9 @@ namespace SM64_ROM_Manager
             this.TabControlPanel3.DisabledBackColor = System.Drawing.Color.Empty;
             resources.ApplyResources(this.TabControlPanel3, "TabControlPanel3");
             this.TabControlPanel3.Name = "TabControlPanel3";
-            this.TabControlPanel3.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(239)))), ((int)(((byte)(255)))));
-            this.TabControlPanel3.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
+            this.TabControlPanel3.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.TabControlPanel3.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
-            this.TabControlPanel3.Style.BorderColor.Color = System.Drawing.Color.FromArgb(((int)(((byte)(146)))), ((int)(((byte)(165)))), ((int)(((byte)(199)))));
+            this.TabControlPanel3.Style.BorderColor.Color = System.Drawing.Color.FromArgb(((int)(((byte)(211)))), ((int)(((byte)(211)))), ((int)(((byte)(211)))));
             this.TabControlPanel3.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right) 
             | DevComponents.DotNetBar.eBorderSide.Bottom)));
             this.TabControlPanel3.Style.GradientAngle = 90;
@@ -234,10 +232,9 @@ namespace SM64_ROM_Manager
             this.TabControlPanel2.DisabledBackColor = System.Drawing.Color.Empty;
             resources.ApplyResources(this.TabControlPanel2, "TabControlPanel2");
             this.TabControlPanel2.Name = "TabControlPanel2";
-            this.TabControlPanel2.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(239)))), ((int)(((byte)(255)))));
-            this.TabControlPanel2.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
+            this.TabControlPanel2.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.TabControlPanel2.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
-            this.TabControlPanel2.Style.BorderColor.Color = System.Drawing.Color.FromArgb(((int)(((byte)(146)))), ((int)(((byte)(165)))), ((int)(((byte)(199)))));
+            this.TabControlPanel2.Style.BorderColor.Color = System.Drawing.Color.FromArgb(((int)(((byte)(211)))), ((int)(((byte)(211)))), ((int)(((byte)(211)))));
             this.TabControlPanel2.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right) 
             | DevComponents.DotNetBar.eBorderSide.Bottom)));
             this.TabControlPanel2.Style.GradientAngle = 90;
@@ -287,48 +284,6 @@ namespace SM64_ROM_Manager
             this.ButtonItem6});
             resources.ApplyResources(this.ButtonItem2, "ButtonItem2");
             // 
-            // ButtonItem3
-            // 
-            this.ButtonItem3.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_open_folder_16px;
-            this.ButtonItem3.Name = "ButtonItem3";
-            this.ButtonItem3.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlO);
-            this.ButtonItem3.SymbolColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(172)))), ((int)(((byte)(106)))));
-            this.ButtonItem3.SymbolSet = DevComponents.DotNetBar.eSymbolSet.Material;
-            this.ButtonItem3.SymbolSize = 12F;
-            resources.ApplyResources(this.ButtonItem3, "ButtonItem3");
-            this.ButtonItem3.Click += new System.EventHandler(this.MenuItem_OpenROM_Click);
-            // 
-            // ButtonItem_SaveRom
-            // 
-            this.ButtonItem_SaveRom.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_save_16px;
-            this.ButtonItem_SaveRom.Name = "ButtonItem_SaveRom";
-            this.ButtonItem_SaveRom.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlS);
-            this.ButtonItem_SaveRom.SymbolColor = System.Drawing.Color.FromArgb(((int)(((byte)(82)))), ((int)(((byte)(124)))), ((int)(((byte)(64)))));
-            this.ButtonItem_SaveRom.SymbolSet = DevComponents.DotNetBar.eSymbolSet.Material;
-            this.ButtonItem_SaveRom.SymbolSize = 12F;
-            resources.ApplyResources(this.ButtonItem_SaveRom, "ButtonItem_SaveRom");
-            this.ButtonItem_SaveRom.Click += new System.EventHandler(this.ButtonItem12_Click);
-            // 
-            // ButtonItem_LaunchROM
-            // 
-            this.ButtonItem_LaunchROM.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_controller_16px;
-            this.ButtonItem_LaunchROM.Name = "ButtonItem_LaunchROM";
-            this.ButtonItem_LaunchROM.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.F5);
-            this.ButtonItem_LaunchROM.SymbolSize = 12F;
-            resources.ApplyResources(this.ButtonItem_LaunchROM, "ButtonItem_LaunchROM");
-            this.ButtonItem_LaunchROM.Click += new System.EventHandler(this.MenuItem_LaunchROM_Click);
-            // 
-            // ButtonItem6
-            // 
-            resources.ApplyResources(this.ButtonItem6, "ButtonItem6");
-            this.ButtonItem6.BeginGroup = true;
-            this.ButtonItem6.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_cancel_16px;
-            this.ButtonItem6.Name = "ButtonItem6";
-            this.ButtonItem6.SymbolColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.ButtonItem6.SymbolSet = DevComponents.DotNetBar.eSymbolSet.Material;
-            this.ButtonItem6.SymbolSize = 12F;
-            this.ButtonItem6.Click += new System.EventHandler(this.MenuItem11_Click);
-            // 
             // ButtonItem7
             // 
             this.ButtonItem7.BeginGroup = true;
@@ -347,6 +302,7 @@ namespace SM64_ROM_Manager
             this.ButtonItem15,
             this.ButtonItem16,
             this.ButtonItem_HudOptions,
+            this.ButtonItem_CustomObjects,
             this.ButtonItem18,
             this.ButtonItem_GlobalBehaviorBank});
             resources.ApplyResources(this.ButtonItem7, "ButtonItem7");
@@ -361,27 +317,6 @@ namespace SM64_ROM_Manager
             this.LabelItem2.PaddingTop = 1;
             this.LabelItem2.SingleLineColor = System.Drawing.Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(197)))), ((int)(((byte)(197)))));
             resources.ApplyResources(this.LabelItem2, "LabelItem2");
-            // 
-            // ButtonItem8
-            // 
-            this.ButtonItem8.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_map_16px;
-            this.ButtonItem8.Name = "ButtonItem8";
-            resources.ApplyResources(this.ButtonItem8, "ButtonItem8");
-            this.ButtonItem8.Click += new System.EventHandler(this.MenuItem20_Click);
-            // 
-            // ButtonItem10
-            // 
-            this.ButtonItem10.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_music_16px;
-            this.ButtonItem10.Name = "ButtonItem10";
-            resources.ApplyResources(this.ButtonItem10, "ButtonItem10");
-            this.ButtonItem10.Click += new System.EventHandler(this.MenuItem17_Click);
-            // 
-            // ButtonItem11
-            // 
-            this.ButtonItem11.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_text_16px;
-            this.ButtonItem11.Name = "ButtonItem11";
-            resources.ApplyResources(this.ButtonItem11, "ButtonItem11");
-            this.ButtonItem11.Click += new System.EventHandler(this.MenuItem16_Click);
             // 
             // LabelItem3
             // 
@@ -401,58 +336,19 @@ namespace SM64_ROM_Manager
             resources.ApplyResources(this.ButtonItem_ModelImporter, "ButtonItem_ModelImporter");
             this.ButtonItem_ModelImporter.Click += new System.EventHandler(this.ButtonItem_ModelImporter_Click);
             // 
-            // ButtonItem17
-            // 
-            this.ButtonItem17.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_pills_16px;
-            this.ButtonItem17.Name = "ButtonItem17";
-            resources.ApplyResources(this.ButtonItem17, "ButtonItem17");
-            this.ButtonItem17.Click += new System.EventHandler(this.ButtonItem17_Click);
-            // 
-            // ButtonItem_TrajectoryEditor
-            // 
-            this.ButtonItem_TrajectoryEditor.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_edit_node_16px;
-            this.ButtonItem_TrajectoryEditor.Name = "ButtonItem_TrajectoryEditor";
-            resources.ApplyResources(this.ButtonItem_TrajectoryEditor, "ButtonItem_TrajectoryEditor");
-            this.ButtonItem_TrajectoryEditor.Click += new System.EventHandler(this.ButtonItem_TrajectoryEditor_Click);
-            // 
-            // ButtonItem14
-            // 
-            this.ButtonItem14.Name = "ButtonItem14";
-            resources.ApplyResources(this.ButtonItem14, "ButtonItem14");
-            this.ButtonItem14.Click += new System.EventHandler(this.ButtonItem14_Click);
-            // 
-            // ButtonItem13
-            // 
-            this.ButtonItem13.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_filled_star_location_16px;
-            this.ButtonItem13.Name = "ButtonItem13";
-            resources.ApplyResources(this.ButtonItem13, "ButtonItem13");
-            this.ButtonItem13.Click += new System.EventHandler(this.ButtonItem13_Click);
-            // 
-            // ButtonItem15
-            // 
-            this.ButtonItem15.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_variation_16px;
-            this.ButtonItem15.Name = "ButtonItem15";
-            resources.ApplyResources(this.ButtonItem15, "ButtonItem15");
-            this.ButtonItem15.Click += new System.EventHandler(this.ButtonItem15_Click);
-            // 
-            // ButtonItem16
-            // 
-            this.ButtonItem16.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_coins_16px;
-            this.ButtonItem16.Name = "ButtonItem16";
-            resources.ApplyResources(this.ButtonItem16, "ButtonItem16");
-            this.ButtonItem16.Click += new System.EventHandler(this.ButtonItem16_Click);
-            // 
-            // ButtonItem18
-            // 
-            this.ButtonItem18.Name = "ButtonItem18";
-            resources.ApplyResources(this.ButtonItem18, "ButtonItem18");
-            this.ButtonItem18.Click += new System.EventHandler(this.ButtonItem18_Click);
-            // 
             // ButtonItem_HudOptions
             // 
+            this.ButtonItem_HudOptions.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_300_degrees_16px;
             this.ButtonItem_HudOptions.Name = "ButtonItem_HudOptions";
             resources.ApplyResources(this.ButtonItem_HudOptions, "ButtonItem_HudOptions");
             this.ButtonItem_HudOptions.Click += new System.EventHandler(this.ButtonItem_HudOptions_Click);
+            // 
+            // buttonItem26
+            // 
+            this.ButtonItem_CustomObjects.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_module_16px;
+            this.ButtonItem_CustomObjects.Name = "ButtonItem_CustomObjects";
+            resources.ApplyResources(this.ButtonItem_CustomObjects, "buttonItem26");
+            this.ButtonItem_CustomObjects.Click += new System.EventHandler(this.ButtonItem_CustomObjects_Click);
             // 
             // ButtonItem22
             // 
@@ -462,29 +358,6 @@ namespace SM64_ROM_Manager
             this.ButtonItem9,
             this.ButtonItem_M64ToMidiConverter});
             resources.ApplyResources(this.ButtonItem22, "ButtonItem22");
-            // 
-            // ButtonItem1
-            // 
-            this.ButtonItem1.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
-            this.ButtonItem1.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_text_16px;
-            this.ButtonItem1.Name = "ButtonItem1";
-            this.ButtonItem1.SymbolSize = 12F;
-            resources.ApplyResources(this.ButtonItem1, "ButtonItem1");
-            this.ButtonItem1.Click += new System.EventHandler(this.ButtonItem1_Click);
-            // 
-            // ButtonItem9
-            // 
-            this.ButtonItem9.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_syringe_16px;
-            this.ButtonItem9.Name = "ButtonItem9";
-            resources.ApplyResources(this.ButtonItem9, "ButtonItem9");
-            this.ButtonItem9.Click += new System.EventHandler(this.ButtonItem9_Click);
-            // 
-            // ButtonItem_M64ToMidiConverter
-            // 
-            this.ButtonItem_M64ToMidiConverter.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_music_16px;
-            this.ButtonItem_M64ToMidiConverter.Name = "ButtonItem_M64ToMidiConverter";
-            resources.ApplyResources(this.ButtonItem_M64ToMidiConverter, "ButtonItem_M64ToMidiConverter");
-            this.ButtonItem_M64ToMidiConverter.Click += new System.EventHandler(this.ButtonItem_M64ToMidiConverter_Click);
             // 
             // ButtonItem12
             // 
@@ -510,13 +383,6 @@ namespace SM64_ROM_Manager
             this.ButtonItem_Bar_Plugins.SymbolSize = 12F;
             resources.ApplyResources(this.ButtonItem_Bar_Plugins, "ButtonItem_Bar_Plugins");
             // 
-            // ButtonItem20
-            // 
-            this.ButtonItem20.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_plugin_16px;
-            this.ButtonItem20.Name = "ButtonItem20";
-            resources.ApplyResources(this.ButtonItem20, "ButtonItem20");
-            this.ButtonItem20.Click += new System.EventHandler(this.ButtonItem_Bar_Plugins_ManagePlugins_Click);
-            // 
             // ButtonItem558
             // 
             this.ButtonItem558.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
@@ -532,22 +398,6 @@ namespace SM64_ROM_Manager
             this.ButtonItem29});
             this.ButtonItem558.SymbolSize = 12F;
             resources.ApplyResources(this.ButtonItem558, "ButtonItem558");
-            // 
-            // ButtonItem25
-            // 
-            this.ButtonItem25.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_settings_16px;
-            this.ButtonItem25.Name = "ButtonItem25";
-            this.ButtonItem25.SymbolSize = 12F;
-            resources.ApplyResources(this.ButtonItem25, "ButtonItem25");
-            this.ButtonItem25.Click += new System.EventHandler(this.MenuItem_Settings_Click);
-            // 
-            // ButtonItem5
-            // 
-            this.ButtonItem5.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_color_dropper_16px;
-            this.ButtonItem5.Name = "ButtonItem5";
-            this.ButtonItem5.SymbolSize = 12F;
-            resources.ApplyResources(this.ButtonItem5, "ButtonItem5");
-            this.ButtonItem5.Click += new System.EventHandler(this.ButtonItem5_Click);
             // 
             // ButtonItem19
             // 
@@ -569,32 +419,6 @@ namespace SM64_ROM_Manager
             this.ButtonItem_Bar_EnableExpertMode.Name = "ButtonItem_Bar_EnableExpertMode";
             resources.ApplyResources(this.ButtonItem_Bar_EnableExpertMode, "ButtonItem_Bar_EnableExpertMode");
             this.ButtonItem_Bar_EnableExpertMode.Visible = false;
-            // 
-            // ButtonItem27
-            // 
-            this.ButtonItem27.BeginGroup = true;
-            this.ButtonItem27.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_help_16px;
-            this.ButtonItem27.Name = "ButtonItem27";
-            this.ButtonItem27.SymbolSet = DevComponents.DotNetBar.eSymbolSet.Material;
-            this.ButtonItem27.SymbolSize = 12F;
-            resources.ApplyResources(this.ButtonItem27, "ButtonItem27");
-            this.ButtonItem27.Visible = false;
-            // 
-            // ButtonItem28
-            // 
-            this.ButtonItem28.Image = ((System.Drawing.Image)(resources.GetObject("ButtonItem28.Image")));
-            this.ButtonItem28.Name = "ButtonItem28";
-            resources.ApplyResources(this.ButtonItem28, "ButtonItem28");
-            this.ButtonItem28.Visible = false;
-            // 
-            // ButtonItem29
-            // 
-            this.ButtonItem29.BeginGroup = true;
-            this.ButtonItem29.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_downloading_updates_16px;
-            this.ButtonItem29.Name = "ButtonItem29";
-            this.ButtonItem29.SymbolSize = 12F;
-            resources.ApplyResources(this.ButtonItem29, "ButtonItem29");
-            this.ButtonItem29.Click += new System.EventHandler(this.ButtonItem29_Click);
             // 
             // ButtonItem24
             // 
@@ -631,15 +455,6 @@ namespace SM64_ROM_Manager
             this.ButtonItem_Supporter.Name = "ButtonItem_Supporter";
             resources.ApplyResources(this.ButtonItem_Supporter, "ButtonItem_Supporter");
             this.ButtonItem_Supporter.Click += new System.EventHandler(this.ButtonItem_Supporter_Click);
-            // 
-            // ButtonItem30
-            // 
-            this.ButtonItem30.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_about_16px;
-            this.ButtonItem30.Name = "ButtonItem30";
-            this.ButtonItem30.SymbolSet = DevComponents.DotNetBar.eSymbolSet.Material;
-            this.ButtonItem30.SymbolSize = 12F;
-            resources.ApplyResources(this.ButtonItem30, "ButtonItem30");
-            this.ButtonItem30.Click += new System.EventHandler(this.MenuItem_About_Click);
             // 
             // Bar1
             // 
@@ -695,11 +510,205 @@ namespace SM64_ROM_Manager
             this.RibbonControl1.SystemText.QatRemoveItemText = resources.GetString("RibbonControl1.SystemText.QatRemoveItemText");
             this.RibbonControl1.TabGroupHeight = 14;
             // 
+            // ButtonItem14
+            // 
+            this.ButtonItem14.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_package_16px;
+            this.ButtonItem14.Name = "ButtonItem14";
+            resources.ApplyResources(this.ButtonItem14, "ButtonItem14");
+            this.ButtonItem14.Click += new System.EventHandler(this.ButtonItem14_Click);
+            // 
+            // ButtonItem18
+            // 
+            this.ButtonItem18.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_cube_16px;
+            this.ButtonItem18.Name = "ButtonItem18";
+            resources.ApplyResources(this.ButtonItem18, "ButtonItem18");
+            this.ButtonItem18.Click += new System.EventHandler(this.ButtonItem18_Click);
+            // 
             // ButtonItem_GlobalBehaviorBank
             // 
+            this.ButtonItem_GlobalBehaviorBank.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_static_view_level1_16px;
             this.ButtonItem_GlobalBehaviorBank.Name = "ButtonItem_GlobalBehaviorBank";
             resources.ApplyResources(this.ButtonItem_GlobalBehaviorBank, "ButtonItem_GlobalBehaviorBank");
             this.ButtonItem_GlobalBehaviorBank.Click += new System.EventHandler(this.ButtonItem_GlobalBehaviorBank_Click);
+            // 
+            // ButtonItem3
+            // 
+            this.ButtonItem3.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_open_folder_16px;
+            this.ButtonItem3.Name = "ButtonItem3";
+            this.ButtonItem3.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlO);
+            this.ButtonItem3.SymbolColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(172)))), ((int)(((byte)(106)))));
+            this.ButtonItem3.SymbolSet = DevComponents.DotNetBar.eSymbolSet.Material;
+            this.ButtonItem3.SymbolSize = 12F;
+            resources.ApplyResources(this.ButtonItem3, "ButtonItem3");
+            this.ButtonItem3.Click += new System.EventHandler(this.MenuItem_OpenROM_Click);
+            // 
+            // ButtonItem_SaveRom
+            // 
+            this.ButtonItem_SaveRom.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_save_16px;
+            this.ButtonItem_SaveRom.Name = "ButtonItem_SaveRom";
+            this.ButtonItem_SaveRom.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlS);
+            this.ButtonItem_SaveRom.SymbolColor = System.Drawing.Color.FromArgb(((int)(((byte)(82)))), ((int)(((byte)(124)))), ((int)(((byte)(64)))));
+            this.ButtonItem_SaveRom.SymbolSet = DevComponents.DotNetBar.eSymbolSet.Material;
+            this.ButtonItem_SaveRom.SymbolSize = 12F;
+            resources.ApplyResources(this.ButtonItem_SaveRom, "ButtonItem_SaveRom");
+            this.ButtonItem_SaveRom.Click += new System.EventHandler(this.ButtonItem12_Click);
+            // 
+            // ButtonItem_LaunchROM
+            // 
+            this.ButtonItem_LaunchROM.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_controller_16px;
+            this.ButtonItem_LaunchROM.Name = "ButtonItem_LaunchROM";
+            this.ButtonItem_LaunchROM.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.F5);
+            this.ButtonItem_LaunchROM.SymbolSize = 12F;
+            resources.ApplyResources(this.ButtonItem_LaunchROM, "ButtonItem_LaunchROM");
+            this.ButtonItem_LaunchROM.Click += new System.EventHandler(this.MenuItem_LaunchROM_Click);
+            // 
+            // ButtonItem6
+            // 
+            resources.ApplyResources(this.ButtonItem6, "ButtonItem6");
+            this.ButtonItem6.BeginGroup = true;
+            this.ButtonItem6.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_cancel_16px;
+            this.ButtonItem6.Name = "ButtonItem6";
+            this.ButtonItem6.SymbolColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.ButtonItem6.SymbolSet = DevComponents.DotNetBar.eSymbolSet.Material;
+            this.ButtonItem6.SymbolSize = 12F;
+            this.ButtonItem6.Click += new System.EventHandler(this.MenuItem11_Click);
+            // 
+            // ButtonItem8
+            // 
+            this.ButtonItem8.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_map_16px;
+            this.ButtonItem8.Name = "ButtonItem8";
+            resources.ApplyResources(this.ButtonItem8, "ButtonItem8");
+            this.ButtonItem8.Click += new System.EventHandler(this.MenuItem20_Click);
+            // 
+            // ButtonItem10
+            // 
+            this.ButtonItem10.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_music_16px;
+            this.ButtonItem10.Name = "ButtonItem10";
+            resources.ApplyResources(this.ButtonItem10, "ButtonItem10");
+            this.ButtonItem10.Click += new System.EventHandler(this.MenuItem17_Click);
+            // 
+            // ButtonItem11
+            // 
+            this.ButtonItem11.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_text_16px;
+            this.ButtonItem11.Name = "ButtonItem11";
+            resources.ApplyResources(this.ButtonItem11, "ButtonItem11");
+            this.ButtonItem11.Click += new System.EventHandler(this.MenuItem16_Click);
+            // 
+            // ButtonItem17
+            // 
+            this.ButtonItem17.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_pills_16px;
+            this.ButtonItem17.Name = "ButtonItem17";
+            resources.ApplyResources(this.ButtonItem17, "ButtonItem17");
+            this.ButtonItem17.Click += new System.EventHandler(this.ButtonItem17_Click);
+            // 
+            // ButtonItem_TrajectoryEditor
+            // 
+            this.ButtonItem_TrajectoryEditor.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_edit_node_16px;
+            this.ButtonItem_TrajectoryEditor.Name = "ButtonItem_TrajectoryEditor";
+            resources.ApplyResources(this.ButtonItem_TrajectoryEditor, "ButtonItem_TrajectoryEditor");
+            this.ButtonItem_TrajectoryEditor.Click += new System.EventHandler(this.ButtonItem_TrajectoryEditor_Click);
+            // 
+            // ButtonItem13
+            // 
+            this.ButtonItem13.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_filled_star_location_16px;
+            this.ButtonItem13.Name = "ButtonItem13";
+            resources.ApplyResources(this.ButtonItem13, "ButtonItem13");
+            this.ButtonItem13.Click += new System.EventHandler(this.ButtonItem13_Click);
+            // 
+            // ButtonItem15
+            // 
+            this.ButtonItem15.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_variation_16px;
+            this.ButtonItem15.Name = "ButtonItem15";
+            resources.ApplyResources(this.ButtonItem15, "ButtonItem15");
+            this.ButtonItem15.Click += new System.EventHandler(this.ButtonItem15_Click);
+            // 
+            // ButtonItem16
+            // 
+            this.ButtonItem16.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_coins_16px;
+            this.ButtonItem16.Name = "ButtonItem16";
+            resources.ApplyResources(this.ButtonItem16, "ButtonItem16");
+            this.ButtonItem16.Click += new System.EventHandler(this.ButtonItem16_Click);
+            // 
+            // ButtonItem1
+            // 
+            this.ButtonItem1.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
+            this.ButtonItem1.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_text_16px;
+            this.ButtonItem1.Name = "ButtonItem1";
+            this.ButtonItem1.SymbolSize = 12F;
+            resources.ApplyResources(this.ButtonItem1, "ButtonItem1");
+            this.ButtonItem1.Click += new System.EventHandler(this.ButtonItem1_Click);
+            // 
+            // ButtonItem9
+            // 
+            this.ButtonItem9.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_syringe_16px;
+            this.ButtonItem9.Name = "ButtonItem9";
+            resources.ApplyResources(this.ButtonItem9, "ButtonItem9");
+            this.ButtonItem9.Click += new System.EventHandler(this.ButtonItem9_Click);
+            // 
+            // ButtonItem_M64ToMidiConverter
+            // 
+            this.ButtonItem_M64ToMidiConverter.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_music_16px;
+            this.ButtonItem_M64ToMidiConverter.Name = "ButtonItem_M64ToMidiConverter";
+            resources.ApplyResources(this.ButtonItem_M64ToMidiConverter, "ButtonItem_M64ToMidiConverter");
+            this.ButtonItem_M64ToMidiConverter.Click += new System.EventHandler(this.ButtonItem_M64ToMidiConverter_Click);
+            // 
+            // ButtonItem20
+            // 
+            this.ButtonItem20.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_plugin_16px;
+            this.ButtonItem20.Name = "ButtonItem20";
+            resources.ApplyResources(this.ButtonItem20, "ButtonItem20");
+            this.ButtonItem20.Click += new System.EventHandler(this.ButtonItem_Bar_Plugins_ManagePlugins_Click);
+            // 
+            // ButtonItem25
+            // 
+            this.ButtonItem25.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_settings_16px;
+            this.ButtonItem25.Name = "ButtonItem25";
+            this.ButtonItem25.SymbolSize = 12F;
+            resources.ApplyResources(this.ButtonItem25, "ButtonItem25");
+            this.ButtonItem25.Click += new System.EventHandler(this.MenuItem_Settings_Click);
+            // 
+            // ButtonItem5
+            // 
+            this.ButtonItem5.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_color_dropper_16px;
+            this.ButtonItem5.Name = "ButtonItem5";
+            this.ButtonItem5.SymbolSize = 12F;
+            resources.ApplyResources(this.ButtonItem5, "ButtonItem5");
+            this.ButtonItem5.Click += new System.EventHandler(this.ButtonItem5_Click);
+            // 
+            // ButtonItem27
+            // 
+            this.ButtonItem27.BeginGroup = true;
+            this.ButtonItem27.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_help_16px;
+            this.ButtonItem27.Name = "ButtonItem27";
+            this.ButtonItem27.SymbolSet = DevComponents.DotNetBar.eSymbolSet.Material;
+            this.ButtonItem27.SymbolSize = 12F;
+            resources.ApplyResources(this.ButtonItem27, "ButtonItem27");
+            this.ButtonItem27.Visible = false;
+            // 
+            // ButtonItem28
+            // 
+            this.ButtonItem28.Image = ((System.Drawing.Image)(resources.GetObject("ButtonItem28.Image")));
+            this.ButtonItem28.Name = "ButtonItem28";
+            resources.ApplyResources(this.ButtonItem28, "ButtonItem28");
+            this.ButtonItem28.Visible = false;
+            // 
+            // ButtonItem29
+            // 
+            this.ButtonItem29.BeginGroup = true;
+            this.ButtonItem29.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_downloading_updates_16px;
+            this.ButtonItem29.Name = "ButtonItem29";
+            this.ButtonItem29.SymbolSize = 12F;
+            resources.ApplyResources(this.ButtonItem29, "ButtonItem29");
+            this.ButtonItem29.Click += new System.EventHandler(this.ButtonItem29_Click);
+            // 
+            // ButtonItem30
+            // 
+            this.ButtonItem30.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_about_16px;
+            this.ButtonItem30.Name = "ButtonItem30";
+            this.ButtonItem30.SymbolSet = DevComponents.DotNetBar.eSymbolSet.Material;
+            this.ButtonItem30.SymbolSize = 12F;
+            resources.ApplyResources(this.ButtonItem30, "ButtonItem30");
+            this.ButtonItem30.Click += new System.EventHandler(this.MenuItem_About_Click);
             // 
             // MainForm
             // 
@@ -859,5 +868,6 @@ namespace SM64_ROM_Manager
 
         private DevComponents.DotNetBar.ButtonItem ButtonItem_HudOptions;
         private DevComponents.DotNetBar.ButtonItem ButtonItem_GlobalBehaviorBank;
+        private DevComponents.DotNetBar.ButtonItem ButtonItem_CustomObjects;
     }
 }

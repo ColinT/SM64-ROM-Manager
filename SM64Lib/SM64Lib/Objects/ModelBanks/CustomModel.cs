@@ -9,48 +9,9 @@ namespace SM64Lib.Objects.ModelBanks
         public Model.ObjectModel Model { get; set; } = null;
         public byte ModelID { get; set; } = 0;
 
-        private int modelOffset = 0;
-        private int geolayoutOffset = 0;
-        private int colPointer = 0;
-
-        public int ModelBankOffset
-        {
-            get
-            {
-                return modelOffset;
-            }
-
-            internal set
-            {
-                modelOffset = value;
-            }
-        }
-
-        public int GeolayoutBankOffset
-        {
-            get
-            {
-                return geolayoutOffset;
-            }
-
-            internal set
-            {
-                geolayoutOffset = value;
-            }
-        }
-
-        public int CollisionPointer
-        {
-            get
-            {
-                return colPointer;
-            }
-
-            internal set
-            {
-                colPointer = value;
-            }
-        }
+        public int ModelBankOffset { get; internal set; } = 0;
+        public int GeolayoutBankOffset { get; internal set; } = 0;
+        public int CollisionPointer { get; internal set; } = 0;
 
         public CustomModel()
         {

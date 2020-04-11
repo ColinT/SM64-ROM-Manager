@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using SM64Lib.Configuration;
 using SM64Lib.Objects.ModelBanks;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,7 @@ namespace SM64Lib.Objects.ObjectBanks
         [JsonProperty(nameof(ModelID))]
         private byte _modelID;
         [JsonProperty(nameof(Model))]
-        private CustomModel _model;
+        private CustomModelConfig _model;
 
         [JsonIgnore]
         public bool UseCustomModelID
@@ -36,19 +37,28 @@ namespace SM64Lib.Objects.ObjectBanks
                 if (UseCustomModelID || Model == null)
                     return _modelID;
                 else
-                    return Model.ModelID;
+                {
+                    var mdl = Model.FindModel();
+                    return mdl is object ? mdl.ModelID : _modelID;
+                }
             }
             set
             {
                 if (UseCustomModelID)
                     _modelID = value;
                 else
-                    Model.ModelID = value;
+                {
+                    var mdl = Model.FindModel();
+                    if (mdl is object)
+                        mdl.ModelID = value;
+                    else
+                        _modelID = value;
+                }
             }
         }
 
         [JsonIgnore]
-        public CustomModel Model
+        public CustomModelConfig Model
         {
             get => _model;
             set

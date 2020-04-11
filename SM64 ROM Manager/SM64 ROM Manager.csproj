@@ -456,10 +456,10 @@
     <Compile Include="RomManager\GUI\Other\ThankYouForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="RomManager\GUI\Tools\BehaviorBankManager.cs">
+    <Compile Include="RomManager\GUI\Tools\Behavior Bank Manager\BehaviorBankManager.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="RomManager\GUI\Tools\BehaviorBankManager.Designer.cs">
+    <Compile Include="RomManager\GUI\Tools\Behavior Bank Manager\BehaviorBankManager.Designer.cs">
       <DependentUpon>BehaviorBankManager.cs</DependentUpon>
     </Compile>
     <Compile Include="RomManager\GUI\Tools\Custom Bank Manager\AddressListEditor.Designer.cs">
@@ -525,6 +525,12 @@
     <Compile Include="RomManager\GUI\Main Form\Level Manager\Scrolling Texture Editor\ScrollTexPropertyClass.cs" />
     <Compile Include="RomManager\GUI\Settings\LevelEditorInputSettings.cs">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RomManager\GUI\Tools\CustomObjectsManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RomManager\GUI\Tools\CustomObjectsManager.Designer.cs">
+      <DependentUpon>CustomObjectsManager.cs</DependentUpon>
     </Compile>
     <Compile Include="RomManager\GUI\Tools\HexEditor.Designer.cs">
       <DependentUpon>HexEditor.cs</DependentUpon>
@@ -816,10 +822,10 @@
     <EmbeddedResource Include="RomManager\GUI\Other\ThankYouForm.resx">
       <DependentUpon>ThankYouForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="RomManager\GUI\Tools\BehaviorBankManager.de.resx">
+    <EmbeddedResource Include="RomManager\GUI\Tools\Behavior Bank Manager\BehaviorBankManager.de.resx">
       <DependentUpon>BehaviorBankManager.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="RomManager\GUI\Tools\BehaviorBankManager.resx">
+    <EmbeddedResource Include="RomManager\GUI\Tools\Behavior Bank Manager\BehaviorBankManager.resx">
       <DependentUpon>BehaviorBankManager.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="RomManager\GUI\Tools\Custom Bank Manager\AddressListEditor.de.resx">
@@ -881,6 +887,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="RomManager\GUI\Other\Form_ErrorDialog.de.resx">
       <DependentUpon>Form_ErrorDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RomManager\GUI\Tools\CustomObjectsManager.resx">
+      <DependentUpon>CustomObjectsManager.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="RomManager\GUI\Tools\Form_SM64TextConverter.de.resx">
       <DependentUpon>Form_SM64TextConverter.cs</DependentUpon>
@@ -1166,6 +1175,11 @@
     <None Include="Resources\icons8_preview_pane_16px.png" />
     <None Include="Resources\icons8_checkmark_16px_1.png" />
     <None Include="Resources\icons8_property_script_32px.png" />
+    <None Include="Resources\icons8_static_view_level1_16px.png" />
+    <None Include="Resources\icons8_module_16px.png" />
+    <None Include="Resources\icons8_package_16px.png" />
+    <None Include="Resources\icons8_cube_16px.png" />
+    <None Include="Resources\icons8_300_degrees_16px.png" />
     <Content Include="RomManager\Others\RomMap.txt" />
   </ItemGroup>
   <ItemGroup>

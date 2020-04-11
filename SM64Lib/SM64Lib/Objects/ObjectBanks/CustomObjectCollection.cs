@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using SM64Lib.Behaviors;
 using SM64Lib.Objects.ModelBanks;
 using System;
@@ -38,12 +39,31 @@ namespace SM64Lib.Objects.ObjectBanks
                 CustomObjects = customObjects,
                 ExportDate = DateTime.UtcNow
             };
-            File.WriteAllText(filePath, JObject.FromObject(export).ToString());
+
+            foreach (var cobj in customObjects)
+            {
+                if (cobj.ModelProps is object)
+                {
+                    var mdl = cobj.ModelProps.Model.FindModel();
+                    if (mdl is object)
+                    {
+                        export.CustomModels.Add(cobj.ModelProps.Model, mdl);
+                    }
+                }
+            }
+
+            var ser = JsonSerializer.CreateDefault();
+            ser.PreserveReferencesHandling = PreserveReferencesHandling.All;
+            ser.ReferenceLoopHandling = ReferenceLoopHandling.Serialize;
+            File.WriteAllText(filePath, JObject.FromObject(export, ser).ToString());
         }
 
         public static CustomObjectExport LoadImport(string filePath)
         {
-            return JObject.Parse(File.ReadAllText(filePath)).ToObject<CustomObjectExport>();
+            var ser = JsonSerializer.CreateDefault();
+            ser.PreserveReferencesHandling = PreserveReferencesHandling.All;
+            ser.ReferenceLoopHandling = ReferenceLoopHandling.Serialize;
+            return JObject.Parse(File.ReadAllText(filePath)).ToObject<CustomObjectExport>(ser);
         }
 
         public void Import(string filePath, CustomModelBank destModelBank, BehaviorBank destBehaviorBank)
@@ -69,9 +89,9 @@ namespace SM64Lib.Objects.ObjectBanks
                 }
 
                 // Add Custom Behavior
-                if (cobj.ModelProps.Model is object)
+                if (cobj.ModelProps.Model is object && export.CustomModels.ContainsKey(cobj.ModelProps.Model))
                 {
-                    destModelBank.Models.Add(cobj.ModelProps.Model);
+                    destModelBank.Models.Add(export.CustomModels[cobj.ModelProps.Model]);
                     destModelBank.NeedToSave = true;
                 }
 

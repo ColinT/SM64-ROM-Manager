@@ -159,6 +159,7 @@
     <Compile Include="SM64Lib\Geolayout\Script\GeolayoutCommandTypes.cs" />
     <Compile Include="SM64Lib\Geolayout\TerrainType.cs" />
     <Compile Include="SM64Lib\ExtensionMethods.cs" />
+    <Compile Include="SM64Lib\Json\Fast3DBufferJsonConverter.cs" />
     <Compile Include="SM64Lib\Level\ILevelManager.cs" />
     <Compile Include="SM64Lib\Level\LevelList.cs" />
     <Compile Include="SM64Lib\Level\LevelSaveResult.cs" />

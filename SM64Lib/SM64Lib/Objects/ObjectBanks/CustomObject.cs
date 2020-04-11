@@ -18,7 +18,10 @@ namespace SM64Lib.Objects.ObjectBanks
             if (BehaviorProps.UseCollisionPointerOfModel && BehaviorProps.Behavior is object && ModelProps.Model is object)
             {
                 BehaviorProps.Behavior.EnableCollisionPointer = true;
-                BehaviorProps.Behavior.CollisionPointer = ModelProps.Model.CollisionPointer;
+
+                var mdl = ModelProps.Model.FindModel();
+                if (mdl is object)
+                    BehaviorProps.Behavior.CollisionPointer = mdl.CollisionPointer;
             }
         }
     }

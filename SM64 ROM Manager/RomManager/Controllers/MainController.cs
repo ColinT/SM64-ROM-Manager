@@ -738,6 +738,15 @@ namespace SM64_ROM_Manager
             }
         }
 
+        public void OpenCustomObjectsManager()
+        {
+            if (RomManager is object)
+            {
+                var mgr = new CustomObjectsManager(RomManager);
+                mgr.Show();
+            }
+        }
+
         public void OpenPluginManager()
         {
             var frm = new SM64_ROM_Manager.PluginInstallerForm();

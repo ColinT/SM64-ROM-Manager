@@ -8,6 +8,7 @@ using global::SM64Lib.Geolayout;
 
 namespace SM64Lib.Model.Fast3D
 {
+    [Newtonsoft.Json.JsonConverter(typeof(Json.Fast3DBufferJsonConverter))]
     public class Fast3DBuffer : MemoryStream
     {
         public Conversion.Fast3DWriting.Fast3DWriter.ConvertResult ConvertResult { get; set; } = null;
