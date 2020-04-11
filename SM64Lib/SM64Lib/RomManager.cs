@@ -136,6 +136,8 @@ namespace SM64Lib
         /// <param name="levelManager">The ROM that will be opened.</param>
         public RomManager(string FileName, ILevelManager levelManager)
         {
+            CustomModelConfig.RequestModel += CustomModelConfig_RequestModel;
+
             RomFile = FileName;
             LevelManager = levelManager;
             string levelTableFile = General.MyFilePaths["Level Tabel.json"];
@@ -150,6 +152,32 @@ namespace SM64Lib
             SetSegBank(0x2, 0x803156, 0); // Text Table??
             LoadRomConfig();
             LoadDictionaryUpdatePatches();
+        }
+
+        // O t h e r   E v e n t s
+
+        private void CustomModelConfig_RequestModel(CustomModelConfig config, CustomModelConfig.RequestModelEventArgs request)
+        {
+            if (HasGlobalObjectBank)
+                checkModelBank(GlobalModelBank);
+
+            if (request.Model == null)
+            {
+                foreach (var lvl in Levels)
+                    checkModelBank(lvl.LocalObjectBank);
+            }
+
+            void checkModelBank(CustomModelBank bank)
+            {
+                if (request.Model == null)
+                {
+                    foreach (var mdl in bank.Models)
+                    {
+                        if (request.Model == null && mdl.Config == config)
+                            request.Model = mdl;
+                    }
+                }
+            }
         }
 
         // R a i s e   E v e n t s
