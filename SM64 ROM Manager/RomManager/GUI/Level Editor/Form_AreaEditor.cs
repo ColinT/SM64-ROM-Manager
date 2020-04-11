@@ -633,10 +633,10 @@ namespace SM64_ROM_Manager.LevelEditor
 
         private void AddObject3DWithRendererIfNotNull(Object3D mdl, byte modelID)
         {
-            if (mdl.Meshes.Count > 0)
+            if (mdl.Meshes.Any())
             {
                 var rndr = new Renderer(mdl);
-                ObjectModels.Add(modelID, rndr);
+                ObjectModels.AddOrUpdate(modelID, rndr);
             }
         }
 
@@ -692,7 +692,8 @@ namespace SM64_ROM_Manager.LevelEditor
                         break;
                     case GeolayoutCommandTypes.EndOfNode:
                         nodeIndex -= 1;
-                        curTotalOffset = offsets.Pop();
+                        if (offsets.Any())
+                            curTotalOffset = offsets.Pop();
                         break;
                     case GeolayoutCommandTypes.x10:
                         curTotalOffset += cgLoadDisplayListWithOffset.GetOffset(ref gmd);
@@ -728,9 +729,9 @@ namespace SM64_ROM_Manager.LevelEditor
                             if (!KnownModelIDs.Contains(modelID))
                                 KnownModelIDs.Add(modelID);
                             var seg = Rommgr.GetSegBank(segID);
-                            if (segID != 0 && seg is object && !ObjectModels.ContainsKey(modelID))
+                            if (segID != 0 && seg is object)
                             {
-                                var glscript = new SM64Lib.Geolayout.Script.Geolayoutscript();
+                                var glscript = new Geolayoutscript();
                                 glscript.Read(Rommgr, segPointer);
                                 await ParseGeolayoutAndLoadModels(glscript, modelID);
                                 GeolayoutScriptDumps.Add(modelID, glscript);
@@ -750,12 +751,12 @@ namespace SM64_ROM_Manager.LevelEditor
                             if (!KnownModelIDs.Contains(modelID))
                                 KnownModelIDs.Add(modelID);
                             var seg = Rommgr.GetSegBank(segID);
-                            if (segID != 0 && seg is object && !ObjectModels.ContainsKey(modelID))
+                            if (segID != 0 && seg is object)
                             {
                                 var mdl = new Object3D();
                                 await LoadDisplaylist(new Geopointer(Conversions.ToByte(layer), segPointer), mdl);
                                 var rndr = new Renderer(mdl);
-                                ObjectModels.Add(modelID, rndr);
+                                ObjectModels.AddOrUpdate(modelID, rndr);
                             }
 
                             break;
