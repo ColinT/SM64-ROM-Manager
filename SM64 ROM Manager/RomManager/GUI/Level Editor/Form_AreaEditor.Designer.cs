@@ -165,11 +165,6 @@ namespace SM64_ROM_Manager.LevelEditor
             this.GalleryContainer2 = new DevComponents.DotNetBar.GalleryContainer();
             this.LabelItem3 = new DevComponents.DotNetBar.LabelItem();
             this.RibbonControl1 = new DevComponents.DotNetBar.RibbonControl();
-            this.RibbonPanel7 = new DevComponents.DotNetBar.RibbonPanel();
-            this.ribbonBar13 = new DevComponents.DotNetBar.RibbonBar();
-            this.ButtonItem_GeolayoutScriptDumps = new DevComponents.DotNetBar.ButtonItem();
-            this.RibbonBar28 = new DevComponents.DotNetBar.RibbonBar();
-            this.ButtonItem34 = new DevComponents.DotNetBar.ButtonItem();
             this.RibbonPanel1 = new DevComponents.DotNetBar.RibbonPanel();
             this.RibbonBar29 = new DevComponents.DotNetBar.RibbonBar();
             this.ButtonItem35 = new DevComponents.DotNetBar.ButtonItem();
@@ -206,6 +201,11 @@ namespace SM64_ROM_Manager.LevelEditor
             this.ButtonItem41 = new DevComponents.DotNetBar.ButtonItem();
             this.ButtonItem42 = new DevComponents.DotNetBar.ButtonItem();
             this.ButtonItem43 = new DevComponents.DotNetBar.ButtonItem();
+            this.RibbonPanel7 = new DevComponents.DotNetBar.RibbonPanel();
+            this.ribbonBar13 = new DevComponents.DotNetBar.RibbonBar();
+            this.ButtonItem_GeolayoutScriptDumps = new DevComponents.DotNetBar.ButtonItem();
+            this.RibbonBar28 = new DevComponents.DotNetBar.RibbonBar();
+            this.ButtonItem34 = new DevComponents.DotNetBar.ButtonItem();
             this.RibbonPanel6 = new DevComponents.DotNetBar.RibbonPanel();
             this.RibbonBar23 = new DevComponents.DotNetBar.RibbonBar();
             this.ItemContainer4 = new DevComponents.DotNetBar.ItemContainer();
@@ -323,8 +323,8 @@ namespace SM64_ROM_Manager.LevelEditor
             this.Panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ContextMenuBar1)).BeginInit();
             this.RibbonControl1.SuspendLayout();
-            this.RibbonPanel7.SuspendLayout();
             this.RibbonPanel1.SuspendLayout();
+            this.RibbonPanel7.SuspendLayout();
             this.RibbonPanel6.SuspendLayout();
             this.RibbonPanel5.SuspendLayout();
             this.RibbonPanel4.SuspendLayout();
@@ -479,7 +479,7 @@ namespace SM64_ROM_Manager.LevelEditor
             this.DockSite4.Controls.Add(this.Bar_Controls);
             resources.ApplyResources(this.DockSite4, "DockSite4");
             this.DockSite4.DocumentDockContainer = new DevComponents.DotNetBar.DocumentDockContainer(new DevComponents.DotNetBar.DocumentBaseContainer[] {
-            ((DevComponents.DotNetBar.DocumentBaseContainer)(new DevComponents.DotNetBar.DocumentBarContainer(this.Bar_Controls, 1031, 132)))}, DevComponents.DotNetBar.eOrientation.Vertical);
+            ((DevComponents.DotNetBar.DocumentBaseContainer)(new DevComponents.DotNetBar.DocumentBarContainer(this.Bar_Controls, 967, 132)))}, DevComponents.DotNetBar.eOrientation.Vertical);
             this.DockSite4.Name = "DockSite4";
             this.DockSite4.TabStop = false;
             // 
@@ -669,12 +669,14 @@ namespace SM64_ROM_Manager.LevelEditor
             // ButtonItem_CamOrbit
             // 
             this.ButtonItem_CamOrbit.Name = "ButtonItem_CamOrbit";
+            this.ButtonItem_CamOrbit.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.F1);
             resources.ApplyResources(this.ButtonItem_CamOrbit, "ButtonItem_CamOrbit");
             this.ButtonItem_CamOrbit.Click += new System.EventHandler(this.ChangeCamMode);
             // 
             // ButtonItem_CamFly
             // 
             this.ButtonItem_CamFly.Name = "ButtonItem_CamFly";
+            this.ButtonItem_CamFly.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.F2);
             resources.ApplyResources(this.ButtonItem_CamFly, "ButtonItem_CamFly");
             this.ButtonItem_CamFly.Click += new System.EventHandler(this.ChangeCamMode);
             // 
@@ -960,7 +962,7 @@ namespace SM64_ROM_Manager.LevelEditor
             this.DockSite9.Controls.Add(this.Bar_AreaViewer);
             resources.ApplyResources(this.DockSite9, "DockSite9");
             this.DockSite9.DocumentDockContainer = new DevComponents.DotNetBar.DocumentDockContainer(new DevComponents.DotNetBar.DocumentBaseContainer[] {
-            ((DevComponents.DotNetBar.DocumentBaseContainer)(new DevComponents.DotNetBar.DocumentBarContainer(this.Bar_AreaViewer, 1031, 815)))}, DevComponents.DotNetBar.eOrientation.Horizontal);
+            ((DevComponents.DotNetBar.DocumentBaseContainer)(new DevComponents.DotNetBar.DocumentBarContainer(this.Bar_AreaViewer, 967, 685)))}, DevComponents.DotNetBar.eOrientation.Horizontal);
             this.DockSite9.Name = "DockSite9";
             this.DockSite9.TabStop = false;
             // 
@@ -1019,8 +1021,8 @@ namespace SM64_ROM_Manager.LevelEditor
             this.DockSite1.Controls.Add(this.Bar2);
             resources.ApplyResources(this.DockSite1, "DockSite1");
             this.DockSite1.DocumentDockContainer = new DevComponents.DotNetBar.DocumentDockContainer(new DevComponents.DotNetBar.DocumentBaseContainer[] {
-            ((DevComponents.DotNetBar.DocumentBaseContainer)(new DevComponents.DotNetBar.DocumentBarContainer(this.Bar2, 271, 318))),
-            ((DevComponents.DotNetBar.DocumentBaseContainer)(new DevComponents.DotNetBar.DocumentBarContainer(this.Bar1, 271, 629)))}, DevComponents.DotNetBar.eOrientation.Vertical);
+            ((DevComponents.DotNetBar.DocumentBaseContainer)(new DevComponents.DotNetBar.DocumentBarContainer(this.Bar2, 271, 273))),
+            ((DevComponents.DotNetBar.DocumentBaseContainer)(new DevComponents.DotNetBar.DocumentBarContainer(this.Bar1, 271, 544)))}, DevComponents.DotNetBar.eOrientation.Vertical);
             this.DockSite1.Name = "DockSite1";
             this.DockSite1.TabStop = false;
             // 
@@ -1712,101 +1714,6 @@ namespace SM64_ROM_Manager.LevelEditor
             this.RibbonControl1.TabGroupHeight = 14;
             this.RibbonControl1.SelectedRibbonTabChanged += new System.EventHandler(this.RibbonControl1_SelectedRibbonTabChanged);
             // 
-            // RibbonPanel7
-            // 
-            this.RibbonPanel7.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.RibbonPanel7.Controls.Add(this.ribbonBar13);
-            this.RibbonPanel7.Controls.Add(this.RibbonBar28);
-            resources.ApplyResources(this.RibbonPanel7, "RibbonPanel7");
-            this.RibbonPanel7.Name = "RibbonPanel7";
-            // 
-            // 
-            // 
-            this.RibbonPanel7.Style.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            // 
-            // 
-            // 
-            this.RibbonPanel7.StyleMouseDown.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            // 
-            // 
-            // 
-            this.RibbonPanel7.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            // 
-            // ribbonBar13
-            // 
-            this.ribbonBar13.AutoOverflowEnabled = true;
-            // 
-            // 
-            // 
-            this.ribbonBar13.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            // 
-            // 
-            // 
-            this.ribbonBar13.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.ribbonBar13.ContainerControlProcessDialogKey = true;
-            resources.ApplyResources(this.ribbonBar13, "ribbonBar13");
-            this.ribbonBar13.DragDropSupport = true;
-            this.ribbonBar13.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.ButtonItem_GeolayoutScriptDumps});
-            this.ribbonBar13.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
-            this.ribbonBar13.Name = "ribbonBar13";
-            this.ribbonBar13.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            // 
-            // 
-            // 
-            this.ribbonBar13.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            // 
-            // 
-            // 
-            this.ribbonBar13.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            // 
-            // ButtonItem_GeolayoutScriptDumps
-            // 
-            this.ButtonItem_GeolayoutScriptDumps.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_property_script_32px;
-            this.ButtonItem_GeolayoutScriptDumps.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
-            this.ButtonItem_GeolayoutScriptDumps.Name = "ButtonItem_GeolayoutScriptDumps";
-            this.ButtonItem_GeolayoutScriptDumps.SubItemsExpandWidth = 14;
-            resources.ApplyResources(this.ButtonItem_GeolayoutScriptDumps, "ButtonItem_GeolayoutScriptDumps");
-            this.ButtonItem_GeolayoutScriptDumps.Click += new System.EventHandler(this.ButtonItem_GeolayoutScriptDumps_Click);
-            // 
-            // RibbonBar28
-            // 
-            this.RibbonBar28.AutoOverflowEnabled = true;
-            // 
-            // 
-            // 
-            this.RibbonBar28.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            // 
-            // 
-            // 
-            this.RibbonBar28.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.RibbonBar28.ContainerControlProcessDialogKey = true;
-            resources.ApplyResources(this.RibbonBar28, "RibbonBar28");
-            this.RibbonBar28.DragDropSupport = true;
-            this.RibbonBar28.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.ButtonItem34});
-            this.RibbonBar28.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
-            this.RibbonBar28.Name = "RibbonBar28";
-            this.RibbonBar28.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            // 
-            // 
-            // 
-            this.RibbonBar28.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            // 
-            // 
-            // 
-            this.RibbonBar28.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            // 
-            // ButtonItem34
-            // 
-            this.ButtonItem34.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
-            this.ButtonItem34.Image = global::SM64_ROM_Manager.My.Resources.MyOldIcons.EditPicture_32px;
-            this.ButtonItem34.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
-            this.ButtonItem34.Name = "ButtonItem34";
-            this.ButtonItem34.SubItemsExpandWidth = 14;
-            resources.ApplyResources(this.ButtonItem34, "ButtonItem34");
-            this.ButtonItem34.Click += new System.EventHandler(this.ButtonItem34_Click);
-            // 
             // RibbonPanel1
             // 
             this.RibbonPanel1.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -2342,6 +2249,101 @@ namespace SM64_ROM_Manager.LevelEditor
             this.ButtonItem43.SubItemsExpandWidth = 14;
             resources.ApplyResources(this.ButtonItem43, "ButtonItem43");
             this.ButtonItem43.Click += new System.EventHandler(this.ButtonX_ObjectsAdd_Click);
+            // 
+            // RibbonPanel7
+            // 
+            this.RibbonPanel7.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.RibbonPanel7.Controls.Add(this.ribbonBar13);
+            this.RibbonPanel7.Controls.Add(this.RibbonBar28);
+            resources.ApplyResources(this.RibbonPanel7, "RibbonPanel7");
+            this.RibbonPanel7.Name = "RibbonPanel7";
+            // 
+            // 
+            // 
+            this.RibbonPanel7.Style.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            // 
+            // 
+            // 
+            this.RibbonPanel7.StyleMouseDown.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            // 
+            // 
+            // 
+            this.RibbonPanel7.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            // 
+            // ribbonBar13
+            // 
+            this.ribbonBar13.AutoOverflowEnabled = true;
+            // 
+            // 
+            // 
+            this.ribbonBar13.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            // 
+            // 
+            // 
+            this.ribbonBar13.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.ribbonBar13.ContainerControlProcessDialogKey = true;
+            resources.ApplyResources(this.ribbonBar13, "ribbonBar13");
+            this.ribbonBar13.DragDropSupport = true;
+            this.ribbonBar13.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.ButtonItem_GeolayoutScriptDumps});
+            this.ribbonBar13.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
+            this.ribbonBar13.Name = "ribbonBar13";
+            this.ribbonBar13.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            // 
+            // 
+            // 
+            this.ribbonBar13.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            // 
+            // 
+            // 
+            this.ribbonBar13.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            // 
+            // ButtonItem_GeolayoutScriptDumps
+            // 
+            this.ButtonItem_GeolayoutScriptDumps.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_property_script_32px;
+            this.ButtonItem_GeolayoutScriptDumps.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
+            this.ButtonItem_GeolayoutScriptDumps.Name = "ButtonItem_GeolayoutScriptDumps";
+            this.ButtonItem_GeolayoutScriptDumps.SubItemsExpandWidth = 14;
+            resources.ApplyResources(this.ButtonItem_GeolayoutScriptDumps, "ButtonItem_GeolayoutScriptDumps");
+            this.ButtonItem_GeolayoutScriptDumps.Click += new System.EventHandler(this.ButtonItem_GeolayoutScriptDumps_Click);
+            // 
+            // RibbonBar28
+            // 
+            this.RibbonBar28.AutoOverflowEnabled = true;
+            // 
+            // 
+            // 
+            this.RibbonBar28.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            // 
+            // 
+            // 
+            this.RibbonBar28.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.RibbonBar28.ContainerControlProcessDialogKey = true;
+            resources.ApplyResources(this.RibbonBar28, "RibbonBar28");
+            this.RibbonBar28.DragDropSupport = true;
+            this.RibbonBar28.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.ButtonItem34});
+            this.RibbonBar28.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
+            this.RibbonBar28.Name = "RibbonBar28";
+            this.RibbonBar28.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            // 
+            // 
+            // 
+            this.RibbonBar28.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            // 
+            // 
+            // 
+            this.RibbonBar28.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            // 
+            // ButtonItem34
+            // 
+            this.ButtonItem34.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
+            this.ButtonItem34.Image = global::SM64_ROM_Manager.My.Resources.MyOldIcons.EditPicture_32px;
+            this.ButtonItem34.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
+            this.ButtonItem34.Name = "ButtonItem34";
+            this.ButtonItem34.SubItemsExpandWidth = 14;
+            resources.ApplyResources(this.ButtonItem34, "ButtonItem34");
+            this.ButtonItem34.Click += new System.EventHandler(this.ButtonItem34_Click);
             // 
             // RibbonPanel6
             // 
@@ -3572,6 +3574,7 @@ namespace SM64_ROM_Manager.LevelEditor
             this.Controls.Add(this.RibbonControl1);
             this.KeyPreview = true;
             this.Name = "Form_AreaEditor";
+            this.Tag = "1251; 970";
             this.TopLeftCornerSize = 0;
             this.TopRightCornerSize = 0;
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
@@ -3613,8 +3616,8 @@ namespace SM64_ROM_Manager.LevelEditor
             ((System.ComponentModel.ISupportInitialize)(this.ContextMenuBar1)).EndInit();
             this.RibbonControl1.ResumeLayout(false);
             this.RibbonControl1.PerformLayout();
-            this.RibbonPanel7.ResumeLayout(false);
             this.RibbonPanel1.ResumeLayout(false);
+            this.RibbonPanel7.ResumeLayout(false);
             this.RibbonPanel6.ResumeLayout(false);
             this.RibbonPanel5.ResumeLayout(false);
             this.RibbonPanel4.ResumeLayout(false);
