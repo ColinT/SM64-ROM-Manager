@@ -43,7 +43,7 @@ namespace SM64Lib.Objects.ObjectBanks
             {
                 if (cobj.ModelProps is object)
                 {
-                    var mdl = cobj.ModelProps.Model.FindModel();
+                    var mdl = cobj.ModelProps.Model?.FindModel();
                     if (mdl is object)
                     {
                         export.CustomModels.Add(cobj.ModelProps.Model, mdl);

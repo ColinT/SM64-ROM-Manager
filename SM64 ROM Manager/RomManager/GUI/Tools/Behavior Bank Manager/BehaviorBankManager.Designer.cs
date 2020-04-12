@@ -41,10 +41,6 @@ namespace SM64_ROM_Manager
             this.nodeConnector1 = new DevComponents.AdvTree.NodeConnector();
             this.elementStyle1 = new DevComponents.DotNetBar.ElementStyle();
             this.TabControl_Behav = new DevComponents.DotNetBar.TabControl();
-            this.tabControlPanel2 = new DevComponents.DotNetBar.TabControlPanel();
-            this.ButtonX_SaveScript = new DevComponents.DotNetBar.ButtonX();
-            this.RichTextBoxEx_Script = new DevComponents.DotNetBar.Controls.RichTextBoxEx();
-            this.TabItem_BehavScript = new DevComponents.DotNetBar.TabItem(this.components);
             this.tabControlPanel1 = new DevComponents.DotNetBar.TabControlPanel();
             this.layoutControl1 = new DevComponents.DotNetBar.Layout.LayoutControl();
             this.TextBoxX_BehavName = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -54,6 +50,10 @@ namespace SM64_ROM_Manager
             this.layoutControlItem2 = new DevComponents.DotNetBar.Layout.LayoutControlItem();
             this.layoutControlItem3 = new DevComponents.DotNetBar.Layout.LayoutControlItem();
             this.TabItem_BehavProps = new DevComponents.DotNetBar.TabItem(this.components);
+            this.tabControlPanel2 = new DevComponents.DotNetBar.TabControlPanel();
+            this.ButtonX_SaveScript = new DevComponents.DotNetBar.ButtonX();
+            this.RichTextBoxEx_Script = new DevComponents.DotNetBar.Controls.RichTextBoxEx();
+            this.TabItem_BehavScript = new DevComponents.DotNetBar.TabItem(this.components);
             this.customValidator1 = new DevComponents.DotNetBar.Validator.CustomValidator();
             this.customValidator2 = new DevComponents.DotNetBar.Validator.CustomValidator();
             this.highlighter_Script = new DevComponents.DotNetBar.Validator.Highlighter();
@@ -61,9 +61,9 @@ namespace SM64_ROM_Manager
             ((System.ComponentModel.ISupportInitialize)(this.AdvTree_Behaviors)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.TabControl_Behav)).BeginInit();
             this.TabControl_Behav.SuspendLayout();
-            this.tabControlPanel2.SuspendLayout();
             this.tabControlPanel1.SuspendLayout();
             this.layoutControl1.SuspendLayout();
+            this.tabControlPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // bar1
@@ -181,51 +181,6 @@ namespace SM64_ROM_Manager
             this.TabControl_Behav.SelectedTabChanged += new DevComponents.DotNetBar.TabStrip.SelectedTabChangedEventHandler(this.TabControl_Behav_SelectedTabChanged);
             this.TabControl_Behav.SelectedTabChanging += new DevComponents.DotNetBar.TabStrip.SelectedTabChangingEventHandler(this.TabControl_Behav_SelectedTabChanging);
             // 
-            // tabControlPanel2
-            // 
-            this.tabControlPanel2.Controls.Add(this.ButtonX_SaveScript);
-            this.tabControlPanel2.Controls.Add(this.RichTextBoxEx_Script);
-            this.tabControlPanel2.DisabledBackColor = System.Drawing.Color.Empty;
-            resources.ApplyResources(this.tabControlPanel2, "tabControlPanel2");
-            this.tabControlPanel2.Name = "tabControlPanel2";
-            this.tabControlPanel2.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(239)))), ((int)(((byte)(255)))));
-            this.tabControlPanel2.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
-            this.tabControlPanel2.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
-            this.tabControlPanel2.Style.BorderColor.Color = System.Drawing.Color.FromArgb(((int)(((byte)(146)))), ((int)(((byte)(165)))), ((int)(((byte)(199)))));
-            this.tabControlPanel2.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right) 
-            | DevComponents.DotNetBar.eBorderSide.Bottom)));
-            this.tabControlPanel2.Style.GradientAngle = 90;
-            this.tabControlPanel2.TabItem = this.TabItem_BehavScript;
-            // 
-            // ButtonX_SaveScript
-            // 
-            this.ButtonX_SaveScript.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            resources.ApplyResources(this.ButtonX_SaveScript, "ButtonX_SaveScript");
-            this.ButtonX_SaveScript.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.ButtonX_SaveScript.Name = "ButtonX_SaveScript";
-            this.ButtonX_SaveScript.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.ButtonX_SaveScript.Click += new System.EventHandler(this.ButtonX_SaveScript_Click);
-            // 
-            // RichTextBoxEx_Script
-            // 
-            // 
-            // 
-            // 
-            this.RichTextBoxEx_Script.BackgroundStyle.Class = "RichTextBoxBorder";
-            this.RichTextBoxEx_Script.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            resources.ApplyResources(this.RichTextBoxEx_Script, "RichTextBoxEx_Script");
-            this.RichTextBoxEx_Script.Name = "RichTextBoxEx_Script";
-            this.RichTextBoxEx_Script.Rtf = "{\\rtf1\\ansi\\ansicpg1252\\deff0\\deflang1031{\\fonttbl{\\f0\\fnil\\fcharset0 Consolas;}}" +
-    "\r\n\\viewkind4\\uc1\\pard\\f0\\fs17\\par\r\n}\r\n";
-            this.RichTextBoxEx_Script.GotFocus += new System.EventHandler(this.RichTextBoxEx_Script_GotFocus);
-            this.RichTextBoxEx_Script.LostFocus += new System.EventHandler(this.RichTextBoxEx_Script_LostFocus);
-            // 
-            // TabItem_BehavScript
-            // 
-            this.TabItem_BehavScript.AttachedControl = this.tabControlPanel2;
-            this.TabItem_BehavScript.Name = "TabItem_BehavScript";
-            resources.ApplyResources(this.TabItem_BehavScript, "TabItem_BehavScript");
-            // 
             // tabControlPanel1
             // 
             this.tabControlPanel1.Controls.Add(this.layoutControl1);
@@ -336,6 +291,51 @@ namespace SM64_ROM_Manager
             this.TabItem_BehavProps.Name = "TabItem_BehavProps";
             resources.ApplyResources(this.TabItem_BehavProps, "TabItem_BehavProps");
             // 
+            // tabControlPanel2
+            // 
+            this.tabControlPanel2.Controls.Add(this.ButtonX_SaveScript);
+            this.tabControlPanel2.Controls.Add(this.RichTextBoxEx_Script);
+            this.tabControlPanel2.DisabledBackColor = System.Drawing.Color.Empty;
+            resources.ApplyResources(this.tabControlPanel2, "tabControlPanel2");
+            this.tabControlPanel2.Name = "tabControlPanel2";
+            this.tabControlPanel2.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(239)))), ((int)(((byte)(255)))));
+            this.tabControlPanel2.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
+            this.tabControlPanel2.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
+            this.tabControlPanel2.Style.BorderColor.Color = System.Drawing.Color.FromArgb(((int)(((byte)(146)))), ((int)(((byte)(165)))), ((int)(((byte)(199)))));
+            this.tabControlPanel2.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right) 
+            | DevComponents.DotNetBar.eBorderSide.Bottom)));
+            this.tabControlPanel2.Style.GradientAngle = 90;
+            this.tabControlPanel2.TabItem = this.TabItem_BehavScript;
+            // 
+            // ButtonX_SaveScript
+            // 
+            this.ButtonX_SaveScript.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            resources.ApplyResources(this.ButtonX_SaveScript, "ButtonX_SaveScript");
+            this.ButtonX_SaveScript.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.ButtonX_SaveScript.Name = "ButtonX_SaveScript";
+            this.ButtonX_SaveScript.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.ButtonX_SaveScript.Click += new System.EventHandler(this.ButtonX_SaveScript_Click);
+            // 
+            // RichTextBoxEx_Script
+            // 
+            // 
+            // 
+            // 
+            this.RichTextBoxEx_Script.BackgroundStyle.Class = "RichTextBoxBorder";
+            this.RichTextBoxEx_Script.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            resources.ApplyResources(this.RichTextBoxEx_Script, "RichTextBoxEx_Script");
+            this.RichTextBoxEx_Script.Name = "RichTextBoxEx_Script";
+            this.RichTextBoxEx_Script.Rtf = "{\\rtf1\\ansi\\ansicpg1252\\deff0\\deflang1031{\\fonttbl{\\f0\\fnil\\fcharset0 Consolas;}}" +
+    "\r\n\\viewkind4\\uc1\\pard\\f0\\fs17\\par\r\n}\r\n";
+            this.RichTextBoxEx_Script.GotFocus += new System.EventHandler(this.RichTextBoxEx_Script_GotFocus);
+            this.RichTextBoxEx_Script.LostFocus += new System.EventHandler(this.RichTextBoxEx_Script_LostFocus);
+            // 
+            // TabItem_BehavScript
+            // 
+            this.TabItem_BehavScript.AttachedControl = this.tabControlPanel2;
+            this.TabItem_BehavScript.Name = "TabItem_BehavScript";
+            resources.ApplyResources(this.TabItem_BehavScript, "TabItem_BehavScript");
+            // 
             // customValidator1
             // 
             resources.ApplyResources(this.customValidator1, "customValidator1");
@@ -360,14 +360,15 @@ namespace SM64_ROM_Manager
             this.Name = "BehaviorBankManager";
             this.TopLeftCornerSize = 0;
             this.TopRightCornerSize = 0;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.BehaviorBankManager_FormClosing);
             this.Shown += new System.EventHandler(this.BehaviorBankManager_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.bar1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.AdvTree_Behaviors)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.TabControl_Behav)).EndInit();
             this.TabControl_Behav.ResumeLayout(false);
-            this.tabControlPanel2.ResumeLayout(false);
             this.tabControlPanel1.ResumeLayout(false);
             this.layoutControl1.ResumeLayout(false);
+            this.tabControlPanel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

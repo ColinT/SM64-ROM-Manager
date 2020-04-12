@@ -418,7 +418,7 @@
     <value>TabControl_Behav</value>
   </data>
   <data name="&gt;&gt;tabControlPanel2.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>4</value>
   </data>
   <data name="TabControl_Behav.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -608,12 +608,6 @@
   <data name="&gt;&gt;elementStyle1.Type" xml:space="preserve">
     <value>DevComponents.DotNetBar.ElementStyle, DevComponents.DotNetBar2, Version=14.1.0.37, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;TabItem_BehavScript.Name" xml:space="preserve">
-    <value>TabItem_BehavScript</value>
-  </data>
-  <data name="&gt;&gt;TabItem_BehavScript.Type" xml:space="preserve">
-    <value>DevComponents.DotNetBar.TabItem, DevComponents.DotNetBar2, Version=14.1.0.37, Culture=neutral, PublicKeyToken=null</value>
-  </data>
   <data name="&gt;&gt;layoutControlItem1.Name" xml:space="preserve">
     <value>layoutControlItem1</value>
   </data>
@@ -636,6 +630,12 @@
     <value>TabItem_BehavProps</value>
   </data>
   <data name="&gt;&gt;TabItem_BehavProps.Type" xml:space="preserve">
+    <value>DevComponents.DotNetBar.TabItem, DevComponents.DotNetBar2, Version=14.1.0.37, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;TabItem_BehavScript.Name" xml:space="preserve">
+    <value>TabItem_BehavScript</value>
+  </data>
+  <data name="&gt;&gt;TabItem_BehavScript.Type" xml:space="preserve">
     <value>DevComponents.DotNetBar.TabItem, DevComponents.DotNetBar2, Version=14.1.0.37, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;customValidator1.Name" xml:space="preserve">

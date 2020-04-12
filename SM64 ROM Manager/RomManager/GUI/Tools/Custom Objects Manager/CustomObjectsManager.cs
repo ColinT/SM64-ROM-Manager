@@ -23,8 +23,8 @@ namespace SM64_ROM_Manager
     {
         // C o n s t a n t s
 
-        private const string FILTER_CUSTOM_OBJECT_NAMES = "Custom Objects (*.rmobj)";
-        private const string FILTER_CUSTOM_OBJECT_EXTENSIONS = "*.rmobj";
+        private const string FILTER_CUSTOM_OBJECT_NAMES = "Custom Objects";
+        private const string FILTER_CUSTOM_OBJECT_EXTENSIONS = ".rmobj";
 
         // F i e l d s
 
@@ -38,17 +38,30 @@ namespace SM64_ROM_Manager
 
         public CustomObjectsManager(CustomObjectCollection collection, RomManager rommgr)
         {
-            this.rommgr = rommgr;
+            if (rommgr is object)
+            {
+                this.rommgr = rommgr;
+                rommgr.AfterRomSave += Rommgr_AfterRomSave;
+            }
             customObjectCollection = collection;
 
             // Components
             InitializeComponent();
             UpdateAmbientColors();
             layoutControl1.Enabled = false;
+            TextBoxX_BehavAddr.Enabled = false;
+            TextBoxX_ModelID.Enabled = false;
 
             // Props-Timer
             Timer_PropsChanged = new Timer(1000) { SynchronizingObject = this, AutoReset = false };
             Timer_PropsChanged.Elapsed += Timer_PropsChanged_Elapsed;
+        }
+
+        // R o m M a n a g e r   E v e n t s
+
+        private void Rommgr_AfterRomSave(RomManager sender, EventArgs e)
+        {
+            UpdateAllNodes();
         }
 
         // T i m e r   E v e n t s
@@ -81,6 +94,22 @@ namespace SM64_ROM_Manager
             n.Cells.Add(new Cell());
             UpdateNode(n);
             return n;
+        }
+
+        private void UpdateAllNodes()
+        {
+            AdvTree_Objs.BeginUpdate();
+            updateNodes(AdvTree_Objs.Nodes);
+            AdvTree_Objs.EndUpdate();
+
+            void updateNodes(NodeCollection collection)
+            {
+                foreach (Node n in collection)
+                {
+                    UpdateNode(n);
+                    updateNodes(n.Nodes);
+                }
+            }
         }
 
         private void UpdateNode(Node n)
@@ -239,6 +268,7 @@ namespace SM64_ROM_Manager
             {
                 customObject.ModelProps.UseCustomModelID = false;
                 customObject.ModelProps.Model = frm.Model;
+                UpdateNode(customObject);
                 LoadObjectProps();
                 return true;
             }
@@ -257,6 +287,7 @@ namespace SM64_ROM_Manager
             {
                 customObject.BehaviorProps.UseCustomAddress = false;
                 customObject.BehaviorProps.Behavior = frm.Behavior;
+                UpdateNode(customObject);
                 LoadObjectProps();
                 return true;
             }
@@ -283,7 +314,7 @@ namespace SM64_ROM_Manager
         {
             var ofd_SM64RM_ExportCustomObjectToFile = new OpenFileDialog
             {
-                Filter = $"{FILTER_CUSTOM_OBJECT_NAMES} ({FILTER_CUSTOM_OBJECT_EXTENSIONS})|{FILTER_CUSTOM_OBJECT_EXTENSIONS}",
+                Filter = $"{FILTER_CUSTOM_OBJECT_NAMES} (*{FILTER_CUSTOM_OBJECT_EXTENSIONS})|*{FILTER_CUSTOM_OBJECT_EXTENSIONS}",
                 Multiselect = true
             };
 
@@ -318,7 +349,7 @@ namespace SM64_ROM_Manager
                 sfd_SM64RM_ExportCustomObjectToFile = new CommonOpenFileDialog() { IsFolderPicker = true };
             else
             {
-                sfd_SM64RM_ExportCustomObjectToFile = new CommonSaveFileDialog();
+                sfd_SM64RM_ExportCustomObjectToFile = new CommonSaveFileDialog() { DefaultExtension = FILTER_CUSTOM_OBJECT_EXTENSIONS };
                 sfd_SM64RM_ExportCustomObjectToFile.Filters.Add(new CommonFileDialogFilter(FILTER_CUSTOM_OBJECT_NAMES, FILTER_CUSTOM_OBJECT_EXTENSIONS));
             }
 
@@ -452,6 +483,21 @@ namespace SM64_ROM_Manager
         {
             if (!isLoadingProps && e.EventSource != eEventSource.Code)
                 e.Cancel = e.NewChecked.Checked || !SelectCustomModelFromBank();
+        }
+
+        private void CustomObjectsManager_Load(object sender, EventArgs e)
+        {
+            LoadObjects();
+        }
+
+        private void CustomObjectsManager_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            rommgr.AfterRomSave -= Rommgr_AfterRomSave;
+        }
+
+        private void CheckBoxX_CheckingChanging(object sender, DevComponents.DotNetBar.Controls.CheckBoxXChangeEventArgs e)
+        {
+            e.Cancel = !isLoadingProps && e.EventSource != eEventSource.Code && e.NewChecked.Checked;
         }
     }
 }

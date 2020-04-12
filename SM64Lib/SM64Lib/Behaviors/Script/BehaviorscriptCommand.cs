@@ -1,6 +1,10 @@
 ﻿
+using Newtonsoft.Json;
+using SM64Lib.Json;
+
 namespace SM64Lib.Behaviors.Script
 {
+    [JsonConverter(typeof(BehaviorscriptCommandJsonConverter))]
     public class BehaviorscriptCommand : SM64Lib.Script.BaseCommand<BehaviorscriptCommandTypes>
     {
 

@@ -289,6 +289,7 @@ namespace SM64_ROM_Manager
             this.CheckBoxX_BehavCustom.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.CheckBoxX_BehavCustom.TabIndex = 3;
             this.CheckBoxX_BehavCustom.Text = "Set Behavior Address";
+            this.CheckBoxX_BehavCustom.CheckedChanging += new DevComponents.DotNetBar.Controls.CheckBoxXChangeEventHandler(this.CheckBoxX_CheckingChanging);
             this.CheckBoxX_BehavCustom.CheckedChanged += new System.EventHandler(this.CheckBoxX_BehavCustom_CheckedChanged);
             // 
             // CheckBoxX_BehavBank
@@ -377,6 +378,7 @@ namespace SM64_ROM_Manager
             this.CheckBoxX_CustomModelID.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.CheckBoxX_CustomModelID.TabIndex = 10;
             this.CheckBoxX_CustomModelID.Text = "Set Model ID";
+            this.CheckBoxX_CustomModelID.CheckedChanging += new DevComponents.DotNetBar.Controls.CheckBoxXChangeEventHandler(this.CheckBoxX_CheckingChanging);
             this.CheckBoxX_CustomModelID.CheckedChanged += new System.EventHandler(this.CheckBoxX_CustomModelID_CheckedChanged);
             // 
             // CheckBoxX_CustomModel
@@ -466,6 +468,7 @@ namespace SM64_ROM_Manager
             this.CheckBoxX_NoModel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.CheckBoxX_NoModel.TabIndex = 9;
             this.CheckBoxX_NoModel.Text = "Don\'t use a model";
+            this.CheckBoxX_NoModel.CheckedChanging += new DevComponents.DotNetBar.Controls.CheckBoxXChangeEventHandler(this.CheckBoxX_CheckingChanging);
             this.CheckBoxX_NoModel.CheckedChanged += new System.EventHandler(this.CheckBoxX_NoModel_CheckedChanged);
             // 
             // TextBoxX_Description
@@ -707,6 +710,8 @@ namespace SM64_ROM_Manager
             this.Text = "Custom Objects Manager";
             this.TopLeftCornerSize = 0;
             this.TopRightCornerSize = 0;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CustomObjectsManager_FormClosing);
+            this.Load += new System.EventHandler(this.CustomObjectsManager_Load);
             ((System.ComponentModel.ISupportInitialize)(this.AdvTree_Objs)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bar1)).EndInit();
             this.layoutControl1.ResumeLayout(false);

@@ -72,6 +72,8 @@ namespace SM64_ROM_Manager
                 name = General.BehaviorInfos.GetByBehaviorAddress((uint)behav.Config.BankAddress)?.Name;
             if (string.IsNullOrEmpty(name))
                 name = General.BehaviorInfosCustom.GetByBehaviorAddress((uint)behav.Config.BankAddress)?.Name;
+            if (string.IsNullOrEmpty(name))
+                name = "Unnamed";
 
             var n = new Node()
             {

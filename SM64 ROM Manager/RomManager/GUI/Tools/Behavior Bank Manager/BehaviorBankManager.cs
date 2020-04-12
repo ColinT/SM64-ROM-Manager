@@ -30,6 +30,7 @@ namespace SM64_ROM_Manager
 
         // F i e l d s
 
+        private readonly RomManager rommgr;
         private BehaviorBank bank;
         private Behavior curBehav = null;
         private bool loadingBehavior = false;
@@ -43,7 +44,10 @@ namespace SM64_ROM_Manager
             
             // Add rom manager events
             if (rommgr is object)
+            {
                 rommgr.AfterRomSave += Rommgr_AfterRomSave;
+                this.rommgr = rommgr;
+            }
 
             // Load behavior infos
             General.LoadBehaviorInfosIfEmpty();
@@ -416,6 +420,11 @@ namespace SM64_ROM_Manager
         private void RichTextBoxEx_Script_LostFocus(object sender, EventArgs e)
         {
             ButtonX_SaveScript.Shortcuts.Remove(eShortcut.CtrlS);
+        }
+
+        private void BehaviorBankManager_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            rommgr.AfterRomSave -= Rommgr_AfterRomSave;
         }
     }
 }
