@@ -18,25 +18,7 @@ namespace SM64_ROM_Manager.LevelEditor
 {
     public class OpenGLManager
     {
-        public OpenGLManager(Form targetForm, Control targetControl)
-        {
-            GLControl1 = new GLControl();
-            CameraPrivate = new Camera();
-            /* TODO ERROR: Skipped IfDirectiveTrivia */
-            RenderTimer = new System.Timers.Timer(20);
-            Main = (Form_AreaEditor)targetForm;
-            TargetControl = targetControl;
-            Main.KeyUp += ModelPreview_KeyUp;
-            InitializeGLControl();
-
-            /* TODO ERROR: Skipped IfDirectiveTrivia */
-            RenderTimer.SynchronizingObject = null;
-            RenderTimer.Start();
-            /* TODO ERROR: Skipped EndIfDirectiveTrivia */
-        }
-
         private Form_AreaEditor _Main;
-
         private Form_AreaEditor Main
         {
             [MethodImpl(MethodImplOptions.Synchronized)]
@@ -60,7 +42,6 @@ namespace SM64_ROM_Manager.LevelEditor
         }
 
         private Control _TargetControl;
-
         private Control TargetControl
         {
             [MethodImpl(MethodImplOptions.Synchronized)]
@@ -84,7 +65,6 @@ namespace SM64_ROM_Manager.LevelEditor
         }
 
         private GLControl _GLControl1;
-
         private GLControl GLControl1
         {
             [MethodImpl(MethodImplOptions.Synchronized)]
@@ -126,7 +106,6 @@ namespace SM64_ROM_Manager.LevelEditor
         }
 
         private Camera _CameraPrivate;
-
         private Camera CameraPrivate
         {
             [MethodImpl(MethodImplOptions.Synchronized)]
@@ -152,7 +131,6 @@ namespace SM64_ROM_Manager.LevelEditor
         }
 
         private System.Timers.Timer _RenderTimer;
-
         private System.Timers.Timer RenderTimer
         {
             [MethodImpl(MethodImplOptions.Synchronized)]
@@ -178,7 +156,7 @@ namespace SM64_ROM_Manager.LevelEditor
                 }
             }
         }
-        /* TODO ERROR: Skipped EndIfDirectiveTrivia */
+        
         internal Matrix4 ProjMatrix = default;
         internal bool Ortho = false;
         internal float FOV = 1.048F;
@@ -187,8 +165,24 @@ namespace SM64_ROM_Manager.LevelEditor
         internal bool isMouseDown = false;
         internal float curScale = 1.0F;
 
+        private Renderer rndrDirectionArrow = null;
+
         public OpenGLManager(Form targetForm) : this(targetForm, targetForm)
         {
+        }
+
+        public OpenGLManager(Form targetForm, Control targetControl)
+        {
+            GLControl1 = new GLControl();
+            CameraPrivate = new Camera();
+            RenderTimer = new System.Timers.Timer(20);
+            Main = (Form_AreaEditor)targetForm;
+            TargetControl = targetControl;
+            Main.KeyUp += ModelPreview_KeyUp;
+            InitializeGLControl();
+
+            RenderTimer.SynchronizingObject = null;
+            RenderTimer.Start();
         }
 
         private MapManagement Maps
@@ -608,6 +602,10 @@ namespace SM64_ROM_Manager.LevelEditor
                 if (Main.DrawObjectModels && Main.ObjectModels.ContainsKey(n.ModelID))
                 {
                     objModel = Main.ObjectModels[n.ModelID];
+                }
+                else if (Main.DrawDirectionArrow)
+                {
+                    objModel = Main.ObjectModels[0];
                 }
                 else
                 {

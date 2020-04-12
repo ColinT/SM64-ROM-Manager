@@ -208,6 +208,8 @@ namespace SM64_ROM_Manager.LevelEditor
             }
         }
 
+        internal bool DrawDirectionArrow { get; set; } = true;
+
         internal bool KeepObjectsOnNearestGround
         {
             get
@@ -341,7 +343,12 @@ namespace SM64_ROM_Manager.LevelEditor
             ResumeLayout();
 
             // Add event to remember loaded area displaylist dumps
-            General.LoadedAreaVisualMapDisplayLists += (dls) => Invoke(new Action(() => AreaDisplaylistScriptDumps.Add(CArea.AreaID, dls.Select((n) => n.Script).ToArray())));
+            General.LoadedAreaVisualMapDisplayLists += General_LoadedAreaVisualMapDisplayLists;
+        }
+
+        private void General_LoadedAreaVisualMapDisplayLists(DisplayList[] dls)
+        {
+            Invoke(new Action(() => AreaDisplaylistScriptDumps.Add(CArea.AreaID, dls.Select((n) => n.Script).ToArray())));
         }
 
         internal void ButtonItem10_Click(object sender, EventArgs e)
@@ -351,6 +358,8 @@ namespace SM64_ROM_Manager.LevelEditor
 
         internal void Form_AreaEditor_FormClosing(object sender, FormClosingEventArgs e)
         {
+            General.LoadedAreaVisualMapDisplayLists -= General_LoadedAreaVisualMapDisplayLists;
+
             maps.ReleaseBuffers();
 
             GeolayoutScriptDumps.ForEach((n) => n.Value.Close());
@@ -602,6 +611,24 @@ namespace SM64_ROM_Manager.LevelEditor
             {
                 await LoadCustomObjectBankModels(CLevel.LocalObjectBank);
             }
+
+            // Additional Editor Models
+            await LoadAdditionalEditorModels();
+        }
+
+        private async Task LoadAdditionalEditorModels()
+        {
+            var loaderModule = File3DLoaderModule.LoaderModules.FirstOrDefault(n => n.Name == "Assimp");
+            var loaderOptions = new LoaderOptions()
+            {
+                LoadMaterials = true,
+                UpAxis = UpAxis.Y
+            };
+
+            // Load Model ID 0
+            var mdlDirectionArrow = await loaderModule.InvokeAsync(Path.Combine(Publics.General.MyDataPath, @"Area Editor\Models\Direction Arrow.fbx"), loaderOptions);
+            mdlDirectionArrow.ScaleModel(100f);
+            AddObject3DWithRendererIfNotNull(mdlDirectionArrow, 0);
         }
 
         private async Task LoadCustomObjectBankModels(CustomModelBank objBank)

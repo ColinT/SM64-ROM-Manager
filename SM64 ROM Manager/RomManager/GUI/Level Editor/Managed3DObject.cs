@@ -345,32 +345,30 @@ namespace SM64_ROM_Manager
             var position = new Vector3(Position.X, Position.Y, Position.Z);
             var boundOff = new Vector3(25.0F, 25.0F, 25.0F);
             Color colorToUse = (Color)(col is object ? col : IsSelected ? Color.Yellow : Color.Red);
+
             if (ModelRenderer is object)
-            {
-                var md = ModelRenderer.Model.GetBoundaries();
                 ModelRenderer.DrawModel(mode, new OpenTK.Vector3(Position.X, Position.Y, Position.Z), new OpenTK.Quaternion(Rotation.X, Rotation.Y, Rotation.Z, 1.0F), OpenTK.Vector3.One);
-                if (DrawBoundingBox)
-                {
-                    if (DrawSolid)
-                    {
-                        BoundingBox.DrawSolid(scale, rotation, position, colorToUse, md.Upper + boundOff, md.Lower - boundOff);
-                    }
-                    else
-                    {
-                        BoundingBox.Draw(scale, rotation, position, colorToUse, md.Upper + boundOff, md.Lower - boundOff);
-                    }
-                }
-            }
-            else if (DrawBoundingBox)
+
+            if (DrawBoundingBox)
             {
-                if (DrawSolid)
+                Vector3 upper, lower;
+
+                if (ModelRenderer is object && ModelID != 0)
                 {
-                    BoundingBox.DrawSolid(scale, rotation, position, colorToUse, new Vector3(150.0F, 150.0F, 150.0F), new Vector3(-150.0F, -150.0F, -150.0F));
+                    var md = ModelRenderer.Model.GetBoundaries();
+                    upper = md.Upper + boundOff;
+                    lower = md.Lower - boundOff;
                 }
                 else
                 {
-                    BoundingBox.Draw(scale, rotation, position, colorToUse, new Vector3(150.0F, 150.0F, 150.0F), new Vector3(-150.0F, -150.0F, -150.0F));
+                    upper = new Vector3(150.0F, 150.0F, 150.0F);
+                    lower = new Vector3(-150.0F, -150.0F, -150.0F);
                 }
+
+                if (DrawSolid)
+                    BoundingBox.DrawSolid(scale, rotation, position, colorToUse, upper, lower);
+                else
+                    BoundingBox.Draw(scale, rotation, position, colorToUse, upper, lower);
             }
         }
     }
