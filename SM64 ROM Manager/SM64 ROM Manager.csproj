@@ -462,6 +462,18 @@
     <Compile Include="RomManager\GUI\Tools\Behavior Bank Manager\BehaviorBankManager.Designer.cs">
       <DependentUpon>BehaviorBankManager.cs</DependentUpon>
     </Compile>
+    <Compile Include="RomManager\GUI\Tools\Custom Objects Manager\CustomBehaviorSelector.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RomManager\GUI\Tools\Custom Objects Manager\CustomBehaviorSelector.Designer.cs">
+      <DependentUpon>CustomBehaviorSelector.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RomManager\GUI\Tools\Custom Objects Manager\CustomModelSelector.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RomManager\GUI\Tools\Custom Objects Manager\CustomModelSelector.Designer.cs">
+      <DependentUpon>CustomModelSelector.cs</DependentUpon>
+    </Compile>
     <Compile Include="RomManager\GUI\Tools\Model Bank Manager\AddressListEditor.Designer.cs">
       <DependentUpon>AddressListEditor.cs</DependentUpon>
     </Compile>
@@ -827,6 +839,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="RomManager\GUI\Tools\Behavior Bank Manager\BehaviorBankManager.resx">
       <DependentUpon>BehaviorBankManager.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RomManager\GUI\Tools\Custom Objects Manager\CustomBehaviorSelector.de.resx">
+      <DependentUpon>CustomBehaviorSelector.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RomManager\GUI\Tools\Custom Objects Manager\CustomBehaviorSelector.resx">
+      <DependentUpon>CustomBehaviorSelector.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RomManager\GUI\Tools\Custom Objects Manager\CustomModelSelector.de.resx">
+      <DependentUpon>CustomModelSelector.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RomManager\GUI\Tools\Custom Objects Manager\CustomModelSelector.resx">
+      <DependentUpon>CustomModelSelector.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="RomManager\GUI\Tools\Model Bank Manager\AddressListEditor.de.resx">
       <DependentUpon>AddressListEditor.cs</DependentUpon>

@@ -742,7 +742,7 @@ namespace SM64_ROM_Manager
         {
             if (RomManager is object)
             {
-                var mgr = new CustomObjectsManager(RomManager);
+                var mgr = new CustomObjectsManager(RomManager.CustomObjects, RomManager);
                 mgr.Show();
             }
         }

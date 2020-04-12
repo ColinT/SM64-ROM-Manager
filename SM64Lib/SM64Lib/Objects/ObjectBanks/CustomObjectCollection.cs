@@ -21,21 +21,20 @@ namespace SM64Lib.Objects.ObjectBanks
                 cobj.TakeoverProperties(rommgr);
         }
 
-        public void Export(string filePath, string comments)
+        public void Export(string filePath)
         {
-            Export(filePath, CustomObjects.ToArray(), comments);
+            Export(filePath, CustomObjects.ToArray());
         }
 
-        public static void Export(string filePath, CustomObject customObject, string comments)
+        public static void Export(string filePath, CustomObject customObject)
         {
-            Export(filePath, new CustomObject[] { customObject }, comments);
+            Export(filePath, new CustomObject[] { customObject });
         }
 
-        public static void Export(string filePath, CustomObject[] customObjects, string comments)
+        public static void Export(string filePath, CustomObject[] customObjects)
         {
             var export = new CustomObjectExport()
             {
-                Comments = comments,
                 CustomObjects = customObjects,
                 ExportDate = DateTime.UtcNow
             };

@@ -10,7 +10,6 @@ namespace SM64Lib.Objects.ObjectBanks
 {
     public class CustomObjectExport
     {
-        public string Comments { get; set; }
         public CustomObject[] CustomObjects { get; set; }
         public DateTime ExportDate { get; set; }
         public Dictionary<CustomModelConfig, CustomModel> CustomModels { get; set; } = new Dictionary<CustomModelConfig, CustomModel>();

@@ -10,12 +10,13 @@ namespace SM64Lib.Objects.ObjectBanks
     public class CustomObject
     {
         public string Name { get; set; }
+        public string Description { get; set; }
         public CustomObjectBehaviorProps BehaviorProps { get; private set; } = new CustomObjectBehaviorProps();
         public CustomObjectModelProps ModelProps { get; private set; } = new CustomObjectModelProps();
 
         public void TakeoverProperties(RomManager rommgr)
         {
-            if (BehaviorProps.UseCollisionPointerOfModel && BehaviorProps.Behavior is object && ModelProps.Model is object)
+            if (BehaviorProps.UseCollisionPointerOfModel && BehaviorProps.Behavior is object && (!BehaviorProps.Behavior.Config.IsVanilla || BehaviorProps.Behavior.EnableCollisionPointer) && ModelProps.Model is object)
             {
                 BehaviorProps.Behavior.EnableCollisionPointer = true;
 
