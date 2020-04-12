@@ -812,6 +812,18 @@ namespace SM64_ROM_Manager
             frm.Show();
         }
 
+        public async Task OpenTextureEditor()
+        {
+            // Load main levelscript because the segmented banks
+            var lvlScriptMain = LevelEditor.Form_AreaEditor.LoadMainLevelscript(RomManager);
+            await LevelEditor.Form_AreaEditor.ParseLevelscriptAndLoadSegmentedBanks(RomManager, lvlScriptMain);
+
+            // Open Texture editor
+            var cat = LevelEditor.Form_AreaEditor.GetOtherTexturesCategorie(RomManager);
+            var frm = new LevelEditor.TextureEditor(RomManager, new[] { cat });
+            frm.Show();
+        }
+
         public void OpenStyleManager()
         {
             SM64_ROM_Manager.My.MyProject.Forms.Form_Stylemanager.Show();

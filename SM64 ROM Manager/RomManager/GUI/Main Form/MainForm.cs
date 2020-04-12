@@ -707,5 +707,10 @@ namespace SM64_ROM_Manager
         {
             Controller.OpenCustomObjectsManager();
         }
+
+        private async void ButtonItem_TextureEditor_Click(object sender, EventArgs e)
+        {
+            await Controller.OpenTextureEditor();
+        }
     }
 }

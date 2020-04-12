@@ -592,9 +592,7 @@ namespace SM64_ROM_Manager.LevelEditor
             ObjectModels.Clear();
 
             // Parse root level script
-            var lvlScriptMain = new Levelscript();
-            lvlScriptMain.Read(Rommgr, Rommgr.GetSegBank(0x15).BankAddress, LevelscriptCommandTypes.x1E);
-            await ParseLevelscriptAndLoadModels(lvlScriptMain);
+            await ParseLevelscriptAndLoadModels(LoadMainLevelscript(Rommgr));
 
             // Parse level script
             await ParseLevelscriptAndLoadModels(CLevel.Levelscript);
@@ -629,6 +627,13 @@ namespace SM64_ROM_Manager.LevelEditor
             var mdlDirectionArrow = await loaderModule.InvokeAsync(Path.Combine(Publics.General.MyDataPath, @"Area Editor\Models\Direction Arrow.fbx"), loaderOptions);
             mdlDirectionArrow.ScaleModel(100f);
             AddObject3DWithRendererIfNotNull(mdlDirectionArrow, 0);
+        }
+
+        public static Levelscript LoadMainLevelscript(SM64Lib.RomManager Rommgr)
+        {
+            var lvlScriptMain = new Levelscript();
+            lvlScriptMain.Read(Rommgr, Rommgr.GetSegBank(0x15).BankAddress, LevelscriptCommandTypes.x1E);
+            return lvlScriptMain;
         }
 
         private async Task LoadCustomObjectBankModels(CustomModelBank objBank)
@@ -740,6 +745,53 @@ namespace SM64_ROM_Manager.LevelEditor
             AddObject3DWithRendererIfNotNull(mdl, modelID);
         }
 
+        public static async Task ParseLevelscriptAndLoadSegmentedBanks(SM64Lib.RomManager Rommgr, Levelscript lvlscript)
+        {
+            foreach (LevelscriptCommand cmd in lvlscript)
+            {
+                var switchExpr = cmd.CommandType;
+                switch (switchExpr)
+                {
+                    case LevelscriptCommandTypes.JumpToSegAddr:
+                        var scrpt = ParseLevelscriptCommandGetLevelscriptToJump(Rommgr, cmd);
+                        await ParseLevelscriptAndLoadSegmentedBanks(Rommgr, scrpt);
+                        break;
+                    case LevelscriptCommandTypes.LoadRomToRam:
+                    case LevelscriptCommandTypes.x1A:
+                    case LevelscriptCommandTypes.x18:
+                        ParseLevelscriptCommandLoadSegBank(Rommgr, cmd);
+                        break;
+                }
+            }
+        }
+
+        private static Levelscript ParseLevelscriptCommandGetLevelscriptToJump(SM64Lib.RomManager Rommgr, LevelscriptCommand cmd)
+        {
+            int bankAddr = clJumpToSegAddr.GetSegJumpAddr(cmd);
+            byte segID = Conversions.ToByte(bankAddr >> 24);
+            var seg = Rommgr.GetSegBank(segID);
+            var scrpt = new Levelscript();
+            if (segID != 0 && seg is object)
+                scrpt.Read(Rommgr, bankAddr, LevelscriptCommandTypes.JumpBack);
+            return scrpt;
+        }
+
+        private static void ParseLevelscriptCommandLoadSegBank(SM64Lib.RomManager Rommgr, LevelscriptCommand cmd)
+        {
+            byte segID = clLoadRomToRam.GetSegmentedID(cmd);
+            var segg = Rommgr.GetSegBank(segID);
+            if (segg is null)
+            {
+                var seg = new SegmentedBank();
+                seg.BankID = segID;
+                seg.RomStart = clLoadRomToRam.GetRomStart(cmd);
+                seg.RomEnd = clLoadRomToRam.GetRomEnd(cmd);
+                if (cmd.CommandType == LevelscriptCommandTypes.x1A)
+                    seg.MakeAsMIO0();
+                Rommgr.SetSegBank(seg);
+            }
+        }
+
         private async Task ParseLevelscriptAndLoadModels(Levelscript lvlscript)
         {
             foreach (LevelscriptCommand cmd in lvlscript)
@@ -762,12 +814,9 @@ namespace SM64_ROM_Manager.LevelEditor
                                 glscript.Read(Rommgr, segPointer);
                                 await ParseGeolayoutAndLoadModels(glscript, modelID);
                                 GeolayoutScriptDumps.AddOrUpdate(modelID, glscript);
-                                //glscript.Close();
                             }
-
                             break;
                         }
-
                     case LevelscriptCommandTypes.LoadPolygonWithoutGeo:
                         {
                             byte modelID = clLoadPolygonWithGeo.GetModelID(cmd);
@@ -785,50 +834,19 @@ namespace SM64_ROM_Manager.LevelEditor
                                 var rndr = new Renderer(mdl);
                                 ObjectModels.AddOrUpdate(modelID, rndr);
                             }
-
                             break;
                         }
-
                     case LevelscriptCommandTypes.PaintingWarp:
-                        {
-                            break;
-                        }
-                    // ...
-
+                        break;
                     case LevelscriptCommandTypes.JumpToSegAddr:
-                        {
-                            int bankAddr = clJumpToSegAddr.GetSegJumpAddr(cmd);
-                            byte segID = Conversions.ToByte(bankAddr >> 24);
-                            var seg = Rommgr.GetSegBank(segID);
-                            if (segID != 0 && seg is object)
-                            {
-                                var scrpt = new Levelscript();
-                                scrpt.Read(Rommgr, bankAddr, LevelscriptCommandTypes.JumpBack);
-                                await ParseLevelscriptAndLoadModels(scrpt);
-                            }
-
-                            break;
-                        }
-
+                        var scrpt = ParseLevelscriptCommandGetLevelscriptToJump(Rommgr, cmd);
+                        await ParseLevelscriptAndLoadModels(scrpt);
+                        break;
                     case LevelscriptCommandTypes.LoadRomToRam:
                     case LevelscriptCommandTypes.x1A:
                     case LevelscriptCommandTypes.x18:
-                        {
-                            byte segID = clLoadRomToRam.GetSegmentedID(cmd);
-                            var segg = Rommgr.GetSegBank(segID);
-                            if (segg is null)
-                            {
-                                var seg = new SegmentedBank();
-                                seg.BankID = segID;
-                                seg.RomStart = clLoadRomToRam.GetRomStart(cmd);
-                                seg.RomEnd = clLoadRomToRam.GetRomEnd(cmd);
-                                if (cmd.CommandType == LevelscriptCommandTypes.x1A)
-                                    seg.MakeAsMIO0();
-                                Rommgr.SetSegBank(seg);
-                            }
-
-                            break;
-                        }
+                        ParseLevelscriptCommandLoadSegBank(Rommgr, cmd);
+                        break;
                 }
             }
         }
@@ -3053,11 +3071,60 @@ namespace SM64_ROM_Manager.LevelEditor
         internal IEnumerable<TextureEditor.TextureCategory> LoadOtherTexturesCategories()
         {
             // Load json for other textures
-            var ot = JObject.Parse(File.ReadAllText(Path.Combine(Publics.General.MyDataPath, @"Other\Other Textures.json")));
-            var jblocks = ot["Blocks"].ToObject<TextureBlocksJsonClass[]>();
-            var addresses = ot["Levelscripts to load"].ToObject<string[]>();
             var categories = new List<TextureEditor.TextureCategory>();
             var catLevelTextures = new TextureEditor.TextureCategory() { Name = "Level Textures" };
+
+            // Read Other Textures
+            categories.Add(GetOtherTexturesCategorie(Rommgr));
+
+            // Add all area model textures
+            if (maps.cVisualMap is object)
+            {
+                var block = new TextureEditor.TextureBlock();
+                block.Name = "Area Model";
+                foreach (var kvp in maps.cVisualMap.Materials)
+                {
+                    if (kvp.Value.Image is object)
+                    {
+                        block.Textures.Add(kvp.Value);
+                    }
+                }
+
+                catLevelTextures.Blocks.Add(block);
+            }
+
+            // Add all other textures
+            if (ObjectModels.Any())
+            {
+                var block = new TextureEditor.TextureBlock();
+                block.Name = "Object Models";
+                foreach (var kvpp in ObjectModels)
+                {
+                    foreach (var kvp in kvpp.Value.Model.Materials)
+                    {
+                        if (kvp.Value.Image is object)
+                        {
+                            block.Textures.Add(kvp.Value);
+                        }
+                    }
+                }
+
+                catLevelTextures.Blocks.Add(block);
+            }
+
+            if (catLevelTextures.Blocks.Any())
+            {
+                categories.Add(catLevelTextures);
+            }
+
+            return categories;
+        }
+
+        internal static TextureEditor.TextureCategory GetOtherTexturesCategorie(SM64Lib.RomManager Rommgr)
+        {
+            // Load json for other textures
+            var ot = JObject.Parse(File.ReadAllText(Path.Combine(Publics.General.MyDataPath, @"Other\Other Textures.json")));
+            var jblocks = ot["Blocks"].ToObject<TextureBlocksJsonClass[]>();
 
             // Read Textures
             var catOtherTextures = new TextureEditor.TextureCategory() { Name = "Other Textures" };
@@ -3154,49 +3221,7 @@ namespace SM64_ROM_Manager.LevelEditor
             }
 
             data.Close();
-            categories.Add(catOtherTextures);
-
-            // Add all area model textures
-            if (maps.cVisualMap is object)
-            {
-                var block = new TextureEditor.TextureBlock();
-                block.Name = "Area Model";
-                foreach (var kvp in maps.cVisualMap.Materials)
-                {
-                    if (kvp.Value.Image is object)
-                    {
-                        block.Textures.Add(kvp.Value);
-                    }
-                }
-
-                catLevelTextures.Blocks.Add(block);
-            }
-
-            // Add all other textures
-            if (ObjectModels.Any())
-            {
-                var block = new TextureEditor.TextureBlock();
-                block.Name = "Object Models";
-                foreach (var kvpp in ObjectModels)
-                {
-                    foreach (var kvp in kvpp.Value.Model.Materials)
-                    {
-                        if (kvp.Value.Image is object)
-                        {
-                            block.Textures.Add(kvp.Value);
-                        }
-                    }
-                }
-
-                catLevelTextures.Blocks.Add(block);
-            }
-
-            if (catLevelTextures.Blocks.Any())
-            {
-                categories.Add(catLevelTextures);
-            }
-
-            return categories;
+            return catOtherTextures;
         }
 
         internal void OpenTextureEditor()
