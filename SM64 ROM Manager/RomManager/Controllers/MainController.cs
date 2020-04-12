@@ -725,7 +725,7 @@ namespace SM64_ROM_Manager
                 RomManager.CreateNewGlobalModelBank();
             }
 
-            var mgr = new CustomBankManager(RomManager, RomManager.GlobalModelBank);
+            var mgr = new ModelBankManager(RomManager, RomManager.GlobalModelBank);
             mgr.Show();
         }
 
@@ -904,7 +904,7 @@ namespace SM64_ROM_Manager
                 //void objectCountChanged(object sender, EventArgs e) => 
                 //    LevelCustomObjectsCountChanged?.Invoke(new EventArguments.LevelEventArgs(levelIndex, lvl.LevelID));
 
-                var mgr = new CustomBankManager(RomManager, lvl.LocalObjectBank);
+                var mgr = new ModelBankManager(RomManager, lvl.LocalObjectBank);
                 //mgr.ObjectAdded += objectCountChanged;
                 //mgr.ObjectRemoved += objectCountChanged;
                 mgr.Show();

@@ -11,12 +11,12 @@ using SM64Lib.Objects.ModelBanks;
 
 namespace SM64_ROM_Manager
 {
-    public partial class CustomBankManager
+    public partial class ModelBankManager
     {
 
         // C o n s t r u c t o r s
 
-        public CustomBankManager(RomManager rommgr, CustomModelBank objBank)
+        public ModelBankManager(RomManager rommgr, CustomModelBank objBank)
         {
 
             // G U I

@@ -8,7 +8,7 @@ using Microsoft.VisualBasic.CompilerServices;
 namespace SM64_ROM_Manager
 {
     [DesignerGenerated()]
-    public partial class CustomBankManager : DevComponents.DotNetBar.OfficeForm
+    public partial class ModelBankManager : DevComponents.DotNetBar.OfficeForm
     {
 
         // Form overrides dispose to clean up the component list.
@@ -37,7 +37,7 @@ namespace SM64_ROM_Manager
         [DebuggerStepThrough()]
         private void InitializeComponent()
         {
-            var resources = new System.ComponentModel.ComponentResourceManager(typeof(CustomBankManager));
+            var resources = new System.ComponentModel.ComponentResourceManager(typeof(ModelBankManager));
             ItemListBox1 = new Publics.Controls.ItemListBox();
             ButtonX_CreateNewObject = new DevComponents.DotNetBar.ButtonX();
             ButtonX_CreateNewObject.Click += new EventHandler(ButtonX1_Click);
