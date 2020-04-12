@@ -30,34 +30,47 @@ namespace SM64_ROM_Manager
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CustomObjectsManager));
             this.AdvTree_Objs = new DevComponents.AdvTree.AdvTree();
-            this.nodeConnector1 = new DevComponents.AdvTree.NodeConnector();
-            this.elementStyle1 = new DevComponents.DotNetBar.ElementStyle();
             this.columnHeader1 = new DevComponents.AdvTree.ColumnHeader();
             this.columnHeader2 = new DevComponents.AdvTree.ColumnHeader();
             this.columnHeader3 = new DevComponents.AdvTree.ColumnHeader();
+            this.nodeConnector1 = new DevComponents.AdvTree.NodeConnector();
+            this.elementStyle1 = new DevComponents.DotNetBar.ElementStyle();
             this.bar1 = new DevComponents.DotNetBar.Bar();
             this.ButtonItem_NewObject = new DevComponents.DotNetBar.ButtonItem();
-            this.ButtonItem_DeleteObject = new DevComponents.DotNetBar.ButtonItem();
-            this.buttonItem3 = new DevComponents.DotNetBar.ButtonItem();
             this.buttonItem4 = new DevComponents.DotNetBar.ButtonItem();
-            this.ButtonItem_ExportToFile = new DevComponents.DotNetBar.ButtonItem();
             this.ButtonItem_ImportFromFile = new DevComponents.DotNetBar.ButtonItem();
             this.buttonItem1 = new DevComponents.DotNetBar.ButtonItem();
+            this.ButtonItem_DeleteObject = new DevComponents.DotNetBar.ButtonItem();
+            this.buttonItem3 = new DevComponents.DotNetBar.ButtonItem();
+            this.ButtonItem_ExportToFile = new DevComponents.DotNetBar.ButtonItem();
             this.ButtonItem_UploadToDatabase = new DevComponents.DotNetBar.ButtonItem();
             this.layoutControl1 = new DevComponents.DotNetBar.Layout.LayoutControl();
             this.checkBoxX1 = new DevComponents.DotNetBar.Controls.CheckBoxX();
-            this.layoutControlItem2 = new DevComponents.DotNetBar.Layout.LayoutControlItem();
             this.checkBoxX2 = new DevComponents.DotNetBar.Controls.CheckBoxX();
-            this.layoutControlItem3 = new DevComponents.DotNetBar.Layout.LayoutControlItem();
             this.buttonX1 = new DevComponents.DotNetBar.ButtonX();
-            this.layoutControlItem4 = new DevComponents.DotNetBar.Layout.LayoutControlItem();
-            this.layoutSpacerItem2 = new DevComponents.DotNetBar.Layout.LayoutSpacerItem();
-            this.layoutSpacerItem4 = new DevComponents.DotNetBar.Layout.LayoutSpacerItem();
             this.textBoxX1 = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.layoutControlItem1 = new DevComponents.DotNetBar.Layout.LayoutControlItem();
-            this.layoutSpacerItem1 = new DevComponents.DotNetBar.Layout.LayoutSpacerItem();
             this.textBoxX2 = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.checkBoxX3 = new DevComponents.DotNetBar.Controls.CheckBoxX();
+            this.checkBoxX4 = new DevComponents.DotNetBar.Controls.CheckBoxX();
+            this.textBoxX3 = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.buttonX2 = new DevComponents.DotNetBar.ButtonX();
+            this.checkBoxX5 = new DevComponents.DotNetBar.Controls.CheckBoxX();
+            this.layoutControlItem1 = new DevComponents.DotNetBar.Layout.LayoutControlItem();
+            this.layoutSpacerItem2 = new DevComponents.DotNetBar.Layout.LayoutSpacerItem();
+            this.layoutControlItem2 = new DevComponents.DotNetBar.Layout.LayoutControlItem();
             this.layoutControlItem5 = new DevComponents.DotNetBar.Layout.LayoutControlItem();
+            this.layoutControlItem3 = new DevComponents.DotNetBar.Layout.LayoutControlItem();
+            this.layoutControlItem4 = new DevComponents.DotNetBar.Layout.LayoutControlItem();
+            this.layoutSpacerItem3 = new DevComponents.DotNetBar.Layout.LayoutSpacerItem();
+            this.layoutSpacerItem4 = new DevComponents.DotNetBar.Layout.LayoutSpacerItem();
+            this.layoutControlItem10 = new DevComponents.DotNetBar.Layout.LayoutControlItem();
+            this.layoutControlItem12 = new DevComponents.DotNetBar.Layout.LayoutControlItem();
+            this.layoutControlItem11 = new DevComponents.DotNetBar.Layout.LayoutControlItem();
+            this.layoutControlItem13 = new DevComponents.DotNetBar.Layout.LayoutControlItem();
+            this.layoutSpacerItem5 = new DevComponents.DotNetBar.Layout.LayoutSpacerItem();
+            this.layoutSpacerItem8 = new DevComponents.DotNetBar.Layout.LayoutSpacerItem();
+            this.layoutControlItem14 = new DevComponents.DotNetBar.Layout.LayoutControlItem();
+            this.layoutSpacerItem1 = new DevComponents.DotNetBar.Layout.LayoutSpacerItem();
             this.layoutGroup2 = new DevComponents.DotNetBar.Layout.LayoutGroup();
             this.layoutControlItem6 = new DevComponents.DotNetBar.Layout.LayoutControlItem();
             this.layoutControlItem7 = new DevComponents.DotNetBar.Layout.LayoutControlItem();
@@ -65,15 +78,8 @@ namespace SM64_ROM_Manager
             this.layoutControlItem8 = new DevComponents.DotNetBar.Layout.LayoutControlItem();
             this.layoutControlItem9 = new DevComponents.DotNetBar.Layout.LayoutControlItem();
             this.layoutSpacerItem7 = new DevComponents.DotNetBar.Layout.LayoutSpacerItem();
-            this.checkBoxX3 = new DevComponents.DotNetBar.Controls.CheckBoxX();
-            this.checkBoxX4 = new DevComponents.DotNetBar.Controls.CheckBoxX();
-            this.layoutControlItem10 = new DevComponents.DotNetBar.Layout.LayoutControlItem();
-            this.layoutControlItem11 = new DevComponents.DotNetBar.Layout.LayoutControlItem();
-            this.textBoxX3 = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.layoutControlItem12 = new DevComponents.DotNetBar.Layout.LayoutControlItem();
-            this.buttonX2 = new DevComponents.DotNetBar.ButtonX();
-            this.layoutControlItem13 = new DevComponents.DotNetBar.Layout.LayoutControlItem();
-            this.layoutSpacerItem3 = new DevComponents.DotNetBar.Layout.LayoutSpacerItem();
+            this.checkBoxX6 = new DevComponents.DotNetBar.Controls.CheckBoxX();
+            this.layoutControlItem15 = new DevComponents.DotNetBar.Layout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.AdvTree_Objs)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bar1)).BeginInit();
             this.layoutControl1.SuspendLayout();
@@ -103,16 +109,6 @@ namespace SM64_ROM_Manager
             this.AdvTree_Objs.TabIndex = 0;
             this.AdvTree_Objs.Text = "advTree1";
             // 
-            // nodeConnector1
-            // 
-            this.nodeConnector1.LineColor = System.Drawing.SystemColors.ControlText;
-            // 
-            // elementStyle1
-            // 
-            this.elementStyle1.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.elementStyle1.Name = "elementStyle1";
-            this.elementStyle1.TextColor = System.Drawing.SystemColors.ControlText;
-            // 
             // columnHeader1
             // 
             this.columnHeader1.Name = "columnHeader1";
@@ -131,10 +127,20 @@ namespace SM64_ROM_Manager
             this.columnHeader3.Text = "Behavior Address";
             this.columnHeader3.Width.Absolute = 110;
             // 
+            // nodeConnector1
+            // 
+            this.nodeConnector1.LineColor = System.Drawing.SystemColors.ControlText;
+            // 
+            // elementStyle1
+            // 
+            this.elementStyle1.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.elementStyle1.Name = "elementStyle1";
+            this.elementStyle1.TextColor = System.Drawing.SystemColors.ControlText;
+            // 
             // bar1
             // 
-            this.bar1.AccessibleDescription = "bar1 (bar1)";
-            this.bar1.AccessibleName = "bar1";
+            this.bar1.AccessibleDescription = "DotNetBar Bar (bar1)";
+            this.bar1.AccessibleName = "DotNetBar Bar";
             this.bar1.AccessibleRole = System.Windows.Forms.AccessibleRole.MenuBar;
             this.bar1.AntiAlias = true;
             this.bar1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -161,6 +167,28 @@ namespace SM64_ROM_Manager
             this.ButtonItem_NewObject.Name = "ButtonItem_NewObject";
             this.ButtonItem_NewObject.Text = "New Object";
             // 
+            // buttonItem4
+            // 
+            this.buttonItem4.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
+            this.buttonItem4.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_import_16px;
+            this.buttonItem4.Name = "buttonItem4";
+            this.buttonItem4.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.ButtonItem_ImportFromFile,
+            this.buttonItem1});
+            this.buttonItem4.Text = "Import";
+            // 
+            // ButtonItem_ImportFromFile
+            // 
+            this.ButtonItem_ImportFromFile.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_import_16px;
+            this.ButtonItem_ImportFromFile.Name = "ButtonItem_ImportFromFile";
+            this.ButtonItem_ImportFromFile.Text = "Import from file ...";
+            // 
+            // buttonItem1
+            // 
+            this.buttonItem1.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_download_16px;
+            this.buttonItem1.Name = "buttonItem1";
+            this.buttonItem1.Text = "Import from Database ...";
+            // 
             // ButtonItem_DeleteObject
             // 
             this.ButtonItem_DeleteObject.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
@@ -178,33 +206,11 @@ namespace SM64_ROM_Manager
             this.ButtonItem_UploadToDatabase});
             this.buttonItem3.Text = "Export";
             // 
-            // buttonItem4
-            // 
-            this.buttonItem4.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
-            this.buttonItem4.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_import_16px;
-            this.buttonItem4.Name = "buttonItem4";
-            this.buttonItem4.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.ButtonItem_ImportFromFile,
-            this.buttonItem1});
-            this.buttonItem4.Text = "Import";
-            // 
             // ButtonItem_ExportToFile
             // 
             this.ButtonItem_ExportToFile.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_export_16px;
             this.ButtonItem_ExportToFile.Name = "ButtonItem_ExportToFile";
             this.ButtonItem_ExportToFile.Text = "Export to file ...";
-            // 
-            // ButtonItem_ImportFromFile
-            // 
-            this.ButtonItem_ImportFromFile.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_import_16px;
-            this.ButtonItem_ImportFromFile.Name = "ButtonItem_ImportFromFile";
-            this.ButtonItem_ImportFromFile.Text = "Import from file ...";
-            // 
-            // buttonItem1
-            // 
-            this.buttonItem1.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_download_16px;
-            this.buttonItem1.Name = "buttonItem1";
-            this.buttonItem1.Text = "Import from Database ...";
             // 
             // ButtonItem_UploadToDatabase
             // 
@@ -225,6 +231,8 @@ namespace SM64_ROM_Manager
             this.layoutControl1.Controls.Add(this.checkBoxX4);
             this.layoutControl1.Controls.Add(this.textBoxX3);
             this.layoutControl1.Controls.Add(this.buttonX2);
+            this.layoutControl1.Controls.Add(this.checkBoxX5);
+            this.layoutControl1.Controls.Add(this.checkBoxX6);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Right;
             this.layoutControl1.ForeColor = System.Drawing.Color.Black;
             this.layoutControl1.Location = new System.Drawing.Point(400, 24);
@@ -241,10 +249,14 @@ namespace SM64_ROM_Manager
             this.layoutControlItem4,
             this.layoutSpacerItem3,
             this.layoutSpacerItem4,
+            this.layoutControlItem15,
             this.layoutControlItem10,
             this.layoutControlItem12,
             this.layoutControlItem11,
-            this.layoutControlItem13});
+            this.layoutControlItem13,
+            this.layoutSpacerItem5,
+            this.layoutSpacerItem8,
+            this.layoutControlItem14});
             this.layoutControl1.Size = new System.Drawing.Size(352, 387);
             this.layoutControl1.TabIndex = 2;
             // 
@@ -256,21 +268,13 @@ namespace SM64_ROM_Manager
             // 
             this.checkBoxX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.checkBoxX1.Location = new System.Drawing.Point(4, 63);
-            this.checkBoxX1.Margin = new System.Windows.Forms.Padding(0, 0, 0, 0);
+            this.checkBoxX1.Margin = new System.Windows.Forms.Padding(0);
             this.checkBoxX1.MinimumSize = new System.Drawing.Size(0, 23);
             this.checkBoxX1.Name = "checkBoxX1";
             this.checkBoxX1.Size = new System.Drawing.Size(129, 23);
             this.checkBoxX1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.checkBoxX1.TabIndex = 2;
             this.checkBoxX1.Text = "Set Behavior Address";
-            // 
-            // layoutControlItem2
-            // 
-            this.layoutControlItem2.Control = this.checkBoxX1;
-            this.layoutControlItem2.Height = 31;
-            this.layoutControlItem2.MinSize = new System.Drawing.Size(64, 18);
-            this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Width = 200;
             // 
             // checkBoxX2
             // 
@@ -290,47 +294,17 @@ namespace SM64_ROM_Manager
             this.checkBoxX2.TabIndex = 4;
             this.checkBoxX2.Text = "Select from Behavior Bank";
             // 
-            // layoutControlItem3
-            // 
-            this.layoutControlItem3.Control = this.checkBoxX2;
-            this.layoutControlItem3.Height = 31;
-            this.layoutControlItem3.MinSize = new System.Drawing.Size(64, 18);
-            this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Width = 200;
-            // 
             // buttonX1
             // 
             this.buttonX1.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.buttonX1.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             this.buttonX1.Location = new System.Drawing.Point(204, 94);
-            this.buttonX1.Margin = new System.Windows.Forms.Padding(0, 0, 0, 0);
+            this.buttonX1.Margin = new System.Windows.Forms.Padding(0);
             this.buttonX1.Name = "buttonX1";
             this.buttonX1.Size = new System.Drawing.Size(92, 23);
             this.buttonX1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.buttonX1.TabIndex = 5;
             this.buttonX1.Text = "Select ...";
-            // 
-            // layoutControlItem4
-            // 
-            this.layoutControlItem4.Control = this.buttonX1;
-            this.layoutControlItem4.Height = 31;
-            this.layoutControlItem4.MinSize = new System.Drawing.Size(32, 20);
-            this.layoutControlItem4.Name = "layoutControlItem4";
-            this.layoutControlItem4.Width = 100;
-            // 
-            // layoutSpacerItem2
-            // 
-            this.layoutSpacerItem2.Height = 31;
-            this.layoutSpacerItem2.Name = "layoutSpacerItem2";
-            this.layoutSpacerItem2.Width = 100;
-            this.layoutSpacerItem2.WidthType = DevComponents.DotNetBar.Layout.eLayoutSizeType.Percent;
-            // 
-            // layoutSpacerItem4
-            // 
-            this.layoutSpacerItem4.Height = 31;
-            this.layoutSpacerItem4.Name = "layoutSpacerItem4";
-            this.layoutSpacerItem4.Width = 100;
-            this.layoutSpacerItem4.WidthType = DevComponents.DotNetBar.Layout.eLayoutSizeType.Percent;
             // 
             // textBoxX1
             // 
@@ -343,28 +317,11 @@ namespace SM64_ROM_Manager
             this.textBoxX1.DisabledBackColor = System.Drawing.Color.White;
             this.textBoxX1.ForeColor = System.Drawing.Color.Black;
             this.textBoxX1.Location = new System.Drawing.Point(45, 4);
-            this.textBoxX1.Margin = new System.Windows.Forms.Padding(0, 0, 0, 0);
+            this.textBoxX1.Margin = new System.Windows.Forms.Padding(0);
             this.textBoxX1.Name = "textBoxX1";
             this.textBoxX1.PreventEnterBeep = true;
             this.textBoxX1.Size = new System.Drawing.Size(303, 20);
             this.textBoxX1.TabIndex = 0;
-            // 
-            // layoutControlItem1
-            // 
-            this.layoutControlItem1.Control = this.textBoxX1;
-            this.layoutControlItem1.Height = 28;
-            this.layoutControlItem1.MinSize = new System.Drawing.Size(120, 0);
-            this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Text = "Name:";
-            this.layoutControlItem1.Width = 100;
-            this.layoutControlItem1.WidthType = DevComponents.DotNetBar.Layout.eLayoutSizeType.Percent;
-            // 
-            // layoutSpacerItem1
-            // 
-            this.layoutSpacerItem1.Height = 31;
-            this.layoutSpacerItem1.Name = "layoutSpacerItem1";
-            this.layoutSpacerItem1.Width = 99;
-            this.layoutSpacerItem1.WidthType = DevComponents.DotNetBar.Layout.eLayoutSizeType.Percent;
             // 
             // textBoxX2
             // 
@@ -385,6 +342,114 @@ namespace SM64_ROM_Manager
             this.textBoxX2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.textBoxX2.WatermarkText = "Behavior Address";
             // 
+            // checkBoxX3
+            // 
+            this.checkBoxX3.AutoSize = true;
+            // 
+            // 
+            // 
+            this.checkBoxX3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.checkBoxX3.Location = new System.Drawing.Point(4, 187);
+            this.checkBoxX3.Margin = new System.Windows.Forms.Padding(0);
+            this.checkBoxX3.MinimumSize = new System.Drawing.Size(0, 23);
+            this.checkBoxX3.Name = "checkBoxX3";
+            this.checkBoxX3.Size = new System.Drawing.Size(86, 23);
+            this.checkBoxX3.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.checkBoxX3.TabIndex = 9;
+            this.checkBoxX3.Text = "Set Model ID";
+            // 
+            // checkBoxX4
+            // 
+            this.checkBoxX4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.checkBoxX4.AutoSize = true;
+            // 
+            // 
+            // 
+            this.checkBoxX4.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.checkBoxX4.Location = new System.Drawing.Point(4, 218);
+            this.checkBoxX4.Margin = new System.Windows.Forms.Padding(0);
+            this.checkBoxX4.MinimumSize = new System.Drawing.Size(0, 23);
+            this.checkBoxX4.Name = "checkBoxX4";
+            this.checkBoxX4.Size = new System.Drawing.Size(139, 23);
+            this.checkBoxX4.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.checkBoxX4.TabIndex = 11;
+            this.checkBoxX4.Text = "Select from Model Bank";
+            // 
+            // textBoxX3
+            // 
+            this.textBoxX3.BackColor = System.Drawing.Color.White;
+            // 
+            // 
+            // 
+            this.textBoxX3.Border.Class = "TextBoxBorder";
+            this.textBoxX3.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.textBoxX3.DisabledBackColor = System.Drawing.Color.White;
+            this.textBoxX3.ForeColor = System.Drawing.Color.Black;
+            this.textBoxX3.Location = new System.Drawing.Point(204, 187);
+            this.textBoxX3.Margin = new System.Windows.Forms.Padding(0);
+            this.textBoxX3.Name = "textBoxX3";
+            this.textBoxX3.PreventEnterBeep = true;
+            this.textBoxX3.Size = new System.Drawing.Size(112, 20);
+            this.textBoxX3.TabIndex = 10;
+            this.textBoxX3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBoxX3.WatermarkText = "Model ID";
+            // 
+            // buttonX2
+            // 
+            this.buttonX2.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.buttonX2.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.buttonX2.Location = new System.Drawing.Point(204, 218);
+            this.buttonX2.Margin = new System.Windows.Forms.Padding(0);
+            this.buttonX2.Name = "buttonX2";
+            this.buttonX2.Size = new System.Drawing.Size(92, 24);
+            this.buttonX2.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.buttonX2.TabIndex = 12;
+            this.buttonX2.Text = "Select ...";
+            // 
+            // checkBoxX5
+            // 
+            this.checkBoxX5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.checkBoxX5.AutoSize = true;
+            // 
+            // 
+            // 
+            this.checkBoxX5.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.checkBoxX5.Location = new System.Drawing.Point(4, 282);
+            this.checkBoxX5.Margin = new System.Windows.Forms.Padding(0);
+            this.checkBoxX5.MinimumSize = new System.Drawing.Size(0, 23);
+            this.checkBoxX5.Name = "checkBoxX5";
+            this.checkBoxX5.Size = new System.Drawing.Size(205, 23);
+            this.checkBoxX5.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.checkBoxX5.TabIndex = 15;
+            this.checkBoxX5.Text = "Use Collision Pointer for the Behavior";
+            // 
+            // layoutControlItem1
+            // 
+            this.layoutControlItem1.Control = this.textBoxX1;
+            this.layoutControlItem1.Height = 28;
+            this.layoutControlItem1.MinSize = new System.Drawing.Size(120, 0);
+            this.layoutControlItem1.Name = "layoutControlItem1";
+            this.layoutControlItem1.Text = "Name:";
+            this.layoutControlItem1.Width = 100;
+            this.layoutControlItem1.WidthType = DevComponents.DotNetBar.Layout.eLayoutSizeType.Percent;
+            // 
+            // layoutSpacerItem2
+            // 
+            this.layoutSpacerItem2.Height = 31;
+            this.layoutSpacerItem2.Name = "layoutSpacerItem2";
+            this.layoutSpacerItem2.Width = 100;
+            this.layoutSpacerItem2.WidthType = DevComponents.DotNetBar.Layout.eLayoutSizeType.Percent;
+            // 
+            // layoutControlItem2
+            // 
+            this.layoutControlItem2.Control = this.checkBoxX1;
+            this.layoutControlItem2.Height = 31;
+            this.layoutControlItem2.MinSize = new System.Drawing.Size(64, 18);
+            this.layoutControlItem2.Name = "layoutControlItem2";
+            this.layoutControlItem2.Width = 200;
+            // 
             // layoutControlItem5
             // 
             this.layoutControlItem5.Control = this.textBoxX2;
@@ -392,6 +457,98 @@ namespace SM64_ROM_Manager
             this.layoutControlItem5.MinSize = new System.Drawing.Size(120, 0);
             this.layoutControlItem5.Name = "layoutControlItem5";
             this.layoutControlItem5.Width = 80;
+            // 
+            // layoutControlItem3
+            // 
+            this.layoutControlItem3.Control = this.checkBoxX2;
+            this.layoutControlItem3.Height = 31;
+            this.layoutControlItem3.MinSize = new System.Drawing.Size(64, 18);
+            this.layoutControlItem3.Name = "layoutControlItem3";
+            this.layoutControlItem3.Width = 200;
+            // 
+            // layoutControlItem4
+            // 
+            this.layoutControlItem4.Control = this.buttonX1;
+            this.layoutControlItem4.Height = 31;
+            this.layoutControlItem4.MinSize = new System.Drawing.Size(32, 20);
+            this.layoutControlItem4.Name = "layoutControlItem4";
+            this.layoutControlItem4.Width = 100;
+            // 
+            // layoutSpacerItem3
+            // 
+            this.layoutSpacerItem3.Height = 31;
+            this.layoutSpacerItem3.Name = "layoutSpacerItem3";
+            this.layoutSpacerItem3.Width = 99;
+            this.layoutSpacerItem3.WidthType = DevComponents.DotNetBar.Layout.eLayoutSizeType.Percent;
+            // 
+            // layoutSpacerItem4
+            // 
+            this.layoutSpacerItem4.Height = 31;
+            this.layoutSpacerItem4.Name = "layoutSpacerItem4";
+            this.layoutSpacerItem4.Width = 100;
+            this.layoutSpacerItem4.WidthType = DevComponents.DotNetBar.Layout.eLayoutSizeType.Percent;
+            // 
+            // layoutControlItem10
+            // 
+            this.layoutControlItem10.Control = this.checkBoxX3;
+            this.layoutControlItem10.Height = 31;
+            this.layoutControlItem10.MinSize = new System.Drawing.Size(64, 18);
+            this.layoutControlItem10.Name = "layoutControlItem10";
+            this.layoutControlItem10.Width = 200;
+            // 
+            // layoutControlItem12
+            // 
+            this.layoutControlItem12.Control = this.textBoxX3;
+            this.layoutControlItem12.Height = 28;
+            this.layoutControlItem12.MinSize = new System.Drawing.Size(120, 0);
+            this.layoutControlItem12.Name = "layoutControlItem12";
+            this.layoutControlItem12.Width = 80;
+            // 
+            // layoutControlItem11
+            // 
+            this.layoutControlItem11.Control = this.checkBoxX4;
+            this.layoutControlItem11.Height = 31;
+            this.layoutControlItem11.MinSize = new System.Drawing.Size(64, 18);
+            this.layoutControlItem11.Name = "layoutControlItem11";
+            this.layoutControlItem11.Width = 200;
+            // 
+            // layoutControlItem13
+            // 
+            this.layoutControlItem13.Control = this.buttonX2;
+            this.layoutControlItem13.Height = 31;
+            this.layoutControlItem13.MinSize = new System.Drawing.Size(32, 20);
+            this.layoutControlItem13.Name = "layoutControlItem13";
+            this.layoutControlItem13.Width = 100;
+            // 
+            // layoutSpacerItem5
+            // 
+            this.layoutSpacerItem5.Height = 32;
+            this.layoutSpacerItem5.Name = "layoutSpacerItem5";
+            this.layoutSpacerItem5.Width = 99;
+            this.layoutSpacerItem5.WidthType = DevComponents.DotNetBar.Layout.eLayoutSizeType.Percent;
+            // 
+            // layoutSpacerItem8
+            // 
+            this.layoutSpacerItem8.Height = 32;
+            this.layoutSpacerItem8.Name = "layoutSpacerItem8";
+            this.layoutSpacerItem8.Width = 100;
+            this.layoutSpacerItem8.WidthType = DevComponents.DotNetBar.Layout.eLayoutSizeType.Percent;
+            // 
+            // layoutControlItem14
+            // 
+            this.layoutControlItem14.Control = this.checkBoxX5;
+            this.layoutControlItem14.Height = 31;
+            this.layoutControlItem14.MinSize = new System.Drawing.Size(64, 18);
+            this.layoutControlItem14.Name = "layoutControlItem14";
+            this.layoutControlItem14.Width = 100;
+            this.layoutControlItem14.WidthType = DevComponents.DotNetBar.Layout.eLayoutSizeType.Percent;
+            // 
+            // layoutSpacerItem1
+            // 
+            this.layoutSpacerItem1.Height = 31;
+            this.layoutSpacerItem1.Name = "layoutSpacerItem1";
+            this.layoutSpacerItem1.Width = 99;
+            this.layoutSpacerItem1.WidthType = DevComponents.DotNetBar.Layout.eLayoutSizeType.Percent;
             // 
             // layoutGroup2
             // 
@@ -455,109 +612,30 @@ namespace SM64_ROM_Manager
             this.layoutSpacerItem7.Width = 99;
             this.layoutSpacerItem7.WidthType = DevComponents.DotNetBar.Layout.eLayoutSizeType.Percent;
             // 
-            // checkBoxX3
+            // checkBoxX6
             // 
-            this.checkBoxX3.AutoSize = true;
-            // 
-            // 
-            // 
-            this.checkBoxX3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.checkBoxX3.Location = new System.Drawing.Point(4, 156);
-            this.checkBoxX3.Margin = new System.Windows.Forms.Padding(0);
-            this.checkBoxX3.MinimumSize = new System.Drawing.Size(0, 23);
-            this.checkBoxX3.Name = "checkBoxX3";
-            this.checkBoxX3.Size = new System.Drawing.Size(86, 23);
-            this.checkBoxX3.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.checkBoxX3.TabIndex = 8;
-            this.checkBoxX3.Text = "Set Model ID";
-            // 
-            // checkBoxX4
-            // 
-            this.checkBoxX4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.checkBoxX4.AutoSize = true;
+            this.checkBoxX6.AutoSize = true;
             // 
             // 
             // 
-            this.checkBoxX4.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.checkBoxX4.Location = new System.Drawing.Point(4, 187);
-            this.checkBoxX4.Margin = new System.Windows.Forms.Padding(0);
-            this.checkBoxX4.MinimumSize = new System.Drawing.Size(0, 23);
-            this.checkBoxX4.Name = "checkBoxX4";
-            this.checkBoxX4.Size = new System.Drawing.Size(139, 23);
-            this.checkBoxX4.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.checkBoxX4.TabIndex = 10;
-            this.checkBoxX4.Text = "Select from Model Bank";
+            this.checkBoxX6.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.checkBoxX6.Location = new System.Drawing.Point(4, 156);
+            this.checkBoxX6.Margin = new System.Windows.Forms.Padding(0);
+            this.checkBoxX6.MinimumSize = new System.Drawing.Size(0, 23);
+            this.checkBoxX6.Name = "checkBoxX6";
+            this.checkBoxX6.Size = new System.Drawing.Size(110, 23);
+            this.checkBoxX6.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.checkBoxX6.TabIndex = 8;
+            this.checkBoxX6.Text = "Don\'t use a model";
             // 
-            // layoutControlItem10
+            // layoutControlItem15
             // 
-            this.layoutControlItem10.Control = this.checkBoxX3;
-            this.layoutControlItem10.Height = 31;
-            this.layoutControlItem10.MinSize = new System.Drawing.Size(64, 18);
-            this.layoutControlItem10.Name = "layoutControlItem10";
-            this.layoutControlItem10.Width = 200;
-            // 
-            // layoutControlItem11
-            // 
-            this.layoutControlItem11.Control = this.checkBoxX4;
-            this.layoutControlItem11.Height = 31;
-            this.layoutControlItem11.MinSize = new System.Drawing.Size(64, 18);
-            this.layoutControlItem11.Name = "layoutControlItem11";
-            this.layoutControlItem11.Width = 200;
-            // 
-            // textBoxX3
-            // 
-            this.textBoxX3.BackColor = System.Drawing.Color.White;
-            // 
-            // 
-            // 
-            this.textBoxX3.Border.Class = "TextBoxBorder";
-            this.textBoxX3.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.textBoxX3.DisabledBackColor = System.Drawing.Color.White;
-            this.textBoxX3.ForeColor = System.Drawing.Color.Black;
-            this.textBoxX3.Location = new System.Drawing.Point(204, 156);
-            this.textBoxX3.Margin = new System.Windows.Forms.Padding(0);
-            this.textBoxX3.Name = "textBoxX3";
-            this.textBoxX3.PreventEnterBeep = true;
-            this.textBoxX3.Size = new System.Drawing.Size(112, 20);
-            this.textBoxX3.TabIndex = 9;
-            this.textBoxX3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.textBoxX3.WatermarkText = "Model ID";
-            // 
-            // layoutControlItem12
-            // 
-            this.layoutControlItem12.Control = this.textBoxX3;
-            this.layoutControlItem12.Height = 28;
-            this.layoutControlItem12.MinSize = new System.Drawing.Size(120, 0);
-            this.layoutControlItem12.Name = "layoutControlItem12";
-            this.layoutControlItem12.Width = 80;
-            // 
-            // buttonX2
-            // 
-            this.buttonX2.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.buttonX2.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.buttonX2.Location = new System.Drawing.Point(204, 187);
-            this.buttonX2.Margin = new System.Windows.Forms.Padding(0);
-            this.buttonX2.Name = "buttonX2";
-            this.buttonX2.Size = new System.Drawing.Size(92, 23);
-            this.buttonX2.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.buttonX2.TabIndex = 11;
-            this.buttonX2.Text = "Select ...";
-            // 
-            // layoutControlItem13
-            // 
-            this.layoutControlItem13.Control = this.buttonX2;
-            this.layoutControlItem13.Height = 31;
-            this.layoutControlItem13.MinSize = new System.Drawing.Size(32, 20);
-            this.layoutControlItem13.Name = "layoutControlItem13";
-            this.layoutControlItem13.Width = 100;
-            // 
-            // layoutSpacerItem3
-            // 
-            this.layoutSpacerItem3.Height = 31;
-            this.layoutSpacerItem3.Name = "layoutSpacerItem3";
-            this.layoutSpacerItem3.Width = 99;
-            this.layoutSpacerItem3.WidthType = DevComponents.DotNetBar.Layout.eLayoutSizeType.Percent;
+            this.layoutControlItem15.Control = this.checkBoxX6;
+            this.layoutControlItem15.Height = 31;
+            this.layoutControlItem15.MinSize = new System.Drawing.Size(64, 18);
+            this.layoutControlItem15.Name = "layoutControlItem15";
+            this.layoutControlItem15.Width = 100;
+            this.layoutControlItem15.WidthType = DevComponents.DotNetBar.Layout.eLayoutSizeType.Percent;
             // 
             // CustomObjectsManager
             // 
@@ -626,5 +704,11 @@ namespace SM64_ROM_Manager
         private DevComponents.DotNetBar.Layout.LayoutControlItem layoutControlItem11;
         private DevComponents.DotNetBar.Layout.LayoutControlItem layoutControlItem13;
         private DevComponents.DotNetBar.Layout.LayoutSpacerItem layoutSpacerItem3;
+        private DevComponents.DotNetBar.Controls.CheckBoxX checkBoxX5;
+        private DevComponents.DotNetBar.Layout.LayoutSpacerItem layoutSpacerItem5;
+        private DevComponents.DotNetBar.Layout.LayoutSpacerItem layoutSpacerItem8;
+        private DevComponents.DotNetBar.Layout.LayoutControlItem layoutControlItem14;
+        private DevComponents.DotNetBar.Controls.CheckBoxX checkBoxX6;
+        private DevComponents.DotNetBar.Layout.LayoutControlItem layoutControlItem15;
     }
 }

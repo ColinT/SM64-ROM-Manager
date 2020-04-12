@@ -5,7 +5,7 @@ namespace SM64Lib.Configuration
 {
     public class CustomModelConfig
     {
-        internal delegate void RequestModelEventHandler(CustomModelConfig config, RequestModelEventArgs);
+        internal delegate void RequestModelEventHandler(CustomModelConfig config, RequestModelEventArgs request);
         internal static event RequestModelEventHandler RequestModel;
 
         public string Name { get; set; } = string.Empty;
@@ -20,7 +20,7 @@ namespace SM64Lib.Configuration
 
         internal class RequestModelEventArgs
         {
-            public CustomModel Model { get; set; };
+            public CustomModel Model { get; set; }
         }
     }
 }

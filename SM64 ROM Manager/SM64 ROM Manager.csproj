@@ -526,10 +526,10 @@
     <Compile Include="RomManager\GUI\Settings\LevelEditorInputSettings.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="RomManager\GUI\Tools\CustomObjectsManager.cs">
+    <Compile Include="RomManager\GUI\Tools\Custom Objects Manager\CustomObjectsManager.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="RomManager\GUI\Tools\CustomObjectsManager.Designer.cs">
+    <Compile Include="RomManager\GUI\Tools\Custom Objects Manager\CustomObjectsManager.Designer.cs">
       <DependentUpon>CustomObjectsManager.cs</DependentUpon>
     </Compile>
     <Compile Include="RomManager\GUI\Tools\HexEditor.Designer.cs">
@@ -888,7 +888,7 @@
     <EmbeddedResource Include="RomManager\GUI\Other\Form_ErrorDialog.de.resx">
       <DependentUpon>Form_ErrorDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="RomManager\GUI\Tools\CustomObjectsManager.resx">
+    <EmbeddedResource Include="RomManager\GUI\Tools\Custom Objects Manager\CustomObjectsManager.resx">
       <DependentUpon>CustomObjectsManager.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="RomManager\GUI\Tools\Form_SM64TextConverter.de.resx">

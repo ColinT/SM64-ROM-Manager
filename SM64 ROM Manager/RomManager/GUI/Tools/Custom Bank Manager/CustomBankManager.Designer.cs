@@ -37,343 +37,361 @@ namespace SM64_ROM_Manager
         [DebuggerStepThrough()]
         private void InitializeComponent()
         {
-            var resources = new System.ComponentModel.ComponentResourceManager(typeof(CustomBankManager));
-            _ItemListBox1 = new Publics.Controls.ItemListBox();
-            _ButtonX_CreateNewObject = new DevComponents.DotNetBar.ButtonX();
-            _ButtonX_CreateNewObject.Click += new EventHandler(ButtonX1_Click);
-            _ButtonX_RemoveObject = new DevComponents.DotNetBar.ButtonX();
-            _ButtonX_RemoveObject.Click += new EventHandler(ButtonItem_RemoveObject_Click);
-            _TextBoxX_ModelID = new DevComponents.DotNetBar.Controls.TextBoxX();
-            _TextBoxX_ModelID.TextChanged += new EventHandler(TextBoxX_ModelID_TextChanged);
-            _ButtonX_ImportModel = new DevComponents.DotNetBar.ButtonX();
-            _ButtonX_ImportModel.Click += new EventHandler(ButtonItem_ImportModell_Click);
-            _Panel1 = new Panel();
-            _LayoutControl1 = new DevComponents.DotNetBar.Layout.LayoutControl();
-            _TextBoxX_Name = new DevComponents.DotNetBar.Controls.TextBoxX();
-            _TextBoxX_Name.TextChanged += new EventHandler(TextBoxX_Name_TextChanged);
-            _LabelX_CollisionPointerDestinationsCount = new DevComponents.DotNetBar.LabelX();
-            _ButtonX_EditCollisionPointerDestinations = new DevComponents.DotNetBar.ButtonX();
-            _ButtonX_EditCollisionPointerDestinations.Click += new EventHandler(ButtonX_EditCollisionPointerDestinations_Click);
-            _LayoutControlItem3 = new DevComponents.DotNetBar.Layout.LayoutControlItem();
-            _LayoutControlItem4 = new DevComponents.DotNetBar.Layout.LayoutControlItem();
-            _LayoutGroup_ModelInfo = new DevComponents.DotNetBar.Layout.LayoutGroup();
-            _LayoutControlItem2 = new DevComponents.DotNetBar.Layout.LayoutControlItem();
-            _LayoutControlItem1 = new DevComponents.DotNetBar.Layout.LayoutControlItem();
-            _LayoutGroup_CollisionPointerDestinations = new DevComponents.DotNetBar.Layout.LayoutGroup();
-            _LayoutControlItem5 = new DevComponents.DotNetBar.Layout.LayoutControlItem();
-            _LayoutControlItem6 = new DevComponents.DotNetBar.Layout.LayoutControlItem();
-            _ContextMenuBar1 = new DevComponents.DotNetBar.ContextMenuBar();
-            _CM_Object = new DevComponents.DotNetBar.ButtonItem();
-            _ButtonItem_ImportModell = new DevComponents.DotNetBar.ButtonItem();
-            _ButtonItem_ImportModell.Click += new EventHandler(ButtonItem_ImportModell_Click);
-            _ButtonItem_ImportVisualMap = new DevComponents.DotNetBar.ButtonItem();
-            _ButtonItem_ImportVisualMap.Click += new EventHandler(ButtonItem_ImportVisualMap_Click);
-            _ButtonItem_ImportCollision = new DevComponents.DotNetBar.ButtonItem();
-            _ButtonItem_ImportCollision.Click += new EventHandler(ButtonItem_ImportCollision_Click);
-            _ButtonItem_RemoveCollision = new DevComponents.DotNetBar.ButtonItem();
-            _ButtonItem_RemoveCollision.Click += new EventHandler(ButtonItem_RemoveCollision_Click);
-            _ButtonItem_ShowVisualMap = new DevComponents.DotNetBar.ButtonItem();
-            _ButtonItem_ShowVisualMap.Click += new EventHandler(ButtonItem_ShowVisualMap_Click);
-            _ButtonItem_ShowCollision = new DevComponents.DotNetBar.ButtonItem();
-            _ButtonItem_ShowCollision.Click += new EventHandler(ButtonItem_ShowCollision_Click);
-            _ButtonItem_CopyCollisionPointer = new DevComponents.DotNetBar.ButtonItem();
-            _ButtonItem_CopyCollisionPointer.Click += new EventHandler(ButtonItem_CopyCollisionPointer_Click);
-            _ButtonItem_RemoveObject = new DevComponents.DotNetBar.ButtonItem();
-            _ButtonItem_RemoveObject.Click += new EventHandler(ButtonItem_RemoveObject_Click);
-            _Panel1.SuspendLayout();
-            _LayoutControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)_ContextMenuBar1).BeginInit();
-            SuspendLayout();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CustomBankManager));
+            this._ItemListBox1 = new SM64_ROM_Manager.Publics.Controls.ItemListBox();
+            this._ButtonX_CreateNewObject = new DevComponents.DotNetBar.ButtonX();
+            this._ButtonX_RemoveObject = new DevComponents.DotNetBar.ButtonX();
+            this._TextBoxX_ModelID = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this._ButtonX_ImportModel = new DevComponents.DotNetBar.ButtonX();
+            this._Panel1 = new System.Windows.Forms.Panel();
+            this._LayoutControl1 = new DevComponents.DotNetBar.Layout.LayoutControl();
+            this._TextBoxX_Name = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this._LabelX_CollisionPointerDestinationsCount = new DevComponents.DotNetBar.LabelX();
+            this._ButtonX_EditCollisionPointerDestinations = new DevComponents.DotNetBar.ButtonX();
+            this.LayoutControlItem3 = new DevComponents.DotNetBar.Layout.LayoutControlItem();
+            this.LayoutControlItem4 = new DevComponents.DotNetBar.Layout.LayoutControlItem();
+            this.LayoutGroup_ModelInfo = new DevComponents.DotNetBar.Layout.LayoutGroup();
+            this.LayoutControlItem2 = new DevComponents.DotNetBar.Layout.LayoutControlItem();
+            this.LayoutControlItem1 = new DevComponents.DotNetBar.Layout.LayoutControlItem();
+            this.LayoutGroup_CollisionPointerDestinations = new DevComponents.DotNetBar.Layout.LayoutGroup();
+            this.LayoutControlItem5 = new DevComponents.DotNetBar.Layout.LayoutControlItem();
+            this.LayoutControlItem6 = new DevComponents.DotNetBar.Layout.LayoutControlItem();
+            this._ContextMenuBar1 = new DevComponents.DotNetBar.ContextMenuBar();
+            this.CM_Object = new DevComponents.DotNetBar.ButtonItem();
+            this.ButtonItem_ImportModell = new DevComponents.DotNetBar.ButtonItem();
+            this.ButtonItem_ImportVisualMap = new DevComponents.DotNetBar.ButtonItem();
+            this.ButtonItem_ImportCollision = new DevComponents.DotNetBar.ButtonItem();
+            this.ButtonItem_RemoveCollision = new DevComponents.DotNetBar.ButtonItem();
+            this.ButtonItem_ShowVisualMap = new DevComponents.DotNetBar.ButtonItem();
+            this.ButtonItem_ShowCollision = new DevComponents.DotNetBar.ButtonItem();
+            this.ButtonItem_CopyCollisionPointer = new DevComponents.DotNetBar.ButtonItem();
+            this.ButtonItem_RemoveObject = new DevComponents.DotNetBar.ButtonItem();
+            this._Panel1.SuspendLayout();
+            this._LayoutControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this._ContextMenuBar1)).BeginInit();
+            this.SuspendLayout();
             // 
-            // ItemListBox1
+            // _ItemListBox1
             // 
             // 
             // 
             // 
-            _ItemListBox1.BackgroundStyle.Class = "ItemPanel";
-            _ItemListBox1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            _ItemListBox1.ContainerControlProcessDialogKey = true;
-            resources.ApplyResources(_ItemListBox1, "ItemListBox1");
-            _ItemListBox1.DragDropSupport = true;
-            _ItemListBox1.LayoutOrientation = DevComponents.DotNetBar.eOrientation.Vertical;
-            _ItemListBox1.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
-            _ItemListBox1.Name = "ItemListBox1";
-            _ItemListBox1.ReserveLeftSpace = false;
-            _ItemListBox1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this._ItemListBox1.BackgroundStyle.Class = "ItemPanel";
+            this._ItemListBox1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this._ItemListBox1.ContainerControlProcessDialogKey = true;
+            resources.ApplyResources(this._ItemListBox1, "_ItemListBox1");
+            this._ItemListBox1.DragDropSupport = true;
+            this._ItemListBox1.LayoutOrientation = DevComponents.DotNetBar.eOrientation.Vertical;
+            this._ItemListBox1.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
+            this._ItemListBox1.Name = "_ItemListBox1";
+            this._ItemListBox1.ReserveLeftSpace = false;
+            this._ItemListBox1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             // 
-            // ButtonX_CreateNewObject
+            // _ButtonX_CreateNewObject
             // 
-            _ButtonX_CreateNewObject.AccessibleRole = AccessibleRole.PushButton;
-            resources.ApplyResources(_ButtonX_CreateNewObject, "ButtonX_CreateNewObject");
-            _ButtonX_CreateNewObject.ColorTable = DevComponents.DotNetBar.eButtonColor.Orange;
-            _ButtonX_CreateNewObject.FocusCuesEnabled = false;
-            _ButtonX_CreateNewObject.Image = My.Resources.MyIcons.icons8_plus_math_16px;
-            _ButtonX_CreateNewObject.Name = "ButtonX_CreateNewObject";
-            _ButtonX_CreateNewObject.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            _ButtonX_CreateNewObject.SymbolColor = Color.FromArgb(Conversions.ToInteger(Conversions.ToByte(82)), Conversions.ToInteger(Conversions.ToByte(124)), Conversions.ToInteger(Conversions.ToByte(64)));
-            _ButtonX_CreateNewObject.SymbolSet = DevComponents.DotNetBar.eSymbolSet.Material;
-            _ButtonX_CreateNewObject.SymbolSize = 12.0F;
+            this._ButtonX_CreateNewObject.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            resources.ApplyResources(this._ButtonX_CreateNewObject, "_ButtonX_CreateNewObject");
+            this._ButtonX_CreateNewObject.ColorTable = DevComponents.DotNetBar.eButtonColor.Orange;
+            this._ButtonX_CreateNewObject.FocusCuesEnabled = false;
+            this._ButtonX_CreateNewObject.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_plus_math_16px;
+            this._ButtonX_CreateNewObject.Name = "_ButtonX_CreateNewObject";
+            this._ButtonX_CreateNewObject.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this._ButtonX_CreateNewObject.SymbolColor = System.Drawing.Color.FromArgb(((int)(((byte)(82)))), ((int)(((byte)(124)))), ((int)(((byte)(64)))));
+            this._ButtonX_CreateNewObject.SymbolSet = DevComponents.DotNetBar.eSymbolSet.Material;
+            this._ButtonX_CreateNewObject.SymbolSize = 12F;
+            this._ButtonX_CreateNewObject.Click += new System.EventHandler(this.ButtonX1_Click);
             // 
-            // ButtonX_RemoveObject
+            // _ButtonX_RemoveObject
             // 
-            _ButtonX_RemoveObject.AccessibleRole = AccessibleRole.PushButton;
-            resources.ApplyResources(_ButtonX_RemoveObject, "ButtonX_RemoveObject");
-            _ButtonX_RemoveObject.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            _ButtonX_RemoveObject.FocusCuesEnabled = false;
-            _ButtonX_RemoveObject.Image = My.Resources.MyIcons.icons8_delete_sign_16px;
-            _ButtonX_RemoveObject.Name = "ButtonX_RemoveObject";
-            _ButtonX_RemoveObject.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            _ButtonX_RemoveObject.SymbolColor = Color.FromArgb(Conversions.ToInteger(Conversions.ToByte(150)), Conversions.ToInteger(Conversions.ToByte(0)), Conversions.ToInteger(Conversions.ToByte(0)));
-            _ButtonX_RemoveObject.SymbolSet = DevComponents.DotNetBar.eSymbolSet.Material;
-            _ButtonX_RemoveObject.SymbolSize = 12.0F;
+            this._ButtonX_RemoveObject.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            resources.ApplyResources(this._ButtonX_RemoveObject, "_ButtonX_RemoveObject");
+            this._ButtonX_RemoveObject.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this._ButtonX_RemoveObject.FocusCuesEnabled = false;
+            this._ButtonX_RemoveObject.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_delete_sign_16px;
+            this._ButtonX_RemoveObject.Name = "_ButtonX_RemoveObject";
+            this._ButtonX_RemoveObject.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this._ButtonX_RemoveObject.SymbolColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this._ButtonX_RemoveObject.SymbolSet = DevComponents.DotNetBar.eSymbolSet.Material;
+            this._ButtonX_RemoveObject.SymbolSize = 12F;
+            this._ButtonX_RemoveObject.Click += new System.EventHandler(this.ButtonItem_RemoveObject_Click);
             // 
-            // TextBoxX_ModelID
+            // _TextBoxX_ModelID
             // 
-            _TextBoxX_ModelID.BackColor = Color.White;
-            // 
-            // 
-            // 
-            _TextBoxX_ModelID.Border.Class = "TextBoxBorder";
-            _TextBoxX_ModelID.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            _TextBoxX_ModelID.DisabledBackColor = Color.White;
-            _TextBoxX_ModelID.ForeColor = Color.Black;
-            resources.ApplyResources(_TextBoxX_ModelID, "TextBoxX_ModelID");
-            _TextBoxX_ModelID.Name = "TextBoxX_ModelID";
-            _TextBoxX_ModelID.PreventEnterBeep = true;
-            // 
-            // ButtonX_ImportModel
-            // 
-            _ButtonX_ImportModel.AccessibleRole = AccessibleRole.PushButton;
-            resources.ApplyResources(_ButtonX_ImportModel, "ButtonX_ImportModel");
-            _ButtonX_ImportModel.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            _ButtonX_ImportModel.FocusCuesEnabled = false;
-            _ButtonX_ImportModel.Image = My.Resources.MyIcons.icons8_import_16px;
-            _ButtonX_ImportModel.Name = "ButtonX_ImportModel";
-            _ButtonX_ImportModel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            // 
-            // Panel1
-            // 
-            _Panel1.BackColor = Color.Transparent;
-            _Panel1.Controls.Add(_ButtonX_CreateNewObject);
-            _Panel1.Controls.Add(_ItemListBox1);
-            _Panel1.Controls.Add(_LayoutControl1);
-            resources.ApplyResources(_Panel1, "Panel1");
-            _Panel1.Name = "Panel1";
-            // 
-            // LayoutControl1
-            // 
-            _LayoutControl1.BackColor = Color.FromArgb(Conversions.ToInteger(Conversions.ToByte(255)), Conversions.ToInteger(Conversions.ToByte(255)), Conversions.ToInteger(Conversions.ToByte(255)));
-            _LayoutControl1.Controls.Add(_TextBoxX_ModelID);
-            _LayoutControl1.Controls.Add(_TextBoxX_Name);
-            _LayoutControl1.Controls.Add(_ButtonX_ImportModel);
-            _LayoutControl1.Controls.Add(_ButtonX_RemoveObject);
-            _LayoutControl1.Controls.Add(_LabelX_CollisionPointerDestinationsCount);
-            _LayoutControl1.Controls.Add(_ButtonX_EditCollisionPointerDestinations);
-            resources.ApplyResources(_LayoutControl1, "LayoutControl1");
-            _LayoutControl1.ForeColor = Color.Black;
-            _LayoutControl1.Name = "LayoutControl1";
+            this._TextBoxX_ModelID.BackColor = System.Drawing.Color.White;
             // 
             // 
             // 
-            _LayoutControl1.RootGroup.Items.AddRange(new DevComponents.DotNetBar.Layout.LayoutItemBase[] { _LayoutControlItem3, _LayoutControlItem4, _LayoutGroup_ModelInfo, _LayoutGroup_CollisionPointerDestinations });
+            this._TextBoxX_ModelID.Border.Class = "TextBoxBorder";
+            this._TextBoxX_ModelID.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this._TextBoxX_ModelID.DisabledBackColor = System.Drawing.Color.White;
+            this._TextBoxX_ModelID.ForeColor = System.Drawing.Color.Black;
+            resources.ApplyResources(this._TextBoxX_ModelID, "_TextBoxX_ModelID");
+            this._TextBoxX_ModelID.Name = "_TextBoxX_ModelID";
+            this._TextBoxX_ModelID.PreventEnterBeep = true;
+            this._TextBoxX_ModelID.TextChanged += new System.EventHandler(this.TextBoxX_ModelID_TextChanged);
             // 
-            // TextBoxX_Name
+            // _ButtonX_ImportModel
             // 
-            _TextBoxX_Name.BackColor = Color.White;
+            this._ButtonX_ImportModel.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            resources.ApplyResources(this._ButtonX_ImportModel, "_ButtonX_ImportModel");
+            this._ButtonX_ImportModel.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this._ButtonX_ImportModel.FocusCuesEnabled = false;
+            this._ButtonX_ImportModel.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_import_16px;
+            this._ButtonX_ImportModel.Name = "_ButtonX_ImportModel";
+            this._ButtonX_ImportModel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this._ButtonX_ImportModel.Click += new System.EventHandler(this.ButtonItem_ImportModell_Click);
+            // 
+            // _Panel1
+            // 
+            this._Panel1.BackColor = System.Drawing.Color.Transparent;
+            this._Panel1.Controls.Add(this._ButtonX_CreateNewObject);
+            this._Panel1.Controls.Add(this._ItemListBox1);
+            this._Panel1.Controls.Add(this._LayoutControl1);
+            resources.ApplyResources(this._Panel1, "_Panel1");
+            this._Panel1.Name = "_Panel1";
+            // 
+            // _LayoutControl1
+            // 
+            this._LayoutControl1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this._LayoutControl1.Controls.Add(this._TextBoxX_ModelID);
+            this._LayoutControl1.Controls.Add(this._TextBoxX_Name);
+            this._LayoutControl1.Controls.Add(this._ButtonX_ImportModel);
+            this._LayoutControl1.Controls.Add(this._ButtonX_RemoveObject);
+            this._LayoutControl1.Controls.Add(this._LabelX_CollisionPointerDestinationsCount);
+            this._LayoutControl1.Controls.Add(this._ButtonX_EditCollisionPointerDestinations);
+            resources.ApplyResources(this._LayoutControl1, "_LayoutControl1");
+            this._LayoutControl1.ForeColor = System.Drawing.Color.Black;
+            this._LayoutControl1.Name = "_LayoutControl1";
             // 
             // 
             // 
-            _TextBoxX_Name.Border.Class = "TextBoxBorder";
-            _TextBoxX_Name.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            _TextBoxX_Name.DisabledBackColor = Color.White;
-            _TextBoxX_Name.ForeColor = Color.Black;
-            resources.ApplyResources(_TextBoxX_Name, "TextBoxX_Name");
-            _TextBoxX_Name.Name = "TextBoxX_Name";
-            _TextBoxX_Name.PreventEnterBeep = true;
+            this._LayoutControl1.RootGroup.Items.AddRange(new DevComponents.DotNetBar.Layout.LayoutItemBase[] {
+            this.LayoutControlItem3,
+            this.LayoutControlItem4,
+            this.LayoutGroup_ModelInfo,
+            this.LayoutGroup_CollisionPointerDestinations});
             // 
-            // LabelX_CollisionPointerDestinationsCount
+            // _TextBoxX_Name
             // 
-            // 
+            this._TextBoxX_Name.BackColor = System.Drawing.Color.White;
             // 
             // 
-            _LabelX_CollisionPointerDestinationsCount.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            resources.ApplyResources(_LabelX_CollisionPointerDestinationsCount, "LabelX_CollisionPointerDestinationsCount");
-            _LabelX_CollisionPointerDestinationsCount.Name = "LabelX_CollisionPointerDestinationsCount";
-            _LabelX_CollisionPointerDestinationsCount.TextAlignment = StringAlignment.Center;
             // 
-            // ButtonX_EditCollisionPointerDestinations
+            this._TextBoxX_Name.Border.Class = "TextBoxBorder";
+            this._TextBoxX_Name.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this._TextBoxX_Name.DisabledBackColor = System.Drawing.Color.White;
+            this._TextBoxX_Name.ForeColor = System.Drawing.Color.Black;
+            resources.ApplyResources(this._TextBoxX_Name, "_TextBoxX_Name");
+            this._TextBoxX_Name.Name = "_TextBoxX_Name";
+            this._TextBoxX_Name.PreventEnterBeep = true;
+            this._TextBoxX_Name.TextChanged += new System.EventHandler(this.TextBoxX_Name_TextChanged);
             // 
-            _ButtonX_EditCollisionPointerDestinations.AccessibleRole = AccessibleRole.PushButton;
-            _ButtonX_EditCollisionPointerDestinations.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            _ButtonX_EditCollisionPointerDestinations.Image = My.Resources.MyIcons.icons8_edit_16px;
-            resources.ApplyResources(_ButtonX_EditCollisionPointerDestinations, "ButtonX_EditCollisionPointerDestinations");
-            _ButtonX_EditCollisionPointerDestinations.Name = "ButtonX_EditCollisionPointerDestinations";
-            _ButtonX_EditCollisionPointerDestinations.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            // _LabelX_CollisionPointerDestinationsCount
+            // 
+            // 
+            // 
+            // 
+            this._LabelX_CollisionPointerDestinationsCount.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            resources.ApplyResources(this._LabelX_CollisionPointerDestinationsCount, "_LabelX_CollisionPointerDestinationsCount");
+            this._LabelX_CollisionPointerDestinationsCount.Name = "_LabelX_CollisionPointerDestinationsCount";
+            this._LabelX_CollisionPointerDestinationsCount.TextAlignment = System.Drawing.StringAlignment.Center;
+            // 
+            // _ButtonX_EditCollisionPointerDestinations
+            // 
+            this._ButtonX_EditCollisionPointerDestinations.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this._ButtonX_EditCollisionPointerDestinations.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this._ButtonX_EditCollisionPointerDestinations.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_edit_16px;
+            resources.ApplyResources(this._ButtonX_EditCollisionPointerDestinations, "_ButtonX_EditCollisionPointerDestinations");
+            this._ButtonX_EditCollisionPointerDestinations.Name = "_ButtonX_EditCollisionPointerDestinations";
+            this._ButtonX_EditCollisionPointerDestinations.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this._ButtonX_EditCollisionPointerDestinations.Click += new System.EventHandler(this.ButtonX_EditCollisionPointerDestinations_Click);
             // 
             // LayoutControlItem3
             // 
-            _LayoutControlItem3.Control = _ButtonX_ImportModel;
-            _LayoutControlItem3.Height = 31;
-            _LayoutControlItem3.MinSize = new Size(32, 20);
-            _LayoutControlItem3.Name = "LayoutControlItem3";
-            _LayoutControlItem3.Width = 99;
-            _LayoutControlItem3.WidthType = DevComponents.DotNetBar.Layout.eLayoutSizeType.Percent;
+            this.LayoutControlItem3.Control = this._ButtonX_ImportModel;
+            this.LayoutControlItem3.Height = 31;
+            this.LayoutControlItem3.MinSize = new System.Drawing.Size(32, 20);
+            this.LayoutControlItem3.Name = "LayoutControlItem3";
+            this.LayoutControlItem3.Width = 99;
+            this.LayoutControlItem3.WidthType = DevComponents.DotNetBar.Layout.eLayoutSizeType.Percent;
             // 
             // LayoutControlItem4
             // 
-            _LayoutControlItem4.Control = _ButtonX_RemoveObject;
-            _LayoutControlItem4.Height = 31;
-            _LayoutControlItem4.MinSize = new Size(32, 20);
-            _LayoutControlItem4.Name = "LayoutControlItem4";
-            _LayoutControlItem4.Width = 31;
+            this.LayoutControlItem4.Control = this._ButtonX_RemoveObject;
+            this.LayoutControlItem4.Height = 31;
+            this.LayoutControlItem4.MinSize = new System.Drawing.Size(32, 20);
+            this.LayoutControlItem4.Name = "LayoutControlItem4";
+            this.LayoutControlItem4.Width = 31;
             // 
             // LayoutGroup_ModelInfo
             // 
-            _LayoutGroup_ModelInfo.Height = 57;
-            _LayoutGroup_ModelInfo.Items.AddRange(new DevComponents.DotNetBar.Layout.LayoutItemBase[] { _LayoutControlItem2, _LayoutControlItem1 });
-            _LayoutGroup_ModelInfo.MinSize = new Size(120, 32);
-            _LayoutGroup_ModelInfo.Name = "LayoutGroup_ModelInfo";
-            _LayoutGroup_ModelInfo.Padding = new Padding(0);
-            _LayoutGroup_ModelInfo.TextPosition = DevComponents.DotNetBar.Layout.eLayoutPosition.Top;
-            _LayoutGroup_ModelInfo.Width = 100;
-            _LayoutGroup_ModelInfo.WidthType = DevComponents.DotNetBar.Layout.eLayoutSizeType.Percent;
+            this.LayoutGroup_ModelInfo.Height = 57;
+            this.LayoutGroup_ModelInfo.Items.AddRange(new DevComponents.DotNetBar.Layout.LayoutItemBase[] {
+            this.LayoutControlItem2,
+            this.LayoutControlItem1});
+            this.LayoutGroup_ModelInfo.MinSize = new System.Drawing.Size(120, 32);
+            this.LayoutGroup_ModelInfo.Name = "LayoutGroup_ModelInfo";
+            this.LayoutGroup_ModelInfo.Padding = new System.Windows.Forms.Padding(0);
+            this.LayoutGroup_ModelInfo.TextPosition = DevComponents.DotNetBar.Layout.eLayoutPosition.Top;
+            this.LayoutGroup_ModelInfo.Width = 100;
+            this.LayoutGroup_ModelInfo.WidthType = DevComponents.DotNetBar.Layout.eLayoutSizeType.Percent;
             // 
             // LayoutControlItem2
             // 
-            _LayoutControlItem2.Control = _TextBoxX_Name;
-            _LayoutControlItem2.Height = 28;
-            _LayoutControlItem2.MinSize = new Size(120, 0);
-            _LayoutControlItem2.Name = "LayoutControlItem2";
-            resources.ApplyResources(_LayoutControlItem2, "LayoutControlItem2");
-            _LayoutControlItem2.Width = 100;
-            _LayoutControlItem2.WidthType = DevComponents.DotNetBar.Layout.eLayoutSizeType.Percent;
+            this.LayoutControlItem2.Control = this._TextBoxX_Name;
+            this.LayoutControlItem2.Height = 28;
+            this.LayoutControlItem2.MinSize = new System.Drawing.Size(120, 0);
+            this.LayoutControlItem2.Name = "LayoutControlItem2";
+            resources.ApplyResources(this.LayoutControlItem2, "LayoutControlItem2");
+            this.LayoutControlItem2.Width = 100;
+            this.LayoutControlItem2.WidthType = DevComponents.DotNetBar.Layout.eLayoutSizeType.Percent;
             // 
             // LayoutControlItem1
             // 
-            _LayoutControlItem1.Control = _TextBoxX_ModelID;
-            _LayoutControlItem1.Height = 28;
-            _LayoutControlItem1.MinSize = new Size(120, 0);
-            _LayoutControlItem1.Name = "LayoutControlItem1";
-            resources.ApplyResources(_LayoutControlItem1, "LayoutControlItem1");
-            _LayoutControlItem1.Width = 100;
-            _LayoutControlItem1.WidthType = DevComponents.DotNetBar.Layout.eLayoutSizeType.Percent;
+            this.LayoutControlItem1.Control = this._TextBoxX_ModelID;
+            this.LayoutControlItem1.Height = 28;
+            this.LayoutControlItem1.MinSize = new System.Drawing.Size(120, 0);
+            this.LayoutControlItem1.Name = "LayoutControlItem1";
+            resources.ApplyResources(this.LayoutControlItem1, "LayoutControlItem1");
+            this.LayoutControlItem1.Width = 100;
+            this.LayoutControlItem1.WidthType = DevComponents.DotNetBar.Layout.eLayoutSizeType.Percent;
             // 
             // LayoutGroup_CollisionPointerDestinations
             // 
-            _LayoutGroup_CollisionPointerDestinations.Height = 35;
-            _LayoutGroup_CollisionPointerDestinations.Items.AddRange(new DevComponents.DotNetBar.Layout.LayoutItemBase[] { _LayoutControlItem5, _LayoutControlItem6 });
-            _LayoutGroup_CollisionPointerDestinations.MinSize = new Size(120, 32);
-            _LayoutGroup_CollisionPointerDestinations.Name = "LayoutGroup_CollisionPointerDestinations";
-            _LayoutGroup_CollisionPointerDestinations.Padding = new Padding(0);
-            _LayoutGroup_CollisionPointerDestinations.TextPadding = new Padding(4, 0, 0, 0);
-            _LayoutGroup_CollisionPointerDestinations.TextPosition = DevComponents.DotNetBar.Layout.eLayoutPosition.Top;
-            _LayoutGroup_CollisionPointerDestinations.Width = 100;
-            _LayoutGroup_CollisionPointerDestinations.WidthType = DevComponents.DotNetBar.Layout.eLayoutSizeType.Percent;
+            this.LayoutGroup_CollisionPointerDestinations.Height = 35;
+            this.LayoutGroup_CollisionPointerDestinations.Items.AddRange(new DevComponents.DotNetBar.Layout.LayoutItemBase[] {
+            this.LayoutControlItem5,
+            this.LayoutControlItem6});
+            this.LayoutGroup_CollisionPointerDestinations.MinSize = new System.Drawing.Size(120, 32);
+            this.LayoutGroup_CollisionPointerDestinations.Name = "LayoutGroup_CollisionPointerDestinations";
+            this.LayoutGroup_CollisionPointerDestinations.Padding = new System.Windows.Forms.Padding(0);
+            this.LayoutGroup_CollisionPointerDestinations.TextPadding = new System.Windows.Forms.Padding(4, 0, 0, 0);
+            this.LayoutGroup_CollisionPointerDestinations.TextPosition = DevComponents.DotNetBar.Layout.eLayoutPosition.Top;
+            this.LayoutGroup_CollisionPointerDestinations.Width = 100;
+            this.LayoutGroup_CollisionPointerDestinations.WidthType = DevComponents.DotNetBar.Layout.eLayoutSizeType.Percent;
             // 
             // LayoutControlItem5
             // 
-            _LayoutControlItem5.Control = _LabelX_CollisionPointerDestinationsCount;
-            _LayoutControlItem5.Height = 31;
-            _LayoutControlItem5.MinSize = new Size(64, 18);
-            _LayoutControlItem5.Name = "LayoutControlItem5";
-            resources.ApplyResources(_LayoutControlItem5, "LayoutControlItem5");
-            _LayoutControlItem5.Width = 99;
-            _LayoutControlItem5.WidthType = DevComponents.DotNetBar.Layout.eLayoutSizeType.Percent;
+            this.LayoutControlItem5.Control = this._LabelX_CollisionPointerDestinationsCount;
+            this.LayoutControlItem5.Height = 31;
+            this.LayoutControlItem5.MinSize = new System.Drawing.Size(64, 18);
+            this.LayoutControlItem5.Name = "LayoutControlItem5";
+            resources.ApplyResources(this.LayoutControlItem5, "LayoutControlItem5");
+            this.LayoutControlItem5.Width = 99;
+            this.LayoutControlItem5.WidthType = DevComponents.DotNetBar.Layout.eLayoutSizeType.Percent;
             // 
             // LayoutControlItem6
             // 
-            _LayoutControlItem6.Control = _ButtonX_EditCollisionPointerDestinations;
-            _LayoutControlItem6.Height = 31;
-            _LayoutControlItem6.MinSize = new Size(32, 20);
-            _LayoutControlItem6.Name = "LayoutControlItem6";
-            _LayoutControlItem6.Width = 90;
+            this.LayoutControlItem6.Control = this._ButtonX_EditCollisionPointerDestinations;
+            this.LayoutControlItem6.Height = 31;
+            this.LayoutControlItem6.MinSize = new System.Drawing.Size(32, 20);
+            this.LayoutControlItem6.Name = "LayoutControlItem6";
+            this.LayoutControlItem6.Width = 90;
             // 
-            // ContextMenuBar1
+            // _ContextMenuBar1
             // 
-            _ContextMenuBar1.AntiAlias = true;
-            resources.ApplyResources(_ContextMenuBar1, "ContextMenuBar1");
-            _ContextMenuBar1.IsMaximized = false;
-            _ContextMenuBar1.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] { _CM_Object });
-            _ContextMenuBar1.Name = "ContextMenuBar1";
-            _ContextMenuBar1.Stretch = true;
-            _ContextMenuBar1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            _ContextMenuBar1.TabStop = false;
+            this._ContextMenuBar1.AntiAlias = true;
+            resources.ApplyResources(this._ContextMenuBar1, "_ContextMenuBar1");
+            this._ContextMenuBar1.IsMaximized = false;
+            this._ContextMenuBar1.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.CM_Object});
+            this._ContextMenuBar1.Name = "_ContextMenuBar1";
+            this._ContextMenuBar1.Stretch = true;
+            this._ContextMenuBar1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this._ContextMenuBar1.TabStop = false;
             // 
             // CM_Object
             // 
-            _CM_Object.AutoExpandOnClick = true;
-            _CM_Object.Name = "CM_Object";
-            _CM_Object.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] { _ButtonItem_ImportModell, _ButtonItem_ImportVisualMap, _ButtonItem_ImportCollision, _ButtonItem_RemoveCollision, _ButtonItem_ShowVisualMap, _ButtonItem_ShowCollision, _ButtonItem_CopyCollisionPointer, _ButtonItem_RemoveObject });
-            resources.ApplyResources(_CM_Object, "CM_Object");
+            this.CM_Object.AutoExpandOnClick = true;
+            this.CM_Object.Name = "CM_Object";
+            this.CM_Object.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.ButtonItem_ImportModell,
+            this.ButtonItem_ImportVisualMap,
+            this.ButtonItem_ImportCollision,
+            this.ButtonItem_RemoveCollision,
+            this.ButtonItem_ShowVisualMap,
+            this.ButtonItem_ShowCollision,
+            this.ButtonItem_CopyCollisionPointer,
+            this.ButtonItem_RemoveObject});
+            resources.ApplyResources(this.CM_Object, "CM_Object");
             // 
             // ButtonItem_ImportModell
             // 
-            _ButtonItem_ImportModell.Image = My.Resources.MyIcons.icons8_import_16px;
-            _ButtonItem_ImportModell.Name = "ButtonItem_ImportModell";
-            resources.ApplyResources(_ButtonItem_ImportModell, "ButtonItem_ImportModell");
+            this.ButtonItem_ImportModell.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_import_16px;
+            this.ButtonItem_ImportModell.Name = "ButtonItem_ImportModell";
+            resources.ApplyResources(this.ButtonItem_ImportModell, "ButtonItem_ImportModell");
+            this.ButtonItem_ImportModell.Click += new System.EventHandler(this.ButtonItem_ImportModell_Click);
             // 
             // ButtonItem_ImportVisualMap
             // 
-            _ButtonItem_ImportVisualMap.Image = (Image)resources.GetObject("ButtonItem_ImportVisualMap.Image");
-            _ButtonItem_ImportVisualMap.Name = "ButtonItem_ImportVisualMap";
-            resources.ApplyResources(_ButtonItem_ImportVisualMap, "ButtonItem_ImportVisualMap");
+            this.ButtonItem_ImportVisualMap.Image = ((System.Drawing.Image)(resources.GetObject("ButtonItem_ImportVisualMap.Image")));
+            this.ButtonItem_ImportVisualMap.Name = "ButtonItem_ImportVisualMap";
+            resources.ApplyResources(this.ButtonItem_ImportVisualMap, "ButtonItem_ImportVisualMap");
+            this.ButtonItem_ImportVisualMap.Click += new System.EventHandler(this.ButtonItem_ImportVisualMap_Click);
             // 
             // ButtonItem_ImportCollision
             // 
-            _ButtonItem_ImportCollision.Image = (Image)resources.GetObject("ButtonItem_ImportCollision.Image");
-            _ButtonItem_ImportCollision.Name = "ButtonItem_ImportCollision";
-            resources.ApplyResources(_ButtonItem_ImportCollision, "ButtonItem_ImportCollision");
+            this.ButtonItem_ImportCollision.Image = ((System.Drawing.Image)(resources.GetObject("ButtonItem_ImportCollision.Image")));
+            this.ButtonItem_ImportCollision.Name = "ButtonItem_ImportCollision";
+            resources.ApplyResources(this.ButtonItem_ImportCollision, "ButtonItem_ImportCollision");
+            this.ButtonItem_ImportCollision.Click += new System.EventHandler(this.ButtonItem_ImportCollision_Click);
             // 
             // ButtonItem_RemoveCollision
             // 
-            _ButtonItem_RemoveCollision.Image = My.Resources.MyIcons.icons8_delete_2_16px;
-            _ButtonItem_RemoveCollision.Name = "ButtonItem_RemoveCollision";
-            resources.ApplyResources(_ButtonItem_RemoveCollision, "ButtonItem_RemoveCollision");
+            this.ButtonItem_RemoveCollision.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_delete_2_16px;
+            this.ButtonItem_RemoveCollision.Name = "ButtonItem_RemoveCollision";
+            resources.ApplyResources(this.ButtonItem_RemoveCollision, "ButtonItem_RemoveCollision");
+            this.ButtonItem_RemoveCollision.Click += new System.EventHandler(this.ButtonItem_RemoveCollision_Click);
             // 
             // ButtonItem_ShowVisualMap
             // 
-            _ButtonItem_ShowVisualMap.BeginGroup = true;
-            _ButtonItem_ShowVisualMap.Image = (Image)resources.GetObject("ButtonItem_ShowVisualMap.Image");
-            _ButtonItem_ShowVisualMap.Name = "ButtonItem_ShowVisualMap";
-            resources.ApplyResources(_ButtonItem_ShowVisualMap, "ButtonItem_ShowVisualMap");
+            this.ButtonItem_ShowVisualMap.BeginGroup = true;
+            this.ButtonItem_ShowVisualMap.Image = ((System.Drawing.Image)(resources.GetObject("ButtonItem_ShowVisualMap.Image")));
+            this.ButtonItem_ShowVisualMap.Name = "ButtonItem_ShowVisualMap";
+            resources.ApplyResources(this.ButtonItem_ShowVisualMap, "ButtonItem_ShowVisualMap");
+            this.ButtonItem_ShowVisualMap.Click += new System.EventHandler(this.ButtonItem_ShowVisualMap_Click);
             // 
             // ButtonItem_ShowCollision
             // 
-            _ButtonItem_ShowCollision.Image = (Image)resources.GetObject("ButtonItem_ShowCollision.Image");
-            _ButtonItem_ShowCollision.Name = "ButtonItem_ShowCollision";
-            resources.ApplyResources(_ButtonItem_ShowCollision, "ButtonItem_ShowCollision");
+            this.ButtonItem_ShowCollision.Image = ((System.Drawing.Image)(resources.GetObject("ButtonItem_ShowCollision.Image")));
+            this.ButtonItem_ShowCollision.Name = "ButtonItem_ShowCollision";
+            resources.ApplyResources(this.ButtonItem_ShowCollision, "ButtonItem_ShowCollision");
+            this.ButtonItem_ShowCollision.Click += new System.EventHandler(this.ButtonItem_ShowCollision_Click);
             // 
             // ButtonItem_CopyCollisionPointer
             // 
-            _ButtonItem_CopyCollisionPointer.BeginGroup = true;
-            _ButtonItem_CopyCollisionPointer.Image = My.Resources.MyIcons.icons8_copy_16px;
-            _ButtonItem_CopyCollisionPointer.Name = "ButtonItem_CopyCollisionPointer";
-            resources.ApplyResources(_ButtonItem_CopyCollisionPointer, "ButtonItem_CopyCollisionPointer");
+            this.ButtonItem_CopyCollisionPointer.BeginGroup = true;
+            this.ButtonItem_CopyCollisionPointer.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_copy_16px;
+            this.ButtonItem_CopyCollisionPointer.Name = "ButtonItem_CopyCollisionPointer";
+            resources.ApplyResources(this.ButtonItem_CopyCollisionPointer, "ButtonItem_CopyCollisionPointer");
+            this.ButtonItem_CopyCollisionPointer.Click += new System.EventHandler(this.ButtonItem_CopyCollisionPointer_Click);
             // 
             // ButtonItem_RemoveObject
             // 
-            _ButtonItem_RemoveObject.BeginGroup = true;
-            _ButtonItem_RemoveObject.Image = My.Resources.MyIcons.icons8_delete_sign_16px;
-            _ButtonItem_RemoveObject.Name = "ButtonItem_RemoveObject";
-            _ButtonItem_RemoveObject.SymbolColor = Color.FromArgb(Conversions.ToInteger(Conversions.ToByte(150)), Conversions.ToInteger(Conversions.ToByte(0)), Conversions.ToInteger(Conversions.ToByte(0)));
-            _ButtonItem_RemoveObject.SymbolSet = DevComponents.DotNetBar.eSymbolSet.Material;
-            _ButtonItem_RemoveObject.SymbolSize = 12.0F;
-            resources.ApplyResources(_ButtonItem_RemoveObject, "ButtonItem_RemoveObject");
+            this.ButtonItem_RemoveObject.BeginGroup = true;
+            this.ButtonItem_RemoveObject.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_delete_sign_16px;
+            this.ButtonItem_RemoveObject.Name = "ButtonItem_RemoveObject";
+            this.ButtonItem_RemoveObject.SymbolColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.ButtonItem_RemoveObject.SymbolSet = DevComponents.DotNetBar.eSymbolSet.Material;
+            this.ButtonItem_RemoveObject.SymbolSize = 12F;
+            resources.ApplyResources(this.ButtonItem_RemoveObject, "ButtonItem_RemoveObject");
+            this.ButtonItem_RemoveObject.Click += new System.EventHandler(this.ButtonItem_RemoveObject_Click);
             // 
             // CustomBankManager
             // 
             resources.ApplyResources(this, "$this");
-            AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(_ContextMenuBar1);
-            Controls.Add(_Panel1);
-            MaximizeBox = false;
-            Name = "CustomBankManager";
-            TopLeftCornerSize = 0;
-            TopRightCornerSize = 0;
-            _Panel1.ResumeLayout(false);
-            _LayoutControl1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)_ContextMenuBar1).EndInit();
-            ResumeLayout(false);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this._ContextMenuBar1);
+            this.Controls.Add(this._Panel1);
+            this.MaximizeBox = false;
+            this.Name = "CustomBankManager";
+            this.TopLeftCornerSize = 0;
+            this.TopRightCornerSize = 0;
+            this._Panel1.ResumeLayout(false);
+            this._LayoutControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this._ContextMenuBar1)).EndInit();
+            this.ResumeLayout(false);
+
         }
 
         private Publics.Controls.ItemListBox _ItemListBox1;
@@ -576,6 +594,14 @@ namespace SM64_ROM_Manager
             }
         }
 
+        private DevComponents.DotNetBar.ButtonItem ButtonItem_ImportModell;
+        private DevComponents.DotNetBar.ButtonItem ButtonItem_ImportVisualMap;
+        private DevComponents.DotNetBar.ButtonItem ButtonItem_ImportCollision;
+        private DevComponents.DotNetBar.ButtonItem ButtonItem_RemoveCollision;
+        private DevComponents.DotNetBar.ButtonItem ButtonItem_ShowVisualMap;
+        private DevComponents.DotNetBar.ButtonItem ButtonItem_ShowCollision;
+        private DevComponents.DotNetBar.ButtonItem ButtonItem_CopyCollisionPointer;
+        private DevComponents.DotNetBar.ButtonItem ButtonItem_RemoveObject;
         private DevComponents.DotNetBar.ButtonItem _ButtonItem_ShowVisualMap;
 
         internal DevComponents.DotNetBar.ButtonItem ButtonItem_ShowVisualMap
@@ -858,6 +884,11 @@ namespace SM64_ROM_Manager
             }
         }
 
+        private DevComponents.DotNetBar.Layout.LayoutControlItem LayoutControlItem1;
+        private DevComponents.DotNetBar.Layout.LayoutGroup LayoutGroup_CollisionPointerDestinations;
+        private DevComponents.DotNetBar.Layout.LayoutControlItem LayoutControlItem5;
+        private DevComponents.DotNetBar.Layout.LayoutControlItem LayoutControlItem6;
+        private DevComponents.DotNetBar.ButtonItem CM_Object;
         private DevComponents.DotNetBar.Layout.LayoutControlItem _LayoutControlItem1;
 
         internal DevComponents.DotNetBar.Layout.LayoutControlItem LayoutControlItem1
@@ -906,6 +937,9 @@ namespace SM64_ROM_Manager
             }
         }
 
+        private DevComponents.DotNetBar.Layout.LayoutControlItem LayoutControlItem4;
+        private DevComponents.DotNetBar.Layout.LayoutGroup LayoutGroup_ModelInfo;
+        private DevComponents.DotNetBar.Layout.LayoutControlItem LayoutControlItem2;
         private DevComponents.DotNetBar.Layout.LayoutControlItem _LayoutControlItem4;
 
         internal DevComponents.DotNetBar.Layout.LayoutControlItem LayoutControlItem4
@@ -1053,6 +1087,7 @@ namespace SM64_ROM_Manager
         }
 
         private DevComponents.DotNetBar.Layout.LayoutControlItem _LayoutControlItem6;
+        private DevComponents.DotNetBar.Layout.LayoutControlItem LayoutControlItem3;
 
         internal DevComponents.DotNetBar.Layout.LayoutControlItem LayoutControlItem6
         {

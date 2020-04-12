@@ -18,6 +18,7 @@ namespace SM64_ROM_Manager
         {
             this.rommgr = rommgr;
             InitializeComponent();
+            UpdateAmbientColors();
         }
     }
 }
