@@ -94,11 +94,13 @@ namespace SM64_ROM_Manager.LevelEditor
         internal bool isFullscreen = false;
         internal bool waitUntilLostFocus = false;
         internal bool isDeactivated = false;
+        internal bool hasClosed = false;
 
         // Variables
         internal WindowState backupWindowState = (WindowState)FormWindowState.Normal;
         internal int backupCurrentAreaIndex = -1;
         internal string lastChangedPropertyName = "";
+        internal DisplayList[] lastlyLoadedDisplaylists = null;
 
         // Delegates
         internal delegate bool RemoveAllObjectsWhereExpression(Managed3DObject mobj);
@@ -287,6 +289,7 @@ namespace SM64_ROM_Manager.LevelEditor
         public Form_AreaEditor(SM64Lib.RomManager rommgr, Level Level, byte LevelID, byte AreaID)
         {
             Timer_ListViewEx_Objects_SelectionChanged = new System.Timers.Timer() { AutoReset = false, SynchronizingObject = this, Interval = 40 };
+
             // Setup some level variables
             CLevel = Level;
             Rommgr = rommgr;
@@ -348,23 +351,12 @@ namespace SM64_ROM_Manager.LevelEditor
 
         private void General_LoadedAreaVisualMapDisplayLists(DisplayList[] dls)
         {
-            Invoke(new Action(() => AreaDisplaylistScriptDumps.Add(CArea.AreaID, dls.Select((n) => n.Script).ToArray())));
+            lastlyLoadedDisplaylists = dls;
         }
 
         internal void ButtonItem10_Click(object sender, EventArgs e)
         {
             Close();
-        }
-
-        internal void Form_AreaEditor_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            General.LoadedAreaVisualMapDisplayLists -= General_LoadedAreaVisualMapDisplayLists;
-
-            maps.ReleaseBuffers();
-
-            GeolayoutScriptDumps.ForEach((n) => n.Value.Close());
-            ObjectDisplaylistScriptDumps.ForEach((m) => m.Value.ForEach((n) => n.Close()));
-            AreaDisplaylistScriptDumps.ForEach((m) => m.Value.ForEach((n) => n.Close()));
         }
 
         internal async void Form_AreaEditor_Shown(object sender, EventArgs e)
@@ -488,6 +480,16 @@ namespace SM64_ROM_Manager.LevelEditor
             // Save all Objects
             SaveAllObjectProperties();
             SaveAllWarpProperties();
+
+            General.LoadedAreaVisualMapDisplayLists -= General_LoadedAreaVisualMapDisplayLists;
+
+            maps.ReleaseBuffers();
+
+            GeolayoutScriptDumps.ForEach((n) => n.Value.Close());
+            ObjectDisplaylistScriptDumps.ForEach((m) => m.Value.ForEach((n) => n.Close()));
+            AreaDisplaylistScriptDumps.ForEach((m) => m.Value.ForEach((n) => n.Close()));
+
+            hasClosed = true;
         }
 
         internal void DockContainerItem4_Click(object sender, EventArgs e)
@@ -1752,6 +1754,7 @@ namespace SM64_ROM_Manager.LevelEditor
                 maps.cCollisionMap = null;
                 maps.cVisualMap = null;
                 maps.LoadAreaModel();
+                AreaDisplaylistScriptDumps.Add(CArea.AreaID, lastlyLoadedDisplaylists.Select((n) => n.Script).ToArray());
                 LoadObjectLists();
                 LoadWarpsLists();
                 LoadSpecailBoxList();
