@@ -708,7 +708,7 @@ namespace SM64_ROM_Manager.LevelEditor
             }
 
             if (dls.Any())
-                ObjectDisplaylistScriptDumps.Add(modelID, dls.Select((n) => n.Script).ToArray());
+                ObjectDisplaylistScriptDumps.AddOrUpdate(modelID, dls.Select((n) => n.Script).ToArray());
 
             AddObject3DWithRendererIfNotNull(mdl, modelID);
         }
