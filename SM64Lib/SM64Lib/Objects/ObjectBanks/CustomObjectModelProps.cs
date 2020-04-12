@@ -11,23 +11,11 @@ namespace SM64Lib.Objects.ObjectBanks
 {
     public class CustomObjectModelProps
     {
-        [JsonProperty(nameof(UseCustomModelID))]
-        private bool _useCustomModelID = true;
+        public CustomModelConfig Model { get; set; }
+        public bool UseCustomModelID { get; set; } = true;
+
         [JsonProperty(nameof(ModelID))]
         private byte _modelID;
-        [JsonProperty(nameof(Model))]
-        private CustomModelConfig _model;
-
-        [JsonIgnore]
-        public bool UseCustomModelID
-        {
-            get => _useCustomModelID;
-            set
-            {
-                _useCustomModelID = value;
-                if (value) Model = null;
-            }
-        }
 
         [JsonIgnore]
         public byte ModelID
@@ -57,15 +45,6 @@ namespace SM64Lib.Objects.ObjectBanks
             }
         }
 
-        [JsonIgnore]
-        public CustomModelConfig Model
-        {
-            get => _model;
-            set
-            {
-                _model = value;
-                UseCustomModelID = false;
-            }
-        }
+        
     }
 }

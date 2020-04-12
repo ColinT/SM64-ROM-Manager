@@ -120,9 +120,20 @@ namespace SM64_ROM_Manager
 
         private void LoadObjectProps()
         {
-            if (customObject is object)
+            var isObject = customObject != null;
+            layoutControl1.Enabled = isObject;
+            buttonItem_Export.Enabled = isObject;
+            ButtonItem_DeleteObject.Enabled = isObject;
+
+            if (isObject)
             {
                 isLoadingProps = true;
+
+                CheckBoxX_BehavBank.Checked = false;
+                CheckBoxX_BehavCustom.Checked = false;
+                CheckBoxX_NoModel.Checked = false;
+                CheckBoxX_CustomModel.Checked = false;
+                CheckBoxX_CustomModelID.Checked = false;
 
                 // General
                 TextBoxX_Name.Text = customObject.Name;
@@ -217,6 +228,42 @@ namespace SM64_ROM_Manager
 
         }
 
+        private bool SelectCustomModelFromBank()
+        {
+            var frm = new CustomModelSelector(rommgr)
+            {
+                Model = customObject.ModelProps.Model
+            };
+
+            if (frm.ShowDialog(this) == DialogResult.OK)
+            {
+                customObject.ModelProps.UseCustomModelID = false;
+                customObject.ModelProps.Model = frm.Model;
+                LoadObjectProps();
+                return true;
+            }
+            else
+                return false;
+        }
+
+        private bool SelectFromBehaviorBank()
+        {
+            var frm = new CustomBehaviorSelector(rommgr)
+            {
+                Behavior = customObject.BehaviorProps.Behavior
+            };
+
+            if (frm.ShowDialog(this) == DialogResult.OK)
+            {
+                customObject.BehaviorProps.UseCustomAddress = false;
+                customObject.BehaviorProps.Behavior = frm.Behavior;
+                LoadObjectProps();
+                return true;
+            }
+            else
+                return false;
+        }
+
         // G u i
 
         private void ButtonItem_NewObject_Click(object sender, EventArgs e)
@@ -258,7 +305,8 @@ namespace SM64_ROM_Manager
 
             customObjectCollection.CustomObjects.RemoveIfContains(customObject);
 
-            SelectNode(null);
+            customObject = null;
+            LoadObjectProps();
         }
 
         private void ButtonItem_ExportToFile_Click(object sender, EventArgs e)
@@ -295,16 +343,7 @@ namespace SM64_ROM_Manager
 
         private void ButtonX_SelectFromBehavBank_Click(object sender, EventArgs e)
         {
-            var frm = new CustomBehaviorSelector(rommgr)
-            {
-                Behavior = customObject.BehaviorProps.Behavior
-            };
-
-            if (frm.ShowDialog(this) == DialogResult.OK)
-            {
-                customObject.BehaviorProps.Behavior = frm.Behavior;
-                LoadObjectProps();
-            }
+            SelectFromBehaviorBank();
         }
 
         private void TextBoxX_ModelID_TextChanged(object sender, EventArgs e)
@@ -314,25 +353,22 @@ namespace SM64_ROM_Manager
 
         private void ButtonX_SelectCustomModelFromBank_Click(object sender, EventArgs e)
         {
-            var frm = new CustomModelSelector(rommgr)
-            {
-                Model = customObject.ModelProps.Model
-            };
-
-            if (frm.ShowDialog(this) == DialogResult.OK)
-            {
-                customObject.ModelProps.Model = frm.Model;
-                LoadObjectProps();
-            }
+            SelectCustomModelFromBank();
         }
 
         private void CheckBoxX_BehavCustom_CheckedChanged(object sender, EventArgs e)
         {
-            TextBoxX_BehavAddr.Enabled = CheckBoxX_BehavCustom.Checked;
+            var isChecked = CheckBoxX_BehavCustom.Checked;
+            TextBoxX_BehavAddr.Enabled = isChecked;
 
-            if (!isLoadingProps && customObject is object && CheckBoxX_BehavCustom.Checked)
+            if (isChecked)
+                CheckBoxX_BehavBank.Checked = false;
+
+            if (!isLoadingProps && customObject is object && isChecked)
             {
                 customObject.BehaviorProps.UseCustomAddress = true;
+                customObject.BehaviorProps.Behavior = null;
+                UpdateNode(customObject);
                 LoadObjectProps();
             }
         }
@@ -351,6 +387,8 @@ namespace SM64_ROM_Manager
             {
                 customObject.ModelProps.UseCustomModelID = true;
                 customObject.ModelProps.ModelID = 0;
+                customObject.ModelProps.Model = null;
+                UpdateNode(customObject);
             }
         }
 
@@ -368,6 +406,8 @@ namespace SM64_ROM_Manager
             if (!isLoadingProps && customObject is object && isChecked)
             {
                 customObject.ModelProps.UseCustomModelID = true;
+                customObject.ModelProps.Model = null;
+                UpdateNode(customObject);
             }
         }
 
@@ -379,26 +419,39 @@ namespace SM64_ROM_Manager
         private void AdvTree_Objs_AfterNodeSelect(object sender, AdvTreeNodeEventArgs e)
         {
             customObject = e.Node?.Tag as CustomObject;
-
-            var isObject = customObject != null;
-            layoutControl1.Enabled = isObject;
-            buttonItem_Export.Enabled = isObject;
-            ButtonItem_DeleteObject.Enabled = isObject;
+            LoadObjectProps();
         }
 
         private void CheckBoxX_CustomModel_Click(object sender, EventArgs e)
         {
-            ButtonX_SelectCustomModelFromBank.PerformClick();
+            if (CheckBoxX_CustomModel.Checked)
+            {
+                CheckBoxX_CustomModelID.Checked = false;
+                CheckBoxX_NoModel.Checked = false;
+            }
         }
 
         private void CheckBoxX_BehavBank_Click(object sender, EventArgs e)
         {
-            ButtonX_SelectFromBehavBank.PerformClick();
+            if (CheckBoxX_BehavBank.Checked)
+                CheckBoxX_BehavCustom.Checked = false;
         }
 
         private void TextBoxX_Description_TextChanged(object sender, EventArgs e)
         {
             SaveObjectProps();
+        }
+
+        private void CheckBoxX_BehavBank_CheckedChanging(object sender, DevComponents.DotNetBar.Controls.CheckBoxXChangeEventArgs e)
+        {
+            if (!isLoadingProps && e.EventSource != eEventSource.Code)
+                e.Cancel = e.NewChecked.Checked || !SelectFromBehaviorBank();
+        }
+
+        private void CheckBoxX_CustomModel_CheckedChanging(object sender, DevComponents.DotNetBar.Controls.CheckBoxXChangeEventArgs e)
+        {
+            if (!isLoadingProps && e.EventSource != eEventSource.Code)
+                e.Cancel = e.NewChecked.Checked || !SelectCustomModelFromBank();
         }
     }
 }

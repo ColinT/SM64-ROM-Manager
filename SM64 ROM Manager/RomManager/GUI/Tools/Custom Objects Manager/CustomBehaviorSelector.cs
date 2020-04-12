@@ -24,8 +24,10 @@ namespace SM64_ROM_Manager
 
         public CustomBehaviorSelector(RomManager romManager)
         {
+            General.LoadBehaviorInfosIfEmpty();
             this.romManager = romManager;
             InitializeComponent();
+            UpdateAmbientColors();
         }
 
         private void LoadList()
@@ -33,8 +35,8 @@ namespace SM64_ROM_Manager
             AdvTree1.BeginUpdate();
             AdvTree1.Nodes.Clear();
 
-            var nVanilla = new Node("Vanilla");
-            var nCustom = new Node("Custom");
+            var nVanilla = new Node("Vanilla") { Expanded = true };
+            var nCustom = new Node("Custom") { Expanded = true };
             Node nToSelect = null;
 
             foreach (var behav in romManager.GlobalBehaviorBank.Behaviors)
@@ -65,12 +67,20 @@ namespace SM64_ROM_Manager
 
         private Node GetNode(Behavior behav)
         {
+            var name = behav.Config.Name;
+            if (string.IsNullOrEmpty(name))
+                name = General.BehaviorInfos.GetByBehaviorAddress((uint)behav.Config.BankAddress)?.Name;
+            if (string.IsNullOrEmpty(name))
+                name = General.BehaviorInfosCustom.GetByBehaviorAddress((uint)behav.Config.BankAddress)?.Name;
+
             var n = new Node()
             {
-                Text = behav.Config.Name,
+                Text = name,
                 Tag = behav
             };
+
             n.Cells.Add(new Cell(TextFromValue(behav.Config.BankAddress)));
+
             return n;
         }
 

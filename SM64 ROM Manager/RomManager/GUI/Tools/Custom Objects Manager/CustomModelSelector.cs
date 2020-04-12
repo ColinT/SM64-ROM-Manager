@@ -25,6 +25,7 @@ namespace SM64_ROM_Manager
         {
             this.romManager = romManager;
             InitializeComponent();
+            UpdateAmbientColors();
         }
 
         private void LoadList()
@@ -38,7 +39,7 @@ namespace SM64_ROM_Manager
             goThourghtBank(romManager.GlobalModelBank, "Global Object Bank", AdvTree1.Nodes);
 
             // Local Object Banks
-            var nlob = new Node("Local Object Bank");
+            var nlob = new Node("Local Object Bank") { Expanded = true };
             foreach (var lvl in romManager.Levels)
             {
                 string levelName = romManager.RomConfig.GetLevelConfig(lvl.LevelID)?.LevelName;
@@ -46,7 +47,8 @@ namespace SM64_ROM_Manager
                     levelName = romManager.LevelInfoData.FirstOrDefault(n => n.ID == lvl.LevelID).Name;
                 goThourghtBank(lvl.LocalObjectBank, levelName, nlob.Nodes);
             }
-            AdvTree1.Nodes.Add(nlob);
+            if (nlob.Nodes.Count > 0)
+                AdvTree1.Nodes.Add(nlob);
 
             void goThourghtBank(CustomModelBank bank, string bankName, NodeCollection collection)
             {
@@ -60,7 +62,8 @@ namespace SM64_ROM_Manager
                         nToSelect = nMdl;
                 }
 
-                collection.Add(n);
+                if (n.Nodes.Count > 0)
+                    collection.Add(n);
             }
 
             AdvTree1.EndUpdate();

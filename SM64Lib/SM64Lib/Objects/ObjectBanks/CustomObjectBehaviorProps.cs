@@ -10,25 +10,12 @@ namespace SM64Lib.Objects.ObjectBanks
 {
     public class CustomObjectBehaviorProps
     {
-        [JsonProperty(nameof(UseCustomAddress))]
-        private bool _useCustomAddress = true;
-        [JsonProperty(nameof(BehaviorAddress))]
-        private int _behaviorAddress;
-        [JsonProperty(nameof(Behavior))]
-        private Behavior _behavior;
-
+        public Behavior Behavior { get; set; }
+        public bool UseCustomAddress { get; set; } = true;
         public bool UseCollisionPointerOfModel { get; set; } = true;
 
-        [JsonIgnore]
-        public bool UseCustomAddress
-        {
-            get => _useCustomAddress;
-            set
-            {
-                _useCustomAddress = value;
-                if (value) Behavior = null;
-            }
-        }
+        [JsonProperty(nameof(BehaviorAddress))]
+        private int _behaviorAddress;
 
         [JsonIgnore]
         public int BehaviorAddress
@@ -46,17 +33,6 @@ namespace SM64Lib.Objects.ObjectBanks
                     _behaviorAddress = value;
                 else
                     Behavior.Config.BankAddress = value;
-            }
-        }
-
-        [JsonIgnore]
-        public Behavior Behavior
-        {
-            get => _behavior;
-            set
-            {
-                _behavior = value;
-                UseCustomAddress = true;
             }
         }
     }

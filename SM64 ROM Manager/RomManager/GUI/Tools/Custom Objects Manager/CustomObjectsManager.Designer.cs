@@ -56,7 +56,9 @@ namespace SM64_ROM_Manager
             this.ButtonX_SelectCustomModelFromBank = new DevComponents.DotNetBar.ButtonX();
             this.CheckBoxX_UseColPtrForBehav = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.CheckBoxX_NoModel = new DevComponents.DotNetBar.Controls.CheckBoxX();
+            this.TextBoxX_Description = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.layoutControlItem1 = new DevComponents.DotNetBar.Layout.LayoutControlItem();
+            this.layoutControlItem16 = new DevComponents.DotNetBar.Layout.LayoutControlItem();
             this.layoutSpacerItem2 = new DevComponents.DotNetBar.Layout.LayoutSpacerItem();
             this.layoutControlItem2 = new DevComponents.DotNetBar.Layout.LayoutControlItem();
             this.layoutControlItem5 = new DevComponents.DotNetBar.Layout.LayoutControlItem();
@@ -80,8 +82,6 @@ namespace SM64_ROM_Manager
             this.layoutControlItem8 = new DevComponents.DotNetBar.Layout.LayoutControlItem();
             this.layoutControlItem9 = new DevComponents.DotNetBar.Layout.LayoutControlItem();
             this.layoutSpacerItem7 = new DevComponents.DotNetBar.Layout.LayoutSpacerItem();
-            this.TextBoxX_Description = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.layoutControlItem16 = new DevComponents.DotNetBar.Layout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.AdvTree_Objs)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bar1)).BeginInit();
             this.layoutControl1.SuspendLayout();
@@ -308,6 +308,7 @@ namespace SM64_ROM_Manager
             this.CheckBoxX_BehavBank.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.CheckBoxX_BehavBank.TabIndex = 5;
             this.CheckBoxX_BehavBank.Text = "Select from Behavior Bank";
+            this.CheckBoxX_BehavBank.CheckedChanging += new DevComponents.DotNetBar.Controls.CheckBoxXChangeEventHandler(this.CheckBoxX_BehavBank_CheckedChanging);
             this.CheckBoxX_BehavBank.Click += new System.EventHandler(this.CheckBoxX_BehavBank_Click);
             // 
             // ButtonX_SelectFromBehavBank
@@ -395,6 +396,7 @@ namespace SM64_ROM_Manager
             this.CheckBoxX_CustomModel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.CheckBoxX_CustomModel.TabIndex = 12;
             this.CheckBoxX_CustomModel.Text = "Select from Model Bank";
+            this.CheckBoxX_CustomModel.CheckedChanging += new DevComponents.DotNetBar.Controls.CheckBoxXChangeEventHandler(this.CheckBoxX_CustomModel_CheckedChanging);
             this.CheckBoxX_CustomModel.Click += new System.EventHandler(this.CheckBoxX_CustomModel_Click);
             // 
             // TextBoxX_ModelID
@@ -466,6 +468,26 @@ namespace SM64_ROM_Manager
             this.CheckBoxX_NoModel.Text = "Don\'t use a model";
             this.CheckBoxX_NoModel.CheckedChanged += new System.EventHandler(this.CheckBoxX_NoModel_CheckedChanged);
             // 
+            // TextBoxX_Description
+            // 
+            this.TextBoxX_Description.BackColor = System.Drawing.Color.White;
+            // 
+            // 
+            // 
+            this.TextBoxX_Description.Border.Class = "TextBoxBorder";
+            this.TextBoxX_Description.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.TextBoxX_Description.DisabledBackColor = System.Drawing.Color.White;
+            this.TextBoxX_Description.ForeColor = System.Drawing.Color.Black;
+            this.TextBoxX_Description.Location = new System.Drawing.Point(71, 32);
+            this.TextBoxX_Description.Margin = new System.Windows.Forms.Padding(0);
+            this.TextBoxX_Description.Multiline = true;
+            this.TextBoxX_Description.Name = "TextBoxX_Description";
+            this.TextBoxX_Description.PreventEnterBeep = true;
+            this.TextBoxX_Description.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.TextBoxX_Description.Size = new System.Drawing.Size(277, 72);
+            this.TextBoxX_Description.TabIndex = 1;
+            this.TextBoxX_Description.TextChanged += new System.EventHandler(this.TextBoxX_Description_TextChanged);
+            // 
             // layoutControlItem1
             // 
             this.layoutControlItem1.Control = this.TextBoxX_Name;
@@ -475,6 +497,17 @@ namespace SM64_ROM_Manager
             this.layoutControlItem1.Text = "Name:";
             this.layoutControlItem1.Width = 100;
             this.layoutControlItem1.WidthType = DevComponents.DotNetBar.Layout.eLayoutSizeType.Percent;
+            // 
+            // layoutControlItem16
+            // 
+            this.layoutControlItem16.Control = this.TextBoxX_Description;
+            this.layoutControlItem16.Height = 100;
+            this.layoutControlItem16.HeightType = DevComponents.DotNetBar.Layout.eLayoutSizeType.Percent;
+            this.layoutControlItem16.MinSize = new System.Drawing.Size(120, 0);
+            this.layoutControlItem16.Name = "layoutControlItem16";
+            this.layoutControlItem16.Text = "Description:";
+            this.layoutControlItem16.Width = 100;
+            this.layoutControlItem16.WidthType = DevComponents.DotNetBar.Layout.eLayoutSizeType.Percent;
             // 
             // layoutSpacerItem2
             // 
@@ -661,37 +694,6 @@ namespace SM64_ROM_Manager
             this.layoutSpacerItem7.Name = "layoutSpacerItem7";
             this.layoutSpacerItem7.Width = 99;
             this.layoutSpacerItem7.WidthType = DevComponents.DotNetBar.Layout.eLayoutSizeType.Percent;
-            // 
-            // TextBoxX_Description
-            // 
-            this.TextBoxX_Description.BackColor = System.Drawing.Color.White;
-            // 
-            // 
-            // 
-            this.TextBoxX_Description.Border.Class = "TextBoxBorder";
-            this.TextBoxX_Description.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.TextBoxX_Description.DisabledBackColor = System.Drawing.Color.White;
-            this.TextBoxX_Description.ForeColor = System.Drawing.Color.Black;
-            this.TextBoxX_Description.Location = new System.Drawing.Point(71, 32);
-            this.TextBoxX_Description.Margin = new System.Windows.Forms.Padding(0);
-            this.TextBoxX_Description.Multiline = true;
-            this.TextBoxX_Description.Name = "TextBoxX_Description";
-            this.TextBoxX_Description.PreventEnterBeep = true;
-            this.TextBoxX_Description.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.TextBoxX_Description.Size = new System.Drawing.Size(277, 72);
-            this.TextBoxX_Description.TabIndex = 1;
-            this.TextBoxX_Description.TextChanged += new System.EventHandler(this.TextBoxX_Description_TextChanged);
-            // 
-            // layoutControlItem16
-            // 
-            this.layoutControlItem16.Control = this.TextBoxX_Description;
-            this.layoutControlItem16.Height = 100;
-            this.layoutControlItem16.HeightType = DevComponents.DotNetBar.Layout.eLayoutSizeType.Percent;
-            this.layoutControlItem16.MinSize = new System.Drawing.Size(120, 0);
-            this.layoutControlItem16.Name = "layoutControlItem16";
-            this.layoutControlItem16.Text = "Description:";
-            this.layoutControlItem16.Width = 100;
-            this.layoutControlItem16.WidthType = DevComponents.DotNetBar.Layout.eLayoutSizeType.Percent;
             // 
             // CustomObjectsManager
             // 
