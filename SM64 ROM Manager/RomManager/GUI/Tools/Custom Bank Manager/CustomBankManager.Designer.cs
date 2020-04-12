@@ -431,6 +431,5 @@ namespace SM64_ROM_Manager
         private DevComponents.DotNetBar.Layout.LayoutControlItem LayoutControlItem5;
 
         private DevComponents.DotNetBar.Layout.LayoutControlItem LayoutControlItem6;
-
     }
 }
