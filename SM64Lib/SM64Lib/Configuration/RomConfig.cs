@@ -13,6 +13,7 @@ namespace SM64Lib.Configuration
         public Dictionary<byte, LevelConfig> LevelConfigs { get; private set; } = new Dictionary<byte, LevelConfig>();
         public MusicConfiguration MusicConfig { get; private set; } = new MusicConfiguration();
         public string SelectedTextProfileInfo { get; set; } = string.Empty;
+        public ScrollTexConfig ScrollTexConfig { get; set; } = new ScrollTexConfig();
         [JsonProperty("GlobalObjectBankConfig")]
         public ObjectModelConfig GlobalModelBank { get; private set; } = new ObjectModelConfig();
         public BehaviorBankConfig GlobalBehaviorBank { get; private set; } = new BehaviorBankConfig();
