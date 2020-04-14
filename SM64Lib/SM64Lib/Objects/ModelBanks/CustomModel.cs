@@ -19,12 +19,10 @@ namespace SM64Lib.Objects.ModelBanks
 
         public CustomModel()
         {
-            GenerateNewGeolayout();
         }
 
         public CustomModel(Model.ObjectModel mdl)
         {
-            GenerateNewGeolayout();
             Model = mdl;
         }
 

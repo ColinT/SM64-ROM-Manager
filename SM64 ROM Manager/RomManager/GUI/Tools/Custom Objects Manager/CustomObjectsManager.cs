@@ -51,6 +51,8 @@ namespace SM64_ROM_Manager
             layoutControl1.Enabled = false;
             TextBoxX_BehavAddr.Enabled = false;
             TextBoxX_ModelID.Enabled = false;
+            ButtonItem_DeleteObject.Enabled = false;
+            buttonItem_Export.Enabled = false;
 
             // Props-Timer
             Timer_PropsChanged = new Timer(1000) { SynchronizingObject = this, AutoReset = false };
