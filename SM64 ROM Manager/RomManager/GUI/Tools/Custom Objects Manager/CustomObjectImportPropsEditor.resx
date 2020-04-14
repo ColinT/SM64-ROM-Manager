@@ -151,7 +151,7 @@
     <value>Top, Right</value>
   </data>
   <data name="TextBoxX_ModelID.Location" type="System.Drawing.Point, System.Drawing">
-    <value>372, 5</value>
+    <value>372, 4</value>
   </data>
   <data name="TextBoxX_ModelID.Size" type="System.Drawing.Size, System.Drawing">
     <value>60, 20</value>
@@ -202,7 +202,7 @@
     <value>3, 3</value>
   </data>
   <data name="labelX1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>48, 23</value>
+    <value>38, 23</value>
   </data>
   <data name="labelX1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -253,10 +253,10 @@
     <value>Top, Left, Right</value>
   </data>
   <data name="TextBoxX_Name.Location" type="System.Drawing.Point, System.Drawing">
-    <value>57, 5</value>
+    <value>47, 4</value>
   </data>
   <data name="TextBoxX_Name.Size" type="System.Drawing.Size, System.Drawing">
-    <value>243, 20</value>
+    <value>253, 20</value>
   </data>
   <data name="TextBoxX_Name.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>

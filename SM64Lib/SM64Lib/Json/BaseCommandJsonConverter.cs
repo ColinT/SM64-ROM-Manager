@@ -1,4 +1,6 @@
 ﻿using Newtonsoft.Json;
+using SM64Lib.Behaviors.Script;
+using SM64Lib.Geolayout.Script;
 using SM64Lib.Model.Fast3D;
 using System;
 using System.Collections.Generic;
@@ -8,22 +10,22 @@ using System.Threading.Tasks;
 
 namespace SM64Lib.Json
 {
-    internal class Fast3DBufferJsonConverter : JsonConverter
+    internal class BaseCommandJsonConverter : JsonConverter
     {
         public override bool CanConvert(Type objectType)
         {
-            return typeof(Fast3DBuffer).IsAssignableFrom(objectType);
+            return typeof(GeolayoutscriptCommandJsonConverter).IsAssignableFrom(objectType);
         }
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
-            var export = serializer.Deserialize<Fast3DBufferExport>(reader);
-            Fast3DBuffer c;
+            var export = serializer.Deserialize<CmdExport>(reader);
+            GeolayoutCommand c;
 
             if (existingValue is object)
-                c = (Fast3DBuffer)existingValue;
+                c = (GeolayoutCommand)existingValue;
             else
-                c = new Fast3DBuffer();
+                c = new GeolayoutCommand();
 
             if (export?.Buffer is object)
             {
@@ -32,31 +34,28 @@ namespace SM64Lib.Json
                 c.Position = 0;
             }
 
-            c.Fast3DBankStart = export.Fast3DBankStart;
-            c.DLPointers = export.DLPointers.ToArray();
+            c.BankAddress = export.BankAddress;
 
             return c;
         }
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            var buffer = (Fast3DBuffer)value;
+            var cmd = (GeolayoutCommand)value;
 
-            var export = new Fast3DBufferExport
+            var export = new CmdExport
             {
-                Buffer = buffer.ToArray(),
-                Fast3DBankStart = buffer.Fast3DBankStart,
-                DLPointers = buffer.DLPointers.ToList()
+                Buffer = cmd.ToArray(),
+                BankAddress = cmd.BankAddress
             };
 
             serializer.Serialize(writer, export);
         }
 
-        private class Fast3DBufferExport
+        private class CmdExport
         {
             public byte[] Buffer { get; set; }
-            public int Fast3DBankStart { get; set; }
-            public List<Geolayout.Geopointer> DLPointers { get; set; }
+            public int BankAddress { get; set; }
         }
     }
 }

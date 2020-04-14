@@ -261,11 +261,19 @@ namespace SM64_ROM_Manager
 
             if (imports.Any())
             {
+                foreach (var kvpImport in imports)
+                {
+                    foreach (var kvpMdl in kvpImport.Value.CustomModels)
+                        kvpImport.Value.DestModelBanks.Add(kvpMdl.Key, rommgr.GlobalModelBank);
+                    kvpImport.Value.DestBehaviorBank = rommgr.GlobalBehaviorBank;
+                }
+
                 var frm = new CustomObjectImportDialog(rommgr, imports);
                 if (frm.ShowDialog() == DialogResult.OK)
                 {
                     foreach (var import in imports.Values)
                         customObjectCollection.Import(import);
+                    LoadObjects();
                 }
             }
         }

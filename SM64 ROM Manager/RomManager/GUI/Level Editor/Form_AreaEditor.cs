@@ -44,6 +44,7 @@ using SM64Lib.Model.Fast3D.DisplayLists.Script;
 using Color = System.Drawing.Color;
 using Bitmap = System.Drawing.Bitmap;
 using SM64Lib.Objects.ModelBanks;
+using SM64Lib.Objects.ObjectBanks;
 
 namespace SM64_ROM_Manager.LevelEditor
 {
@@ -401,10 +402,27 @@ namespace SM64_ROM_Manager.LevelEditor
             foreach (ObjectCombo obj in General.ObjectCombos.Concat(General.ObjectCombosCustom))
             {
                 if ((modelIDsToLoad.Contains(obj.ModelID) || obj.Name.Contains("[MOP")) && !MyObjectCombos.Contains(obj))
-                {
                     MyObjectCombos.Add(obj);
-                }
             }
+            MyObjectCombos.AddRange(BuildObjectCombos(Rommgr.CustomObjects));
+        }
+
+        internal static ObjectComboList BuildObjectCombos(CustomObjectCollection customObjectCollection)
+        {
+            var list = new ObjectComboList();
+
+            foreach (var customObject in customObjectCollection.CustomObjects)
+            {
+                var combo = new ObjectCombo
+                {
+                    Name = customObject.Name,
+                    BehaviorAddress = (uint)customObject.BehaviorProps.BehaviorAddress,
+                    ModelID = customObject.ModelProps.ModelID
+                };
+                list.Add(combo);
+            }
+
+            return list;
         }
 
         internal void LoadLevelsStringList()
@@ -2261,7 +2279,7 @@ namespace SM64_ROM_Manager.LevelEditor
             var objs = SelectedObjects;
             if (objs.Any())
             {
-                var dialog = new InformationListDialog(InformationListDialog.EditModes.EnableBehavTab);
+                var dialog = new InformationListDialog(InformationListDialog.EditModes.EnableBehavTab, MyObjectCombos);
                 dialog.SelectedBehavior = General.BehaviorInfos.GetByBehaviorAddress(objs.First().BehaviorID);
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {

@@ -56,7 +56,7 @@ namespace SM64_ROM_Manager
                     levelName = romManager.LevelInfoData.FirstOrDefault(n => n.ID == lvl.LevelID).Name;
                 goThourghtBank(lvl.LocalObjectBank, levelName, nlob.Nodes);
             }
-            if (nlob.Nodes.Count > 0)
+            if (nlob.Nodes.Count > 0 || isBankPicker)
                 AdvTree1.Nodes.Add(nlob);
 
             void goThourghtBank(CustomModelBank bank, string bankName, NodeCollection collection)
@@ -79,7 +79,7 @@ namespace SM64_ROM_Manager
                 else if (bank == SelectedBank)
                     nToSelect = n;
 
-                if (n.Nodes.Count > 0)
+                if (n.Nodes.Count > 0 || isBankPicker)
                     collection.Add(n);
             }
 

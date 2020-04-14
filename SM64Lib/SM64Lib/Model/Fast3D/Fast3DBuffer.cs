@@ -13,7 +13,7 @@ namespace SM64Lib.Model.Fast3D
     {
         public Conversion.Fast3DWriting.Fast3DWriter.ConvertResult ConvertResult { get; set; } = null;
         public int Fast3DBankStart { get; set; } = 0xE000000;
-        public Geopointer[] DLPointers { get; set; } = Array.Empty<Geopointer>();
+        public Geopointer[] DLPointers { get; set; } = new Geopointer[] { };
 
         /// <summary>
         /// Creates a Fast3D Model from a Obj File

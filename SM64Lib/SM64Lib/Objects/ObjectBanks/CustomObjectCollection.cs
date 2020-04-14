@@ -2,6 +2,7 @@
 using Newtonsoft.Json.Linq;
 using SM64Lib.Behaviors;
 using SM64Lib.Configuration;
+using SM64Lib.Json;
 using SM64Lib.Objects.ModelBanks;
 using System;
 using System.Collections.Generic;
@@ -36,9 +37,9 @@ namespace SM64Lib.Objects.ObjectBanks
         {
             var export = new CustomObjectExport()
             {
-                CustomObjects = customObjects,
                 ExportDate = DateTime.UtcNow
             };
+            export.CustomObjects.AddRange(customObjects);
 
             foreach (var cobj in customObjects)
             {
@@ -59,7 +60,6 @@ namespace SM64Lib.Objects.ObjectBanks
 
             var ser = JsonSerializer.CreateDefault();
             ser.PreserveReferencesHandling = PreserveReferencesHandling.All;
-            ser.ReferenceLoopHandling = ReferenceLoopHandling.Serialize;
             File.WriteAllText(filePath, JObject.FromObject(export, ser).ToString());
         }
 
@@ -67,7 +67,7 @@ namespace SM64Lib.Objects.ObjectBanks
         {
             var ser = JsonSerializer.CreateDefault();
             ser.PreserveReferencesHandling = PreserveReferencesHandling.All;
-            ser.ReferenceLoopHandling = ReferenceLoopHandling.Serialize;
+            //ser.Converters.Add(new ArrayReferencePreservngConverter());
             return JObject.Parse(File.ReadAllText(filePath)).ToObject<CustomObjectImport>(ser);
         }
 

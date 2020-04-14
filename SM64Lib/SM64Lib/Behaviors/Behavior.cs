@@ -1,4 +1,5 @@
-﻿using SM64Lib.Behaviors.Script;
+﻿using Newtonsoft.Json;
+using SM64Lib.Behaviors.Script;
 using SM64Lib.Data;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ namespace SM64Lib.Behaviors
 {
     public class Behavior
     {
+        [JsonProperty]
         public BehaviorConfig Config { get; private set; }
         public Behaviorscript Script { get; private set; }
         public int CollisionPointer { get; set; }

@@ -40,7 +40,8 @@ namespace SM64_ROM_Manager
                 flowLayoutPanel1.Controls.Add(new LabelX
                 {
                     Text = kvp.Key,
-                    Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top
+                    Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top,
+                    Width = flowLayoutPanel1.Width - 6
                 });
 
                 foreach (var customObject in kvp.Value.CustomObjects)

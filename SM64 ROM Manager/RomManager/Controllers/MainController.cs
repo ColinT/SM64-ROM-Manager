@@ -888,7 +888,7 @@ namespace SM64_ROM_Manager
             ObjectBankDataChanged?.Invoke();
         }
 
-        private void OpenScriptDumper<TCmd, eTypes>(BaseCommandCollection<TCmd, eTypes> script)
+        private void OpenScriptDumper<TCmd, eTypes>(BaseCommandCollection<TCmd, eTypes> script) where TCmd : BaseCommand<eTypes>
         {
             var frm = new SM64_ROM_Manager.ScriptDumper<TCmd, eTypes>();
             frm.Script = script;
