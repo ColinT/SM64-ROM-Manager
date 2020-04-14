@@ -17,7 +17,7 @@ namespace SM64Lib.TextValueConverter
         {
             try
             {
-                Text = Text.Trim();
+                Text = Text?.Trim();
                 int IVM = useIVM > -1 ? useIVM : GetIntegerValueMode();
                 switch (true)
                 {
