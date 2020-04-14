@@ -200,6 +200,7 @@
     <Compile Include="SM64Lib\Objects\ObjectBanks\CustomObject.cs" />
     <Compile Include="SM64Lib\Objects\ObjectBanks\CustomObjectCollection.cs" />
     <Compile Include="SM64Lib\Objects\ObjectBanks\CustomObjectBehaviorProps.cs" />
+    <Compile Include="SM64Lib\Objects\ObjectBanks\CustomObjectImport.cs" />
     <Compile Include="SM64Lib\Objects\ObjectBanks\CustomObjectExport.cs" />
     <Compile Include="SM64Lib\Objects\ObjectBanks\CustomObjectModelProps.cs" />
     <Compile Include="SM64Lib\Objects\ObjectBanks\Data\ObjectBankDataCommand.cs" />

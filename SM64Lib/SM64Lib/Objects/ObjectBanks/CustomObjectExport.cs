@@ -1,4 +1,5 @@
-﻿using SM64Lib.Configuration;
+﻿using SM64Lib.Behaviors;
+using SM64Lib.Configuration;
 using SM64Lib.Objects.ModelBanks;
 using System;
 using System.Collections.Generic;
@@ -13,5 +14,6 @@ namespace SM64Lib.Objects.ObjectBanks
         public CustomObject[] CustomObjects { get; set; }
         public DateTime ExportDate { get; set; }
         public Dictionary<CustomModelConfig, CustomModel> CustomModels { get; set; } = new Dictionary<CustomModelConfig, CustomModel>();
+        public Dictionary<BehaviorConfig, Behavior> Behaviors { get; set; } = new Dictionary<BehaviorConfig, Behavior>();
     }
 }

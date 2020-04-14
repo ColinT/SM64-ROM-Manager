@@ -16,13 +16,16 @@ namespace SM64Lib.Objects.ObjectBanks
 
         public void TakeoverProperties(RomManager rommgr)
         {
-            if (BehaviorProps.UseCollisionPointerOfModel && BehaviorProps.Behavior is object && (!BehaviorProps.Behavior.Config.IsVanilla || BehaviorProps.Behavior.EnableCollisionPointer) && ModelProps.Model is object)
+            var behav = BehaviorProps.Behavior?.FindBehavior();
+            if (BehaviorProps.UseCollisionPointerOfModel && BehaviorProps.Behavior is object && (!BehaviorProps.Behavior.IsVanilla || behav.EnableCollisionPointer) && ModelProps.Model is object)
             {
-                BehaviorProps.Behavior.EnableCollisionPointer = true;
-
                 var mdl = ModelProps.Model.FindModel();
-                if (mdl is object)
-                    BehaviorProps.Behavior.CollisionPointer = mdl.CollisionPointer;
+
+                if (mdl?.Model?.Collision is object && mdl.CollisionPointer != -1)
+                {
+                    behav.CollisionPointer = mdl.CollisionPointer;
+                    behav.EnableCollisionPointer = true;
+                }
             }
         }
     }

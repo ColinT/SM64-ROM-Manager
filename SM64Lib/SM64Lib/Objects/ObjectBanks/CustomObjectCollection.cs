@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using SM64Lib.Behaviors;
+using SM64Lib.Configuration;
 using SM64Lib.Objects.ModelBanks;
 using System;
 using System.Collections.Generic;
@@ -41,13 +42,18 @@ namespace SM64Lib.Objects.ObjectBanks
 
             foreach (var cobj in customObjects)
             {
+                if (cobj.BehaviorProps.Behavior is object && !cobj.BehaviorProps.Behavior.IsVanilla)
+                {
+                    var behav = cobj.BehaviorProps.Behavior.FindBehavior();
+                    if (behav is object)
+                        export.Behaviors.Add(cobj.BehaviorProps.Behavior, behav);
+                }
+
                 if (cobj.ModelProps is object)
                 {
                     var mdl = cobj.ModelProps.Model?.FindModel();
                     if (mdl is object)
-                    {
                         export.CustomModels.Add(cobj.ModelProps.Model, mdl);
-                    }
                 }
             }
 
@@ -57,40 +63,38 @@ namespace SM64Lib.Objects.ObjectBanks
             File.WriteAllText(filePath, JObject.FromObject(export, ser).ToString());
         }
 
-        public static CustomObjectExport LoadImport(string filePath)
+        public static CustomObjectImport LoadImport(string filePath)
         {
             var ser = JsonSerializer.CreateDefault();
             ser.PreserveReferencesHandling = PreserveReferencesHandling.All;
             ser.ReferenceLoopHandling = ReferenceLoopHandling.Serialize;
-            return JObject.Parse(File.ReadAllText(filePath)).ToObject<CustomObjectExport>(ser);
+            return JObject.Parse(File.ReadAllText(filePath)).ToObject<CustomObjectImport>(ser);
         }
 
-        public void Import(string filePath, CustomModelBank destModelBank, BehaviorBank destBehaviorBank)
+        public void Import(CustomObjectImport import)
         {
-            Import(LoadImport(filePath), destModelBank, destBehaviorBank);
-        }
-
-        public void Import(CustomObjectExport export, CustomModelBank destModelBank, BehaviorBank destBehaviorBank)
-        {
-            foreach (var cobj in export.CustomObjects)
+            foreach (var cobj in import.CustomObjects)
             {
                 // Add Custom Model
                 if (cobj.BehaviorProps.Behavior is object)
                 {
-                    if (cobj.BehaviorProps.Behavior.Config.IsVanilla)
+                    if (cobj.BehaviorProps.Behavior.IsVanilla)
                     {
-                        var behav = destBehaviorBank.GetBehaviorByBankAddress(cobj.BehaviorProps.BehaviorAddress);
-                        if (behav is object)
-                            cobj.BehaviorProps.Behavior = behav;
+                        var behav = import.DestBehaviorBank.GetBehaviorByBankAddress(cobj.BehaviorProps.BehaviorAddress);
+                            cobj.BehaviorProps.Behavior = behav.Config;
                     }
-                    else
-                        destBehaviorBank.Behaviors.Add(cobj.BehaviorProps.Behavior);
+                    else if (import.Behaviors.ContainsKey(cobj.BehaviorProps.Behavior))
+                    {
+                        var behav = import.Behaviors[cobj.BehaviorProps.Behavior];
+                        import.DestBehaviorBank.Behaviors.Add(behav);
+                    }
                 }
 
                 // Add Custom Behavior
-                if (cobj.ModelProps.Model is object && export.CustomModels.ContainsKey(cobj.ModelProps.Model))
+                if (cobj.ModelProps.Model is object && import.CustomModels.ContainsKey(cobj.ModelProps.Model) && import.DestModelBanks.ContainsKey(cobj.ModelProps.Model))
                 {
-                    destModelBank.Models.Add(export.CustomModels[cobj.ModelProps.Model]);
+                    var destModelBank = import.DestModelBanks[cobj.ModelProps.Model];
+                    destModelBank.Models.Add(import.CustomModels[cobj.ModelProps.Model]);
                     destModelBank.NeedToSave = true;
                 }
 

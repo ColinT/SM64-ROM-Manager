@@ -90,7 +90,7 @@ namespace SM64Lib.Behaviors
                 switch (cmd.CommandType)
                 {
                     case BehaviorscriptCommandTypes.x2A_SetCollision:
-                        CollisionPointer = BehaviorscriptCommandFunctions.X2E.GetCollisionPointer(cmd);
+                        CollisionPointer = BehaviorscriptCommandFunctions.X2A.GetCollisionPointer(cmd);
                         EnableCollisionPointer = true;
                         break;
                 }
@@ -103,8 +103,8 @@ namespace SM64Lib.Behaviors
             AddUpdateRemoveCmd(
                 BehaviorscriptCommandTypes.x2A_SetCollision,
                 EnableCollisionPointer,
-                () => BehaviorscriptCommandFactory.Build_x2E(CollisionPointer),
-                (cmd) => BehaviorscriptCommandFunctions.X2E.SetCollisionPointer(cmd, CollisionPointer));
+                () => BehaviorscriptCommandFactory.Build_x2A(CollisionPointer),
+                (cmd) => BehaviorscriptCommandFunctions.X2A.SetCollisionPointer(cmd, CollisionPointer));
         }
 
         private void AddUpdateRemoveCmd(BehaviorscriptCommandTypes cmdType, bool conditionAddUpdate, Func<BehaviorscriptCommand> createCmd, Action<BehaviorscriptCommand> updateCmd)

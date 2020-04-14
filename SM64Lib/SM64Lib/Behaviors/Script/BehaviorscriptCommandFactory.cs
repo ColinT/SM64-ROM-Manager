@@ -8,11 +8,11 @@ namespace SM64Lib.Behaviors.Script
 {
     public static class BehaviorscriptCommandFactory
     {
-        public static BehaviorscriptCommand Build_x2E(int collisionPointer = -1)
+        public static BehaviorscriptCommand Build_x2A(int collisionPointer = -1)
         {
-            var cmd = new BehaviorscriptCommand("2e 00 00 00 00 00 00 00");
+            var cmd = new BehaviorscriptCommand("2a 00 00 00 00 00 00 00");
             if (collisionPointer != -1)
-                BehaviorscriptCommandFunctions.X2E.SetCollisionPointer(cmd, collisionPointer);
+                BehaviorscriptCommandFunctions.X2A.SetCollisionPointer(cmd, collisionPointer);
             return cmd;
         }
     }

@@ -19,13 +19,22 @@ namespace SM64_ROM_Manager
     public partial class CustomModelSelector : OfficeForm
     {
         private readonly RomManager romManager;
-        public CustomModelConfig Model { get; set; } = null;
+        private bool isBankPicker = false;
+        public CustomModelConfig Model { get; set; }
+        public CustomModelBank SelectedBank { get; private set; }
 
         public CustomModelSelector(RomManager romManager)
         {
             this.romManager = romManager;
             InitializeComponent();
             UpdateAmbientColors();
+        }
+
+        public void SetAsBankPicker(CustomModelBank selectedBank)
+        {
+            isBankPicker = true;
+            columnHeader2.Visible = false;
+            SelectedBank = selectedBank;
         }
 
         private void LoadList()
@@ -52,15 +61,23 @@ namespace SM64_ROM_Manager
 
             void goThourghtBank(CustomModelBank bank, string bankName, NodeCollection collection)
             {
-                var n = new Node(bankName);
-
-                foreach (var mdl in bank.Models)
+                var n = new Node(bankName)
                 {
-                    var nMdl = GetNode(mdl);
-                    n.Nodes.Add(nMdl);
-                    if (nMdl is object)
-                        nToSelect = nMdl;
+                    Tag = bank
+                };
+
+                if (!isBankPicker)
+                {
+                    foreach (var mdl in bank.Models)
+                    {
+                        var nMdl = GetNode(mdl);
+                        n.Nodes.Add(nMdl);
+                        if (nMdl is object)
+                            nToSelect = nMdl;
+                    }
                 }
+                else if (bank == SelectedBank)
+                    nToSelect = n;
 
                 if (n.Nodes.Count > 0)
                     collection.Add(n);
@@ -86,10 +103,18 @@ namespace SM64_ROM_Manager
             return n;
         }
 
-        private void AdvTree1_AfterNodeSelect(object sender, DevComponents.AdvTree.AdvTreeNodeEventArgs e)
+        private void AdvTree1_AfterNodeSelect(object sender, AdvTreeNodeEventArgs e)
         {
-            Model = e.Node?.Tag as CustomModelConfig;
-            buttonX_Select.Enabled = Model != null;
+            if (isBankPicker)
+            {
+                SelectedBank = e.Node?.Tag as CustomModelBank;
+                buttonX_Select.Enabled = SelectedBank != null;
+            }
+            else
+            {
+                Model = e.Node?.Tag as CustomModelConfig;
+                buttonX_Select.Enabled = Model != null;
+            }
         }
 
         private void CustomModelSelector_Load(object sender, EventArgs e)

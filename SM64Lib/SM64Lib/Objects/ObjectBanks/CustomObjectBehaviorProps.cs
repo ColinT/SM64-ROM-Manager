@@ -10,7 +10,7 @@ namespace SM64Lib.Objects.ObjectBanks
 {
     public class CustomObjectBehaviorProps
     {
-        public Behavior Behavior { get; set; }
+        public BehaviorConfig Behavior { get; set; }
         public bool UseCustomAddress { get; set; } = true;
         public bool UseCollisionPointerOfModel { get; set; } = true;
 
@@ -25,14 +25,14 @@ namespace SM64Lib.Objects.ObjectBanks
                 if (UseCustomAddress || Behavior == null)
                     return _behaviorAddress;
                 else
-                    return Behavior.Config.BankAddress;
+                    return Behavior.BankAddress;
             }
             set
             {
                 if (UseCustomAddress)
                     _behaviorAddress = value;
                 else
-                    Behavior.Config.BankAddress = value;
+                    Behavior.BankAddress = value;
             }
         }
     }

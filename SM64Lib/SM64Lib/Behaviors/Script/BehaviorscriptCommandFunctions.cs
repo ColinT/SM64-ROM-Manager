@@ -9,7 +9,7 @@ namespace SM64Lib.Behaviors.Script
 {
     public class BehaviorscriptCommandFunctions
     {
-        public class X2E
+        public class X2A
         {
             public static int GetCollisionPointer(BehaviorscriptCommand cmd)
             {

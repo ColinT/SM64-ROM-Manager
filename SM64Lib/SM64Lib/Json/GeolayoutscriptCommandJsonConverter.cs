@@ -29,6 +29,7 @@ namespace SM64Lib.Json
 
             if (export?.Buffer is object)
             {
+                c.Position = 0;
                 c.Write(export.Buffer, 0, export.Buffer.Length);
                 c.Position = 0;
             }

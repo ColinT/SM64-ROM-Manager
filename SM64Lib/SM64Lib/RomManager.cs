@@ -137,6 +137,7 @@ namespace SM64Lib
         public RomManager(string FileName, ILevelManager levelManager)
         {
             CustomModelConfig.RequestModel += CustomModelConfig_RequestModel;
+            BehaviorConfig.RequestBehavior += BehaviorConfig_RequestBehavior;
 
             RomFile = FileName;
             LevelManager = levelManager;
@@ -155,6 +156,18 @@ namespace SM64Lib
         }
 
         // O t h e r   E v e n t s
+
+        private void BehaviorConfig_RequestBehavior(BehaviorConfig config, BehaviorConfig.RequestBehaviorEventArgs request)
+        {
+            if (request.Behavior == null)
+            {
+                foreach (var behav in GlobalBehaviorBank.Behaviors)
+                {
+                    if (request.Behavior == null && behav.Config == config)
+                        request.Behavior = behav;
+                }
+            }
+        }
 
         private void CustomModelConfig_RequestModel(CustomModelConfig config, CustomModelConfig.RequestModelEventArgs request)
         {

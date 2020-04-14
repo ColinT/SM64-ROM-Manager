@@ -254,7 +254,20 @@ namespace SM64_ROM_Manager
 
         private void ImportObjects(string[] filePaths)
         {
+            var imports = new Dictionary<string, CustomObjectImport>();
 
+            foreach (var filePath in filePaths)
+                imports.Add(Path.GetFileNameWithoutExtension(filePath), CustomObjectCollection.LoadImport(filePath));
+
+            if (imports.Any())
+            {
+                var frm = new CustomObjectImportDialog(rommgr, imports);
+                if (frm.ShowDialog() == DialogResult.OK)
+                {
+                    foreach (var import in imports.Values)
+                        customObjectCollection.Import(import);
+                }
+            }
         }
 
         private bool SelectCustomModelFromBank()

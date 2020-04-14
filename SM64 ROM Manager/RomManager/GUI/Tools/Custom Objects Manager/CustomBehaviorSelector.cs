@@ -20,7 +20,7 @@ namespace SM64_ROM_Manager
     public partial class CustomBehaviorSelector : OfficeForm
     {
         private readonly RomManager romManager;
-        public Behavior Behavior { get; set; } = null;
+        public BehaviorConfig Behavior { get; set; } = null;
 
         public CustomBehaviorSelector(RomManager romManager)
         {
@@ -48,7 +48,7 @@ namespace SM64_ROM_Manager
                 else
                     nCustom.Nodes.Add(n);
 
-                if (behav == Behavior)
+                if (behav.Config == Behavior)
                     nToSelect = n;
             }
 
@@ -78,7 +78,7 @@ namespace SM64_ROM_Manager
             var n = new Node()
             {
                 Text = name,
-                Tag = behav
+                Tag = behav.Config
             };
 
             n.Cells.Add(new Cell(TextFromValue(behav.Config.BankAddress)));
@@ -88,7 +88,7 @@ namespace SM64_ROM_Manager
 
         private void AdvTree1_AfterNodeSelect(object sender, DevComponents.AdvTree.AdvTreeNodeEventArgs e)
         {
-            Behavior = e.Node?.Tag as Behavior;
+            Behavior = e.Node?.Tag as BehaviorConfig;
             buttonX_Select.Enabled = Behavior != null;
         }
 
