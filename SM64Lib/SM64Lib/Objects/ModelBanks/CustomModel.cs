@@ -1,4 +1,5 @@
 ﻿using global::SM64Lib.Configuration;
+using Newtonsoft.Json;
 
 namespace SM64Lib.Objects.ModelBanks
 {
@@ -9,8 +10,11 @@ namespace SM64Lib.Objects.ModelBanks
         public Model.ObjectModel Model { get; set; } = null;
         public byte ModelID { get; set; } = 0;
 
+        [JsonProperty]
         public int ModelBankOffset { get; internal set; } = 0;
+        [JsonProperty]
         public int GeolayoutBankOffset { get; internal set; } = 0;
+        [JsonProperty]
         public int CollisionPointer { get; internal set; } = 0;
 
         public CustomModel()

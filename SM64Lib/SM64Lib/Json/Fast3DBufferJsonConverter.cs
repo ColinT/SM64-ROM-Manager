@@ -41,13 +41,13 @@ namespace SM64Lib.Json
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
             var buffer = (Fast3DBuffer)value;
-
             var export = new Fast3DBufferExport
             {
                 Buffer = buffer.ToArray(),
                 Fast3DBankStart = buffer.Fast3DBankStart,
                 DLPointers = buffer.DLPointers.ToList()
             };
+            buffer.Position = 0;
 
             serializer.Serialize(writer, export);
         }
