@@ -486,6 +486,12 @@
     <Compile Include="RomManager\GUI\Tools\Custom Objects Manager\CustomObjectImportPropsEditor.Designer.cs">
       <DependentUpon>CustomObjectImportPropsEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="RomManager\GUI\Tools\Custom Objects Manager\CustomObjectsDatabaseViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RomManager\GUI\Tools\Custom Objects Manager\CustomObjectsDatabaseViewer.Designer.cs">
+      <DependentUpon>CustomObjectsDatabaseViewer.cs</DependentUpon>
+    </Compile>
     <Compile Include="RomManager\GUI\Tools\Model Bank Manager\AddressListEditor.Designer.cs">
       <DependentUpon>AddressListEditor.cs</DependentUpon>
     </Compile>
@@ -875,6 +881,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="RomManager\GUI\Tools\Custom Objects Manager\CustomObjectImportPropsEditor.resx">
       <DependentUpon>CustomObjectImportPropsEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RomManager\GUI\Tools\Custom Objects Manager\CustomObjectsDatabaseViewer.resx">
+      <DependentUpon>CustomObjectsDatabaseViewer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="RomManager\GUI\Tools\Model Bank Manager\AddressListEditor.de.resx">
       <DependentUpon>AddressListEditor.cs</DependentUpon>

@@ -16,6 +16,7 @@ using Z.Collections.Extensions;
 using System.Linq;
 using System.IO;
 using Timer = System.Timers.Timer;
+using Microsoft.WindowsAPICodePack.Dialogs.Controls;
 
 namespace SM64_ROM_Manager
 {
@@ -231,7 +232,7 @@ namespace SM64_ROM_Manager
             return cobjs;
         }
 
-        private void ExportObjects(string filePath, bool multiExport)
+        private void ExportObjects(string filePath, bool multiExport, string exportName)
         {
             if (multiExport)
             {
@@ -239,13 +240,13 @@ namespace SM64_ROM_Manager
                 foreach (var obj in objs)
                 {
                     var myFilePath = Path.Combine(filePath, obj.Name + ".rmobj");
-                    CustomObjectCollection.Export(myFilePath, obj);
+                    CustomObjectCollection.Export(myFilePath, obj, exportName);
                 }
             }
             else
             {
                 var objs = GetSelectedCustomObjects();
-                CustomObjectCollection.Export(filePath, objs.ToArray());
+                CustomObjectCollection.Export(filePath, objs.ToArray(), exportName);
             }
         }
 
@@ -367,6 +368,7 @@ namespace SM64_ROM_Manager
         {
             var isMultiselect = IsMultiselect();
             CommonFileDialog sfd_SM64RM_ExportCustomObjectToFile;
+            var tbxName = new CommonFileDialogTextBox("rmobj.name", customObject.Name);
 
             if (isMultiselect && MessageBoxEx.Show(this, "You are going to export multiple custom objects. Do you want to save all objects to one single file (Yes) or do you want to save every single object to one file (No)?", "Export Custom Objects", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
                 sfd_SM64RM_ExportCustomObjectToFile = new CommonOpenFileDialog() { IsFolderPicker = true };
@@ -375,9 +377,10 @@ namespace SM64_ROM_Manager
                 sfd_SM64RM_ExportCustomObjectToFile = new CommonSaveFileDialog() { DefaultExtension = FILTER_CUSTOM_OBJECT_EXTENSIONS };
                 sfd_SM64RM_ExportCustomObjectToFile.Filters.Add(new CommonFileDialogFilter(FILTER_CUSTOM_OBJECT_NAMES, FILTER_CUSTOM_OBJECT_EXTENSIONS));
             }
+            sfd_SM64RM_ExportCustomObjectToFile.Controls.Add(tbxName);
 
             if (sfd_SM64RM_ExportCustomObjectToFile.ShowDialog(Handle) == CommonFileDialogResult.Ok)
-                ExportObjects(sfd_SM64RM_ExportCustomObjectToFile.FileName, isMultiselect);
+                ExportObjects(sfd_SM64RM_ExportCustomObjectToFile.FileName, isMultiselect, tbxName.Text);
         }
 
         private void ButtonItem_UploadToDatabase_Click(object sender, EventArgs e)

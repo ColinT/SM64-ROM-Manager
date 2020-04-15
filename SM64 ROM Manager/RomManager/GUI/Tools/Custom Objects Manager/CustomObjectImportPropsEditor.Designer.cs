@@ -35,6 +35,9 @@
             this.labelX1 = new DevComponents.DotNetBar.LabelX();
             this.labelX3 = new DevComponents.DotNetBar.LabelX();
             this.TextBoxX_Name = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.checkBoxX1 = new DevComponents.DotNetBar.Controls.CheckBoxX();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // labelX2
@@ -103,17 +106,40 @@
             this.TextBoxX_Name.PreventEnterBeep = true;
             this.TextBoxX_Name.TextChanged += new System.EventHandler(this.TextBoxX_Name_TextChanged);
             // 
+            // checkBoxX1
+            // 
+            // 
+            // 
+            // 
+            this.checkBoxX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.checkBoxX1.Checked = true;
+            this.checkBoxX1.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxX1.CheckValue = "Y";
+            resources.ApplyResources(this.checkBoxX1, "checkBoxX1");
+            this.checkBoxX1.Name = "checkBoxX1";
+            this.checkBoxX1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.checkBoxX1.CheckedChanged += new System.EventHandler(this.CheckBoxX1_CheckedChanged);
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.Transparent;
+            this.panel1.Controls.Add(this.labelX1);
+            this.panel1.Controls.Add(this.labelX2);
+            this.panel1.Controls.Add(this.ButtonX_ChangeDestModelBank);
+            this.panel1.Controls.Add(this.labelX3);
+            this.panel1.Controls.Add(this.TextBoxX_Name);
+            this.panel1.Controls.Add(this.TextBoxX_ModelID);
+            resources.ApplyResources(this.panel1, "panel1");
+            this.panel1.Name = "panel1";
+            // 
             // CustomObjectImportPropsEditor
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.ButtonX_ChangeDestModelBank);
-            this.Controls.Add(this.TextBoxX_Name);
-            this.Controls.Add(this.TextBoxX_ModelID);
-            this.Controls.Add(this.labelX1);
-            this.Controls.Add(this.labelX3);
-            this.Controls.Add(this.labelX2);
+            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.checkBoxX1);
             this.Name = "CustomObjectImportPropsEditor";
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -125,5 +151,7 @@
         private DevComponents.DotNetBar.LabelX labelX1;
         private DevComponents.DotNetBar.LabelX labelX3;
         private DevComponents.DotNetBar.Controls.TextBoxX TextBoxX_Name;
+        private DevComponents.DotNetBar.Controls.CheckBoxX checkBoxX1;
+        private System.Windows.Forms.Panel panel1;
     }
 }

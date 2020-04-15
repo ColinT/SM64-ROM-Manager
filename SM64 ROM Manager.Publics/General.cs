@@ -36,6 +36,7 @@ namespace SM64_ROM_Manager.Publics
         private static string pMyDataPath = string.Empty;
         private static string pMyToolsPath = string.Empty;
         private static string pMyTweaksPath = string.Empty;
+        private static string pMyCustomObjectsPath = string.Empty;
         private static string pMyPluginsPath = string.Empty;
         private static string pMyUserRequestsPath = string.Empty;
         private static string pMyImporterPresetsPath = string.Empty;
@@ -84,6 +85,19 @@ namespace SM64_ROM_Manager.Publics
                 }
 
                 return pMyTweaksPath;
+            }
+        }
+
+        public static string MyCustomObjectsPath
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(pMyCustomObjectsPath))
+                {
+                    pMyCustomObjectsPath = Path.Combine(MyDataPath, "Custom Objects");
+                }
+
+                return pMyCustomObjectsPath;
             }
         }
 

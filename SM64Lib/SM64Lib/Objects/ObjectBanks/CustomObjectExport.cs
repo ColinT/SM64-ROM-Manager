@@ -13,6 +13,7 @@ namespace SM64Lib.Objects.ObjectBanks
 {
     public class CustomObjectExport
     {
+        public string Name { get; set; } = string.Empty;
         public List<CustomObject> CustomObjects { get; set; } = new List<CustomObject>();
         public DateTime ExportDate { get; set; }
         [JsonConverter(typeof(ComplexDictionarJsonConverter<CustomModelConfig, CustomModel>))]

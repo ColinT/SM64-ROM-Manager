@@ -68,5 +68,17 @@ namespace SM64_ROM_Manager
             if (hasInit)
                 customObject.Name = TextBoxX_Name.Text.Trim();
         }
+
+        private void CheckBoxX1_CheckedChanged(object sender, EventArgs e)
+        {
+            var isChecked = checkBoxX1.Checked;
+
+            panel1.Enabled = isChecked;
+
+            if (isChecked)
+                import.IgnoreCustomObjects.RemoveIfContains(customObject);
+            else
+                import.IgnoreCustomObjects.AddIfNotContains(customObject);
+        }
     }
 }

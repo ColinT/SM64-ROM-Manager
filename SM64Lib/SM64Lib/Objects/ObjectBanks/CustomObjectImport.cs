@@ -16,5 +16,7 @@ namespace SM64Lib.Objects.ObjectBanks
         public Dictionary<CustomModelConfig, CustomModelBank> DestModelBanks { get; } = new Dictionary<CustomModelConfig, CustomModelBank>();
         [JsonIgnore]
         public BehaviorBank DestBehaviorBank { get; set; } = null;
+        [JsonIgnore]
+        public List<CustomObject> IgnoreCustomObjects { get; } = new List<CustomObject>();
     }
 }

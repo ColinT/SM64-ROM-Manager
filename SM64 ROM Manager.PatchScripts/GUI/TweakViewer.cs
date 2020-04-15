@@ -59,7 +59,7 @@ namespace SM64_ROM_Manager.PatchScripts
         private async void CheckForTweakUpdates()
         {
             var dbmgr = GetDatabaseManager();
-            string localPath = Path.Combine(General.MyTweaksPath, nameof(TweakDatabaseCategories.Reviewed));
+            string localPath = Path.Combine(General.MyTweaksPath, dbmgr.Preferences.CategoryPaths[TweakDatabaseCategories.Reviewed]);
             bool hasUpdates = false;
 
 #if !DEBUG
