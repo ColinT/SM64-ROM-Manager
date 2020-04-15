@@ -41,7 +41,7 @@ namespace SM64_ROM_Manager
         {
             var tasks = new List<Task<CustomObjectImport>>();
             var imports = new List<CustomObjectImport>();
-            var localPath = Path.Combine(Publics.General.MyCustomObjectsPath, databaseManager.Preferences.CategoryPaths[TweakDatabaseCategories.Reviewed]);
+            var localPath = Publics.General.MyCustomObjectsPath;
 
             foreach (var filePath in Directory.GetFiles(localPath, "*.rmobj", SearchOption.AllDirectories))
                 tasks.Add(Task.Run(() => CustomObjectCollection.LoadImport(filePath)));
@@ -110,7 +110,8 @@ namespace SM64_ROM_Manager
 
         private async void SearchUpdates()
         {
-            syncFiles = await databaseManager.CheckForUpdates(Publics.General.MyCustomObjectsPath);
+            var localPath = Path.Combine(Publics.General.MyCustomObjectsPath, databaseManager.Preferences.CategoryPaths[TweakDatabaseCategories.Reviewed]);
+            syncFiles = await databaseManager.CheckForUpdates(localPath);
             if (syncFiles is object && syncFiles.Any())
                 warningBox1.Visible = true;
         }
