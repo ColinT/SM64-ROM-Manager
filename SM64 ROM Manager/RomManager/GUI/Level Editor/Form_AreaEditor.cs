@@ -1772,7 +1772,7 @@ namespace SM64_ROM_Manager.LevelEditor
                 maps.cCollisionMap = null;
                 maps.cVisualMap = null;
                 maps.LoadAreaModel();
-                AreaDisplaylistScriptDumps.Add(CArea.AreaID, lastlyLoadedDisplaylists.Select((n) => n.Script).ToArray());
+                AreaDisplaylistScriptDumps.AddOrUpdate(CArea.AreaID, lastlyLoadedDisplaylists.Select((n) => n.Script).ToArray());
                 LoadObjectLists();
                 LoadWarpsLists();
                 LoadSpecailBoxList();

@@ -13,6 +13,7 @@ using global::SM64_ROM_Manager.SettingsManager;
 using global::SM64Lib.Levels;
 using Image = System.Drawing.Image;
 using Bitmap = System.Drawing.Bitmap;
+using System.Collections.Generic;
 
 namespace SM64_ROM_Manager.LevelEditor
 {
@@ -595,38 +596,33 @@ namespace SM64_ROM_Manager.LevelEditor
         internal void DrawAllObjects(bool drawPicking = false, bool DrawBoundingBox = true)
         {
             int index = 0;
+
             foreach (Managed3DObject n in Main.ManagedObjects)
             {
-                Renderer objModel;
+                Renderer objModel = null;
                 Color? col;
+                var otherMdls = new List<Renderer>();
+
                 if (Main.DrawObjectModels && Main.ObjectModels.ContainsKey(n.ModelID))
-                {
                     objModel = Main.ObjectModels[n.ModelID];
-                }
                 else if (Main.DrawDirectionArrow)
-                {
-                    objModel = Main.ObjectModels[0];
-                }
-                else
-                {
-                    objModel = null;
-                }
+                    otherMdls.Add(Main.ObjectModels[0]);
 
                 if (objModel is object && !objModel.HasRendered)
-                {
                     objModel.RenderModel();
+
+                foreach (var mdl in otherMdls)
+                {
+                    if (!mdl.HasRendered)
+                        mdl.RenderModel();
                 }
 
                 if (drawPicking)
-                {
                     col = Color.FromArgb(0x10000000 | index);
-                }
                 else
-                {
                     col = default;
-                }
 
-                n.Draw(FaceDrawMode, objModel, col, drawPicking, DrawBoundingBox);
+                n.Draw(FaceDrawMode, objModel, otherMdls, col, drawPicking, DrawBoundingBox);
                 index += 1;
             }
         }
