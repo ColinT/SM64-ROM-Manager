@@ -16,6 +16,8 @@ namespace SM64Lib.Objects.ObjectBanks
         public string Name { get; set; } = string.Empty;
         public List<CustomObject> CustomObjects { get; set; } = new List<CustomObject>();
         public DateTime ExportDate { get; set; }
+        [JsonConverter(typeof(Newtonsoft.Json.Converters.VersionConverter))]
+        public Version Version { get; set; } = new Version("1.0.0.0");
         [JsonConverter(typeof(ComplexDictionarJsonConverter<CustomModelConfig, CustomModel>))]
         public Dictionary<CustomModelConfig, CustomModel> CustomModels { get; set; } = new Dictionary<CustomModelConfig, CustomModel>();
         [JsonConverter(typeof(ComplexDictionarJsonConverter<BehaviorConfig, Behavior>))]

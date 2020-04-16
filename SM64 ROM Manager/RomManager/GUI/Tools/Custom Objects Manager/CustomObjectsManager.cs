@@ -67,11 +67,16 @@ namespace SM64_ROM_Manager
             UpdateAllNodes();
         }
 
-        // T i m e r   E v e n t s
+        // O t h e r   E v e n t s
 
         private void Timer_PropsChanged_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             UpdateNode(customObject);
+        }
+
+        private void Frm_ImportPatchClicked(CustomObjectImport import)
+        {
+            ImportObjects(new Dictionary<string, CustomObjectImport>() { { import.Name, import } });
         }
 
         // F e a t u r e s
@@ -262,6 +267,11 @@ namespace SM64_ROM_Manager
             foreach (var filePath in filePaths)
                 imports.Add(Path.GetFileNameWithoutExtension(filePath), CustomObjectCollection.LoadImport(filePath));
 
+            ImportObjects(imports);
+        }
+
+        private void ImportObjects(Dictionary<string, CustomObjectImport> imports)
+        {
             if (imports.Any())
             {
                 foreach (var kvpImport in imports)
@@ -348,7 +358,9 @@ namespace SM64_ROM_Manager
 
         private void ButtonItem_ImportFromDatabase_Click(object sender, EventArgs e)
         {
-
+            var frm = new CustomObjectsDatabaseViewer();
+            frm.ImportClicked += Frm_ImportPatchClicked;
+            frm.Show();
         }
 
         private void ButtonItem_DeleteObject_Click(object sender, EventArgs e)

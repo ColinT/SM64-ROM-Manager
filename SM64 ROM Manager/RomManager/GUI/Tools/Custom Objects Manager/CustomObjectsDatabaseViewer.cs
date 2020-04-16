@@ -17,6 +17,11 @@ namespace SM64_ROM_Manager
 {
     public partial class CustomObjectsDatabaseViewer : OfficeForm
     {
+        // Events
+
+        public delegate void ImportClickedEventHandler(CustomObjectImport import);
+        public event ImportClickedEventHandler ImportClicked;
+
         // F i e l d s
 
         private readonly TweakDatabaseManager databaseManager;
@@ -69,9 +74,9 @@ namespace SM64_ROM_Manager
                 itemListBox_CustomObjectFiles.Items.Add(item);
             }
 
-            itemListBox_CustomObjectFiles.EndUpdate();
+            itemListBox_CustomObjectFiles.EndUpdate(true);
             if (itemListBox_CustomObjectFiles.Items.Count > 0)
-                itemListBox_CustomObjectFiles.SelectedIndex = 0;
+                itemListBox_CustomObjectFiles.SelectedItem = itemListBox_CustomObjectFiles.Items[0];
         }
 
         private void LoadObjects(CustomObjectImport import)
@@ -101,6 +106,7 @@ namespace SM64_ROM_Manager
         {
             var isNull = customObject == null;
             textBoxX_Description.Text = isNull ? string.Empty : customObject.Description;
+            panel1.Enabled = !isNull;
         }
 
         private CustomObjectImport GetSelectedImport()
@@ -142,10 +148,20 @@ namespace SM64_ROM_Manager
 
         private async void WarningBox1_OptionsClick(object sender, EventArgs e)
         {
+            Enabled = false;
             CirProg.Start();
-            await DoUpdate();
-            await LoadImports();
+
+            try
+            {
+                await DoUpdate();
+                await LoadImports();
+            }
+            catch (Exception)
+            {
+            }
+
             CirProg.Stop();
+            Enabled = true;
         }
 
         private void AdvTree1_AfterNodeSelect(object sender, DevComponents.AdvTree.AdvTreeNodeEventArgs e)
@@ -156,6 +172,13 @@ namespace SM64_ROM_Manager
         private void ItemListBox_CustomObjectFiles_SelectedItemChanged(object sender, EventArgs e)
         {
             LoadObjects(GetSelectedImport());
+        }
+
+        private void ButtonX_Import_Click(object sender, EventArgs e)
+        {
+            var import = GetSelectedImport();
+            if (import is object)
+                ImportClicked?.Invoke(import);
         }
     }
 }

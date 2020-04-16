@@ -30,15 +30,16 @@ namespace SM64_ROM_Manager
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CustomObjectsDatabaseViewer));
             this.advTree_CustomObjects = new DevComponents.AdvTree.AdvTree();
+            this.columnHeader1 = new DevComponents.AdvTree.ColumnHeader();
+            this.columnHeader2 = new DevComponents.AdvTree.ColumnHeader();
             this.nodeConnector1 = new DevComponents.AdvTree.NodeConnector();
             this.elementStyle1 = new DevComponents.DotNetBar.ElementStyle();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.warningBox1 = new DevComponents.DotNetBar.Controls.WarningBox();
+            this.buttonX_Import = new DevComponents.DotNetBar.ButtonX();
             this.textBoxX_Description = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.warningBox1 = new DevComponents.DotNetBar.Controls.WarningBox();
             this.itemListBox_CustomObjectFiles = new SM64_ROM_Manager.Publics.Controls.ItemListBox();
             this.CirProg = new DevComponents.DotNetBar.Controls.CircularProgress();
-            this.columnHeader1 = new DevComponents.AdvTree.ColumnHeader();
-            this.columnHeader2 = new DevComponents.AdvTree.ColumnHeader();
             ((System.ComponentModel.ISupportInitialize)(this.advTree_CustomObjects)).BeginInit();
             this.panel1.SuspendLayout();
             this.itemListBox_CustomObjectFiles.SuspendLayout();
@@ -62,10 +63,22 @@ namespace SM64_ROM_Manager
             this.advTree_CustomObjects.NodesConnector = this.nodeConnector1;
             this.advTree_CustomObjects.NodeStyle = this.elementStyle1;
             this.advTree_CustomObjects.PathSeparator = ";";
-            this.advTree_CustomObjects.Size = new System.Drawing.Size(384, 328);
+            this.advTree_CustomObjects.Size = new System.Drawing.Size(384, 285);
             this.advTree_CustomObjects.Styles.Add(this.elementStyle1);
             this.advTree_CustomObjects.TabIndex = 1;
             this.advTree_CustomObjects.AfterNodeSelect += new DevComponents.AdvTree.AdvTreeNodeEventHandler(this.AdvTree1_AfterNodeSelect);
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Name = "columnHeader1";
+            this.columnHeader1.Text = "Name";
+            this.columnHeader1.Width.Absolute = 290;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Name = "columnHeader2";
+            this.columnHeader2.Text = "Has Model";
+            this.columnHeader2.Width.Absolute = 60;
             // 
             // nodeConnector1
             // 
@@ -80,16 +93,47 @@ namespace SM64_ROM_Manager
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.Transparent;
-            this.panel1.Controls.Add(this.textBoxX_Description);
+            this.panel1.Controls.Add(this.buttonX_Import);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(400, 361);
+            this.panel1.Enabled = false;
+            this.panel1.Location = new System.Drawing.Point(400, 318);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(384, 100);
+            this.panel1.Size = new System.Drawing.Size(384, 29);
             this.panel1.TabIndex = 2;
+            // 
+            // buttonX_Import
+            // 
+            this.buttonX_Import.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.buttonX_Import.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.buttonX_Import.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.buttonX_Import.Location = new System.Drawing.Point(132, 3);
+            this.buttonX_Import.Name = "buttonX_Import";
+            this.buttonX_Import.Size = new System.Drawing.Size(120, 23);
+            this.buttonX_Import.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.buttonX_Import.TabIndex = 1;
+            this.buttonX_Import.Text = "Import Objects";
+            this.buttonX_Import.Click += new System.EventHandler(this.ButtonX_Import_Click);
+            // 
+            // textBoxX_Description
+            // 
+            // 
+            // 
+            // 
+            this.textBoxX_Description.Border.Class = "TextBoxBorder";
+            this.textBoxX_Description.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.textBoxX_Description.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.textBoxX_Description.Location = new System.Drawing.Point(400, 347);
+            this.textBoxX_Description.Multiline = true;
+            this.textBoxX_Description.Name = "textBoxX_Description";
+            this.textBoxX_Description.PreventEnterBeep = true;
+            this.textBoxX_Description.ReadOnly = true;
+            this.textBoxX_Description.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.textBoxX_Description.Size = new System.Drawing.Size(384, 114);
+            this.textBoxX_Description.TabIndex = 0;
             // 
             // warningBox1
             // 
-            this.warningBox1.BackColor = System.Drawing.Color.Transparent;
+            this.warningBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(196)))), ((int)(((byte)(219)))), ((int)(((byte)(249)))));
             this.warningBox1.CloseButtonVisible = false;
             this.warningBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.warningBox1.Location = new System.Drawing.Point(0, 0);
@@ -101,23 +145,6 @@ namespace SM64_ROM_Manager
     "ase.";
             this.warningBox1.Visible = false;
             this.warningBox1.OptionsClick += new System.EventHandler(this.WarningBox1_OptionsClick);
-            // 
-            // textBoxX_Description
-            // 
-            // 
-            // 
-            // 
-            this.textBoxX_Description.Border.Class = "TextBoxBorder";
-            this.textBoxX_Description.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.textBoxX_Description.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBoxX_Description.Location = new System.Drawing.Point(0, 0);
-            this.textBoxX_Description.Multiline = true;
-            this.textBoxX_Description.Name = "textBoxX_Description";
-            this.textBoxX_Description.PreventEnterBeep = true;
-            this.textBoxX_Description.ReadOnly = true;
-            this.textBoxX_Description.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBoxX_Description.Size = new System.Drawing.Size(384, 100);
-            this.textBoxX_Description.TabIndex = 0;
             // 
             // itemListBox_CustomObjectFiles
             // 
@@ -136,6 +163,7 @@ namespace SM64_ROM_Manager
             this.itemListBox_CustomObjectFiles.Name = "itemListBox_CustomObjectFiles";
             this.itemListBox_CustomObjectFiles.ReserveLeftSpace = false;
             this.itemListBox_CustomObjectFiles.Size = new System.Drawing.Size(400, 428);
+            this.itemListBox_CustomObjectFiles.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.itemListBox_CustomObjectFiles.TabIndex = 0;
             this.itemListBox_CustomObjectFiles.Text = "v";
             this.itemListBox_CustomObjectFiles.SelectedItemChanged += new SM64_ROM_Manager.Publics.Controls.ItemListBox.SelectedItemChangedEventHandler(this.ItemListBox_CustomObjectFiles_SelectedItemChanged);
@@ -157,23 +185,12 @@ namespace SM64_ROM_Manager
             this.CirProg.TabIndex = 5;
             this.CirProg.Visible = false;
             // 
-            // columnHeader1
-            // 
-            this.columnHeader1.Name = "columnHeader1";
-            this.columnHeader1.Text = "Name";
-            this.columnHeader1.Width.Absolute = 290;
-            // 
-            // columnHeader2
-            // 
-            this.columnHeader2.Name = "columnHeader2";
-            this.columnHeader2.Text = "Has Model";
-            this.columnHeader2.Width.Absolute = 60;
-            // 
             // CustomObjectsDatabaseViewer
             // 
             this.ClientSize = new System.Drawing.Size(784, 461);
             this.Controls.Add(this.advTree_CustomObjects);
             this.Controls.Add(this.panel1);
+            this.Controls.Add(this.textBoxX_Description);
             this.Controls.Add(this.itemListBox_CustomObjectFiles);
             this.Controls.Add(this.warningBox1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -203,5 +220,6 @@ namespace SM64_ROM_Manager
         private DevComponents.DotNetBar.Controls.CircularProgress CirProg;
         private DevComponents.AdvTree.ColumnHeader columnHeader1;
         private DevComponents.AdvTree.ColumnHeader columnHeader2;
+        private DevComponents.DotNetBar.ButtonX buttonX_Import;
     }
 }
