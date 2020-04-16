@@ -89,6 +89,7 @@ namespace SM64_ROM_Manager
             // 
             // AdvTree_Objs
             // 
+            resources.ApplyResources(this.AdvTree_Objs, "AdvTree_Objs");
             this.AdvTree_Objs.AccessibleRole = System.Windows.Forms.AccessibleRole.Outline;
             this.AdvTree_Objs.BackColor = System.Drawing.SystemColors.Window;
             // 
@@ -99,38 +100,33 @@ namespace SM64_ROM_Manager
             this.AdvTree_Objs.Columns.Add(this.columnHeader1);
             this.AdvTree_Objs.Columns.Add(this.columnHeader2);
             this.AdvTree_Objs.Columns.Add(this.columnHeader3);
-            this.AdvTree_Objs.Dock = System.Windows.Forms.DockStyle.Fill;
             this.AdvTree_Objs.DragDropEnabled = false;
             this.AdvTree_Objs.DragDropNodeCopyEnabled = false;
             this.AdvTree_Objs.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
-            this.AdvTree_Objs.Location = new System.Drawing.Point(0, 24);
             this.AdvTree_Objs.MultiSelect = true;
             this.AdvTree_Objs.Name = "AdvTree_Objs";
             this.AdvTree_Objs.NodesConnector = this.nodeConnector1;
             this.AdvTree_Objs.NodeStyle = this.elementStyle1;
             this.AdvTree_Objs.PathSeparator = ";";
-            this.AdvTree_Objs.Size = new System.Drawing.Size(400, 387);
             this.AdvTree_Objs.Styles.Add(this.elementStyle1);
-            this.AdvTree_Objs.TabIndex = 0;
-            this.AdvTree_Objs.Text = "advTree1";
             this.AdvTree_Objs.AfterNodeSelect += new DevComponents.AdvTree.AdvTreeNodeEventHandler(this.AdvTree_Objs_AfterNodeSelect);
             // 
             // columnHeader1
             // 
             this.columnHeader1.Name = "columnHeader1";
-            this.columnHeader1.Text = "Name";
+            resources.ApplyResources(this.columnHeader1, "columnHeader1");
             this.columnHeader1.Width.Absolute = 190;
             // 
             // columnHeader2
             // 
             this.columnHeader2.Name = "columnHeader2";
-            this.columnHeader2.Text = "Model ID";
+            resources.ApplyResources(this.columnHeader2, "columnHeader2");
             this.columnHeader2.Width.Absolute = 60;
             // 
             // columnHeader3
             // 
             this.columnHeader3.Name = "columnHeader3";
-            this.columnHeader3.Text = "Behavior Address";
+            resources.ApplyResources(this.columnHeader3, "columnHeader3");
             this.columnHeader3.Width.Absolute = 110;
             // 
             // nodeConnector1
@@ -145,94 +141,89 @@ namespace SM64_ROM_Manager
             // 
             // bar1
             // 
-            this.bar1.AccessibleDescription = "DotNetBar Bar (bar1)";
-            this.bar1.AccessibleName = "DotNetBar Bar";
+            resources.ApplyResources(this.bar1, "bar1");
             this.bar1.AccessibleRole = System.Windows.Forms.AccessibleRole.MenuBar;
             this.bar1.AntiAlias = true;
-            this.bar1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.bar1.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.bar1.IsMaximized = false;
             this.bar1.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.ButtonItem_NewObject,
             this.buttonItem4,
             this.ButtonItem_DeleteObject,
             this.buttonItem_Export});
-            this.bar1.Location = new System.Drawing.Point(0, 0);
             this.bar1.MenuBar = true;
             this.bar1.Name = "bar1";
-            this.bar1.Size = new System.Drawing.Size(752, 24);
             this.bar1.Stretch = true;
             this.bar1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.bar1.TabIndex = 1;
             this.bar1.TabStop = false;
             // 
             // ButtonItem_NewObject
             // 
+            resources.ApplyResources(this.ButtonItem_NewObject, "ButtonItem_NewObject");
             this.ButtonItem_NewObject.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
             this.ButtonItem_NewObject.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_plus_math_16px;
             this.ButtonItem_NewObject.Name = "ButtonItem_NewObject";
-            this.ButtonItem_NewObject.Text = "New Object";
             this.ButtonItem_NewObject.Click += new System.EventHandler(this.ButtonItem_NewObject_Click);
             // 
             // buttonItem4
             // 
+            resources.ApplyResources(this.buttonItem4, "buttonItem4");
             this.buttonItem4.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
             this.buttonItem4.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_import_16px;
             this.buttonItem4.Name = "buttonItem4";
             this.buttonItem4.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.ButtonItem_ImportFromFile,
             this.ButtonItem_ImportFromDatabase});
-            this.buttonItem4.Text = "Import";
             // 
             // ButtonItem_ImportFromFile
             // 
+            resources.ApplyResources(this.ButtonItem_ImportFromFile, "ButtonItem_ImportFromFile");
             this.ButtonItem_ImportFromFile.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_import_16px;
             this.ButtonItem_ImportFromFile.Name = "ButtonItem_ImportFromFile";
-            this.ButtonItem_ImportFromFile.Text = "Import from file ...";
             this.ButtonItem_ImportFromFile.Click += new System.EventHandler(this.ButtonItem_ImportFromFile_Click);
             // 
             // ButtonItem_ImportFromDatabase
             // 
+            resources.ApplyResources(this.ButtonItem_ImportFromDatabase, "ButtonItem_ImportFromDatabase");
             this.ButtonItem_ImportFromDatabase.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_download_16px;
             this.ButtonItem_ImportFromDatabase.Name = "ButtonItem_ImportFromDatabase";
-            this.ButtonItem_ImportFromDatabase.Text = "Import from Database ...";
             this.ButtonItem_ImportFromDatabase.Click += new System.EventHandler(this.ButtonItem_ImportFromDatabase_Click);
             // 
             // ButtonItem_DeleteObject
             // 
+            resources.ApplyResources(this.ButtonItem_DeleteObject, "ButtonItem_DeleteObject");
             this.ButtonItem_DeleteObject.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
             this.ButtonItem_DeleteObject.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_delete_sign_16px;
             this.ButtonItem_DeleteObject.Name = "ButtonItem_DeleteObject";
-            this.ButtonItem_DeleteObject.Text = "Delete Object";
             this.ButtonItem_DeleteObject.Click += new System.EventHandler(this.ButtonItem_DeleteObject_Click);
             // 
             // buttonItem_Export
             // 
+            resources.ApplyResources(this.buttonItem_Export, "buttonItem_Export");
             this.buttonItem_Export.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
             this.buttonItem_Export.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_export_16px;
             this.buttonItem_Export.Name = "buttonItem_Export";
             this.buttonItem_Export.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.ButtonItem_ExportToFile,
             this.ButtonItem_UploadToDatabase});
-            this.buttonItem_Export.Text = "Export";
             // 
             // ButtonItem_ExportToFile
             // 
+            resources.ApplyResources(this.ButtonItem_ExportToFile, "ButtonItem_ExportToFile");
             this.ButtonItem_ExportToFile.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_export_16px;
             this.ButtonItem_ExportToFile.Name = "ButtonItem_ExportToFile";
-            this.ButtonItem_ExportToFile.Text = "Export to file ...";
             this.ButtonItem_ExportToFile.Click += new System.EventHandler(this.ButtonItem_ExportToFile_Click);
             // 
             // ButtonItem_UploadToDatabase
             // 
+            resources.ApplyResources(this.ButtonItem_UploadToDatabase, "ButtonItem_UploadToDatabase");
             this.ButtonItem_UploadToDatabase.Enabled = false;
             this.ButtonItem_UploadToDatabase.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_upload_16px;
             this.ButtonItem_UploadToDatabase.Name = "ButtonItem_UploadToDatabase";
-            this.ButtonItem_UploadToDatabase.Text = "Upload to Database ...";
             this.ButtonItem_UploadToDatabase.Click += new System.EventHandler(this.ButtonItem_UploadToDatabase_Click);
             // 
             // layoutControl1
             // 
+            resources.ApplyResources(this.layoutControl1, "layoutControl1");
             this.layoutControl1.BackColor = System.Drawing.Color.Transparent;
             this.layoutControl1.Controls.Add(this.CheckBoxX_BehavCustom);
             this.layoutControl1.Controls.Add(this.CheckBoxX_BehavBank);
@@ -246,9 +237,7 @@ namespace SM64_ROM_Manager
             this.layoutControl1.Controls.Add(this.CheckBoxX_UseColPtrForBehav);
             this.layoutControl1.Controls.Add(this.CheckBoxX_NoModel);
             this.layoutControl1.Controls.Add(this.TextBoxX_Description);
-            this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Right;
             this.layoutControl1.ForeColor = System.Drawing.Color.Black;
-            this.layoutControl1.Location = new System.Drawing.Point(400, 24);
             this.layoutControl1.Name = "layoutControl1";
             // 
             // 
@@ -271,224 +260,188 @@ namespace SM64_ROM_Manager
             this.layoutSpacerItem5,
             this.layoutSpacerItem8,
             this.layoutControlItem14});
-            this.layoutControl1.Size = new System.Drawing.Size(352, 387);
-            this.layoutControl1.TabIndex = 2;
+            this.layoutControl1.RootGroup.Text = resources.GetString("resource.Text");
+            this.layoutControl1.RootGroup.Tooltip = resources.GetString("resource.Tooltip");
             // 
             // CheckBoxX_BehavCustom
             // 
-            this.CheckBoxX_BehavCustom.AutoSize = true;
+            resources.ApplyResources(this.CheckBoxX_BehavCustom, "CheckBoxX_BehavCustom");
             // 
             // 
             // 
             this.CheckBoxX_BehavCustom.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.CheckBoxX_BehavCustom.Location = new System.Drawing.Point(4, 143);
-            this.CheckBoxX_BehavCustom.Margin = new System.Windows.Forms.Padding(0);
-            this.CheckBoxX_BehavCustom.MinimumSize = new System.Drawing.Size(0, 23);
             this.CheckBoxX_BehavCustom.Name = "CheckBoxX_BehavCustom";
-            this.CheckBoxX_BehavCustom.Size = new System.Drawing.Size(129, 23);
             this.CheckBoxX_BehavCustom.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.CheckBoxX_BehavCustom.TabIndex = 3;
-            this.CheckBoxX_BehavCustom.Text = "Set Behavior Address";
             this.CheckBoxX_BehavCustom.CheckedChanging += new DevComponents.DotNetBar.Controls.CheckBoxXChangeEventHandler(this.CheckBoxX_CheckingChanging);
             this.CheckBoxX_BehavCustom.CheckedChanged += new System.EventHandler(this.CheckBoxX_BehavCustom_CheckedChanged);
             // 
             // CheckBoxX_BehavBank
             // 
-            this.CheckBoxX_BehavBank.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.CheckBoxX_BehavBank.AutoSize = true;
+            resources.ApplyResources(this.CheckBoxX_BehavBank, "CheckBoxX_BehavBank");
             // 
             // 
             // 
             this.CheckBoxX_BehavBank.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.CheckBoxX_BehavBank.Location = new System.Drawing.Point(4, 174);
-            this.CheckBoxX_BehavBank.Margin = new System.Windows.Forms.Padding(0);
-            this.CheckBoxX_BehavBank.MinimumSize = new System.Drawing.Size(0, 23);
             this.CheckBoxX_BehavBank.Name = "CheckBoxX_BehavBank";
-            this.CheckBoxX_BehavBank.Size = new System.Drawing.Size(152, 23);
             this.CheckBoxX_BehavBank.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.CheckBoxX_BehavBank.TabIndex = 5;
-            this.CheckBoxX_BehavBank.Text = "Select from Behavior Bank";
             this.CheckBoxX_BehavBank.CheckedChanging += new DevComponents.DotNetBar.Controls.CheckBoxXChangeEventHandler(this.CheckBoxX_BehavBank_CheckedChanging);
             this.CheckBoxX_BehavBank.Click += new System.EventHandler(this.CheckBoxX_BehavBank_Click);
             // 
             // ButtonX_SelectFromBehavBank
             // 
+            resources.ApplyResources(this.ButtonX_SelectFromBehavBank, "ButtonX_SelectFromBehavBank");
             this.ButtonX_SelectFromBehavBank.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.ButtonX_SelectFromBehavBank.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.ButtonX_SelectFromBehavBank.Location = new System.Drawing.Point(204, 174);
-            this.ButtonX_SelectFromBehavBank.Margin = new System.Windows.Forms.Padding(0);
             this.ButtonX_SelectFromBehavBank.Name = "ButtonX_SelectFromBehavBank";
-            this.ButtonX_SelectFromBehavBank.Size = new System.Drawing.Size(92, 23);
             this.ButtonX_SelectFromBehavBank.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.ButtonX_SelectFromBehavBank.TabIndex = 6;
-            this.ButtonX_SelectFromBehavBank.Text = "Select ...";
             this.ButtonX_SelectFromBehavBank.Click += new System.EventHandler(this.ButtonX_SelectFromBehavBank_Click);
             // 
             // TextBoxX_Name
             // 
+            resources.ApplyResources(this.TextBoxX_Name, "TextBoxX_Name");
             this.TextBoxX_Name.BackColor = System.Drawing.Color.White;
             // 
             // 
             // 
             this.TextBoxX_Name.Border.Class = "TextBoxBorder";
             this.TextBoxX_Name.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.TextBoxX_Name.ButtonCustom.DisplayPosition = ((int)(resources.GetObject("TextBoxX_Name.ButtonCustom.DisplayPosition")));
+            this.TextBoxX_Name.ButtonCustom.Image = ((System.Drawing.Image)(resources.GetObject("TextBoxX_Name.ButtonCustom.Image")));
+            this.TextBoxX_Name.ButtonCustom.Text = resources.GetString("TextBoxX_Name.ButtonCustom.Text");
+            this.TextBoxX_Name.ButtonCustom.Tooltip = resources.GetString("TextBoxX_Name.ButtonCustom.Tooltip");
+            this.TextBoxX_Name.ButtonCustom2.DisplayPosition = ((int)(resources.GetObject("TextBoxX_Name.ButtonCustom2.DisplayPosition")));
+            this.TextBoxX_Name.ButtonCustom2.Image = ((System.Drawing.Image)(resources.GetObject("TextBoxX_Name.ButtonCustom2.Image")));
+            this.TextBoxX_Name.ButtonCustom2.Text = resources.GetString("TextBoxX_Name.ButtonCustom2.Text");
+            this.TextBoxX_Name.ButtonCustom2.Tooltip = resources.GetString("TextBoxX_Name.ButtonCustom2.Tooltip");
             this.TextBoxX_Name.DisabledBackColor = System.Drawing.Color.White;
             this.TextBoxX_Name.ForeColor = System.Drawing.Color.Black;
-            this.TextBoxX_Name.Location = new System.Drawing.Point(71, 4);
-            this.TextBoxX_Name.Margin = new System.Windows.Forms.Padding(0);
             this.TextBoxX_Name.Name = "TextBoxX_Name";
             this.TextBoxX_Name.PreventEnterBeep = true;
-            this.TextBoxX_Name.Size = new System.Drawing.Size(277, 20);
-            this.TextBoxX_Name.TabIndex = 0;
             this.TextBoxX_Name.TextChanged += new System.EventHandler(this.TextBoxX_Name_TextChanged);
             // 
             // TextBoxX_BehavAddr
             // 
+            resources.ApplyResources(this.TextBoxX_BehavAddr, "TextBoxX_BehavAddr");
             this.TextBoxX_BehavAddr.BackColor = System.Drawing.Color.White;
             // 
             // 
             // 
             this.TextBoxX_BehavAddr.Border.Class = "TextBoxBorder";
             this.TextBoxX_BehavAddr.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.TextBoxX_BehavAddr.ButtonCustom.DisplayPosition = ((int)(resources.GetObject("TextBoxX_BehavAddr.ButtonCustom.DisplayPosition")));
+            this.TextBoxX_BehavAddr.ButtonCustom.Image = ((System.Drawing.Image)(resources.GetObject("TextBoxX_BehavAddr.ButtonCustom.Image")));
+            this.TextBoxX_BehavAddr.ButtonCustom.Text = resources.GetString("TextBoxX_BehavAddr.ButtonCustom.Text");
+            this.TextBoxX_BehavAddr.ButtonCustom.Tooltip = resources.GetString("TextBoxX_BehavAddr.ButtonCustom.Tooltip");
+            this.TextBoxX_BehavAddr.ButtonCustom2.DisplayPosition = ((int)(resources.GetObject("TextBoxX_BehavAddr.ButtonCustom2.DisplayPosition")));
+            this.TextBoxX_BehavAddr.ButtonCustom2.Image = ((System.Drawing.Image)(resources.GetObject("TextBoxX_BehavAddr.ButtonCustom2.Image")));
+            this.TextBoxX_BehavAddr.ButtonCustom2.Text = resources.GetString("TextBoxX_BehavAddr.ButtonCustom2.Text");
+            this.TextBoxX_BehavAddr.ButtonCustom2.Tooltip = resources.GetString("TextBoxX_BehavAddr.ButtonCustom2.Tooltip");
             this.TextBoxX_BehavAddr.DisabledBackColor = System.Drawing.Color.White;
             this.TextBoxX_BehavAddr.ForeColor = System.Drawing.Color.Black;
-            this.TextBoxX_BehavAddr.Location = new System.Drawing.Point(204, 143);
-            this.TextBoxX_BehavAddr.Margin = new System.Windows.Forms.Padding(0);
             this.TextBoxX_BehavAddr.Name = "TextBoxX_BehavAddr";
             this.TextBoxX_BehavAddr.PreventEnterBeep = true;
-            this.TextBoxX_BehavAddr.Size = new System.Drawing.Size(112, 20);
-            this.TextBoxX_BehavAddr.TabIndex = 4;
-            this.TextBoxX_BehavAddr.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.TextBoxX_BehavAddr.WatermarkText = "Behavior Address";
             this.TextBoxX_BehavAddr.TextChanged += new System.EventHandler(this.TextBoxX_BehavAddr_TextChanged);
             // 
             // CheckBoxX_CustomModelID
             // 
-            this.CheckBoxX_CustomModelID.AutoSize = true;
+            resources.ApplyResources(this.CheckBoxX_CustomModelID, "CheckBoxX_CustomModelID");
             // 
             // 
             // 
             this.CheckBoxX_CustomModelID.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.CheckBoxX_CustomModelID.Location = new System.Drawing.Point(4, 267);
-            this.CheckBoxX_CustomModelID.Margin = new System.Windows.Forms.Padding(0);
-            this.CheckBoxX_CustomModelID.MinimumSize = new System.Drawing.Size(0, 23);
             this.CheckBoxX_CustomModelID.Name = "CheckBoxX_CustomModelID";
-            this.CheckBoxX_CustomModelID.Size = new System.Drawing.Size(86, 23);
             this.CheckBoxX_CustomModelID.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.CheckBoxX_CustomModelID.TabIndex = 10;
-            this.CheckBoxX_CustomModelID.Text = "Set Model ID";
             this.CheckBoxX_CustomModelID.CheckedChanging += new DevComponents.DotNetBar.Controls.CheckBoxXChangeEventHandler(this.CheckBoxX_CheckingChanging);
             this.CheckBoxX_CustomModelID.CheckedChanged += new System.EventHandler(this.CheckBoxX_CustomModelID_CheckedChanged);
             // 
             // CheckBoxX_CustomModel
             // 
-            this.CheckBoxX_CustomModel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.CheckBoxX_CustomModel.AutoSize = true;
+            resources.ApplyResources(this.CheckBoxX_CustomModel, "CheckBoxX_CustomModel");
             // 
             // 
             // 
             this.CheckBoxX_CustomModel.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.CheckBoxX_CustomModel.Location = new System.Drawing.Point(4, 298);
-            this.CheckBoxX_CustomModel.Margin = new System.Windows.Forms.Padding(0);
-            this.CheckBoxX_CustomModel.MinimumSize = new System.Drawing.Size(0, 23);
             this.CheckBoxX_CustomModel.Name = "CheckBoxX_CustomModel";
-            this.CheckBoxX_CustomModel.Size = new System.Drawing.Size(139, 23);
             this.CheckBoxX_CustomModel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.CheckBoxX_CustomModel.TabIndex = 12;
-            this.CheckBoxX_CustomModel.Text = "Select from Model Bank";
             this.CheckBoxX_CustomModel.CheckedChanging += new DevComponents.DotNetBar.Controls.CheckBoxXChangeEventHandler(this.CheckBoxX_CustomModel_CheckedChanging);
             this.CheckBoxX_CustomModel.Click += new System.EventHandler(this.CheckBoxX_CustomModel_Click);
             // 
             // TextBoxX_ModelID
             // 
+            resources.ApplyResources(this.TextBoxX_ModelID, "TextBoxX_ModelID");
             this.TextBoxX_ModelID.BackColor = System.Drawing.Color.White;
             // 
             // 
             // 
             this.TextBoxX_ModelID.Border.Class = "TextBoxBorder";
             this.TextBoxX_ModelID.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.TextBoxX_ModelID.ButtonCustom.DisplayPosition = ((int)(resources.GetObject("TextBoxX_ModelID.ButtonCustom.DisplayPosition")));
+            this.TextBoxX_ModelID.ButtonCustom.Image = ((System.Drawing.Image)(resources.GetObject("TextBoxX_ModelID.ButtonCustom.Image")));
+            this.TextBoxX_ModelID.ButtonCustom.Text = resources.GetString("TextBoxX_ModelID.ButtonCustom.Text");
+            this.TextBoxX_ModelID.ButtonCustom.Tooltip = resources.GetString("TextBoxX_ModelID.ButtonCustom.Tooltip");
+            this.TextBoxX_ModelID.ButtonCustom2.DisplayPosition = ((int)(resources.GetObject("TextBoxX_ModelID.ButtonCustom2.DisplayPosition")));
+            this.TextBoxX_ModelID.ButtonCustom2.Image = ((System.Drawing.Image)(resources.GetObject("TextBoxX_ModelID.ButtonCustom2.Image")));
+            this.TextBoxX_ModelID.ButtonCustom2.Text = resources.GetString("TextBoxX_ModelID.ButtonCustom2.Text");
+            this.TextBoxX_ModelID.ButtonCustom2.Tooltip = resources.GetString("TextBoxX_ModelID.ButtonCustom2.Tooltip");
             this.TextBoxX_ModelID.DisabledBackColor = System.Drawing.Color.White;
             this.TextBoxX_ModelID.ForeColor = System.Drawing.Color.Black;
-            this.TextBoxX_ModelID.Location = new System.Drawing.Point(204, 267);
-            this.TextBoxX_ModelID.Margin = new System.Windows.Forms.Padding(0);
             this.TextBoxX_ModelID.Name = "TextBoxX_ModelID";
             this.TextBoxX_ModelID.PreventEnterBeep = true;
-            this.TextBoxX_ModelID.Size = new System.Drawing.Size(112, 20);
-            this.TextBoxX_ModelID.TabIndex = 11;
-            this.TextBoxX_ModelID.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.TextBoxX_ModelID.WatermarkText = "Model ID";
             this.TextBoxX_ModelID.TextChanged += new System.EventHandler(this.TextBoxX_ModelID_TextChanged);
             // 
             // ButtonX_SelectCustomModelFromBank
             // 
+            resources.ApplyResources(this.ButtonX_SelectCustomModelFromBank, "ButtonX_SelectCustomModelFromBank");
             this.ButtonX_SelectCustomModelFromBank.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.ButtonX_SelectCustomModelFromBank.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.ButtonX_SelectCustomModelFromBank.Location = new System.Drawing.Point(204, 298);
-            this.ButtonX_SelectCustomModelFromBank.Margin = new System.Windows.Forms.Padding(0);
             this.ButtonX_SelectCustomModelFromBank.Name = "ButtonX_SelectCustomModelFromBank";
-            this.ButtonX_SelectCustomModelFromBank.Size = new System.Drawing.Size(92, 23);
             this.ButtonX_SelectCustomModelFromBank.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.ButtonX_SelectCustomModelFromBank.TabIndex = 13;
-            this.ButtonX_SelectCustomModelFromBank.Text = "Select ...";
             this.ButtonX_SelectCustomModelFromBank.Click += new System.EventHandler(this.ButtonX_SelectCustomModelFromBank_Click);
             // 
             // CheckBoxX_UseColPtrForBehav
             // 
-            this.CheckBoxX_UseColPtrForBehav.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.CheckBoxX_UseColPtrForBehav.AutoSize = true;
+            resources.ApplyResources(this.CheckBoxX_UseColPtrForBehav, "CheckBoxX_UseColPtrForBehav");
             // 
             // 
             // 
             this.CheckBoxX_UseColPtrForBehav.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.CheckBoxX_UseColPtrForBehav.Location = new System.Drawing.Point(4, 360);
-            this.CheckBoxX_UseColPtrForBehav.Margin = new System.Windows.Forms.Padding(0);
-            this.CheckBoxX_UseColPtrForBehav.MinimumSize = new System.Drawing.Size(0, 23);
             this.CheckBoxX_UseColPtrForBehav.Name = "CheckBoxX_UseColPtrForBehav";
-            this.CheckBoxX_UseColPtrForBehav.Size = new System.Drawing.Size(205, 23);
             this.CheckBoxX_UseColPtrForBehav.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.CheckBoxX_UseColPtrForBehav.TabIndex = 16;
-            this.CheckBoxX_UseColPtrForBehav.Text = "Use Collision Pointer for the Behavior";
             this.CheckBoxX_UseColPtrForBehav.CheckedChanged += new System.EventHandler(this.CheckBoxX_UseColPtrForBehav_CheckedChanged);
             // 
             // CheckBoxX_NoModel
             // 
-            this.CheckBoxX_NoModel.AutoSize = true;
+            resources.ApplyResources(this.CheckBoxX_NoModel, "CheckBoxX_NoModel");
             // 
             // 
             // 
             this.CheckBoxX_NoModel.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.CheckBoxX_NoModel.Location = new System.Drawing.Point(4, 236);
-            this.CheckBoxX_NoModel.Margin = new System.Windows.Forms.Padding(0);
-            this.CheckBoxX_NoModel.MinimumSize = new System.Drawing.Size(0, 23);
             this.CheckBoxX_NoModel.Name = "CheckBoxX_NoModel";
-            this.CheckBoxX_NoModel.Size = new System.Drawing.Size(110, 23);
             this.CheckBoxX_NoModel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.CheckBoxX_NoModel.TabIndex = 9;
-            this.CheckBoxX_NoModel.Text = "Don\'t use a model";
             this.CheckBoxX_NoModel.CheckedChanging += new DevComponents.DotNetBar.Controls.CheckBoxXChangeEventHandler(this.CheckBoxX_CheckingChanging);
             this.CheckBoxX_NoModel.CheckedChanged += new System.EventHandler(this.CheckBoxX_NoModel_CheckedChanged);
             // 
             // TextBoxX_Description
             // 
+            resources.ApplyResources(this.TextBoxX_Description, "TextBoxX_Description");
             this.TextBoxX_Description.BackColor = System.Drawing.Color.White;
             // 
             // 
             // 
             this.TextBoxX_Description.Border.Class = "TextBoxBorder";
             this.TextBoxX_Description.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.TextBoxX_Description.ButtonCustom.DisplayPosition = ((int)(resources.GetObject("TextBoxX_Description.ButtonCustom.DisplayPosition")));
+            this.TextBoxX_Description.ButtonCustom.Image = ((System.Drawing.Image)(resources.GetObject("TextBoxX_Description.ButtonCustom.Image")));
+            this.TextBoxX_Description.ButtonCustom.Text = resources.GetString("TextBoxX_Description.ButtonCustom.Text");
+            this.TextBoxX_Description.ButtonCustom.Tooltip = resources.GetString("TextBoxX_Description.ButtonCustom.Tooltip");
+            this.TextBoxX_Description.ButtonCustom2.DisplayPosition = ((int)(resources.GetObject("TextBoxX_Description.ButtonCustom2.DisplayPosition")));
+            this.TextBoxX_Description.ButtonCustom2.Image = ((System.Drawing.Image)(resources.GetObject("TextBoxX_Description.ButtonCustom2.Image")));
+            this.TextBoxX_Description.ButtonCustom2.Text = resources.GetString("TextBoxX_Description.ButtonCustom2.Text");
+            this.TextBoxX_Description.ButtonCustom2.Tooltip = resources.GetString("TextBoxX_Description.ButtonCustom2.Tooltip");
             this.TextBoxX_Description.DisabledBackColor = System.Drawing.Color.White;
             this.TextBoxX_Description.ForeColor = System.Drawing.Color.Black;
-            this.TextBoxX_Description.Location = new System.Drawing.Point(71, 32);
-            this.TextBoxX_Description.Margin = new System.Windows.Forms.Padding(0);
-            this.TextBoxX_Description.Multiline = true;
             this.TextBoxX_Description.Name = "TextBoxX_Description";
             this.TextBoxX_Description.PreventEnterBeep = true;
-            this.TextBoxX_Description.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.TextBoxX_Description.Size = new System.Drawing.Size(277, 72);
-            this.TextBoxX_Description.TabIndex = 1;
             this.TextBoxX_Description.TextChanged += new System.EventHandler(this.TextBoxX_Description_TextChanged);
             // 
             // layoutControlItem1
@@ -497,7 +450,7 @@ namespace SM64_ROM_Manager
             this.layoutControlItem1.Height = 28;
             this.layoutControlItem1.MinSize = new System.Drawing.Size(120, 0);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Text = "Name:";
+            resources.ApplyResources(this.layoutControlItem1, "layoutControlItem1");
             this.layoutControlItem1.Width = 100;
             this.layoutControlItem1.WidthType = DevComponents.DotNetBar.Layout.eLayoutSizeType.Percent;
             // 
@@ -508,7 +461,7 @@ namespace SM64_ROM_Manager
             this.layoutControlItem16.HeightType = DevComponents.DotNetBar.Layout.eLayoutSizeType.Percent;
             this.layoutControlItem16.MinSize = new System.Drawing.Size(120, 0);
             this.layoutControlItem16.Name = "layoutControlItem16";
-            this.layoutControlItem16.Text = "Description:";
+            resources.ApplyResources(this.layoutControlItem16, "layoutControlItem16");
             this.layoutControlItem16.Width = 100;
             this.layoutControlItem16.WidthType = DevComponents.DotNetBar.Layout.eLayoutSizeType.Percent;
             // 
@@ -516,6 +469,7 @@ namespace SM64_ROM_Manager
             // 
             this.layoutSpacerItem2.Height = 31;
             this.layoutSpacerItem2.Name = "layoutSpacerItem2";
+            resources.ApplyResources(this.layoutSpacerItem2, "layoutSpacerItem2");
             this.layoutSpacerItem2.Width = 100;
             this.layoutSpacerItem2.WidthType = DevComponents.DotNetBar.Layout.eLayoutSizeType.Percent;
             // 
@@ -525,6 +479,7 @@ namespace SM64_ROM_Manager
             this.layoutControlItem2.Height = 31;
             this.layoutControlItem2.MinSize = new System.Drawing.Size(64, 18);
             this.layoutControlItem2.Name = "layoutControlItem2";
+            resources.ApplyResources(this.layoutControlItem2, "layoutControlItem2");
             this.layoutControlItem2.Width = 200;
             // 
             // layoutControlItem5
@@ -533,6 +488,7 @@ namespace SM64_ROM_Manager
             this.layoutControlItem5.Height = 28;
             this.layoutControlItem5.MinSize = new System.Drawing.Size(120, 0);
             this.layoutControlItem5.Name = "layoutControlItem5";
+            resources.ApplyResources(this.layoutControlItem5, "layoutControlItem5");
             this.layoutControlItem5.Width = 80;
             // 
             // layoutControlItem3
@@ -541,6 +497,7 @@ namespace SM64_ROM_Manager
             this.layoutControlItem3.Height = 31;
             this.layoutControlItem3.MinSize = new System.Drawing.Size(64, 18);
             this.layoutControlItem3.Name = "layoutControlItem3";
+            resources.ApplyResources(this.layoutControlItem3, "layoutControlItem3");
             this.layoutControlItem3.Width = 200;
             // 
             // layoutControlItem4
@@ -549,12 +506,14 @@ namespace SM64_ROM_Manager
             this.layoutControlItem4.Height = 31;
             this.layoutControlItem4.MinSize = new System.Drawing.Size(32, 20);
             this.layoutControlItem4.Name = "layoutControlItem4";
+            resources.ApplyResources(this.layoutControlItem4, "layoutControlItem4");
             this.layoutControlItem4.Width = 100;
             // 
             // layoutSpacerItem3
             // 
             this.layoutSpacerItem3.Height = 31;
             this.layoutSpacerItem3.Name = "layoutSpacerItem3";
+            resources.ApplyResources(this.layoutSpacerItem3, "layoutSpacerItem3");
             this.layoutSpacerItem3.Width = 99;
             this.layoutSpacerItem3.WidthType = DevComponents.DotNetBar.Layout.eLayoutSizeType.Percent;
             // 
@@ -562,6 +521,7 @@ namespace SM64_ROM_Manager
             // 
             this.layoutSpacerItem4.Height = 31;
             this.layoutSpacerItem4.Name = "layoutSpacerItem4";
+            resources.ApplyResources(this.layoutSpacerItem4, "layoutSpacerItem4");
             this.layoutSpacerItem4.Width = 100;
             this.layoutSpacerItem4.WidthType = DevComponents.DotNetBar.Layout.eLayoutSizeType.Percent;
             // 
@@ -571,6 +531,7 @@ namespace SM64_ROM_Manager
             this.layoutControlItem15.Height = 31;
             this.layoutControlItem15.MinSize = new System.Drawing.Size(64, 18);
             this.layoutControlItem15.Name = "layoutControlItem15";
+            resources.ApplyResources(this.layoutControlItem15, "layoutControlItem15");
             this.layoutControlItem15.Width = 100;
             this.layoutControlItem15.WidthType = DevComponents.DotNetBar.Layout.eLayoutSizeType.Percent;
             // 
@@ -580,6 +541,7 @@ namespace SM64_ROM_Manager
             this.layoutControlItem10.Height = 31;
             this.layoutControlItem10.MinSize = new System.Drawing.Size(64, 18);
             this.layoutControlItem10.Name = "layoutControlItem10";
+            resources.ApplyResources(this.layoutControlItem10, "layoutControlItem10");
             this.layoutControlItem10.Width = 200;
             // 
             // layoutControlItem12
@@ -588,6 +550,7 @@ namespace SM64_ROM_Manager
             this.layoutControlItem12.Height = 28;
             this.layoutControlItem12.MinSize = new System.Drawing.Size(120, 0);
             this.layoutControlItem12.Name = "layoutControlItem12";
+            resources.ApplyResources(this.layoutControlItem12, "layoutControlItem12");
             this.layoutControlItem12.Width = 80;
             // 
             // layoutControlItem11
@@ -596,6 +559,7 @@ namespace SM64_ROM_Manager
             this.layoutControlItem11.Height = 31;
             this.layoutControlItem11.MinSize = new System.Drawing.Size(64, 18);
             this.layoutControlItem11.Name = "layoutControlItem11";
+            resources.ApplyResources(this.layoutControlItem11, "layoutControlItem11");
             this.layoutControlItem11.Width = 200;
             // 
             // layoutControlItem13
@@ -604,12 +568,14 @@ namespace SM64_ROM_Manager
             this.layoutControlItem13.Height = 31;
             this.layoutControlItem13.MinSize = new System.Drawing.Size(32, 20);
             this.layoutControlItem13.Name = "layoutControlItem13";
+            resources.ApplyResources(this.layoutControlItem13, "layoutControlItem13");
             this.layoutControlItem13.Width = 100;
             // 
             // layoutSpacerItem5
             // 
             this.layoutSpacerItem5.Height = 31;
             this.layoutSpacerItem5.Name = "layoutSpacerItem5";
+            resources.ApplyResources(this.layoutSpacerItem5, "layoutSpacerItem5");
             this.layoutSpacerItem5.Width = 99;
             this.layoutSpacerItem5.WidthType = DevComponents.DotNetBar.Layout.eLayoutSizeType.Percent;
             // 
@@ -617,6 +583,7 @@ namespace SM64_ROM_Manager
             // 
             this.layoutSpacerItem8.Height = 31;
             this.layoutSpacerItem8.Name = "layoutSpacerItem8";
+            resources.ApplyResources(this.layoutSpacerItem8, "layoutSpacerItem8");
             this.layoutSpacerItem8.Width = 100;
             this.layoutSpacerItem8.WidthType = DevComponents.DotNetBar.Layout.eLayoutSizeType.Percent;
             // 
@@ -626,6 +593,7 @@ namespace SM64_ROM_Manager
             this.layoutControlItem14.Height = 31;
             this.layoutControlItem14.MinSize = new System.Drawing.Size(64, 18);
             this.layoutControlItem14.Name = "layoutControlItem14";
+            resources.ApplyResources(this.layoutControlItem14, "layoutControlItem14");
             this.layoutControlItem14.Width = 100;
             this.layoutControlItem14.WidthType = DevComponents.DotNetBar.Layout.eLayoutSizeType.Percent;
             // 
@@ -633,6 +601,7 @@ namespace SM64_ROM_Manager
             // 
             this.layoutSpacerItem1.Height = 31;
             this.layoutSpacerItem1.Name = "layoutSpacerItem1";
+            resources.ApplyResources(this.layoutSpacerItem1, "layoutSpacerItem1");
             this.layoutSpacerItem1.Width = 99;
             this.layoutSpacerItem1.WidthType = DevComponents.DotNetBar.Layout.eLayoutSizeType.Percent;
             // 
@@ -648,7 +617,7 @@ namespace SM64_ROM_Manager
             this.layoutSpacerItem7});
             this.layoutGroup2.MinSize = new System.Drawing.Size(120, 32);
             this.layoutGroup2.Name = "layoutGroup2";
-            this.layoutGroup2.Text = "Behavior:";
+            resources.ApplyResources(this.layoutGroup2, "layoutGroup2");
             this.layoutGroup2.TextPosition = DevComponents.DotNetBar.Layout.eLayoutPosition.Top;
             this.layoutGroup2.Width = 100;
             this.layoutGroup2.WidthType = DevComponents.DotNetBar.Layout.eLayoutSizeType.Percent;
@@ -658,6 +627,7 @@ namespace SM64_ROM_Manager
             this.layoutControlItem6.Height = 31;
             this.layoutControlItem6.MinSize = new System.Drawing.Size(64, 18);
             this.layoutControlItem6.Name = "layoutControlItem6";
+            resources.ApplyResources(this.layoutControlItem6, "layoutControlItem6");
             this.layoutControlItem6.TextVisible = false;
             this.layoutControlItem6.Width = 150;
             // 
@@ -666,6 +636,7 @@ namespace SM64_ROM_Manager
             this.layoutControlItem7.Height = 28;
             this.layoutControlItem7.MinSize = new System.Drawing.Size(120, 0);
             this.layoutControlItem7.Name = "layoutControlItem7";
+            resources.ApplyResources(this.layoutControlItem7, "layoutControlItem7");
             this.layoutControlItem7.TextVisible = false;
             this.layoutControlItem7.Width = 80;
             // 
@@ -673,6 +644,7 @@ namespace SM64_ROM_Manager
             // 
             this.layoutSpacerItem6.Height = 31;
             this.layoutSpacerItem6.Name = "layoutSpacerItem6";
+            resources.ApplyResources(this.layoutSpacerItem6, "layoutSpacerItem6");
             this.layoutSpacerItem6.Width = 99;
             this.layoutSpacerItem6.WidthType = DevComponents.DotNetBar.Layout.eLayoutSizeType.Percent;
             // 
@@ -681,6 +653,7 @@ namespace SM64_ROM_Manager
             this.layoutControlItem8.Height = 31;
             this.layoutControlItem8.MinSize = new System.Drawing.Size(64, 18);
             this.layoutControlItem8.Name = "layoutControlItem8";
+            resources.ApplyResources(this.layoutControlItem8, "layoutControlItem8");
             this.layoutControlItem8.TextVisible = false;
             this.layoutControlItem8.Width = 150;
             // 
@@ -689,25 +662,24 @@ namespace SM64_ROM_Manager
             this.layoutControlItem9.Height = 31;
             this.layoutControlItem9.MinSize = new System.Drawing.Size(32, 20);
             this.layoutControlItem9.Name = "layoutControlItem9";
+            resources.ApplyResources(this.layoutControlItem9, "layoutControlItem9");
             this.layoutControlItem9.Width = 100;
             // 
             // layoutSpacerItem7
             // 
             this.layoutSpacerItem7.Height = 31;
             this.layoutSpacerItem7.Name = "layoutSpacerItem7";
+            resources.ApplyResources(this.layoutSpacerItem7, "layoutSpacerItem7");
             this.layoutSpacerItem7.Width = 99;
             this.layoutSpacerItem7.WidthType = DevComponents.DotNetBar.Layout.eLayoutSizeType.Percent;
             // 
             // CustomObjectsManager
             // 
-            this.ClientSize = new System.Drawing.Size(752, 411);
+            resources.ApplyResources(this, "$this");
             this.Controls.Add(this.AdvTree_Objs);
             this.Controls.Add(this.layoutControl1);
             this.Controls.Add(this.bar1);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "CustomObjectsManager";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Custom Objects Manager";
             this.TopLeftCornerSize = 0;
             this.TopRightCornerSize = 0;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CustomObjectsManager_FormClosing);

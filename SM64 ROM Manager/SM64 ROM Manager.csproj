@@ -882,8 +882,14 @@
     <EmbeddedResource Include="RomManager\GUI\Tools\Custom Objects Manager\CustomObjectImportPropsEditor.resx">
       <DependentUpon>CustomObjectImportPropsEditor.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="RomManager\GUI\Tools\Custom Objects Manager\CustomObjectsDatabaseViewer.de.resx">
+      <DependentUpon>CustomObjectsDatabaseViewer.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="RomManager\GUI\Tools\Custom Objects Manager\CustomObjectsDatabaseViewer.resx">
       <DependentUpon>CustomObjectsDatabaseViewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RomManager\GUI\Tools\Custom Objects Manager\CustomObjectsManager.de.resx">
+      <DependentUpon>CustomObjectsManager.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="RomManager\GUI\Tools\Model Bank Manager\AddressListEditor.de.resx">
       <DependentUpon>AddressListEditor.cs</DependentUpon>
