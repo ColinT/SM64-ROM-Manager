@@ -93,6 +93,7 @@ namespace SM64Lib.Model.Fast3D
             {
                 if (geop.SegPointer >> 24 == BankRamStart >> 24)
                 {
+                    var ende = false;
                     Position = geop.SegPointer - Fast3DBankStart;
                     do
                     {
@@ -101,6 +102,7 @@ namespace SM64Lib.Model.Fast3D
                         {
                             case 0xB8:
                                 {
+                                    ende = true;
                                     break;
                                 }
 
@@ -125,7 +127,7 @@ namespace SM64Lib.Model.Fast3D
                                 }
                         }
                     }
-                    while (base.Position < base.Length);
+                    while (!ende && base.Position < base.Length);
                     geop.SegPointer += tdif;
                 }
             }
