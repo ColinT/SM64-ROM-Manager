@@ -345,17 +345,17 @@ namespace SM64Lib
                 SaveGlobalModelBank(ref lastpos);
                 General.HexRoundUp2(ref lastpos);
 
+                // Levels
+                SaveLevels(lastpos); // If IgnoreNeedToSave OrElse Levels.NeedToSave Then
+                if (needUpdateChecksum)
+                    General.PatchClass.UpdateChecksum(RomFile);
+
                 // Custom Object Combos
                 CustomObjects.TakeoverProperties(this);
 
                 // Global Behavior Bank
                 SaveGlobalBehaviorBank(ref lastpos);
                 General.HexRoundUp2(ref lastpos);
-
-                // Levels
-                SaveLevels(lastpos); // If IgnoreNeedToSave OrElse Levels.NeedToSave Then
-                if (needUpdateChecksum)
-                    General.PatchClass.UpdateChecksum(RomFile);
 
                 // Write Rom.config
                 SaveRomConfig();

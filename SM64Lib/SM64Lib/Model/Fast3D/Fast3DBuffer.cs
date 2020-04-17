@@ -5,6 +5,7 @@ using Microsoft.VisualBasic.CompilerServices;
 using global::Pilz.S3DFileParser;
 using global::SM64Lib.Data;
 using global::SM64Lib.Geolayout;
+using System.Linq;
 
 namespace SM64Lib.Model.Fast3D
 {
@@ -92,7 +93,7 @@ namespace SM64Lib.Model.Fast3D
             foreach (Geopointer geop in DLPointers)
             {
                 var geopointerSegBank = geop.SegPointer >> 24;
-                if (geopointerSegBank == 0xE || geopointerSegBank == Fast3DBankStart >> 24)
+                if (geopointerSegBank == Fast3DBankStart >> 24)
                 {
                     var ende = false;
                     Position = geop.SegPointer - Fast3DBankStart;

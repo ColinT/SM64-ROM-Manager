@@ -110,7 +110,7 @@ namespace SM64_ROM_Manager.Updating.Administration.Discord
 
             // Add ping
             if (pingAtEveryone)
-                msg += (!string.IsNullOrEmpty(Config.UpdateNotificationRoll) ? Config.UpdateNotificationRoll : "@everyone") + "\n\n";
+                msg += "@" + (!string.IsNullOrEmpty(Config.UpdateNotificationRoll) ? Config.UpdateNotificationRoll : "everyone") + "\n\n";
             
             // Add version as titel
             var versionString = version.ToString();
