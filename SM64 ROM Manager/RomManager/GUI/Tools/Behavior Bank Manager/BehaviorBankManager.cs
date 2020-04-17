@@ -306,6 +306,7 @@ namespace SM64_ROM_Manager
                 curBehav.Config.Name = TextBoxX_BehavName.Text.Trim();
                 curBehav.CollisionPointer = ValueFromText(textBoxX_BehavColPtr.Text);
                 curBehav.EnableCollisionPointer = checkBoxX_BehavEnableColPtr.Checked;
+                rommgr.CalculateGlobalBehaviorBankAddresses();
                 Timer_PropsChanged.Stop(); Timer_PropsChanged.Start();
             }
         }
@@ -316,7 +317,8 @@ namespace SM64_ROM_Manager
             if (!loadingBehavior)
             {
                 res = BuildScriptWithString(curBehav, RichTextBoxEx_Script.Text);
-                if (res) curBehav.ParseScript();
+                if (res)
+                    rommgr.CalculateGlobalBehaviorBankAddresses();
             }
             return res;
         }
@@ -329,6 +331,7 @@ namespace SM64_ROM_Manager
             {
                 n.Remove();
                 bank.Behaviors.RemoveIfContains(behav);
+                rommgr.CalculateGlobalBehaviorBankAddresses();
                 if (curBehav == behav) curBehav = null;
             }
 
@@ -340,6 +343,7 @@ namespace SM64_ROM_Manager
             // Create behavior
             var behav = new Behavior(type);
             bank.Behaviors.Add(behav);
+            rommgr.CalculateGlobalBehaviorBankAddresses();
 
             // Create Node
             var n = GetNode(behav);
@@ -379,9 +383,7 @@ namespace SM64_ROM_Manager
         {
             bool res = SaveBehaviorScript();
             highlighter_Script.SetHighlightColor(RichTextBoxEx_Script, res ? eHighlightColor.None : eHighlightColor.Red);
-            if (res)
-                curBehav.ParseScript();
-            else
+            if (!res)
                 MessageBoxEx.Show(this, BehaviorBankManagerLangRes.Msg_ErrorCompilingScript, BehaviorBankManagerLangRes.Msg_ErrorCompilingScriptTitel, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 

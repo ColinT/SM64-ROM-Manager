@@ -123,13 +123,20 @@ namespace SM64Lib.Behaviors
             }
 
             // Delete unused configs
-            foreach (var oldConfig in Config.BehaviorConfigs)
+            foreach (var oldConfig in Config.BehaviorConfigs.ToArray())
             {
                 if (!usedConfigs.Contains(oldConfig))
                     Config.BehaviorConfigs.Remove(oldConfig);
             }
 
             // Update addresses
+            UpdateBehaviorAddresses(rommgr, addressUpdates);
+
+            return (int)data.Position;
+        }
+
+        private void UpdateBehaviorAddresses(RomManager rommgr, Dictionary<int, int> addressUpdates)
+        {
             if (Behaviors.Any() && rommgr is object)
             {
                 foreach (var lvl in rommgr.Levels)
@@ -148,8 +155,6 @@ namespace SM64Lib.Behaviors
                     }
                 }
             }
-
-            return (int)data.Position;
         }
 
         public void WriteBehaviorAddresss(RomManager rommgr)
@@ -177,6 +182,28 @@ namespace SM64Lib.Behaviors
         public Behavior GetBehaviorByBankAddress(int bankAddress)
         {
             return Behaviors.FirstOrDefault(n => n.Config.BankAddress == bankAddress);
+        }
+
+        public void CalculateBehaviorBankAddresses(int bankStartAddress, RomManager rommgr)
+        {
+            var length = 0;
+            var addressUpdates = new Dictionary<int, int>();
+
+            foreach (var behav in Behaviors)
+            {
+                if (behav.Config.IsVanilla)
+                    length += behav.Config.FixedLength;
+                else
+                {
+                    var newBankAddress = bankStartAddress + length;
+                    addressUpdates.Add(behav.Config.BankAddress, newBankAddress);
+                    behav.Config.BankAddress = newBankAddress;
+                    length += (int)behav.Script.Length;
+                }
+            }
+
+            // Update addresses
+            UpdateBehaviorAddresses(rommgr, addressUpdates);
         }
     }
 }

@@ -345,10 +345,11 @@ namespace SM64Lib
                 SaveGlobalModelBank(ref lastpos);
                 General.HexRoundUp2(ref lastpos);
 
+                // Calc behavior bank addresses
+                CalculateGlobalBehaviorBankAddresses();
+
                 // Levels
-                SaveLevels(lastpos); // If IgnoreNeedToSave OrElse Levels.NeedToSave Then
-                if (needUpdateChecksum)
-                    General.PatchClass.UpdateChecksum(RomFile);
+                SaveLevels(ref lastpos); // If IgnoreNeedToSave OrElse Levels.NeedToSave Then
 
                 // Custom Object Combos
                 CustomObjects.TakeoverProperties(this);
@@ -357,12 +358,21 @@ namespace SM64Lib
                 SaveGlobalBehaviorBank(ref lastpos);
                 General.HexRoundUp2(ref lastpos);
 
+                // Update checksum
+                if (needUpdateChecksum)
+                    General.PatchClass.UpdateChecksum(RomFile);
+
                 // Write Rom.config
                 SaveRomConfig();
 
                 IsNewROM = false;
                 RaiseAfterRomSave();
             }
+        }
+
+        public void CalculateGlobalBehaviorBankAddresses()
+        {
+            GlobalBehaviorBank.CalculateBehaviorBankAddresses(0x13000000, this);
         }
 
         private void WriteVersion(RomVersion newVersion)
@@ -579,9 +589,9 @@ namespace SM64Lib
         /// Saves all Levels to the ROM.
         /// </summary>
         /// <param name="StartAddress">At this position the Levels will be written in ROM.</param>
-        public void SaveLevels(int StartAddress = -1)
+        public void SaveLevels(ref int lastpos)
         {
-            uint curOff = Conversions.ToUInteger(StartAddress);
+            uint curOff = Conversions.ToUInteger(lastpos);
             var binRom = new BinaryRom(this, FileAccess.ReadWrite) { Position = curOff };
             foreach (Level lvl in Levels)
             {
@@ -590,6 +600,7 @@ namespace SM64Lib
                 lvl.NeedToSaveBanks0E = false;
                 lvl.NeedToSaveLevelscript = false;
                 General.HexRoundUp2(ref curOff);
+                lastpos = (int)curOff;
             }
 
             binRom.Close();

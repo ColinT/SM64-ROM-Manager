@@ -351,7 +351,7 @@
             Loads all Levels that are in the ROM.
             </summary>
         </member>
-        <member name="M:SM64Lib.RomManager.SaveLevels(System.Int32)">
+        <member name="M:SM64Lib.RomManager.SaveLevels(System.Int32@)">
             <summary>
             Saves all Levels to the ROM.
             </summary>
