@@ -21,25 +21,29 @@ namespace SM64Lib.Behaviors.Script
                 // Get command infos
                 var cmdType = (BehaviorscriptCommandTypes)data.ReadByte();
                 int cmdLength = BehaviorscriptCommand.GetCommandLength(cmdType);
-                bool isEndCmd = BehaviorscriptCommand.IsEndCommand(cmdType);
+                var unknownCmd = cmdLength == -1;
+                bool isEndCmd = unknownCmd || BehaviorscriptCommand.IsEndCommand(cmdType);
 
-                // Reset position
-                data.Position -= 1;
-
-                // Read full command
-                byte[] buf = new byte[cmdLength];
-                data.Read(buf);
-
-                // Create & add command
-                try
+                if (!unknownCmd)
                 {
-                    newCmds.Add(new BehaviorscriptCommand(buf));
+                    // Reset position
+                    data.Position -= 1;
+
+                    // Read full command
+                    byte[] buf = new byte[cmdLength];
+                    data.Read(buf);
+
+                    // Create & add command
+                    try
+                    {
+                        newCmds.Add(new BehaviorscriptCommand(buf));
+                    }
+                    catch (Exception)
+                    {
+                        success = false;
+                    }
                 }
-                catch (Exception)
-                {
-                    success = false;
-                }
-                
+
                 ende = isEndCmd;
             }
 

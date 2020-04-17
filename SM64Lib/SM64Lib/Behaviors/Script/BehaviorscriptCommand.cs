@@ -95,7 +95,7 @@ namespace SM64Lib.Behaviors.Script
                 case BehaviorscriptCommandTypes.x35_ClearGraphFlag: return 4;
                 case BehaviorscriptCommandTypes.x36_SetValue: return 8;
                 case BehaviorscriptCommandTypes.x37_SpawnSomething: return 8;
-                default: throw new System.Exception("Command type not found!");
+                default: return -1; //throw new System.Exception("Command type not found!");
             }
         }
 
@@ -103,6 +103,8 @@ namespace SM64Lib.Behaviors.Script
         {
             switch (type)
             {
+                case BehaviorscriptCommandTypes.x02_JumpandLink:
+                case BehaviorscriptCommandTypes.x04_Jump:
                 case BehaviorscriptCommandTypes.x06_EndLoopN:
                 case BehaviorscriptCommandTypes.x0A_EndBehaviorscript:
                 case BehaviorscriptCommandTypes.x0B_EndBehaviorscript_Unused:
