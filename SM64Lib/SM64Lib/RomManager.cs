@@ -588,7 +588,7 @@ namespace SM64Lib
         /// <summary>
         /// Saves all Levels to the ROM.
         /// </summary>
-        /// <param name="StartAddress">At this position the Levels will be written in ROM.</param>
+        /// <param name="lastpos">At this position the Levels will be written in ROM.</param>
         public void SaveLevels(ref int lastpos)
         {
             uint curOff = Conversions.ToUInteger(lastpos);
