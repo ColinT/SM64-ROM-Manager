@@ -82,13 +82,15 @@ namespace SM64Lib.Objects.ObjectBanks
                     if (cobj.BehaviorProps.Behavior.IsVanilla)
                     {
                         var behav = import.DestBehaviorBank.GetBehaviorByBankAddress(cobj.BehaviorProps.BehaviorAddress);
-                            cobj.BehaviorProps.Behavior = behav.Config;
+                        cobj.BehaviorProps.Behavior = behav.Config;
+                        cobj.BehaviorProps.Behavior.IsVanilla = false;
                     }
                     else if (import.Behaviors.ContainsKey(cobj.BehaviorProps.Behavior))
                     {
                         var behav = import.Behaviors[cobj.BehaviorProps.Behavior];
                         import.DestBehaviorBank.Behaviors.Add(behav);
                     }
+                    cobj.BehaviorProps.BehaviorAddress = -1;
                 }
 
                 // Add Custom Behavior

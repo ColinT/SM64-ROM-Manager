@@ -286,6 +286,7 @@ namespace SM64_ROM_Manager
                 {
                     foreach (var import in imports.Values)
                         customObjectCollection.Import(import);
+                    rommgr.CalculateGlobalBehaviorBankAddresses();
                     LoadObjects();
                 }
             }

@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Z.Collections.Extensions;
 
 namespace SM64Lib.Behaviors
 {
@@ -196,7 +197,7 @@ namespace SM64Lib.Behaviors
                 else
                 {
                     var newBankAddress = bankStartAddress + length;
-                    addressUpdates.Add(behav.Config.BankAddress, newBankAddress);
+                    addressUpdates.AddIfNotContainsKey(behav.Config.BankAddress, newBankAddress);
                     behav.Config.BankAddress = newBankAddress;
                     length += (int)behav.Script.Length;
                 }
