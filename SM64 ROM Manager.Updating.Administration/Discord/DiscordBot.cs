@@ -104,13 +104,23 @@ namespace SM64_ROM_Manager.Updating.Administration.Discord
             return dic;
         }
 
-        private async Task<string> BuildUpdateMsg(string versionName, ApplicationVersion version, string changelog, ulong guildID, ulong channelID, string appName, string message, bool addChangelog, bool pingAtEveryone)
+        public IReadOnlyDictionary<ulong, string> GetRoles(ulong guildID)
+        {
+            var dic = new Dictionary<ulong, string>();
+
+            foreach (var role in Client.GetGuild(guildID).Roles)
+                dic.Add(role.Id, role.Name);
+
+            return dic;
+        }
+
+        private async Task<string> BuildUpdateMsg(string versionName, ApplicationVersion version, string changelog, ulong guildID, ulong channelID, string appName, string message, bool addChangelog, ulong? pingRole)
         {
             string msg = string.Empty;
 
             // Add ping
-            if (pingAtEveryone)
-                msg += "@" + (!string.IsNullOrEmpty(Config.UpdateNotificationRoll) ? Config.UpdateNotificationRoll : "everyone") + "\n\n";
+            if (pingRole != null)
+                msg += $"<@{pingRole}>\n\n";
             
             // Add version as titel
             var versionString = version.ToString();
@@ -146,9 +156,17 @@ namespace SM64_ROM_Manager.Updating.Administration.Discord
             return msg;
         }
 
-        public async Task SendUpdateNotification(string versionName, ApplicationVersion version, string changelog, ulong guildID, ulong channelID, string appName, string message, bool addChangelog, bool pingAtEveryone)
+        public async Task SendUpdateNotification(string versionName, ApplicationVersion version, string changelog, ulong guildID, ulong channelID, string appName, string message, bool addChangelog, bool pingEveryone)
         {
-            string msg = await BuildUpdateMsg(versionName, version, changelog, guildID, channelID, appName, message, addChangelog, pingAtEveryone);
+            ulong? pingRole;
+            var updateNotifyRoleLower = Config.UpdateNotificationRoll.ToLower();
+
+            if (pingEveryone)
+                pingRole = GetRoles(guildID).FirstOrDefault(n => n.Value.ToLower() == updateNotifyRoleLower).Key;
+            else
+                pingRole = null;
+
+            string msg = await BuildUpdateMsg(versionName, version, changelog, guildID, channelID, appName, message, addChangelog, pingRole);
             var channel = Client.GetGuild(guildID)?.GetTextChannel(channelID);
 
             if (channel != null)
