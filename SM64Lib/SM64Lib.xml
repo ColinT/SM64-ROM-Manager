@@ -355,7 +355,7 @@
             <summary>
             Saves all Levels to the ROM.
             </summary>
-            <param name="StartAddress">At this position the Levels will be written in ROM.</param>
+            <param name="lastpos">At this position the Levels will be written in ROM.</param>
         </member>
         <member name="M:SM64Lib.RomManager.LoadGlobalModelBank">
             <summary>

@@ -318,7 +318,10 @@ namespace SM64_ROM_Manager
             {
                 res = BuildScriptWithString(curBehav, RichTextBoxEx_Script.Text);
                 if (res)
+                {
                     rommgr.CalculateGlobalBehaviorBankAddresses();
+                    curBehav.ParseScript();
+                }
             }
             return res;
         }
