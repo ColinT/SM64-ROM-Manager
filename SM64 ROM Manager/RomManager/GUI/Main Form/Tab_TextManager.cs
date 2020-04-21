@@ -253,12 +253,10 @@ namespace SM64_ROM_Manager
             var itemInfos = TMController.GetTextItemInfos(tableName, tableIndex);
             string nameEntry = null;
             if (nameList.Count() > tableIndex)
-            {
                 nameEntry = nameList[tableIndex];
-            }
 
-            var newItem = new ListViewItem(new string[] { tableIndex.ToString(), nameEntry, string.Empty });
-            UpdateListViewItem(newItem, itemInfos.text, false);
+            var newItem = new ListViewItem(new string[] { tableIndex.ToString(), string.Empty, string.Empty });
+            UpdateListViewItem(newItem, nameEntry, itemInfos.text, false);
             ListViewEx_TM_TableEntries.Items.Add(newItem);
         }
 
@@ -266,10 +264,10 @@ namespace SM64_ROM_Manager
         {
             var lvi = ListViewEx_TM_TableEntries.Items[index];
             var infos = TMController.GetTextItemInfos(GetSelectedIndicies().tableName, index);
-            UpdateListViewItem(lvi, infos.text, refresh);
+            UpdateListViewItem(lvi, infos.dialogDescription, infos.text, refresh);
         }
 
-        private void UpdateListViewItem(ListViewItem lvi, string itemText, bool refresh = true)
+        private void UpdateListViewItem(ListViewItem lvi, string dialogDescription, string itemText, bool refresh = true)
         {
             if (string.IsNullOrEmpty(itemText))
                 itemText = "-";
@@ -280,6 +278,8 @@ namespace SM64_ROM_Manager
                     itemText = itemText.Remove(breakIndex);
             }
             lvi.SubItems[2].Text = itemText;
+            if (dialogDescription is string)
+                lvi.SubItems[1].Text = dialogDescription;
             if (refresh)
                 ListViewEx_TM_TableEntries.Refresh();
         }
@@ -391,9 +391,19 @@ namespace SM64_ROM_Manager
             if (!string.IsNullOrEmpty(selectedIndicies.tableName) && selectedIndicies.tableIndex > -1)
             {
                 TM_LoadingItem = true;
+
                 var groupInfo = TMController.GetTextGroupInfos(selectedIndicies.tableName);
                 var itemInfo = TMController.GetTextItemInfos(selectedIndicies.tableName, selectedIndicies.tableIndex);
+
                 TextBoxX_TM_TextEditor.Text = itemInfo.text;
+
+                var isDescNull = itemInfo.dialogDescription == null;
+                TextBoxX_ItemDescription.ReadOnly = isDescNull;
+                if (isDescNull || TMController.UsingDefaultTextProfileInfo())
+                    TextBoxX_ItemDescription.Text = TMController.GetTextNameList(selectedIndicies.tableName).ElementAtOrDefault(selectedIndicies.tableIndex);
+                else
+                    TextBoxX_ItemDescription.Text = itemInfo.dialogDescription;
+
                 if (groupInfo.isDialogGroup)
                 {
                     IntegerInput_TM_DialogSize.Value = itemInfo.linesPerSite;
@@ -493,6 +503,15 @@ namespace SM64_ROM_Manager
         private void ButtonItem_ClearAllItems_Click(object sender, EventArgs e)
         {
             TMController.ClearTextItems(GetSelectedIndicies().tableName);
+        }
+
+        private void TextBoxX_ItemDescription_TextChanged(object sender, EventArgs e)
+        {
+            if (!TM_LoadingItem)
+            {
+                var sels = GetSelectedIndicies();
+                TMController.SetDialogItemDescription(sels.tableName, sels.tableIndex, TextBoxX_ItemDescription.Text.Trim());
+            }
         }
     }
 }

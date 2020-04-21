@@ -89,6 +89,7 @@ namespace SM64_ROM_Manager
             this.Panel1 = new System.Windows.Forms.Panel();
             this.Panel3 = new System.Windows.Forms.Panel();
             this.ButtonItem_ClearAllItems = new DevComponents.DotNetBar.ButtonItem();
+            this.TextBoxX_ItemDescription = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.GroupPanel_TM_DialogProps.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.IntegerInput_TM_DialogSize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Bar_AddRemoveItems)).BeginInit();
@@ -547,6 +548,7 @@ namespace SM64_ROM_Manager
             this.Panel1.Controls.Add(this.Line_TM_Warning1);
             this.Panel1.Controls.Add(this.TextBoxX_TM_TextEditor);
             this.Panel1.Controls.Add(this.GroupPanel_TM_DialogProps);
+            this.Panel1.Controls.Add(this.TextBoxX_ItemDescription);
             this.Panel1.Controls.Add(this.Bar_TextOptions);
             this.Panel1.Name = "Panel1";
             // 
@@ -566,6 +568,19 @@ namespace SM64_ROM_Manager
             this.ButtonItem_ClearAllItems.Name = "ButtonItem_ClearAllItems";
             resources.ApplyResources(this.ButtonItem_ClearAllItems, "ButtonItem_ClearAllItems");
             this.ButtonItem_ClearAllItems.Click += new System.EventHandler(this.ButtonItem_ClearAllItems_Click);
+            // 
+            // TextBoxX_ItemDescription
+            // 
+            // 
+            // 
+            // 
+            this.TextBoxX_ItemDescription.Border.Class = "TextBoxBorder";
+            this.TextBoxX_ItemDescription.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            resources.ApplyResources(this.TextBoxX_ItemDescription, "TextBoxX_ItemDescription");
+            this.TextBoxX_ItemDescription.Name = "TextBoxX_ItemDescription";
+            this.TextBoxX_ItemDescription.PreventEnterBeep = true;
+            this.TextBoxX_ItemDescription.ReadOnly = true;
+            this.TextBoxX_ItemDescription.TextChanged += new System.EventHandler(this.TextBoxX_ItemDescription_TextChanged);
             // 
             // Tab_TextManager
             // 
@@ -682,5 +697,6 @@ namespace SM64_ROM_Manager
         private DevComponents.DotNetBar.ButtonItem buttonItem2;
         private DevComponents.DotNetBar.ButtonItem buttonItem3;
         private DevComponents.DotNetBar.ButtonItem ButtonItem_ClearAllItems;
+        private DevComponents.DotNetBar.Controls.TextBoxX TextBoxX_ItemDescription;
     }
 }

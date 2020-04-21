@@ -170,12 +170,6 @@
   <data name="ComboBoxEx_TM_DialogPosY.ItemHeight" type="System.Int32, mscorlib">
     <value>15</value>
   </data>
-  <data name="ComboItem10.Text" xml:space="preserve">
-    <value>Middle</value>
-  </data>
-  <data name="ComboItem8.Text" xml:space="preserve">
-    <value>Top</value>
-  </data>
   <data name="ComboBoxEx_TM_DialogPosY.Location" type="System.Drawing.Point, System.Drawing">
     <value>187, 4</value>
   </data>
@@ -220,15 +214,6 @@
   </data>
   <data name="ComboBoxEx_TM_DialogPosX.ItemHeight" type="System.Int32, mscorlib">
     <value>15</value>
-  </data>
-  <data name="ComboItem5.Text" xml:space="preserve">
-    <value>Left</value>
-  </data>
-  <data name="ComboItem6.Text" xml:space="preserve">
-    <value>Centred</value>
-  </data>
-  <data name="ComboItem7.Text" xml:space="preserve">
-    <value>Right</value>
   </data>
   <data name="ComboBoxEx_TM_DialogPosX.Location" type="System.Drawing.Point, System.Drawing">
     <value>113, 4</value>
@@ -302,6 +287,21 @@
   </data>
   <data name="&gt;&gt;GroupPanel_TM_DialogProps.ZOrder" xml:space="preserve">
     <value>4</value>
+  </data>
+  <data name="ComboItem10.Text" xml:space="preserve">
+    <value>Middle</value>
+  </data>
+  <data name="ComboItem8.Text" xml:space="preserve">
+    <value>Top</value>
+  </data>
+  <data name="ComboItem5.Text" xml:space="preserve">
+    <value>Left</value>
+  </data>
+  <data name="ComboItem6.Text" xml:space="preserve">
+    <value>Centred</value>
+  </data>
+  <data name="ComboItem7.Text" xml:space="preserve">
+    <value>Right</value>
   </data>
   <data name="TabStrip_TextTable.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
@@ -382,10 +382,10 @@
     <value>Top, Bottom, Right</value>
   </data>
   <data name="Line_TM_Green.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 25</value>
+    <value>0, 46</value>
   </data>
   <data name="Line_TM_Green.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1, 427</value>
+    <value>1, 413</value>
   </data>
   <data name="Line_TM_Green.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
@@ -406,10 +406,10 @@
     <value>Top, Bottom, Right</value>
   </data>
   <data name="Line_TM_Warning1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>165, 25</value>
+    <value>165, 46</value>
   </data>
   <data name="Line_TM_Warning1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1, 427</value>
+    <value>1, 413</value>
   </data>
   <data name="Line_TM_Warning1.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
@@ -430,10 +430,10 @@
     <value>Top, Bottom, Right</value>
   </data>
   <data name="Line_TM_Warning2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>203, 25</value>
+    <value>203, 46</value>
   </data>
   <data name="Line_TM_Warning2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1, 427</value>
+    <value>1, 413</value>
   </data>
   <data name="Line_TM_Warning2.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
@@ -457,7 +457,7 @@
     <value>Segoe Print, 9.75pt</value>
   </data>
   <data name="TextBoxX_TM_TextEditor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 25</value>
+    <value>0, 45</value>
   </data>
   <data name="TextBoxX_TM_TextEditor.Multiline" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -466,7 +466,7 @@
     <value>Vertical</value>
   </data>
   <data name="TextBoxX_TM_TextEditor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>266, 435</value>
+    <value>266, 415</value>
   </data>
   <data name="TextBoxX_TM_TextEditor.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
@@ -531,6 +531,39 @@
   <data name="Bar_TextOptions.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
+  <data name="ButtonItem_AddButtons.Text" xml:space="preserve">
+    <value>Buttons</value>
+  </data>
+  <data name="ButtonItem9.Text" xml:space="preserve">
+    <value>Arrows</value>
+  </data>
+  <data name="ButtonItem10.Text" xml:space="preserve">
+    <value>Other</value>
+  </data>
+  <data name="Bar_TextOptions.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="Bar_TextOptions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>266, 25</value>
+  </data>
+  <data name="Bar_TextOptions.TabIndex" type="System.Int32, mscorlib">
+    <value>24</value>
+  </data>
+  <data name="Bar_TextOptions.Text" xml:space="preserve">
+    <value>Bar1</value>
+  </data>
+  <data name="&gt;&gt;Bar_TextOptions.Name" xml:space="preserve">
+    <value>Bar_TextOptions</value>
+  </data>
+  <data name="&gt;&gt;Bar_TextOptions.Type" xml:space="preserve">
+    <value>DevComponents.DotNetBar.Bar, DevComponents.DotNetBar2, Version=14.1.0.37, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;Bar_TextOptions.Parent" xml:space="preserve">
+    <value>Panel1</value>
+  </data>
+  <data name="&gt;&gt;Bar_TextOptions.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
   <data name="ButtonItem4.Tag" xml:space="preserve">
     <value>[A]</value>
   </data>
@@ -561,9 +594,6 @@
   <data name="ButtonItem7.Text" xml:space="preserve">
     <value>R</value>
   </data>
-  <data name="ButtonItem_AddButtons.Text" xml:space="preserve">
-    <value>Buttons</value>
-  </data>
   <data name="ButtonItem8.Tag" xml:space="preserve">
     <value>↑</value>
   </data>
@@ -584,9 +614,6 @@
   </data>
   <data name="ButtonItem13.Text" xml:space="preserve">
     <value>→</value>
-  </data>
-  <data name="ButtonItem9.Text" xml:space="preserve">
-    <value>Arrows</value>
   </data>
   <data name="buttonItem2.Tag" xml:space="preserve">
     <value>{sqm}</value>
@@ -642,35 +669,32 @@
   <data name="ButtonItem20.Text" xml:space="preserve">
     <value>Stars left</value>
   </data>
-  <data name="ButtonItem10.Text" xml:space="preserve">
-    <value>Other</value>
-  </data>
-  <data name="Bar_TextOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="Bar_TextOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>266, 25</value>
-  </data>
-  <data name="Bar_TextOptions.TabIndex" type="System.Int32, mscorlib">
-    <value>24</value>
-  </data>
-  <data name="Bar_TextOptions.Text" xml:space="preserve">
-    <value>Bar1</value>
-  </data>
-  <data name="&gt;&gt;Bar_TextOptions.Name" xml:space="preserve">
-    <value>Bar_TextOptions</value>
-  </data>
-  <data name="&gt;&gt;Bar_TextOptions.Type" xml:space="preserve">
-    <value>DevComponents.DotNetBar.Bar, DevComponents.DotNetBar2, Version=14.1.0.37, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;Bar_TextOptions.Parent" xml:space="preserve">
-    <value>Panel1</value>
-  </data>
-  <data name="&gt;&gt;Bar_TextOptions.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
   <data name="Panel1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Right</value>
+  </data>
+  <data name="TextBoxX_ItemDescription.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="TextBoxX_ItemDescription.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 25</value>
+  </data>
+  <data name="TextBoxX_ItemDescription.Size" type="System.Drawing.Size, System.Drawing">
+    <value>266, 20</value>
+  </data>
+  <data name="TextBoxX_ItemDescription.TabIndex" type="System.Int32, mscorlib">
+    <value>25</value>
+  </data>
+  <data name="&gt;&gt;TextBoxX_ItemDescription.Name" xml:space="preserve">
+    <value>TextBoxX_ItemDescription</value>
+  </data>
+  <data name="&gt;&gt;TextBoxX_ItemDescription.Type" xml:space="preserve">
+    <value>DevComponents.DotNetBar.Controls.TextBoxX, DevComponents.DotNetBar2, Version=14.1.0.37, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;TextBoxX_ItemDescription.Parent" xml:space="preserve">
+    <value>Panel1</value>
+  </data>
+  <data name="&gt;&gt;TextBoxX_ItemDescription.ZOrder" xml:space="preserve">
+    <value>5</value>
   </data>
   <data name="Panel1.Location" type="System.Drawing.Point, System.Drawing">
     <value>425, 3</value>

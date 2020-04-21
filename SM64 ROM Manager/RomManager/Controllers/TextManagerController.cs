@@ -10,6 +10,7 @@ using global::SM64_ROM_Manager.EventArguments;
 using global::SM64Lib;
 using global::SM64Lib.Text;
 using global::SM64Lib.Text.Profiles;
+using Z.Collections.Extensions;
 
 namespace SM64_ROM_Manager
 {
@@ -70,6 +71,8 @@ namespace SM64_ROM_Manager
         private string dialogNamesFilePath = string.Empty;
         private bool forceUppercaseForActAndLevelNames = true;
         private bool autoDetectStartEndQuotationMarks = true;
+        private List<RomManager> knownRomManagers = new List<RomManager>();
+        private bool needToSaveCurrentTextProfileInfo = false;
 
         // P r o p e r t i e s
 
@@ -125,7 +128,21 @@ namespace SM64_ROM_Manager
                     M64TextEncoding.AutoDetectStartEndQuotationMarks = AutoDetectStartEndQuotationMarks;
                 }
 
+                if (!knownRomManagers.Contains(e.RomManager))
+                {
+                    knownRomManagers.Add(e.RomManager);
+                    e.RomManager.AfterRomSave += RomManager_AfterRomSave;
+                }
+
                 return e.RomManager;
+            }
+        }
+
+        private void RomManager_AfterRomSave(RomManager sender, EventArgs e)
+        {
+            if (needToSaveCurrentTextProfileInfo)
+            {
+                MyTextProfiles.SaveTextProfile(GetCurrentTextProfile());
             }
         }
 
@@ -344,18 +361,24 @@ namespace SM64_ROM_Manager
             return (int)RomManager.LoadTextGroup(tableName)?.Count;
         }
 
-        public (string text, DialogHorizontalPosition horizontalPosition, DialogVerticalPosition verticalPosition, int linesPerSite) GetTextItemInfos(string tableName, int itemIndex)
+        public (string text, DialogHorizontalPosition horizontalPosition, DialogVerticalPosition verticalPosition, int linesPerSite, string dialogDescription) GetTextItemInfos(string tableName, int itemIndex)
         {
             var item = RomManager.LoadTextGroup(tableName)?.ElementAtOrDefault(itemIndex);
             DialogHorizontalPosition hPos = default;
             DialogVerticalPosition vPos = default;
             int lines = default;
+            string dialogDescription = null;
+
             if (item is TextTableDialogItem)
             {
                 TextTableDialogItem dialogItem = (TextTableDialogItem)item;
+
                 hPos = dialogItem.HorizontalPosition;
                 vPos = dialogItem.VerticalPosition;
                 lines = dialogItem.LinesPerSite;
+
+                if (dialogItem.TextGroupInfo.ItemDescriptionsList.Any())
+                    dialogDescription = dialogItem.TextGroupInfo.ItemDescriptionsList[itemIndex];
             }
 
             if (item is TextTableItem)
@@ -366,31 +389,38 @@ namespace SM64_ROM_Manager
             {
             }
 
-            return (item.Text, hPos, vPos, lines);
+            return (item.Text, hPos, vPos, lines, dialogDescription);
         }
 
         public string[] GetTextNameList(string tableName)
         {
             var group = GetTextGroup(tableName);
             var nameList = new List<string>();
+
             if (group.TextGroupInfo is TextTableGroupInfo)
             {
                 TextTableGroupInfo tg = (TextTableGroupInfo)group.TextGroupInfo;
-                if (!string.IsNullOrEmpty(tg.ItemDescriptions))
-                {
-                    var sr = new StringReader(tg.ItemDescriptions);
-                    string line = sr.ReadLine();
-                    while (!(line is null))
-                    {
-                        nameList.Add(line);
-                        line = sr.ReadLine();
-                    }
-
-                    sr.Close();
-                }
+                nameList.AddRange(tg.ItemDescriptionsList);
             }
 
             return nameList.ToArray();
+        }
+
+        public void SetDialogItemDescription(string tableName, int tableIndex, string description)
+        {
+            var group = GetTextGroup(tableName);
+            var item = group[tableIndex];
+
+            if (item?.TextGroupInfo is TextTableGroupInfo)
+            {
+                var info = (TextTableGroupInfo)item.TextGroupInfo;
+                if (info.ItemDescriptionsList.Count > tableIndex)
+                {
+                    info.ItemDescriptionsList[tableIndex] = description.Trim();
+                    TextItemChanged?.Invoke(new TextItemEventArgs(tableName, tableIndex));
+                    needToSaveCurrentTextProfileInfo = true;
+                }
+            }
         }
 
         public void SetTextItemText(string tableName, int tableIndex, string text)
@@ -494,6 +524,11 @@ namespace SM64_ROM_Manager
             }
 
             return prof;
+        }
+
+        public bool UsingDefaultTextProfileInfo()
+        {
+            return GetCurrentTextProfile() == MyTextProfiles.Manager.DefaultTextProfileInfo;
         }
     }
 }
