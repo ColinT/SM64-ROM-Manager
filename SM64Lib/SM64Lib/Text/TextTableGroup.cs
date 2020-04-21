@@ -66,8 +66,11 @@ namespace SM64Lib.Text
                         data.Position += 6;
 
                         // Sound effect
-                        data.Position = 0xEDE58 + i;
-                        newItem.SoundEffect = (DialogSoundEffect)data.ReadByte();
+                        if (TextGroupInfo.DialogData.HasSoundEffects)
+                        {
+                            data.Position = TextGroupInfo.DialogData.SoundEffectTable + i;
+                            newItem.SoundEffect = (DialogSoundEffect)data.ReadByte();
+                        }
 
                         // Add item
                         Add(newItem);
@@ -168,8 +171,11 @@ namespace SM64Lib.Text
                     DataRomOffset += textitem.Data.Length;
 
                     // Sound Effect
-                    data.Position = 0xEDE58 + i;
-                    data.Write((byte)textitem.SoundEffect);
+                    if (TextGroupInfo.DialogData.HasSoundEffects)
+                    {
+                        data.Position = TextGroupInfo.DialogData.SoundEffectTable + i;
+                        data.Write((byte)textitem.SoundEffect);
+                    }
                 }
             }
             else

@@ -11,6 +11,7 @@ using global::SM64_ROM_Manager.EventArguments;
 using global::SM64_ROM_Manager.My.Resources;
 using SM64Lib.TextValueConverter;
 using Z.Core.Extensions;
+using SM64Lib.Text;
 
 namespace SM64_ROM_Manager
 {
@@ -68,8 +69,17 @@ namespace SM64_ROM_Manager
 
         public Tab_TextManager()
         {
+            // Components
             InitializeComponent();
-            base.BackColor = Color.White;
+            base.BackColor = Color.Transparent;
+
+            var valuesSoundEffect = Enum.GetValues(typeof(SM64Lib.Text.DialogSoundEffect));
+            foreach (var value in valuesSoundEffect)
+                ComboBoxEx_SoundEffect.Items.Add(new ComboItem
+                {
+                    Tag = value,
+                    Text = Form_Main_Resources.ResourceManager.GetString($"SoundEffect_{Enum.GetName(typeof(SM64Lib.Text.DialogSoundEffect), value)}")
+                });
         }
 
         private void Controller_RequestReloadTextManager()
@@ -336,10 +346,11 @@ namespace SM64_ROM_Manager
             if (!TM_LoadingItem && !TMController.IsChangingTab())
             {
                 var selIndicies = GetSelectedIndicies();
-                SM64Lib.Text.DialogVerticalPosition vPos = (SM64Lib.Text.DialogVerticalPosition)GetValueFromComboBox(ComboBoxEx_TM_DialogPosX.Text.Trim(), typeof(SM64Lib.Text.DialogVerticalPosition));
-                SM64Lib.Text.DialogHorizontalPosition hPos = (SM64Lib.Text.DialogHorizontalPosition)GetValueFromComboBox(ComboBoxEx_TM_DialogPosY.Text.Trim(), typeof(SM64Lib.Text.DialogHorizontalPosition));
+                var vPos = (DialogVerticalPosition)GetValueFromComboBox(ComboBoxEx_TM_DialogPosX.Text.Trim(), typeof(DialogVerticalPosition));
+                var hPos = (DialogHorizontalPosition)GetValueFromComboBox(ComboBoxEx_TM_DialogPosY.Text.Trim(), typeof(DialogHorizontalPosition));
+                var soundEffect = (DialogSoundEffect)((ComboItem)ComboBoxEx_SoundEffect.SelectedItem).Tag;
                 int linesPerSite = IntegerInput_TM_DialogSize.Value;
-                TMController.SetTextItemDialogData(selIndicies.tableName, selIndicies.tableIndex, vPos, hPos, linesPerSite);
+                TMController.SetTextItemDialogData(selIndicies.tableName, selIndicies.tableIndex, vPos, hPos, soundEffect, linesPerSite);
             }
         }
 
@@ -407,24 +418,23 @@ namespace SM64_ROM_Manager
                 if (groupInfo.isDialogGroup)
                 {
                     IntegerInput_TM_DialogSize.Value = itemInfo.linesPerSite;
+
                     int vIndex = Array.IndexOf(Enum.GetValues(typeof(SM64Lib.Text.DialogVerticalPosition)), itemInfo.verticalPosition);
                     if (vIndex >= 0)
-                    {
                         ComboBoxEx_TM_DialogPosX.SelectedIndex = vIndex;
-                    }
                     else
-                    {
                         ComboBoxEx_TM_DialogPosX.Text = TextValueConverter.TextFromValue((long)itemInfo.verticalPosition);
-                    }
 
                     int hIndex = Array.IndexOf(Enum.GetValues(typeof(SM64Lib.Text.DialogHorizontalPosition)), itemInfo.horizontalPosition);
                     if (hIndex >= 0)
-                    {
                         ComboBoxEx_TM_DialogPosY.SelectedIndex = hIndex;
-                    }
                     else
-                    {
                         ComboBoxEx_TM_DialogPosY.Text = TextValueConverter.TextFromValue((long)itemInfo.horizontalPosition);
+
+                    foreach (ComboItem cbitem in ComboBoxEx_SoundEffect.Items)
+                    {
+                        if ((DialogSoundEffect)cbitem.Tag == itemInfo.soundEffect)
+                            ComboBoxEx_SoundEffect.SelectedItem = cbitem;
                     }
                 }
 
@@ -512,6 +522,11 @@ namespace SM64_ROM_Manager
                 var sels = GetSelectedIndicies();
                 TMController.SetDialogItemDescription(sels.tableName, sels.tableIndex, TextBoxX_ItemDescription.Text.Trim());
             }
+        }
+
+        private void ComboBoxEx_SoundEffect_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SaveItemDialogData();
         }
     }
 }

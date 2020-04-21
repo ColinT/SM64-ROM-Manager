@@ -234,6 +234,42 @@
   <data name="Notify_ShouldLoadRomFirst" xml:space="preserve">
     <value>Du musst zuerst eine ROM laden.</value>
   </data>
+  <data name="SoundEffect_BobOmb" xml:space="preserve">
+    <value>Bob-Omb</value>
+  </data>
+  <data name="SoundEffect_Boo" xml:space="preserve">
+    <value>Boo</value>
+  </data>
+  <data name="SoundEffect_BowserFight" xml:space="preserve">
+    <value>Bowser-Kampf</value>
+  </data>
+  <data name="SoundEffect_BowserIntroDoors" xml:space="preserve">
+    <value>Bowser (Intro/Türen)</value>
+  </data>
+  <data name="SoundEffect_KingBobOmb" xml:space="preserve">
+    <value>König Bob-Omb</value>
+  </data>
+  <data name="SoundEffect_KoopaTheQuick" xml:space="preserve">
+    <value>Koopa, der Schnelle</value>
+  </data>
+  <data name="SoundEffect_Monkey" xml:space="preserve">
+    <value>Affe</value>
+  </data>
+  <data name="SoundEffect_Penguin" xml:space="preserve">
+    <value>Pinguin</value>
+  </data>
+  <data name="SoundEffect_Sign" xml:space="preserve">
+    <value>Schild</value>
+  </data>
+  <data name="SoundEffect_WhompKing" xml:space="preserve">
+    <value>Whumps-König</value>
+  </data>
+  <data name="SoundEffect_Wiggler" xml:space="preserve">
+    <value>Wiggler</value>
+  </data>
+  <data name="SoundEffect_Yoshi" xml:space="preserve">
+    <value>Yoshi</value>
+  </data>
   <data name="Status_CalculatingTextSpace" xml:space="preserve">
     <value>Berechne verfügbaren Platz ...</value>
   </data>

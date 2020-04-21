@@ -361,13 +361,14 @@ namespace SM64_ROM_Manager
             return (int)RomManager.LoadTextGroup(tableName)?.Count;
         }
 
-        public (string text, DialogHorizontalPosition horizontalPosition, DialogVerticalPosition verticalPosition, int linesPerSite, string dialogDescription) GetTextItemInfos(string tableName, int itemIndex)
+        public (string text, DialogHorizontalPosition horizontalPosition, DialogVerticalPosition verticalPosition, DialogSoundEffect soundEffect, int linesPerSite, string dialogDescription) GetTextItemInfos(string tableName, int itemIndex)
         {
             var item = RomManager.LoadTextGroup(tableName)?.ElementAtOrDefault(itemIndex);
             DialogHorizontalPosition hPos = default;
             DialogVerticalPosition vPos = default;
             int lines = default;
             string dialogDescription = null;
+            DialogSoundEffect soundEffect = default;
 
             if (item is TextTableDialogItem)
             {
@@ -375,6 +376,7 @@ namespace SM64_ROM_Manager
 
                 hPos = dialogItem.HorizontalPosition;
                 vPos = dialogItem.VerticalPosition;
+                soundEffect = dialogItem.SoundEffect;
                 lines = dialogItem.LinesPerSite;
 
                 if (dialogItem.TextGroupInfo.ItemDescriptionsList.Any())
@@ -389,7 +391,7 @@ namespace SM64_ROM_Manager
             {
             }
 
-            return (item.Text, hPos, vPos, lines, dialogDescription);
+            return (item.Text, hPos, vPos, soundEffect, lines, dialogDescription);
         }
 
         public string[] GetTextNameList(string tableName)
@@ -432,12 +434,13 @@ namespace SM64_ROM_Manager
             TextItemChanged?.Invoke(new TextItemEventArgs(tableName, tableIndex));
         }
 
-        public void SetTextItemDialogData(string tableName, int tableIndex, DialogVerticalPosition vPos, DialogHorizontalPosition hPos, int linesPerSite)
+        public void SetTextItemDialogData(string tableName, int tableIndex, DialogVerticalPosition vPos, DialogHorizontalPosition hPos, DialogSoundEffect soundEffect, int linesPerSite)
         {
             var group = GetTextGroup(tableName);
             TextTableDialogItem item = (TextTableDialogItem)group[tableIndex];
             item.VerticalPosition = vPos;
             item.HorizontalPosition = hPos;
+            item.SoundEffect = soundEffect;
             item.LinesPerSite = linesPerSite;
             group.NeedToSave = true;
             TextItemChanged?.Invoke(new TextItemEventArgs(Conversions.ToString(tableIndex), tableIndex));

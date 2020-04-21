@@ -153,7 +153,7 @@
     <value>4</value>
   </data>
   <data name="LabelX21.Text" xml:space="preserve">
-    <value>Dialog Size:</value>
+    <value>Size:</value>
   </data>
   <data name="&gt;&gt;LabelX21.Name" xml:space="preserve">
     <value>LabelX21</value>
@@ -212,8 +212,41 @@
   <data name="&gt;&gt;IntegerInput_TM_DialogSize.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
+  <data name="ComboBoxEx_SoundEffect.ItemHeight" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="ComboBoxEx_SoundEffect.Location" type="System.Drawing.Point, System.Drawing">
+    <value>113, 62</value>
+  </data>
+  <data name="ComboBoxEx_SoundEffect.Size" type="System.Drawing.Size, System.Drawing">
+    <value>142, 21</value>
+  </data>
+  <data name="ComboBoxEx_SoundEffect.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ComboBoxEx_SoundEffect.Name" xml:space="preserve">
+    <value>ComboBoxEx_SoundEffect</value>
+  </data>
+  <data name="&gt;&gt;ComboBoxEx_SoundEffect.Type" xml:space="preserve">
+    <value>DevComponents.DotNetBar.Controls.ComboBoxEx, DevComponents.DotNetBar2, Version=14.1.0.37, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ComboBoxEx_SoundEffect.Parent" xml:space="preserve">
+    <value>GroupPanel_TM_DialogProps</value>
+  </data>
+  <data name="&gt;&gt;ComboBoxEx_SoundEffect.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
   <data name="ComboBoxEx_TM_DialogPosX.ItemHeight" type="System.Int32, mscorlib">
     <value>15</value>
+  </data>
+  <data name="ComboItem5.Text" xml:space="preserve">
+    <value>Left</value>
+  </data>
+  <data name="ComboItem6.Text" xml:space="preserve">
+    <value>Centred</value>
+  </data>
+  <data name="ComboItem7.Text" xml:space="preserve">
+    <value>Right</value>
   </data>
   <data name="ComboBoxEx_TM_DialogPosX.Location" type="System.Drawing.Point, System.Drawing">
     <value>113, 4</value>
@@ -234,7 +267,31 @@
     <value>GroupPanel_TM_DialogProps</value>
   </data>
   <data name="&gt;&gt;ComboBoxEx_TM_DialogPosX.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
+  </data>
+  <data name="labelX1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 61</value>
+  </data>
+  <data name="labelX1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>82, 23</value>
+  </data>
+  <data name="labelX1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="labelX1.Text" xml:space="preserve">
+    <value>Sound Effect:</value>
+  </data>
+  <data name="&gt;&gt;labelX1.Name" xml:space="preserve">
+    <value>labelX1</value>
+  </data>
+  <data name="&gt;&gt;labelX1.Type" xml:space="preserve">
+    <value>DevComponents.DotNetBar.LabelX, DevComponents.DotNetBar2, Version=14.1.0.37, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;labelX1.Parent" xml:space="preserve">
+    <value>GroupPanel_TM_DialogProps</value>
+  </data>
+  <data name="&gt;&gt;labelX1.ZOrder" xml:space="preserve">
+    <value>6</value>
   </data>
   <data name="LabelX18.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 3</value>
@@ -246,7 +303,7 @@
     <value>0</value>
   </data>
   <data name="LabelX18.Text" xml:space="preserve">
-    <value>Dialog Position:</value>
+    <value>Position:</value>
   </data>
   <data name="&gt;&gt;LabelX18.Name" xml:space="preserve">
     <value>LabelX18</value>
@@ -258,17 +315,17 @@
     <value>GroupPanel_TM_DialogProps</value>
   </data>
   <data name="&gt;&gt;LabelX18.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>7</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="GroupPanel_TM_DialogProps.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Bottom</value>
   </data>
   <data name="GroupPanel_TM_DialogProps.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 460</value>
+    <value>0, 434</value>
   </data>
   <data name="GroupPanel_TM_DialogProps.Size" type="System.Drawing.Size, System.Drawing">
-    <value>266, 80</value>
+    <value>266, 106</value>
   </data>
   <data name="GroupPanel_TM_DialogProps.TabIndex" type="System.Int32, mscorlib">
     <value>22</value>
@@ -293,15 +350,6 @@
   </data>
   <data name="ComboItem8.Text" xml:space="preserve">
     <value>Top</value>
-  </data>
-  <data name="ComboItem5.Text" xml:space="preserve">
-    <value>Left</value>
-  </data>
-  <data name="ComboItem6.Text" xml:space="preserve">
-    <value>Centred</value>
-  </data>
-  <data name="ComboItem7.Text" xml:space="preserve">
-    <value>Right</value>
   </data>
   <data name="TabStrip_TextTable.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
@@ -385,7 +433,7 @@
     <value>0, 46</value>
   </data>
   <data name="Line_TM_Green.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1, 413</value>
+    <value>1, 387</value>
   </data>
   <data name="Line_TM_Green.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
@@ -409,7 +457,7 @@
     <value>165, 46</value>
   </data>
   <data name="Line_TM_Warning1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1, 413</value>
+    <value>1, 387</value>
   </data>
   <data name="Line_TM_Warning1.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
@@ -433,7 +481,7 @@
     <value>203, 46</value>
   </data>
   <data name="Line_TM_Warning2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1, 413</value>
+    <value>1, 387</value>
   </data>
   <data name="Line_TM_Warning2.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
@@ -466,7 +514,7 @@
     <value>Vertical</value>
   </data>
   <data name="TextBoxX_TM_TextEditor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>266, 415</value>
+    <value>266, 389</value>
   </data>
   <data name="TextBoxX_TM_TextEditor.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
@@ -822,6 +870,12 @@
   <data name="&gt;&gt;ButtonItem_RemoveTextItem.Type" xml:space="preserve">
     <value>DevComponents.DotNetBar.ButtonItem, DevComponents.DotNetBar2, Version=14.1.0.37, Culture=neutral, PublicKeyToken=null</value>
   </data>
+  <data name="&gt;&gt;ButtonItem_ClearAllItems.Name" xml:space="preserve">
+    <value>ButtonItem_ClearAllItems</value>
+  </data>
+  <data name="&gt;&gt;ButtonItem_ClearAllItems.Type" xml:space="preserve">
+    <value>DevComponents.DotNetBar.ButtonItem, DevComponents.DotNetBar2, Version=14.1.0.37, Culture=neutral, PublicKeyToken=null</value>
+  </data>
   <data name="&gt;&gt;ButtonItem_AddButtons.Name" xml:space="preserve">
     <value>ButtonItem_AddButtons</value>
   </data>
@@ -946,12 +1000,6 @@
     <value>ButtonItem20</value>
   </data>
   <data name="&gt;&gt;ButtonItem20.Type" xml:space="preserve">
-    <value>DevComponents.DotNetBar.ButtonItem, DevComponents.DotNetBar2, Version=14.1.0.37, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ButtonItem_ClearAllItems.Name" xml:space="preserve">
-    <value>ButtonItem_ClearAllItems</value>
-  </data>
-  <data name="&gt;&gt;ButtonItem_ClearAllItems.Type" xml:space="preserve">
     <value>DevComponents.DotNetBar.ButtonItem, DevComponents.DotNetBar2, Version=14.1.0.37, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">

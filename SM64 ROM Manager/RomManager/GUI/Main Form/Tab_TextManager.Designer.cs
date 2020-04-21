@@ -64,6 +64,7 @@ namespace SM64_ROM_Manager
             this.ComboBoxItem_CurProfile = new DevComponents.DotNetBar.ComboBoxItem();
             this.ButtonItem_AddTextItem = new DevComponents.DotNetBar.ButtonItem();
             this.ButtonItem_RemoveTextItem = new DevComponents.DotNetBar.ButtonItem();
+            this.ButtonItem_ClearAllItems = new DevComponents.DotNetBar.ButtonItem();
             this.Bar_TextOptions = new DevComponents.DotNetBar.Bar();
             this.ButtonItem_AddButtons = new DevComponents.DotNetBar.ButtonItem();
             this.ButtonItem4 = new DevComponents.DotNetBar.ButtonItem();
@@ -87,9 +88,10 @@ namespace SM64_ROM_Manager
             this.ButtonItem19 = new DevComponents.DotNetBar.ButtonItem();
             this.ButtonItem20 = new DevComponents.DotNetBar.ButtonItem();
             this.Panel1 = new System.Windows.Forms.Panel();
-            this.Panel3 = new System.Windows.Forms.Panel();
-            this.ButtonItem_ClearAllItems = new DevComponents.DotNetBar.ButtonItem();
             this.TextBoxX_ItemDescription = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.Panel3 = new System.Windows.Forms.Panel();
+            this.labelX1 = new DevComponents.DotNetBar.LabelX();
+            this.ComboBoxEx_SoundEffect = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.GroupPanel_TM_DialogProps.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.IntegerInput_TM_DialogSize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Bar_AddRemoveItems)).BeginInit();
@@ -107,7 +109,9 @@ namespace SM64_ROM_Manager
             this.GroupPanel_TM_DialogProps.Controls.Add(this.LabelX21);
             this.GroupPanel_TM_DialogProps.Controls.Add(this.ComboBoxEx_TM_DialogPosY);
             this.GroupPanel_TM_DialogProps.Controls.Add(this.IntegerInput_TM_DialogSize);
+            this.GroupPanel_TM_DialogProps.Controls.Add(this.ComboBoxEx_SoundEffect);
             this.GroupPanel_TM_DialogProps.Controls.Add(this.ComboBoxEx_TM_DialogPosX);
+            this.GroupPanel_TM_DialogProps.Controls.Add(this.labelX1);
             this.GroupPanel_TM_DialogProps.Controls.Add(this.LabelX18);
             this.GroupPanel_TM_DialogProps.DisabledBackColor = System.Drawing.Color.Empty;
             resources.ApplyResources(this.GroupPanel_TM_DialogProps, "GroupPanel_TM_DialogProps");
@@ -378,6 +382,14 @@ namespace SM64_ROM_Manager
             resources.ApplyResources(this.ButtonItem_RemoveTextItem, "ButtonItem_RemoveTextItem");
             this.ButtonItem_RemoveTextItem.Click += new System.EventHandler(this.ButtonItem_RemoveTextItem_Click);
             // 
+            // ButtonItem_ClearAllItems
+            // 
+            this.ButtonItem_ClearAllItems.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
+            this.ButtonItem_ClearAllItems.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_refresh_16px;
+            this.ButtonItem_ClearAllItems.Name = "ButtonItem_ClearAllItems";
+            resources.ApplyResources(this.ButtonItem_ClearAllItems, "ButtonItem_ClearAllItems");
+            this.ButtonItem_ClearAllItems.Click += new System.EventHandler(this.ButtonItem_ClearAllItems_Click);
+            // 
             // Bar_TextOptions
             // 
             this.Bar_TextOptions.AntiAlias = true;
@@ -552,23 +564,6 @@ namespace SM64_ROM_Manager
             this.Panel1.Controls.Add(this.Bar_TextOptions);
             this.Panel1.Name = "Panel1";
             // 
-            // Panel3
-            // 
-            resources.ApplyResources(this.Panel3, "Panel3");
-            this.Panel3.BackColor = System.Drawing.Color.Transparent;
-            this.Panel3.Controls.Add(this.ListViewEx_TM_TableEntries);
-            this.Panel3.Controls.Add(this.TabStrip_TextTable);
-            this.Panel3.Controls.Add(this.Bar_AddRemoveItems);
-            this.Panel3.Name = "Panel3";
-            // 
-            // ButtonItem_ClearAllItems
-            // 
-            this.ButtonItem_ClearAllItems.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
-            this.ButtonItem_ClearAllItems.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_refresh_16px;
-            this.ButtonItem_ClearAllItems.Name = "ButtonItem_ClearAllItems";
-            resources.ApplyResources(this.ButtonItem_ClearAllItems, "ButtonItem_ClearAllItems");
-            this.ButtonItem_ClearAllItems.Click += new System.EventHandler(this.ButtonItem_ClearAllItems_Click);
-            // 
             // TextBoxX_ItemDescription
             // 
             // 
@@ -581,6 +576,37 @@ namespace SM64_ROM_Manager
             this.TextBoxX_ItemDescription.PreventEnterBeep = true;
             this.TextBoxX_ItemDescription.ReadOnly = true;
             this.TextBoxX_ItemDescription.TextChanged += new System.EventHandler(this.TextBoxX_ItemDescription_TextChanged);
+            // 
+            // Panel3
+            // 
+            resources.ApplyResources(this.Panel3, "Panel3");
+            this.Panel3.BackColor = System.Drawing.Color.Transparent;
+            this.Panel3.Controls.Add(this.ListViewEx_TM_TableEntries);
+            this.Panel3.Controls.Add(this.TabStrip_TextTable);
+            this.Panel3.Controls.Add(this.Bar_AddRemoveItems);
+            this.Panel3.Name = "Panel3";
+            // 
+            // labelX1
+            // 
+            // 
+            // 
+            // 
+            this.labelX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            resources.ApplyResources(this.labelX1, "labelX1");
+            this.labelX1.Name = "labelX1";
+            // 
+            // ComboBoxEx_SoundEffect
+            // 
+            this.ComboBoxEx_SoundEffect.DisplayMember = "Text";
+            this.ComboBoxEx_SoundEffect.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.ComboBoxEx_SoundEffect.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ComboBoxEx_SoundEffect.ForeColor = System.Drawing.Color.Black;
+            this.ComboBoxEx_SoundEffect.FormattingEnabled = true;
+            resources.ApplyResources(this.ComboBoxEx_SoundEffect, "ComboBoxEx_SoundEffect");
+            this.ComboBoxEx_SoundEffect.Name = "ComboBoxEx_SoundEffect";
+            this.ComboBoxEx_SoundEffect.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.ComboBoxEx_SoundEffect.SelectedIndexChanged += new System.EventHandler(this.ComboBoxEx_SoundEffect_SelectedIndexChanged);
+            this.ComboBoxEx_SoundEffect.TextChanged += new System.EventHandler(this.TM_CheckComboBoxText);
             // 
             // Tab_TextManager
             // 
@@ -698,5 +724,7 @@ namespace SM64_ROM_Manager
         private DevComponents.DotNetBar.ButtonItem buttonItem3;
         private DevComponents.DotNetBar.ButtonItem ButtonItem_ClearAllItems;
         private DevComponents.DotNetBar.Controls.TextBoxX TextBoxX_ItemDescription;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx ComboBoxEx_SoundEffect;
+        private DevComponents.DotNetBar.LabelX labelX1;
     }
 }
