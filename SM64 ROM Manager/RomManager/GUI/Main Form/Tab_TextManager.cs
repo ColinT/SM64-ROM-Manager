@@ -301,6 +301,11 @@ namespace SM64_ROM_Manager
             ListViewEx_TM_TableEntries.Refresh();
         }
 
+        public void SetGuiForTextTable()
+        {
+            SetGuiForTextTable(GetSelectedIndicies().tableName);
+        }
+
         private void SetGuiForTextTable(string tableName)
         {
             var groupInfo = TMController.GetTextGroupInfos(tableName);
@@ -444,7 +449,7 @@ namespace SM64_ROM_Manager
 
         private void TabStrip1_SelectedTabChanged(object sender, TabStripTabChangedEventArgs e)
         {
-            SetGuiForTextTable(GetSelectedIndicies().tableName);
+            SetGuiForTextTable();
         }
 
         private void TM_CheckComboBoxText(object sender, EventArgs e = null)

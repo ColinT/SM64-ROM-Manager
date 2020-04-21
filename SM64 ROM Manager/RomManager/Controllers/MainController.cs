@@ -830,6 +830,11 @@ namespace SM64_ROM_Manager
             frm.Show();
         }
 
+        public void CallPublicHackingDocuments()
+        {
+            Process.Start("https://docs.google.com/document/d/1pSYR91UiMVKnP3PyvJiCdwRF5wNS_nZzMe-r2WPQUJk/edit?usp=sharing");
+        }
+
         public async Task OpenTextureEditor()
         {
             // Load main levelscript because the segmented banks
