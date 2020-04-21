@@ -166,6 +166,7 @@
     <Compile Include="SM64Lib\Json\GeolayoutscriptCommandJsonConverter.cs" />
     <Compile Include="SM64Lib\Json\BehaviorscriptCommandJsonConverter.cs" />
     <Compile Include="SM64Lib\Json\Fast3DBufferJsonConverter.cs" />
+    <Compile Include="SM64Lib\Level\AreaReverbLevel.cs" />
     <Compile Include="SM64Lib\Level\ILevelManager.cs" />
     <Compile Include="SM64Lib\Level\LevelList.cs" />
     <Compile Include="SM64Lib\Level\LevelSaveResult.cs" />

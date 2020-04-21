@@ -1498,7 +1498,7 @@ namespace SM64_ROM_Manager
             }
         }
 
-        public void SaveLevelAreaSettings(int levelIndex, int areaIndex, TerrainTypes terrainTypes, byte musicID, EnvironmentEffects environmentEffects, CameraPresets cameraPrset, bool enable2DCamera, bool enableShowMsg, byte showMsgDialogID)
+        public void SaveLevelAreaSettings(int levelIndex, int areaIndex, TerrainTypes terrainTypes, byte musicID, EnvironmentEffects environmentEffects, CameraPresets cameraPrset, bool enable2DCamera, bool enableShowMsg, byte showMsgDialogID, AreaReverbLevel reverbLevel)
         {
             var lvl = GetLevelAndArea(levelIndex, areaIndex);
             var area = lvl.area;
@@ -1509,6 +1509,8 @@ namespace SM64_ROM_Manager
             area.Enable2DCamera = enable2DCamera;
             area.ShowMessage.Enabled = enableShowMsg;
             area.ShowMessage.DialogID = showMsgDialogID;
+            if (area is RMLevelArea)
+                ((RMLevelArea)area).ReverbLevel = reverbLevel;
             this.SetLevelscriptNeedToSave(lvl.level);
         }
 
@@ -1656,15 +1658,22 @@ namespace SM64_ROM_Manager
             StatusText = string.Empty;
         }
 
-        public (TerrainTypes terrainType, byte bgMusic, CameraPresets camPreset, EnvironmentEffects envEffect, bool enable2DCam, AreaBGs bgType, Color bgColor, bool enableShowMsg, byte showMsgDialogID) GetLevelAreaSettings(int levelIndex, int areaIndex)
+        public (TerrainTypes terrainType, byte bgMusic, CameraPresets camPreset, EnvironmentEffects envEffect, bool enable2DCam, AreaBGs bgType, Color bgColor, bool enableShowMsg, byte showMsgDialogID, AreaReverbLevel reverbLevel) GetLevelAreaSettings(int levelIndex, int areaIndex)
         {
             var area = GetLevelAndArea(levelIndex, areaIndex).area;
 
             // Set Area Segmented Banks
             area.SetSegmentedBanks(RomManager);
 
+            // Get Reverb level
+            AreaReverbLevel reverbLevel;
+            if (area is RMLevelArea)
+                reverbLevel = ((RMLevelArea)area).ReverbLevel;
+            else
+                reverbLevel = AreaReverbLevel.None;
+
             // Get Area Settings
-            return (area.TerrainType, area.BGMusic, area.Geolayout.CameraPreset, area.Geolayout.EnvironmentEffect, area.Enable2DCamera, area.Background.Type, area.Background.Color, area.ShowMessage.Enabled, area.ShowMessage.DialogID);
+            return (area.TerrainType, area.BGMusic, area.Geolayout.CameraPreset, area.Geolayout.EnvironmentEffect, area.Enable2DCamera, area.Background.Type, area.Background.Color, area.ShowMessage.Enabled, area.ShowMessage.DialogID, reverbLevel);
         }
 
         public int GetLevelAreaScrollingTexturesCount(int levelIndex, int areaIndex)
