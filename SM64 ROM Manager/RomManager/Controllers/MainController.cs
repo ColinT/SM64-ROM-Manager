@@ -1658,7 +1658,7 @@ namespace SM64_ROM_Manager
             StatusText = string.Empty;
         }
 
-        public (TerrainTypes terrainType, byte bgMusic, CameraPresets camPreset, EnvironmentEffects envEffect, bool enable2DCam, AreaBGs bgType, Color bgColor, bool enableShowMsg, byte showMsgDialogID, AreaReverbLevel reverbLevel) GetLevelAreaSettings(int levelIndex, int areaIndex)
+        public (byte areaID, TerrainTypes terrainType, byte bgMusic, CameraPresets camPreset, EnvironmentEffects envEffect, bool enable2DCam, AreaBGs bgType, Color bgColor, bool enableShowMsg, byte showMsgDialogID, AreaReverbLevel reverbLevel) GetLevelAreaSettings(int levelIndex, int areaIndex)
         {
             var area = GetLevelAndArea(levelIndex, areaIndex).area;
 
@@ -1673,7 +1673,7 @@ namespace SM64_ROM_Manager
                 reverbLevel = AreaReverbLevel.None;
 
             // Get Area Settings
-            return (area.TerrainType, area.BGMusic, area.Geolayout.CameraPreset, area.Geolayout.EnvironmentEffect, area.Enable2DCamera, area.Background.Type, area.Background.Color, area.ShowMessage.Enabled, area.ShowMessage.DialogID, reverbLevel);
+            return (area.AreaID, area.TerrainType, area.BGMusic, area.Geolayout.CameraPreset, area.Geolayout.EnvironmentEffect, area.Enable2DCamera, area.Background.Type, area.Background.Color, area.ShowMessage.Enabled, area.ShowMessage.DialogID, reverbLevel);
         }
 
         public int GetLevelAreaScrollingTexturesCount(int levelIndex, int areaIndex)

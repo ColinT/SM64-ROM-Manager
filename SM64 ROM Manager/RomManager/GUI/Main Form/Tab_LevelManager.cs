@@ -741,6 +741,7 @@ namespace SM64_ROM_Manager
                     if ((AreaReverbLevel)cbitem.Tag == infos.reverbLevel)
                         ComboBoxEx_ReverbLevel.SelectedItem = cbitem;
                 }
+                ComboBoxEx_ReverbLevel.Enabled = infos.areaID >= 1 && infos.areaID <= 3;
 
                 // Model Infos
                 LoadScrollTexCount();
