@@ -272,6 +272,7 @@
     <Compile Include="SM64Lib\Objects\StarManager.cs" />
     <Compile Include="SM64Lib\Data\System\SwapInts.cs" />
     <Compile Include="SM64Lib\Text\DialogHorizontalPosition.cs" />
+    <Compile Include="SM64Lib\Text\DialogSoundEffects.cs" />
     <Compile Include="SM64Lib\Text\DialogVerticalPosition.cs" />
     <Compile Include="SM64Lib\Text\Profiles\TextArrayItemInfo.cs" />
     <Compile Include="SM64Lib\Text\Profiles\TextTableDialogDataInfo.cs" />

@@ -398,8 +398,8 @@ namespace SM64_ROM_Manager
                 TextBoxX_TM_TextEditor.Text = itemInfo.text;
 
                 var isDescNull = itemInfo.dialogDescription == null;
-                TextBoxX_ItemDescription.ReadOnly = isDescNull;
-                if (isDescNull || TMController.UsingDefaultTextProfileInfo())
+                TextBoxX_ItemDescription.ReadOnly = isDescNull && !TMController.UsingDefaultTextProfileInfo();
+                if (isDescNull)
                     TextBoxX_ItemDescription.Text = TMController.GetTextNameList(selectedIndicies.tableName).ElementAtOrDefault(selectedIndicies.tableIndex);
                 else
                     TextBoxX_ItemDescription.Text = itemInfo.dialogDescription;
