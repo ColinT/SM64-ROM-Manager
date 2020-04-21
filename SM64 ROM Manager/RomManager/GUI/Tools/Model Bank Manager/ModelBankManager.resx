@@ -280,13 +280,13 @@
     <value>5</value>
   </data>
   <data name="LabelX_CollisionPointerDestinationsCount.Location" type="System.Drawing.Point, System.Drawing">
-    <value>87, 92</value>
+    <value>100, 92</value>
   </data>
   <data name="LabelX_CollisionPointerDestinationsCount.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="LabelX_CollisionPointerDestinationsCount.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 23</value>
+    <value>37, 23</value>
   </data>
   <data name="LabelX_CollisionPointerDestinationsCount.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -346,7 +346,7 @@
     <value>Model-ID:</value>
   </data>
   <data name="LayoutControlItem5.Text" xml:space="preserve">
-    <value>Collision Pointer&lt;br/&gt;Destinations:</value>
+    <value>Collision Pointer&lt;br/&gt;ROM Destinations:</value>
   </data>
   <data name="LayoutControl1.Size" type="System.Drawing.Size, System.Drawing">
     <value>231, 122</value>
@@ -693,7 +693,7 @@
     <value>DevComponents.DotNetBar.ButtonItem, DevComponents.DotNetBar2, Version=14.1.0.37, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>CustomBankManager</value>
+    <value>ModelBankManager</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>DevComponents.DotNetBar.OfficeForm, DevComponents.DotNetBar2, Version=14.1.0.37, Culture=neutral, PublicKeyToken=null</value>

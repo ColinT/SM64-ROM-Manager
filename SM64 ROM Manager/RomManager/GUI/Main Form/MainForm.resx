@@ -2672,6 +2672,9 @@
   <data name="ButtonItem21.Text" xml:space="preserve">
     <value>Submit Translation</value>
   </data>
+  <data name="ButtonItem_HackingDocuments.Text" xml:space="preserve">
+    <value>Hacking Documents</value>
+  </data>
   <data name="ButtonItem_Supporter.Text" xml:space="preserve">
     <value>Supporter</value>
   </data>
@@ -4877,6 +4880,12 @@
   <data name="&gt;&gt;ButtonItem_M64ToMidiConverter.Type" xml:space="preserve">
     <value>DevComponents.DotNetBar.ButtonItem, DevComponents.DotNetBar2, Version=14.1.0.37, Culture=neutral, PublicKeyToken=null</value>
   </data>
+  <data name="&gt;&gt;ButtonItem_TextureEditor.Name" xml:space="preserve">
+    <value>ButtonItem_TextureEditor</value>
+  </data>
+  <data name="&gt;&gt;ButtonItem_TextureEditor.Type" xml:space="preserve">
+    <value>DevComponents.DotNetBar.ButtonItem, DevComponents.DotNetBar2, Version=14.1.0.37, Culture=neutral, PublicKeyToken=null</value>
+  </data>
   <data name="&gt;&gt;ButtonItem12.Name" xml:space="preserve">
     <value>ButtonItem12</value>
   </data>
@@ -5003,10 +5012,10 @@
   <data name="&gt;&gt;LabelItem_OtherInfoText.Type" xml:space="preserve">
     <value>DevComponents.DotNetBar.LabelItem, DevComponents.DotNetBar2, Version=14.1.0.37, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;ButtonItem_TextureEditor.Name" xml:space="preserve">
-    <value>ButtonItem_TextureEditor</value>
+  <data name="&gt;&gt;ButtonItem_HackingDocuments.Name" xml:space="preserve">
+    <value>ButtonItem_HackingDocuments</value>
   </data>
-  <data name="&gt;&gt;ButtonItem_TextureEditor.Type" xml:space="preserve">
+  <data name="&gt;&gt;ButtonItem_HackingDocuments.Type" xml:space="preserve">
     <value>DevComponents.DotNetBar.ButtonItem, DevComponents.DotNetBar2, Version=14.1.0.37, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">

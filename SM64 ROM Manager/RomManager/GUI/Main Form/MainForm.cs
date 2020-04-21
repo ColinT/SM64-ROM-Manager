@@ -13,6 +13,7 @@ using global::SM64_ROM_Manager.My.Resources;
 using global::SM64_ROM_Manager.SettingsManager;
 using Z.Collections.Extensions;
 using Z.Core.Extensions;
+using System.Diagnostics;
 
 namespace SM64_ROM_Manager
 {
@@ -711,6 +712,11 @@ namespace SM64_ROM_Manager
         private async void ButtonItem_TextureEditor_Click(object sender, EventArgs e)
         {
             await Controller.OpenTextureEditor();
+        }
+
+        private void ButtonItem_HackingDocuments_Click(object sender, EventArgs e)
+        {
+            Controller.CallPublicHackingDocuments();
         }
     }
 }
