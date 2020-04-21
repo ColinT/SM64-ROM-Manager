@@ -53,6 +53,9 @@ namespace SM64_ROM_Manager
         public event TextItemChangedEventHandler TextItemChanged;
         public delegate void TextItemChangedEventHandler(TextItemEventArgs e);
 
+        public event ManyTextItemsChangedEventHandler ManyTextItemsChanged;
+        public delegate void ManyTextItemsChangedEventHandler();
+
         public event TextItemAddedEventHandler TextItemAdded;
         public delegate void TextItemAddedEventHandler(TextItemEventArgs e);
 
@@ -435,6 +438,17 @@ namespace SM64_ROM_Manager
             var group = GetTextGroup(tableName);
             group.RemoveAt(tableIndex);
             TextItemRemoved?.Invoke(new TextItemEventArgs(tableName, tableIndex));
+        }
+
+        public void ClearTextItems(string tableName)
+        {
+            var group = GetTextGroup(tableName);
+            if (group is object)
+            {
+                foreach (var item in group)
+                    item.Text = string.Empty;
+            }
+            ManyTextItemsChanged?.Invoke();
         }
 
         public IEnumerable<string> GetAllTextProfileNames()

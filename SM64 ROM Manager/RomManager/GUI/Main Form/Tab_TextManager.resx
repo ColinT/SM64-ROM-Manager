@@ -501,6 +501,9 @@
   <data name="ButtonItem_RemoveTextItem.Text" xml:space="preserve">
     <value>Remove Item</value>
   </data>
+  <data name="ButtonItem_ClearAllItems.Text" xml:space="preserve">
+    <value>Clear all items</value>
+  </data>
   <data name="Bar_AddRemoveItems.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
@@ -867,6 +870,18 @@
   <data name="&gt;&gt;ButtonItem10.Type" xml:space="preserve">
     <value>DevComponents.DotNetBar.ButtonItem, DevComponents.DotNetBar2, Version=14.1.0.37, Culture=neutral, PublicKeyToken=null</value>
   </data>
+  <data name="&gt;&gt;buttonItem2.Name" xml:space="preserve">
+    <value>buttonItem2</value>
+  </data>
+  <data name="&gt;&gt;buttonItem2.Type" xml:space="preserve">
+    <value>DevComponents.DotNetBar.ButtonItem, DevComponents.DotNetBar2, Version=14.1.0.37, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;buttonItem3.Name" xml:space="preserve">
+    <value>buttonItem3</value>
+  </data>
+  <data name="&gt;&gt;buttonItem3.Type" xml:space="preserve">
+    <value>DevComponents.DotNetBar.ButtonItem, DevComponents.DotNetBar2, Version=14.1.0.37, Culture=neutral, PublicKeyToken=null</value>
+  </data>
   <data name="&gt;&gt;ButtonItem15.Name" xml:space="preserve">
     <value>ButtonItem15</value>
   </data>
@@ -909,16 +924,10 @@
   <data name="&gt;&gt;ButtonItem20.Type" xml:space="preserve">
     <value>DevComponents.DotNetBar.ButtonItem, DevComponents.DotNetBar2, Version=14.1.0.37, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;buttonItem2.Name" xml:space="preserve">
-    <value>buttonItem2</value>
+  <data name="&gt;&gt;ButtonItem_ClearAllItems.Name" xml:space="preserve">
+    <value>ButtonItem_ClearAllItems</value>
   </data>
-  <data name="&gt;&gt;buttonItem2.Type" xml:space="preserve">
-    <value>DevComponents.DotNetBar.ButtonItem, DevComponents.DotNetBar2, Version=14.1.0.37, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;buttonItem3.Name" xml:space="preserve">
-    <value>buttonItem3</value>
-  </data>
-  <data name="&gt;&gt;buttonItem3.Type" xml:space="preserve">
+  <data name="&gt;&gt;ButtonItem_ClearAllItems.Type" xml:space="preserve">
     <value>DevComponents.DotNetBar.ButtonItem, DevComponents.DotNetBar2, Version=14.1.0.37, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">

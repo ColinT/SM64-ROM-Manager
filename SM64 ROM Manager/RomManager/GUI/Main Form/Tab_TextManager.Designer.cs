@@ -77,6 +77,8 @@ namespace SM64_ROM_Manager
             this.ButtonItem12 = new DevComponents.DotNetBar.ButtonItem();
             this.ButtonItem13 = new DevComponents.DotNetBar.ButtonItem();
             this.ButtonItem10 = new DevComponents.DotNetBar.ButtonItem();
+            this.buttonItem2 = new DevComponents.DotNetBar.ButtonItem();
+            this.buttonItem3 = new DevComponents.DotNetBar.ButtonItem();
             this.ButtonItem15 = new DevComponents.DotNetBar.ButtonItem();
             this.ButtonItem14 = new DevComponents.DotNetBar.ButtonItem();
             this.ButtonItem16 = new DevComponents.DotNetBar.ButtonItem();
@@ -86,8 +88,7 @@ namespace SM64_ROM_Manager
             this.ButtonItem20 = new DevComponents.DotNetBar.ButtonItem();
             this.Panel1 = new System.Windows.Forms.Panel();
             this.Panel3 = new System.Windows.Forms.Panel();
-            this.buttonItem2 = new DevComponents.DotNetBar.ButtonItem();
-            this.buttonItem3 = new DevComponents.DotNetBar.ButtonItem();
+            this.ButtonItem_ClearAllItems = new DevComponents.DotNetBar.ButtonItem();
             this.GroupPanel_TM_DialogProps.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.IntegerInput_TM_DialogSize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Bar_AddRemoveItems)).BeginInit();
@@ -335,7 +336,8 @@ namespace SM64_ROM_Manager
             this.Bar_AddRemoveItems.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.ButtonItem_CurProfile,
             this.ButtonItem_AddTextItem,
-            this.ButtonItem_RemoveTextItem});
+            this.ButtonItem_RemoveTextItem,
+            this.ButtonItem_ClearAllItems});
             this.Bar_AddRemoveItems.Name = "Bar_AddRemoveItems";
             this.Bar_AddRemoveItems.Stretch = true;
             this.Bar_AddRemoveItems.Style = DevComponents.DotNetBar.eDotNetBarStyle.Office2013;
@@ -482,6 +484,18 @@ namespace SM64_ROM_Manager
             this.ButtonItem20});
             resources.ApplyResources(this.ButtonItem10, "ButtonItem10");
             // 
+            // buttonItem2
+            // 
+            this.buttonItem2.Name = "buttonItem2";
+            resources.ApplyResources(this.buttonItem2, "buttonItem2");
+            this.buttonItem2.Click += new System.EventHandler(this.ButtonItemAddSpecialChar_Click);
+            // 
+            // buttonItem3
+            // 
+            this.buttonItem3.Name = "buttonItem3";
+            resources.ApplyResources(this.buttonItem3, "buttonItem3");
+            this.buttonItem3.Click += new System.EventHandler(this.ButtonItemAddSpecialChar_Click);
+            // 
             // ButtonItem15
             // 
             this.ButtonItem15.Name = "ButtonItem15";
@@ -545,17 +559,13 @@ namespace SM64_ROM_Manager
             this.Panel3.Controls.Add(this.Bar_AddRemoveItems);
             this.Panel3.Name = "Panel3";
             // 
-            // buttonItem2
+            // ButtonItem_ClearAllItems
             // 
-            this.buttonItem2.Name = "buttonItem2";
-            resources.ApplyResources(this.buttonItem2, "buttonItem2");
-            this.buttonItem2.Click += new System.EventHandler(this.ButtonItemAddSpecialChar_Click);
-            // 
-            // buttonItem3
-            // 
-            this.buttonItem3.Name = "buttonItem3";
-            resources.ApplyResources(this.buttonItem3, "buttonItem3");
-            this.buttonItem3.Click += new System.EventHandler(this.ButtonItemAddSpecialChar_Click);
+            this.ButtonItem_ClearAllItems.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
+            this.ButtonItem_ClearAllItems.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_refresh_16px;
+            this.ButtonItem_ClearAllItems.Name = "ButtonItem_ClearAllItems";
+            resources.ApplyResources(this.ButtonItem_ClearAllItems, "ButtonItem_ClearAllItems");
+            this.ButtonItem_ClearAllItems.Click += new System.EventHandler(this.ButtonItem_ClearAllItems_Click);
             // 
             // Tab_TextManager
             // 
@@ -671,5 +681,6 @@ namespace SM64_ROM_Manager
         private DevComponents.DotNetBar.ButtonItem ButtonItem_CurProfile;
         private DevComponents.DotNetBar.ButtonItem buttonItem2;
         private DevComponents.DotNetBar.ButtonItem buttonItem3;
+        private DevComponents.DotNetBar.ButtonItem ButtonItem_ClearAllItems;
     }
 }

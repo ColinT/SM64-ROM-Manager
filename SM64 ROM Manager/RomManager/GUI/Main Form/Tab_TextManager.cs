@@ -39,6 +39,7 @@ namespace SM64_ROM_Manager
 
                     _TMController.RequestReloadTextManagerLists -= Controller_RequestReloadTextManager;
                     _TMController.TextItemChanged -= Controller_TextItemChanged;
+                    _TMController.ManyTextItemsChanged -= Controller_ManyTextItemsChanged;
                     _TMController.RequestReloadTextManagerLineColors -= Controller_RequestReloadTextManagerLineColors;
                     _TMController.TextItemAdded -= Controller_TextItemAdded;
                     _TMController.TextItemRemoved -= Controller_TextItemRemoved;
@@ -50,6 +51,7 @@ namespace SM64_ROM_Manager
                 {
                     _TMController.RequestReloadTextManagerLists += Controller_RequestReloadTextManager;
                     _TMController.TextItemChanged += Controller_TextItemChanged;
+                    _TMController.ManyTextItemsChanged += Controller_ManyTextItemsChanged;
                     _TMController.RequestReloadTextManagerLineColors += Controller_RequestReloadTextManagerLineColors;
                     _TMController.TextItemAdded += Controller_TextItemAdded;
                     _TMController.TextItemRemoved += Controller_TextItemRemoved;
@@ -78,6 +80,12 @@ namespace SM64_ROM_Manager
         private void Controller_TextItemChanged(TextItemEventArgs e)
         {
             UpdateListViewItem(e.ItemIndex);
+            ShowCurTableBytes();
+        }
+
+        private void Controller_ManyTextItemsChanged()
+        {
+            UpdateAllListViewItems();
             ShowCurTableBytes();
         }
 
@@ -186,9 +194,11 @@ namespace SM64_ROM_Manager
         public void LoadTableEntries()
         {
             string tableName;
+
             var nameList = Array.Empty<string>();
             var col1 = ListViewEx_TM_TableEntries.Columns[1];
             var col2 = ListViewEx_TM_TableEntries.Columns[2];
+
             if (TabStrip_TextTable.Tabs.Count == 0) // First Init
             {
                 LoadTextProfileList();
@@ -199,12 +209,16 @@ namespace SM64_ROM_Manager
             TMController.StatusText = Form_Main_Resources.Status_LoadingTexts;
             TMController.LoadTextGroup(tableName);
             TMController.StatusText = Form_Main_Resources.Status_CreatingTextList;
+
             ListViewEx_TM_TableEntries.SuspendLayout();
             ListViewEx_TM_TableEntries.Items.Clear();
+
             string infos = TMController.GetTextGroupInfos(tableName).name;
             nameList = TMController.GetTextNameList(tableName);
+
             for (int i = 0, loopTo = TMController.GetTextGroupEntriesCount(tableName) - 1; i <= loopTo; i++)
                 AddTextListViewItem(tableName, i, nameList);
+
             if (nameList.Any())
             {
                 if (col1.Tag is object)
@@ -243,7 +257,8 @@ namespace SM64_ROM_Manager
                 nameEntry = nameList[tableIndex];
             }
 
-            var newItem = new ListViewItem(new string[] { tableIndex.ToString(), nameEntry, itemInfos.text.Split(new[] { ControlChars.Cr, ControlChars.Lf }).FirstOrDefault() });
+            var newItem = new ListViewItem(new string[] { tableIndex.ToString(), nameEntry, string.Empty });
+            UpdateListViewItem(newItem, itemInfos.text, false);
             ListViewEx_TM_TableEntries.Items.Add(newItem);
         }
 
@@ -251,7 +266,20 @@ namespace SM64_ROM_Manager
         {
             var lvi = ListViewEx_TM_TableEntries.Items[index];
             var infos = TMController.GetTextItemInfos(GetSelectedIndicies().tableName, index);
-            lvi.SubItems[2].Text = infos.text;
+            UpdateListViewItem(lvi, infos.text, refresh);
+        }
+
+        private void UpdateListViewItem(ListViewItem lvi, string itemText, bool refresh = true)
+        {
+            if (string.IsNullOrEmpty(itemText))
+                itemText = "-";
+            else
+            {
+                var breakIndex = itemText.IndexOf('\n');
+                if (breakIndex != -1)
+                    itemText = itemText.Remove(breakIndex);
+            }
+            lvi.SubItems[2].Text = itemText;
             if (refresh)
                 ListViewEx_TM_TableEntries.Refresh();
         }
@@ -259,7 +287,7 @@ namespace SM64_ROM_Manager
         private void UpdateAllListViewItems()
         {
             for (int i = 0, loopTo = ListViewEx_TM_TableEntries.Items.Count - 1; i <= loopTo; i++)
-                UpdateListViewItem(Conversions.ToInteger(false));
+                UpdateListViewItem(i, false);
             ListViewEx_TM_TableEntries.Refresh();
         }
 
@@ -460,6 +488,11 @@ namespace SM64_ROM_Manager
                     TMController.SetCurrentTextProfileName(Conversions.ToString(ci.Tag));
                 }
             }
+        }
+
+        private void ButtonItem_ClearAllItems_Click(object sender, EventArgs e)
+        {
+            TMController.ClearTextItems(GetSelectedIndicies().tableName);
         }
     }
 }
