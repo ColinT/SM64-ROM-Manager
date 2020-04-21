@@ -492,6 +492,8 @@
     <Compile Include="RomManager\GUI\Tools\Custom Objects Manager\CustomObjectsDatabaseViewer.Designer.cs">
       <DependentUpon>CustomObjectsDatabaseViewer.cs</DependentUpon>
     </Compile>
+    <Compile Include="RomManager\GUI\Tools\HUDOptions\HUDOptionsValueSelection.cs" />
+    <Compile Include="RomManager\GUI\Tools\HUDOptions\HUDOptionsValueTypes.cs" />
     <Compile Include="RomManager\GUI\Tools\Model Bank Manager\AddressListEditor.Designer.cs">
       <DependentUpon>AddressListEditor.cs</DependentUpon>
     </Compile>

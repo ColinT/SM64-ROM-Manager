@@ -663,6 +663,86 @@
               Sucht eine lokalisierte Zeichenfolge, die Timer ähnelt.
             </summary>
         </member>
+        <member name="P:SM64_ROM_Manager.My.Resources.HUDOptionsLangRes.HUDPos_PauseMenu">
+            <summary>
+              Sucht eine lokalisierte Zeichenfolge, die Pause Menu Screen in Level ähnelt.
+            </summary>
+        </member>
+        <member name="P:SM64_ROM_Manager.My.Resources.HUDOptionsLangRes.HUDPos_PauseMenu_ColorfulPause">
+            <summary>
+              Sucht eine lokalisierte Zeichenfolge, die Coloreful PAUSE ähnelt.
+            </summary>
+        </member>
+        <member name="P:SM64_ROM_Manager.My.Resources.HUDOptionsLangRes.HUDPos_PauseMenu_CurrentLevelName">
+            <summary>
+              Sucht eine lokalisierte Zeichenfolge, die Current Level Name ähnelt.
+            </summary>
+        </member>
+        <member name="P:SM64_ROM_Manager.My.Resources.HUDOptionsLangRes.HUDPos_PauseMenu_CurrentStarName">
+            <summary>
+              Sucht eine lokalisierte Zeichenfolge, die Current Star Name ähnelt.
+            </summary>
+        </member>
+        <member name="P:SM64_ROM_Manager.My.Resources.HUDOptionsLangRes.HUDPos_PauseMenu_EmptyStarSymbol">
+            <summary>
+              Sucht eine lokalisierte Zeichenfolge, die Empty Star Symbol ähnelt.
+            </summary>
+        </member>
+        <member name="P:SM64_ROM_Manager.My.Resources.HUDOptionsLangRes.HUDPos_PauseMenu_FilledStarSymbol">
+            <summary>
+              Sucht eine lokalisierte Zeichenfolge, die Filles Star Symbol ähnelt.
+            </summary>
+        </member>
+        <member name="P:SM64_ROM_Manager.My.Resources.HUDOptionsLangRes.HUDPos_PauseMenu_Menu">
+            <summary>
+              Sucht eine lokalisierte Zeichenfolge, die Pause Menu ähnelt.
+            </summary>
+        </member>
+        <member name="P:SM64_ROM_Manager.My.Resources.HUDOptionsLangRes.HUDPos_PauseMenu_Menu_CameraAngle">
+            <summary>
+              Sucht eine lokalisierte Zeichenfolge, die CAMERA ANGLE ähnelt.
+            </summary>
+        </member>
+        <member name="P:SM64_ROM_Manager.My.Resources.HUDOptionsLangRes.HUDPos_PauseMenu_Menu_Continue">
+            <summary>
+              Sucht eine lokalisierte Zeichenfolge, die CONTINUE ähnelt.
+            </summary>
+        </member>
+        <member name="P:SM64_ROM_Manager.My.Resources.HUDOptionsLangRes.HUDPos_PauseMenu_Menu_ExitCourse">
+            <summary>
+              Sucht eine lokalisierte Zeichenfolge, die EXIT COURSE ähnelt.
+            </summary>
+        </member>
+        <member name="P:SM64_ROM_Manager.My.Resources.HUDOptionsLangRes.HUDPos_PauseMenu_Menu_LakituMario">
+            <summary>
+              Sucht eine lokalisierte Zeichenfolge, die LAKITU-MARIO ähnelt.
+            </summary>
+        </member>
+        <member name="P:SM64_ROM_Manager.My.Resources.HUDOptionsLangRes.HUDPos_PauseMenu_Menu_LaktiuStop">
+            <summary>
+              Sucht eine lokalisierte Zeichenfolge, die LAKITU-STOP ähnelt.
+            </summary>
+        </member>
+        <member name="P:SM64_ROM_Manager.My.Resources.HUDOptionsLangRes.HUDPos_PauseMenu_Menu_NavigationDirection">
+            <summary>
+              Sucht eine lokalisierte Zeichenfolge, die Navigation Direction ähnelt.
+            </summary>
+        </member>
+        <member name="P:SM64_ROM_Manager.My.Resources.HUDOptionsLangRes.HUDPos_PauseMenu_Menu_NormalFixed">
+            <summary>
+              Sucht eine lokalisierte Zeichenfolge, die Normal (Fixed) ähnelt.
+            </summary>
+        </member>
+        <member name="P:SM64_ROM_Manager.My.Resources.HUDOptionsLangRes.HUDPos_PauseMenu_Menu_NormalUpClose">
+            <summary>
+              Sucht eine lokalisierte Zeichenfolge, die Normal (Up-Close) ähnelt.
+            </summary>
+        </member>
+        <member name="P:SM64_ROM_Manager.My.Resources.HUDOptionsLangRes.HUDPos_PauseMenu_MyScore">
+            <summary>
+              Sucht eine lokalisierte Zeichenfolge, die My Score ähnelt.
+            </summary>
+        </member>
         <member name="P:SM64_ROM_Manager.My.Resources.HUDOptionsLangRes.HUDPos_Timer_Counter">
             <summary>
               Sucht eine lokalisierte Zeichenfolge, die Counter ähnelt.
@@ -671,6 +751,16 @@
         <member name="P:SM64_ROM_Manager.My.Resources.HUDOptionsLangRes.HUDPos_Timer_Time">
             <summary>
               Sucht eine lokalisierte Zeichenfolge, die Time ähnelt.
+            </summary>
+        </member>
+        <member name="P:SM64_ROM_Manager.My.Resources.HUDOptionsLangRes.HUDPosVals_PauseMenu_Menu_NavigationDirection_Horizontal">
+            <summary>
+              Sucht eine lokalisierte Zeichenfolge, die Horizontal ähnelt.
+            </summary>
+        </member>
+        <member name="P:SM64_ROM_Manager.My.Resources.HUDOptionsLangRes.HUDPosVals_PauseMenu_Menu_NavigationDirection_Vertical">
+            <summary>
+              Sucht eine lokalisierte Zeichenfolge, die Vertical ähnelt.
             </summary>
         </member>
         <member name="T:SM64_ROM_Manager.My.Resources.BehaviorBankManagerLangRes">
