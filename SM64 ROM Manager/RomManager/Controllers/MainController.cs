@@ -36,6 +36,7 @@ using global::SM64Lib.Script;
 using SM64Lib.TextValueConverter;
 using Z.Core.Extensions;
 using SM64_ROM_Manager.My.Resources;
+using System.Diagnostics;
 
 namespace SM64_ROM_Manager
 {

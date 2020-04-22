@@ -447,6 +447,29 @@ namespace SM64_ROM_Manager
             }
         }
 
+        private async void ExportTextTables(bool currentOnly)
+        {
+            var sfd_ExportTextTable = new SaveFileDialog
+            {
+                Filter = "Text file (*.txt)|*.txt|Excel file (*.xlsx)|*.xlsx"
+            };
+
+            if (sfd_ExportTextTable.ShowDialog(this) == DialogResult.OK)
+            {
+                switch (sfd_ExportTextTable.FilterIndex)
+                {
+                    case 1:
+                        if (currentOnly)
+                            await TMController.ExportTextTable(sfd_ExportTextTable.FileName, GetSelectedIndicies().tableName);
+                        else
+                            await TMController.ExportAllTextTables(sfd_ExportTextTable.FileName);
+                        break;
+                    case 2:
+                        break;
+                }
+            }
+        }
+
         private void TabStrip1_SelectedTabChanged(object sender, TabStripTabChangedEventArgs e)
         {
             SetGuiForTextTable();
@@ -532,6 +555,16 @@ namespace SM64_ROM_Manager
         private void ComboBoxEx_SoundEffect_SelectedIndexChanged(object sender, EventArgs e)
         {
             SaveItemDialogData();
+        }
+
+        private void ButtonItem_ExportCurTable_Click(object sender, EventArgs e)
+        {
+            ExportTextTables(true);   
+        }
+
+        private void ButtonItem_ExportAllTables_Click(object sender, EventArgs e)
+        {
+            ExportTextTables(false);
         }
     }
 }

@@ -1300,6 +1300,10 @@
       <Project>{d9258483-950c-46d1-a333-31f32492cd7e}</Project>
       <Name>SM64Lib.N64Graphics</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SM64Lib.Text.Exporters\SM64Lib.Text.Exporters.csproj">
+      <Project>{E6305A1D-E5DA-4BB6-992E-3A341BC99A7B}</Project>
+      <Name>SM64Lib.Text.Exporters</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SM64Lib.TextValueConverter\SM64Lib.TextValueConverter.csproj">
       <Project>{e11312a8-5e8d-073f-0086-11d677519581}</Project>
       <Name>SM64Lib.TextValueConverter</Name>

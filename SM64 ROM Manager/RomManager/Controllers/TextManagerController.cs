@@ -11,6 +11,8 @@ using global::SM64Lib;
 using global::SM64Lib.Text;
 using global::SM64Lib.Text.Profiles;
 using Z.Collections.Extensions;
+using System.Threading.Tasks;
+using SM64Lib.Text.Exporters;
 
 namespace SM64_ROM_Manager
 {
@@ -356,6 +358,12 @@ namespace SM64_ROM_Manager
             RomManager.LoadTextGroup(tableName);
         }
 
+        private void LoadAllTextGroups()
+        {
+            foreach (var tgi in RomManager.TextInfoProfile.AllGroups)
+                RomManager.LoadTextGroup(tgi.Name);
+        }
+
         public int GetTextGroupEntriesCount(string tableName)
         {
             return (int)RomManager.LoadTextGroup(tableName)?.Count;
@@ -532,6 +540,31 @@ namespace SM64_ROM_Manager
         public bool UsingDefaultTextProfileInfo()
         {
             return GetCurrentTextProfile() == MyTextProfiles.Manager.DefaultTextProfileInfo;
+        }
+
+        public async Task ExportTextTable(string destFilePath, string tableName)
+        {
+            await ExportTextTables(destFilePath, new[] { GetTextGroup(tableName) });
+        }
+
+        public async Task ExportAllTextTables(string destFilePath)
+        {
+            LoadAllTextGroups();
+            await ExportTextTables(destFilePath, RomManager.TextGroups.ToArray());
+        }
+
+        private async Task ExportTextTables(string destFilePath, TextGroup[] groups)
+        {
+            var extLower = Path.GetExtension(destFilePath)?.ToLower();
+            switch (extLower)
+            {
+                case ".txt":
+                    var exporter = new TxtExporter();
+                    await exporter.Export(destFilePath, groups);
+                    break;
+                case ".xlsx":
+                    break;
+            }
         }
     }
 }
