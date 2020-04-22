@@ -136,6 +136,7 @@
     <Compile Include="SM64Lib\Behaviors\BehaviorBankConfig.cs" />
     <Compile Include="SM64Lib\Behaviors\BehaviorConfig.cs" />
     <Compile Include="SM64Lib\Behaviors\BehaviorCreationTypes.cs" />
+    <Compile Include="SM64Lib\Behaviors\CustomAsmAreaLinkOptions.cs" />
     <Compile Include="SM64Lib\Behaviors\Script\Behaviorscript.cs" />
     <Compile Include="SM64Lib\Behaviors\Script\BehaviorscriptCommand.cs" />
     <Compile Include="SM64Lib\Behaviors\Script\BehaviorscriptCommandCollection.cs" />

@@ -8,6 +8,7 @@ namespace SM64Lib.ASM
 {
     public class CustomAsmAreaConfig
     {
+        public string Name { get; set; }
         public int RomAddress { get; internal set; } = -1;
         public int Length { get; internal set; } = 0;
     }

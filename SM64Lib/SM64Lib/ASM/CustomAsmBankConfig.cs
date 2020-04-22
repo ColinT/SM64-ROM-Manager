@@ -13,7 +13,7 @@ namespace SM64Lib.ASM
 
         public List<CustomAsmAreaConfig> Areas { get; } = new List<CustomAsmAreaConfig>();
         public int MaxLength { get; set; } = -1;
-        public int Length { get; internal set; } = -1
+        public int Length { get; internal set; } = -1;
         public int RomStartAddress { get; set; }
     }
 }
