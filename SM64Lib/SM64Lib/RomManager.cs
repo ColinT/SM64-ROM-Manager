@@ -325,8 +325,11 @@ namespace SM64Lib
         {
             BeginLoadingRom?.Invoke(this, new EventArgs());
 
+            // Load Global Behavior Bank
+            LoadGlobalBehaviorBank();
+
             // Global Object Banks
-            LoadGlobalObjectBank();
+            LoadGlobalModelBank();
 
             // Levels
             LoadLevels();
