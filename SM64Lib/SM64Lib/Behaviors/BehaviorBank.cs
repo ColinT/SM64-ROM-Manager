@@ -92,7 +92,6 @@ namespace SM64Lib.Behaviors
 
         public int WriteToSeg(SegmentedBank seg, int offset, RomManager rommgr)
         {
-            var usedConfigs = new List<BehaviorConfig>();
             var addressUpdates = new Dictionary<int, int>();
             var segStartAddress = seg.BankAddress | offset;
             var data = new BinaryStreamData(seg.Data);
@@ -112,7 +111,6 @@ namespace SM64Lib.Behaviors
                         behav.Config.BankAddress = newBankAddress;
                     }
                     behav.Write(data, (int)data.Position);
-                    usedConfigs.Add(behav.Config);
                 }
             }
 
