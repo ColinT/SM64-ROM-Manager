@@ -327,6 +327,9 @@ namespace SM64Lib
         {
             BeginLoadingRom?.Invoke(this, new EventArgs());
 
+            // Load Global Custom Asm Bank
+            LoadGlobalCustomAsmBank();
+
             // Load Global Behavior Bank
             LoadGlobalBehaviorBank();
 
