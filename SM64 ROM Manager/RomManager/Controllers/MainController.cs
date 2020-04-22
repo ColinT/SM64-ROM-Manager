@@ -634,6 +634,9 @@ namespace SM64_ROM_Manager
             StatusText = Form_Main_Resources.Status_LoadingRom;
             RomLoading?.Invoke();
 
+            // Load Global Custom Asm Bank
+            RomManager.LoadGlobalCustomAsmBank();
+
             // Load Global Behavior Bank
             RomManager.LoadGlobalBehaviorBank();
 

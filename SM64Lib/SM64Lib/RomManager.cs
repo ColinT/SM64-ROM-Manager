@@ -18,6 +18,7 @@ using global::SM64Lib.Objects.ModelBanks;
 using global::SM64Lib.SegmentedBanking;
 using SM64Lib.Behaviors;
 using SM64Lib.Objects.ObjectBanks;
+using SM64Lib.ASM;
 
 namespace SM64Lib
 {
@@ -54,8 +55,9 @@ namespace SM64Lib
         public bool IsSM64EditorMode { get; private set; } = false;
         public Text.Profiles.TextProfileInfo TextInfoProfile { get; set; }
         public MusicList MusicList { get; private set; } = new MusicList();
-        public CustomModelBank GlobalModelBank { get; set; } = new CustomModelBank();
-        public BehaviorBank GlobalBehaviorBank { get; set; } = null;
+        public CustomModelBank GlobalModelBank { get; private set; } = new CustomModelBank();
+        public BehaviorBank GlobalBehaviorBank { get; private set; } = null;
+        public CustomAsmBank GlobalCustomAsmBank { get; private set; } = null;
         public ILevelManager LevelManager { get; private set; }
         public RomConfig RomConfig { get; private set; }
         public bool IsNewROM { get; private set; } = false;
@@ -353,6 +355,9 @@ namespace SM64Lib
 
                 // Custom Object Combos
                 CustomObjects.TakeoverProperties(this);
+
+                // Global Asm Bank
+                GlobalCustomAsmBank.Save(this);
 
                 // Global Behavior Bank
                 SaveGlobalBehaviorBank(ref lastpos);
@@ -740,6 +745,12 @@ namespace SM64Lib
 
             rom.Close();
             RomConfig.GlobalBehaviorBank.IsVanilla = false;
+        }
+
+        public void LoadGlobalCustomAsmBank()
+        {
+            GlobalCustomAsmBank = new CustomAsmBank(RomConfig.GlobalCustomAsmBank);
+            GlobalCustomAsmBank.Load(this);
         }
 
         /// <summary>
