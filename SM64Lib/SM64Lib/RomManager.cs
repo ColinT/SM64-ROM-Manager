@@ -27,6 +27,21 @@ namespace SM64Lib
 
         // E v e n t s
 
+        public event BeginLoadingRomEventHandler BeginLoadingRom;
+        public delegate void BeginLoadingRomEventHandler(RomManager sender, EventArgs e);
+
+        public event AfterRomLoadedEventHandler AfterRomLoaded;
+        public delegate void AfterRomLoadedEventHandler(RomManager sender, EventArgs e);
+
+        public event AfterLevelsLoadedEventHandler AfterLevelsLoaded;
+        public delegate void AfterLevelsLoadedEventHandler(RomManager sender, EventArgs e);
+
+        public event BeginLoadingMusicEventHandler BeginLoadingMusic;
+        public delegate void BeginLoadingMusicEventHandler(RomManager sender, EventArgs e);
+
+        public event AfterMusicLoadedEventHandler AfterMusicLoaded;
+        public delegate void AfterMusicLoadedEventHandler(RomManager sender, EventArgs e);
+
         public event BeforeRomSaveEventHandler BeforeRomSave;
         public delegate void BeforeRomSaveEventHandler(RomManager sender, CancelEventArgs e);
 
@@ -306,6 +321,25 @@ namespace SM64Lib
         public BinaryRom GetBinaryRom(FileAccess access)
         {
             return new BinaryRom(this, access);
+        }
+
+        public void LoadRom()
+        {
+            BeginLoadingRom?.Invoke(this, new EventArgs());
+
+            // Load Global Behavior Bank
+            LoadGlobalBehaviorBank();
+
+            // Global Object Banks
+            LoadGlobalModelBank();
+
+            // Levels
+            LoadLevels();
+            
+            // Music
+            LoadMusic();
+
+            AfterRomLoaded?.Invoke(this, new EventArgs());
         }
 
         /// <summary>
@@ -588,6 +622,8 @@ namespace SM64Lib
                 if (lvl is object)
                     Levels.Add(lvl);
             }
+
+            AfterLevelsLoaded?.Invoke(this, new EventArgs());
         }
 
         /// <summary>
@@ -804,9 +840,11 @@ namespace SM64Lib
         /// <summary>
         /// Loads the Music from the ROM.
         /// </summary>
-        public void LoadMusic()
+        private void LoadMusic()
         {
+            BeginLoadingMusic?.Invoke(this, new EventArgs());
             MusicList.Read(this);
+            AfterMusicLoaded?.Invoke(this, new EventArgs());
         }
 
         /// <summary>

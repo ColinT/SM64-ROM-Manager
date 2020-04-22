@@ -183,6 +183,11 @@ namespace SM64_ROM_Manager
                     _RomManager.WritingNewProgramVersion -= RomManager_WritingNewRomVersion;
                     _RomManager.BeforeRomSave -= RomManager_BeforeRomSave;
                     _RomManager.AfterRomSave -= RomManager_AfterRomSave;
+                    _RomManager.BeginLoadingRom -= RomManager_BeginLoadingRom;
+                    _RomManager.AfterLevelsLoaded -= RomManager_AfterLevelsLoaded;
+                    _RomManager.BeginLoadingMusic -= RomManager_BeginLoadingMusic;
+                    _RomManager.AfterMusicLoaded -= RomManager_AfterMusicLoaded;
+                    _RomManager.AfterRomLoaded -= RomManager_AfterRomLoaded;
                 }
 
                 _RomManager = value;
@@ -191,6 +196,11 @@ namespace SM64_ROM_Manager
                     _RomManager.WritingNewProgramVersion += RomManager_WritingNewRomVersion;
                     _RomManager.BeforeRomSave += RomManager_BeforeRomSave;
                     _RomManager.AfterRomSave += RomManager_AfterRomSave;
+                    _RomManager.BeginLoadingRom += RomManager_BeginLoadingRom;
+                    _RomManager.AfterLevelsLoaded += RomManager_AfterLevelsLoaded;
+                    _RomManager.BeginLoadingMusic += RomManager_BeginLoadingMusic;
+                    _RomManager.AfterMusicLoaded += RomManager_AfterMusicLoaded;
+                    _RomManager.AfterRomLoaded += RomManager_AfterRomLoaded;
                 }
             }
         }
@@ -368,6 +378,35 @@ namespace SM64_ROM_Manager
         {
             General.DisableRomWatcher();
             isSavingRom = true;
+        }
+
+        private void RomManager_BeginLoadingRom(RomManager sender, EventArgs e)
+        {
+            loadingROM = true;
+            StatusText = Form_Main_Resources.Status_LoadingRom;
+            RomLoading?.Invoke();
+        }
+
+        private void RomManager_AfterLevelsLoaded(RomManager sender, EventArgs e)
+        {
+            RomLevelsLoaded?.Invoke();
+        }
+
+        private void RomManager_BeginLoadingMusic(RomManager sender, EventArgs e)
+        {
+            StatusText = Form_Main_Resources.Status_LoadingMusic;
+        }
+
+        private void RomManager_AfterMusicLoaded(RomManager sender, EventArgs e)
+        {
+            RomMusicLoaded?.Invoke();
+        }
+
+        private void RomManager_AfterRomLoaded(RomManager sender, EventArgs e)
+        {
+            RomLoaded?.Invoke();
+            StatusText = string.Empty;
+            loadingROM = false;
         }
 
         // P r i v a t e   F e a u t u r e s
@@ -602,7 +641,7 @@ namespace SM64_ROM_Manager
                 Publics.Publics.MergeRecentFiles(Settings.RecentFiles.RecentROMs);
                 RecentFilesChanged?.Invoke();
                 SetRomMgr(newrommgr);
-                LoadROM();
+                RomManager.LoadRom();
                 CreateRomWatcherForCurrentRom();
                 success = true;
 
@@ -626,35 +665,6 @@ namespace SM64_ROM_Manager
             }
 
             return success;
-        }
-
-        public void LoadROM()
-        {
-            loadingROM = true;
-            StatusText = Form_Main_Resources.Status_LoadingRom;
-            RomLoading?.Invoke();
-
-            // Load Global Custom Asm Bank
-            RomManager.LoadGlobalCustomAsmBank();
-
-            // Load Global Behavior Bank
-            RomManager.LoadGlobalBehaviorBank();
-
-            // Load Global Model Banks
-            RomManager.LoadGlobalModelBank();
-
-            // Load Levels
-            RomManager.LoadLevels();
-            RomLevelsLoaded?.Invoke();
-
-            // Load Music
-            StatusText = Form_Main_Resources.Status_LoadingMusic;
-            RomManager.LoadMusic();
-            RomMusicLoaded?.Invoke();
-            StatusText = string.Empty;
-            RomLoaded?.Invoke();
-            StatusText = string.Empty;
-            loadingROM = false;
         }
 
         private void CreateRomWatcherForCurrentRom()
