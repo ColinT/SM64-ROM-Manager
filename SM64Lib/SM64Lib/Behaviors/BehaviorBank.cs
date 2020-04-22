@@ -114,21 +114,11 @@ namespace SM64Lib.Behaviors
                     behav.Write(data, (int)data.Position);
                     usedConfigs.Add(behav.Config);
                 }
-
-                // Add new configs
-                foreach (var newConfig in usedConfigs)
-                {
-                    if (!Config.BehaviorConfigs.Contains(newConfig))
-                        Config.BehaviorConfigs.Add(newConfig);
-                }
             }
 
-            // Delete unused configs
-            foreach (var oldConfig in Config.BehaviorConfigs.ToArray())
-            {
-                if (!usedConfigs.Contains(oldConfig))
-                    Config.BehaviorConfigs.Remove(oldConfig);
-            }
+            // Delete unused configs / Add new configs
+            Config.BehaviorConfigs.Clear();
+            Config.BehaviorConfigs.AddRange(Behaviors.Select(n => n.Config));
 
             // Update addresses
             UpdateBehaviorAddresses(rommgr, addressUpdates);
