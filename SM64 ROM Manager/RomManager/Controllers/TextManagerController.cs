@@ -559,10 +559,12 @@ namespace SM64_ROM_Manager
             switch (extLower)
             {
                 case ".txt":
-                    var exporter = new TxtExporter();
-                    await exporter.Export(destFilePath, groups);
+                    var txtExporter = new TxtExporter();
+                    await txtExporter.Export(destFilePath, groups);
                     break;
                 case ".xlsx":
+                    var excelExporter = new ExcelExporter();
+                    await excelExporter.Export(destFilePath, groups);
                     break;
             }
         }

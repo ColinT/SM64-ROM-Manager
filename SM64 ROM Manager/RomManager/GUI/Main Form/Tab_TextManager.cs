@@ -456,17 +456,10 @@ namespace SM64_ROM_Manager
 
             if (sfd_ExportTextTable.ShowDialog(this) == DialogResult.OK)
             {
-                switch (sfd_ExportTextTable.FilterIndex)
-                {
-                    case 1:
-                        if (currentOnly)
-                            await TMController.ExportTextTable(sfd_ExportTextTable.FileName, GetSelectedIndicies().tableName);
-                        else
-                            await TMController.ExportAllTextTables(sfd_ExportTextTable.FileName);
-                        break;
-                    case 2:
-                        break;
-                }
+                if (currentOnly)
+                    await TMController.ExportTextTable(sfd_ExportTextTable.FileName, GetSelectedIndicies().tableName);
+                else
+                    await TMController.ExportAllTextTables(sfd_ExportTextTable.FileName);
             }
         }
 
