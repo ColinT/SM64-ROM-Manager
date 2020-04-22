@@ -127,6 +127,10 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="SM64Lib\ASM\CustomAsmArea.cs" />
+    <Compile Include="SM64Lib\ASM\CustomAsmAreaConfig.cs" />
+    <Compile Include="SM64Lib\ASM\CustomAsmBank.cs" />
+    <Compile Include="SM64Lib\ASM\CustomAsmBankConfig.cs" />
     <Compile Include="SM64Lib\Behaviors\Behavior.cs" />
     <Compile Include="SM64Lib\Behaviors\BehaviorBank.cs" />
     <Compile Include="SM64Lib\Behaviors\BehaviorBankConfig.cs" />
