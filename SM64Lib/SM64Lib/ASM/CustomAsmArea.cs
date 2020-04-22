@@ -21,7 +21,7 @@ namespace SM64Lib.ASM
             Config = config;
         }
 
-        public void Load(BinaryData data)
+        public void Load(BinaryData data, CustomAsmBankConfig bankConfig)
         {
             if (Config.RomAddress != -1 && Config.Length > 0)
             {
@@ -32,13 +32,16 @@ namespace SM64Lib.ASM
                 AreaBytes = new byte[] { };
         }
 
-        public int Save(BinaryData data, int address)
+        public int Save(BinaryData data, int address, CustomAsmBankConfig bankConfig)
         {
             data.Position = address;
             data.Write(AreaBytes);
 
             Config.RomAddress = address;
             Config.Length = AreaBytes.Length;
+            Config.RamAddress = address -
+                (bankConfig.RomStartAddress != -1 ? bankConfig.RomStartAddress : CustomAsmBankConfig.DefaultRomStartAddress) +
+                (bankConfig.RamStartAddress != -1 ? bankConfig.RamStartAddress : CustomAsmBankConfig.DefaultRamStartAddress);
 
             return Config.Length;
         }

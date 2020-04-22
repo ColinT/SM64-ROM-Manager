@@ -10,6 +10,5 @@ namespace SM64Lib.Behaviors
     {
         public bool IsVanilla { get; set; } = true;
         public List<BehaviorConfig> BehaviorConfigs { get; } = new List<BehaviorConfig>();
-        public List<CustomAsmAreaLinkOptions> CustomAsmLinks { get; } = new List<CustomAsmAreaLinkOptions>();
     }
 }

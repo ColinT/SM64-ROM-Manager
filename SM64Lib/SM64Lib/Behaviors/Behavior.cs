@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using SM64Lib.ASM;
 using SM64Lib.Behaviors.Script;
 using SM64Lib.Data;
 using System;
@@ -6,11 +7,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Z.Collections.Extensions;
 
 namespace SM64Lib.Behaviors
 {
     public class Behavior
     {
+        private readonly Dictionary<CustomAsmArea, BehaviorscriptCommand> knownCustomAsmCommands = new Dictionary<CustomAsmArea, BehaviorscriptCommand>();
+
         [JsonProperty]
         public BehaviorConfig Config { get; private set; }
         public Behaviorscript Script { get; private set; }
@@ -85,7 +89,12 @@ namespace SM64Lib.Behaviors
 
         public void ParseScript()
         {
+            var dicCustomAsmFuncs = new Dictionary<int, CustomAsmAreaLinkOptions>();
             EnableCollisionPointer = false;
+            knownCustomAsmCommands.Clear();
+
+            foreach (var link in Config.CustomAsmLinks)
+                dicCustomAsmFuncs.AddOrUpdate(link.CustomAsm.Config.RamAddress | unchecked((int)0x80000000), link);
 
             foreach (BehaviorscriptCommand cmd in Script)
             {
@@ -94,6 +103,11 @@ namespace SM64Lib.Behaviors
                     case BehaviorscriptCommandTypes.x2A_SetCollision:
                         CollisionPointer = BehaviorscriptCommandFunctions.X2A.GetCollisionPointer(cmd);
                         EnableCollisionPointer = true;
+                        break;
+                    case BehaviorscriptCommandTypes.x0C_CallFunction:
+                        var ptr = BehaviorscriptCommandFunctions.X0C.GetAsmPointer(cmd);
+                        if (dicCustomAsmFuncs.ContainsKey(ptr))
+                            knownCustomAsmCommands.Add(dicCustomAsmFuncs[ptr].CustomAsm, cmd);
                         break;
                 }
             }
@@ -107,6 +121,49 @@ namespace SM64Lib.Behaviors
                 EnableCollisionPointer,
                 () => BehaviorscriptCommandFactory.Build_x2A(CollisionPointer),
                 (cmd) => BehaviorscriptCommandFunctions.X2A.SetCollisionPointer(cmd, CollisionPointer));
+
+            // Insert Custom Asm Links
+            {
+                foreach (var link in Config.CustomAsmLinks)
+                {
+                    var asmPointer = link.CustomAsm.Config.RamAddress | unchecked((int)0x80000000);
+                    var cmdStartLoop = Script.FirstOfType(BehaviorscriptCommandTypes.x08_LoopStart);
+                    int iInsert;
+
+                    if (link.Loop)
+                    {
+                        if (cmdStartLoop is object)
+                            iInsert = Script.IndexOf(cmdStartLoop) + 1;
+                        else
+                            iInsert = -1;
+                    }
+                    else
+                    {
+                        if (cmdStartLoop is object)
+                            iInsert = Script.IndexOf(cmdStartLoop);
+                        else
+                            iInsert = (int)Script.Length - 2;
+                    }
+
+                    if (knownCustomAsmCommands.ContainsKey(link.CustomAsm))
+                    {
+                        var cmd = knownCustomAsmCommands[link.CustomAsm];
+                        BehaviorscriptCommandFunctions.X0C.SetAsmPointer(cmd, asmPointer);
+                    }
+                    else if (iInsert != -1)
+                    {
+                        var cmd = BehaviorscriptCommandFactory.Build_x0C(asmPointer);
+                        Script.Insert(iInsert, cmd);
+                        knownCustomAsmCommands.Add(link.CustomAsm, cmd);
+                    }
+                }
+
+                foreach (var kvp in knownCustomAsmCommands.ToArray())
+                {
+                    if (!Config.CustomAsmLinks.Where(n => n.CustomAsm == kvp.Key).Any())
+                        knownCustomAsmCommands.Remove(kvp.Key);
+                }
+            }
         }
 
         private void AddUpdateRemoveCmd(BehaviorscriptCommandTypes cmdType, bool conditionAddUpdate, Func<BehaviorscriptCommand> createCmd, Action<BehaviorscriptCommand> updateCmd)
