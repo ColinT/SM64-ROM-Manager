@@ -12,6 +12,7 @@ using global::SM64_ROM_Manager.My.Resources;
 using SM64Lib.TextValueConverter;
 using Z.Core.Extensions;
 using SM64Lib.Text;
+using System.IO;
 
 namespace SM64_ROM_Manager
 {
@@ -283,9 +284,9 @@ namespace SM64_ROM_Manager
                 itemText = "-";
             else
             {
-                var breakIndex = itemText.IndexOf('\n');
-                if (breakIndex != -1)
-                    itemText = itemText.Remove(breakIndex);
+                var sr = new StringReader(itemText);
+                itemText = sr.ReadLine();
+                sr.Dispose();
             }
             lvi.SubItems[2].Text = itemText;
             if (dialogDescription is string)
@@ -463,6 +464,17 @@ namespace SM64_ROM_Manager
             }
         }
 
+        private async void ImportTextTables()
+        {
+            var ofd_ExportTextTable = new OpenFileDialog
+            {
+                Filter = "Excel file (*.xlsx)|*.xlsx"
+            };
+
+            if (ofd_ExportTextTable.ShowDialog(this) == DialogResult.OK)
+                await TMController.ImportTextTables(ofd_ExportTextTable.FileName);
+        }
+
         private void TabStrip1_SelectedTabChanged(object sender, TabStripTabChangedEventArgs e)
         {
             SetGuiForTextTable();
@@ -558,6 +570,11 @@ namespace SM64_ROM_Manager
         private void ButtonItem_ExportAllTables_Click(object sender, EventArgs e)
         {
             ExportTextTables(false);
+        }
+
+        private void ButtonItem_ImportFrom_Click(object sender, EventArgs e)
+        {
+            ImportTextTables();
         }
     }
 }

@@ -568,5 +568,13 @@ namespace SM64_ROM_Manager
                     break;
             }
         }
+
+        public async Task ImportTextTables(string filePath)
+        {
+            LoadAllTextGroups();
+            var excelExporter = new ExcelExporter();
+            await excelExporter.Import(filePath, RomManager.TextGroups.ToArray());
+            ManyTextItemsChanged?.Invoke();
+        }
     }
 }

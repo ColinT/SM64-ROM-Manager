@@ -68,9 +68,34 @@ namespace SM64Lib.Text.Exporters
             pkg.Dispose();
         }
 
-        public void Import(string filePath, TextGroup[] groups)
+        public async Task Import(string filePath, TextGroup[] groups)
         {
+            try
+            {
+                var pkg = new ExcelPackage();
+                await pkg.LoadAsync(new FileInfo(filePath));
 
+                foreach (var tg in groups)
+                {
+                    var ws = pkg.Workbook.Worksheets[tg.TextGroupInfo.Name];
+                    if (ws is object)
+                    {
+                        for (int iti = 0; iti < tg.Count; iti++)
+                        {
+                            var ti = tg[iti];
+                            var ri = iti + 2;
+                            var c = ws.Cells[ri, 2];
+
+                            ti.Text = (string)c.Value;
+                        }
+                    }
+                }
+
+                pkg.Dispose();
+            }
+            catch (Exception)
+            {
+            }
         }
     }
 }
