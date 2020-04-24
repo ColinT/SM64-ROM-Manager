@@ -347,24 +347,7 @@ namespace SM64_ROM_Manager.PatchScripts
 
                 case ScriptType.Armips:
                     {
-                        string createText =
-$@".Open ""{romfile}"", 0
-.n64
-{script.Script}
-.Close";
-                        string tmpAsmFile = Path.GetTempFileName();
-                        File.WriteAllText(tmpAsmFile, createText);
-                        var p = new Process();
-                        p.StartInfo.FileName = Path.Combine(Publics.General.MyToolsPath, "armips.exe");
-                        p.StartInfo.Arguments = $"-root \"{Path.GetDirectoryName(Conversions.ToString(@params["profilepath"]))}\" \"{tmpAsmFile}\"";
-                        p.StartInfo.UseShellExecute = false;
-                        p.StartInfo.CreateNoWindow = true;
-                        p.Start();
-                        while (!p.HasExited)
-                        {
-                        }
-
-                        File.Delete(tmpAsmFile);
+                        RunArmips(script.Script, romfile, Path.GetDirectoryName(Conversions.ToString(@params["profilepath"])));
                         break;
                     }
             }
@@ -491,6 +474,37 @@ $@".Open ""{romfile}"", 0
             {
                 fs.Close();
             }
+        }
+
+        private static void RunArmips(string script, string filePath, string rootPath)
+        {
+            string createText =
+$@".Open ""{filePath}"", 0
+.n64
+{script}
+.Close";
+            string tmpAsmFile = Path.GetTempFileName();
+            File.WriteAllText(tmpAsmFile, createText);
+            var p = new Process();
+            p.StartInfo.FileName = Path.Combine(Publics.General.MyToolsPath, "armips.exe");
+            p.StartInfo.Arguments = $"-root \"{rootPath}\" \"{tmpAsmFile}\"";
+            p.StartInfo.UseShellExecute = false;
+            p.StartInfo.CreateNoWindow = true;
+            p.Start();
+            while (!p.HasExited)
+            {
+            }
+
+            File.Delete(tmpAsmFile);
+        }
+
+        public static byte[] ConvertAsmToBytes()
+        {
+            string tmpBinFile = Path.GetTempFileName();
+            RunArmips(string.Empty, tmpBinFile, Path.GetDirectoryName(tmpBinFile));
+            var bytes = File.ReadAllBytes(tmpBinFile);
+            File.Delete(tmpBinFile);
+            return bytes;
         }
     }
 }
