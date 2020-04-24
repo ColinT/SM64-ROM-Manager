@@ -498,10 +498,10 @@ $@".Open ""{filePath}"", 0
             File.Delete(tmpAsmFile);
         }
 
-        public static byte[] ConvertAsmToBytes()
+        public static byte[] ConvertAsmToBytes(string script)
         {
             string tmpBinFile = Path.GetTempFileName();
-            RunArmips(string.Empty, tmpBinFile, Path.GetDirectoryName(tmpBinFile));
+            RunArmips(script, tmpBinFile, Path.GetDirectoryName(tmpBinFile));
             var bytes = File.ReadAllBytes(tmpBinFile);
             File.Delete(tmpBinFile);
             return bytes;
