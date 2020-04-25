@@ -120,7 +120,7 @@ namespace SM64_ROM_Manager.Updating.Administration.Discord
 
             // Add ping
             if (pingRole != null)
-                msg += $"<@{pingRole}>\n\n";
+                msg += $"<@&{pingRole}>\n\n";
             
             // Add version as titel
             var versionString = version.ToString();
