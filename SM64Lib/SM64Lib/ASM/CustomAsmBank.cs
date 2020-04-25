@@ -34,7 +34,7 @@ namespace SM64Lib.ASM
                 foreach (var areaConfig in Config.Areas)
                 {
                     var area = new CustomAsmArea(areaConfig);
-                    area.Load(data);
+                    area.Load(data, Config);
                     Areas.Add(area);
                 }
 
@@ -50,7 +50,7 @@ namespace SM64Lib.ASM
                 var curRomAddr = Config.RomStartAddress != -1 ? Config.RomStartAddress : CustomAsmBankConfig.DefaultMaxLength;
 
                 foreach (var area in Areas)
-                    curRomAddr += area.Save(data, curRomAddr);
+                    curRomAddr += area.Save(data, curRomAddr, Config);
 
                 data.Close();
             }
