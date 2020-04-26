@@ -1462,6 +1462,23 @@
             the contents of this method with the code editor.
             </summary>
         </member>
+        <member name="F:SM64_ROM_Manager.CustomAsmCodeSelector.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:SM64_ROM_Manager.CustomAsmCodeSelector.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:SM64_ROM_Manager.CustomAsmCodeSelector.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
         <member name="F:SM64_ROM_Manager.AsmToHexConverter.components">
             <summary>
             Required designer variable.

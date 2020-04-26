@@ -1,6 +1,7 @@
 ﻿using DevComponents.AdvTree;
 using DevComponents.DotNetBar;
 using SM64Lib;
+using SM64Lib.ASM;
 using SM64Lib.Behaviors;
 using SM64Lib.Configuration;
 using SM64Lib.Objects.ModelBanks;
@@ -20,7 +21,7 @@ namespace SM64_ROM_Manager
     public partial class CustomAsmCodeSelector : OfficeForm
     {
         private readonly RomManager romManager;
-        public BehaviorConfig Behavior { get; set; } = null;
+        public CustomAsmAreaConfig AsmArea { get; set; } = null;
 
         public CustomAsmCodeSelector(RomManager romManager)
         {
@@ -35,26 +36,17 @@ namespace SM64_ROM_Manager
             AdvTree1.BeginUpdate();
             AdvTree1.Nodes.Clear();
 
-            var nVanilla = new Node("Vanilla") { Expanded = true };
-            var nCustom = new Node("Custom") { Expanded = true };
             Node nToSelect = null;
 
-            foreach (var behav in romManager.GlobalBehaviorBank.Behaviors)
+            foreach (var area in romManager.GlobalCustomAsmBank.Areas)
             {
-                var n = GetNode(behav);
+                var n = GetNode(area.Config);
 
-                if (behav.Config.IsVanilla)
-                    nVanilla.Nodes.Add(n);
-                else
-                    nCustom.Nodes.Add(n);
+                AdvTree1.Nodes.Add(n);
 
-                if (behav.Config == Behavior)
+                if (area.Config == AsmArea)
                     nToSelect = n;
             }
-
-            if (nCustom.Nodes.Count > 0)
-                AdvTree1.Nodes.Add(nCustom);
-            AdvTree1.Nodes.Add(nVanilla);
 
             AdvTree1.EndUpdate();
 
@@ -65,31 +57,23 @@ namespace SM64_ROM_Manager
             }
         }
 
-        private Node GetNode(Behavior behav)
+        private Node GetNode(CustomAsmAreaConfig area)
         {
-            var name = behav.Config.Name;
-            if (string.IsNullOrEmpty(name))
-                name = General.BehaviorInfos.GetByBehaviorAddress((uint)behav.Config.BankAddress)?.Name;
-            if (string.IsNullOrEmpty(name))
-                name = General.BehaviorInfosCustom.GetByBehaviorAddress((uint)behav.Config.BankAddress)?.Name;
-            if (string.IsNullOrEmpty(name))
-                name = "Unnamed";
-
             var n = new Node()
             {
-                Text = name,
-                Tag = behav.Config
+                Text = area.Name,
+                Tag = area
             };
 
-            n.Cells.Add(new Cell(TextFromValue(behav.Config.BankAddress)));
+            n.Cells.Add(new Cell(TextFromValue(area.RomAddress)));
 
             return n;
         }
 
         private void AdvTree1_AfterNodeSelect(object sender, DevComponents.AdvTree.AdvTreeNodeEventArgs e)
         {
-            Behavior = e.Node?.Tag as BehaviorConfig;
-            buttonX_Select.Enabled = Behavior != null;
+            AsmArea = e.Node?.Tag as CustomAsmAreaConfig;
+            buttonX_Select.Enabled = AsmArea != null;
         }
 
         private void CustomModelSelector_Load(object sender, EventArgs e)
