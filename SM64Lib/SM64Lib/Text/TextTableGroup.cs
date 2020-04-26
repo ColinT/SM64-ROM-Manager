@@ -66,7 +66,7 @@ namespace SM64Lib.Text
                         data.Position += 6;
 
                         // Sound effect
-                        if (TextGroupInfo.DialogData.HasSoundEffects)
+                        if (TextGroupInfo.DialogData.HasSoundEffects && TextGroupInfo.DialogData.SoundEffectTable != -1)
                         {
                             data.Position = TextGroupInfo.DialogData.SoundEffectTable + i;
                             newItem.SoundEffect = (DialogSoundEffect)data.ReadByte();
@@ -171,7 +171,7 @@ namespace SM64Lib.Text
                     DataRomOffset += textitem.Data.Length;
 
                     // Sound Effect
-                    if (TextGroupInfo.DialogData.HasSoundEffects)
+                    if (TextGroupInfo.DialogData.HasSoundEffects && TextGroupInfo.DialogData.SoundEffectTable != -1)
                     {
                         data.Position = TextGroupInfo.DialogData.SoundEffectTable + i;
                         data.Write((byte)textitem.SoundEffect);
