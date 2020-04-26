@@ -49,7 +49,6 @@ namespace SM64_ROM_Manager
             // 
             // AdvTree_Codes
             // 
-            resources.ApplyResources(this.AdvTree_Codes, "AdvTree_Codes");
             this.AdvTree_Codes.AccessibleRole = System.Windows.Forms.AccessibleRole.Outline;
             this.AdvTree_Codes.BackColor = System.Drawing.SystemColors.Window;
             // 
@@ -60,6 +59,7 @@ namespace SM64_ROM_Manager
             this.AdvTree_Codes.CellEdit = true;
             this.AdvTree_Codes.Columns.Add(this.columnHeader1);
             this.AdvTree_Codes.Columns.Add(this.columnHeader2);
+            resources.ApplyResources(this.AdvTree_Codes, "AdvTree_Codes");
             this.AdvTree_Codes.DragDropEnabled = false;
             this.AdvTree_Codes.DragDropNodeCopyEnabled = false;
             this.AdvTree_Codes.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
@@ -111,64 +111,65 @@ namespace SM64_ROM_Manager
             // 
             // ButtonItem_Add
             // 
-            resources.ApplyResources(this.ButtonItem_Add, "ButtonItem_Add");
             this.ButtonItem_Add.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
             this.ButtonItem_Add.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_plus_math_16px;
             this.ButtonItem_Add.Name = "ButtonItem_Add";
+            resources.ApplyResources(this.ButtonItem_Add, "ButtonItem_Add");
             // 
             // ButtonItem_Remove
             // 
-            resources.ApplyResources(this.ButtonItem_Remove, "ButtonItem_Remove");
             this.ButtonItem_Remove.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
             this.ButtonItem_Remove.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_delete_sign_16px;
             this.ButtonItem_Remove.Name = "ButtonItem_Remove";
+            resources.ApplyResources(this.ButtonItem_Remove, "ButtonItem_Remove");
             // 
             // ButtonItem_Edit
             // 
-            resources.ApplyResources(this.ButtonItem_Edit, "ButtonItem_Edit");
             this.ButtonItem_Edit.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
             this.ButtonItem_Edit.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_edit_16px;
             this.ButtonItem_Edit.Name = "ButtonItem_Edit";
             this.ButtonItem_Edit.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.ButtonItem_EditHex,
             this.ButtonItem_EditName});
+            resources.ApplyResources(this.ButtonItem_Edit, "ButtonItem_Edit");
             // 
             // ButtonItem_EditHex
             // 
-            resources.ApplyResources(this.ButtonItem_EditHex, "ButtonItem_EditHex");
             this.ButtonItem_EditHex.FontBold = true;
             this.ButtonItem_EditHex.HotFontBold = true;
             this.ButtonItem_EditHex.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_edit_16px;
             this.ButtonItem_EditHex.Name = "ButtonItem_EditHex";
+            resources.ApplyResources(this.ButtonItem_EditHex, "ButtonItem_EditHex");
             // 
             // ButtonItem_EditName
             // 
-            resources.ApplyResources(this.ButtonItem_EditName, "ButtonItem_EditName");
             this.ButtonItem_EditName.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_edit_16px;
             this.ButtonItem_EditName.Name = "ButtonItem_EditName";
+            resources.ApplyResources(this.ButtonItem_EditName, "ButtonItem_EditName");
             // 
             // ButtonItem_Tools
             // 
-            resources.ApplyResources(this.ButtonItem_Tools, "ButtonItem_Tools");
             this.ButtonItem_Tools.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
             this.ButtonItem_Tools.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_expand_arrow_16px;
             this.ButtonItem_Tools.Name = "ButtonItem_Tools";
             this.ButtonItem_Tools.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.buttonItem1,
             this.ButtonItem_AsmToHexConverter});
+            resources.ApplyResources(this.ButtonItem_Tools, "ButtonItem_Tools");
             // 
             // buttonItem1
             // 
-            resources.ApplyResources(this.buttonItem1, "buttonItem1");
             this.buttonItem1.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_support_16px;
             this.buttonItem1.Name = "buttonItem1";
+            resources.ApplyResources(this.buttonItem1, "buttonItem1");
             // 
             // ButtonItem_AsmToHexConverter
             // 
-            resources.ApplyResources(this.ButtonItem_AsmToHexConverter, "ButtonItem_AsmToHexConverter");
             this.ButtonItem_AsmToHexConverter.BeginGroup = true;
             this.ButtonItem_AsmToHexConverter.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_code_16px;
             this.ButtonItem_AsmToHexConverter.Name = "ButtonItem_AsmToHexConverter";
+            resources.ApplyResources(this.ButtonItem_AsmToHexConverter, "ButtonItem_AsmToHexConverter");
+            this.ButtonItem_AsmToHexConverter.Click += new System.EventHandler(this.ButtonItem_AsmToHexConverter_Click);
             // 
             // CustomAsmCodesManager
             // 

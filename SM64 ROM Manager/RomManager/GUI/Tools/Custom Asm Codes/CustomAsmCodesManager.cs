@@ -15,5 +15,11 @@ namespace SM64_ROM_Manager
         {
             InitializeComponent();
         }
+
+        private void ButtonItem_AsmToHexConverter_Click(object sender, EventArgs e)
+        {
+            var frm = new AsmToHexConverter();
+            frm.Show();
+        }
     }
 }
