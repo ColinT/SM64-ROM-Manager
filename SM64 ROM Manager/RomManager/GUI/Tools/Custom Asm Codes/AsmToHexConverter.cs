@@ -46,7 +46,7 @@ namespace SM64_ROM_Manager
                 {
                     if (sb.Length != 0)
                         sb.Append(" ");
-                    sb.Append(b.ToString("X"));
+                    sb.Append(b.ToString("X2"));
                 }
             }
 
