@@ -65,6 +65,8 @@
             this.fastColoredTextBox_Code.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
             this.fastColoredTextBox_Code.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("fastColoredTextBox_Code.ServiceColors")));
             this.fastColoredTextBox_Code.Zoom = 100;
+            this.fastColoredTextBox_Code.DragDrop += new System.Windows.Forms.DragEventHandler(this.FastColoredTextBox_Code_DragDrop);
+            this.fastColoredTextBox_Code.DragEnter += new System.Windows.Forms.DragEventHandler(this.FastColoredTextBox_Code_DragEnter);
             // 
             // panel1
             // 
@@ -123,6 +125,7 @@
             // 
             // AsmToHexConverter
             // 
+            this.AllowDrop = true;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.fastColoredTextBox_Code);
