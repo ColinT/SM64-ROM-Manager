@@ -462,6 +462,24 @@
     <Compile Include="RomManager\GUI\Tools\Behavior Bank Manager\BehaviorBankManager.Designer.cs">
       <DependentUpon>BehaviorBankManager.cs</DependentUpon>
     </Compile>
+    <Compile Include="RomManager\GUI\Tools\Behavior Bank Manager\CustomAsmCodeSelector.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RomManager\GUI\Tools\Behavior Bank Manager\CustomAsmCodeSelector.Designer.cs">
+      <DependentUpon>CustomAsmCodeSelector.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RomManager\GUI\Tools\Custom Asm Codes\AsmToHexConverter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RomManager\GUI\Tools\Custom Asm Codes\AsmToHexConverter.Designer.cs">
+      <DependentUpon>AsmToHexConverter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RomManager\GUI\Tools\Custom Asm Codes\CustomAsmCodesManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RomManager\GUI\Tools\Custom Asm Codes\CustomAsmCodesManager.Designer.cs">
+      <DependentUpon>CustomAsmCodesManager.cs</DependentUpon>
+    </Compile>
     <Compile Include="RomManager\GUI\Tools\Custom Objects Manager\CustomObjectImportDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -860,6 +878,24 @@
     <EmbeddedResource Include="RomManager\GUI\Tools\Behavior Bank Manager\BehaviorBankManager.resx">
       <DependentUpon>BehaviorBankManager.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="RomManager\GUI\Tools\Behavior Bank Manager\CustomAsmCodeSelector.de.resx">
+      <DependentUpon>CustomAsmCodeSelector.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RomManager\GUI\Tools\Behavior Bank Manager\CustomAsmCodeSelector.resx">
+      <DependentUpon>CustomAsmCodeSelector.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RomManager\GUI\Tools\Custom Asm Codes\AsmToHexConverter.de.resx">
+      <DependentUpon>AsmToHexConverter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RomManager\GUI\Tools\Custom Asm Codes\AsmToHexConverter.resx">
+      <DependentUpon>AsmToHexConverter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RomManager\GUI\Tools\Custom Asm Codes\CustomAsmCodesManager.de.resx">
+      <DependentUpon>CustomAsmCodesManager.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RomManager\GUI\Tools\Custom Asm Codes\CustomAsmCodesManager.resx">
+      <DependentUpon>CustomAsmCodesManager.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="RomManager\GUI\Tools\Custom Objects Manager\CustomObjectImportDialog.de.resx">
       <DependentUpon>CustomObjectImportDialog.cs</DependentUpon>
     </EmbeddedResource>
@@ -1245,6 +1281,9 @@
     <None Include="Resources\icons8_package_16px.png" />
     <None Include="Resources\icons8_cube_16px.png" />
     <None Include="Resources\icons8_300_degrees_16px.png" />
+    <None Include="Resources\icons8_code.ico" />
+    <None Include="Resources\icons8_code_16px.png" />
+    <None Include="Resources\icons8_thick_arrow_pointing_down_16px.png" />
     <Content Include="RomManager\Others\RomMap.txt" />
   </ItemGroup>
   <ItemGroup>

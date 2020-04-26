@@ -70,6 +70,11 @@
               Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
             </summary>
         </member>
+        <member name="P:SM64_ROM_Manager.My.Resources.MyIcons.icons8_code_16px">
+            <summary>
+              Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+            </summary>
+        </member>
         <member name="P:SM64_ROM_Manager.My.Resources.MyIcons.icons8_coins_16px">
             <summary>
               Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
@@ -361,6 +366,11 @@
             </summary>
         </member>
         <member name="P:SM64_ROM_Manager.My.Resources.MyIcons.icons8_text_16px">
+            <summary>
+              Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:SM64_ROM_Manager.My.Resources.MyIcons.icons8_thick_arrow_pointing_down_16px">
             <summary>
               Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
             </summary>
@@ -1447,6 +1457,40 @@
             <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         </member>
         <member name="M:SM64_ROM_Manager.BehaviorBankManager.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:SM64_ROM_Manager.AsmToHexConverter.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:SM64_ROM_Manager.AsmToHexConverter.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:SM64_ROM_Manager.AsmToHexConverter.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:SM64_ROM_Manager.CustomAsmCodesManager.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:SM64_ROM_Manager.CustomAsmCodesManager.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:SM64_ROM_Manager.CustomAsmCodesManager.InitializeComponent">
             <summary>
             Required method for Designer support - do not modify
             the contents of this method with the code editor.
