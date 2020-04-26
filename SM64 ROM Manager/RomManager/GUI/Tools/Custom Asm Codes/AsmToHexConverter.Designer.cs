@@ -94,6 +94,7 @@
             this.ButtonX_Convert.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_thick_arrow_pointing_down_16px;
             this.ButtonX_Convert.Name = "ButtonX_Convert";
             this.ButtonX_Convert.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.ButtonX_Convert.Click += new System.EventHandler(this.ButtonX_Convert_Click);
             // 
             // ButtonX_CopyHex
             // 
@@ -103,6 +104,7 @@
             resources.ApplyResources(this.ButtonX_CopyHex, "ButtonX_CopyHex");
             this.ButtonX_CopyHex.Name = "ButtonX_CopyHex";
             this.ButtonX_CopyHex.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.ButtonX_CopyHex.Click += new System.EventHandler(this.ButtonX_CopyHex_Click);
             // 
             // textBoxX_Hex
             // 

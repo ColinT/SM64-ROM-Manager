@@ -125,6 +125,9 @@
   <data name="fastColoredTextBox_Code.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
+  <data name="fastColoredTextBox_Code.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Courier New, 9.75pt</value>
+  </data>
   <data name="fastColoredTextBox_Code.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
