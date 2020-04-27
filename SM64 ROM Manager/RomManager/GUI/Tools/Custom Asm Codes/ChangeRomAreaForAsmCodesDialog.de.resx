@@ -117,12 +117,38 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="textBoxX_RomAddress.ButtonCustom.DisplayPosition" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="textBoxX_RomAddress.ButtonCustom.Image" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="textBoxX_RomAddress.ButtonCustom.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="textBoxX_RomAddress.ButtonCustom.Tooltip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="textBoxX_RomAddress.ButtonCustom2.DisplayPosition" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="textBoxX_RomAddress.ButtonCustom2.Image" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="textBoxX_RomAddress.ButtonCustom2.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="textBoxX_RomAddress.ButtonCustom2.Tooltip" xml:space="preserve">
+    <value />
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="textBoxX_RomAddress.Location" type="System.Drawing.Point, System.Drawing">
     <value>97, 4</value>
   </data>
   <data name="textBoxX_RomAddress.Size" type="System.Drawing.Size, System.Drawing">
-    <value>153, 20</value>
+    <value>183, 20</value>
   </data>
   <data name="ButtonX_Cancel.Text" xml:space="preserve">
     <value>Abbrechen</value>
@@ -130,17 +156,68 @@
   <data name="ButtonX_Save.Text" xml:space="preserve">
     <value>Speichern</value>
   </data>
+  <data name="textBoxX_Length.ButtonCustom.DisplayPosition" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="textBoxX_Length.ButtonCustom.Image" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="textBoxX_Length.ButtonCustom.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="textBoxX_Length.ButtonCustom.Tooltip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="textBoxX_Length.ButtonCustom2.DisplayPosition" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="textBoxX_Length.ButtonCustom2.Image" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="textBoxX_Length.ButtonCustom2.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="textBoxX_Length.ButtonCustom2.Tooltip" xml:space="preserve">
+    <value />
+  </data>
   <data name="textBoxX_Length.Location" type="System.Drawing.Point, System.Drawing">
     <value>97, 60</value>
   </data>
   <data name="textBoxX_Length.Size" type="System.Drawing.Size, System.Drawing">
-    <value>153, 20</value>
+    <value>183, 20</value>
+  </data>
+  <data name="textBoxX_RamAddress.ButtonCustom.DisplayPosition" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="textBoxX_RamAddress.ButtonCustom.Image" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="textBoxX_RamAddress.ButtonCustom.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="textBoxX_RamAddress.ButtonCustom.Tooltip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="textBoxX_RamAddress.ButtonCustom2.DisplayPosition" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="textBoxX_RamAddress.ButtonCustom2.Image" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="textBoxX_RamAddress.ButtonCustom2.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="textBoxX_RamAddress.ButtonCustom2.Tooltip" xml:space="preserve">
+    <value />
   </data>
   <data name="textBoxX_RamAddress.Location" type="System.Drawing.Point, System.Drawing">
     <value>97, 32</value>
   </data>
   <data name="textBoxX_RamAddress.Size" type="System.Drawing.Size, System.Drawing">
-    <value>153, 20</value>
+    <value>183, 20</value>
+  </data>
+  <data name="buttonX1.Text" xml:space="preserve">
+    <value>Standart</value>
   </data>
   <data name="layoutControlItem1.Text" xml:space="preserve">
     <value>ROM-Adresse:</value>
@@ -150,6 +227,12 @@
   </data>
   <data name="layoutControlItem4.Text" xml:space="preserve">
     <value>Maximale Länge:</value>
+  </data>
+  <data name="resource.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="resource.Tooltip" xml:space="preserve">
+    <value />
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

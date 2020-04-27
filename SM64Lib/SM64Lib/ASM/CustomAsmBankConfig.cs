@@ -15,17 +15,34 @@ namespace SM64Lib.ASM
         public List<CustomAsmAreaConfig> Areas { get; } = new List<CustomAsmAreaConfig>();
         public int MaxLength { get; set; } = -1;
         public int Length { get; internal set; } = -1;
-        public int RomStartAddress { get; set; }
-        public int RamStartAddress { get; set; }
+        public int RomStartAddress { get; set; } = -1;
+        public int RamStartAddress { get; set; } = -1;
 
         public int GetRomStartAddress()
+            => GetRomStartAddressAdv().address;
+
+        public (int address, bool isDefault) GetRomStartAddressAdv()
         {
-            return RomStartAddress != -1 ? CustomAsmBankConfig.DefaultRomStartAddress : DefaultRomStartAddress;
+            bool isDefault = RomStartAddress == -1;
+            return (isDefault ? DefaultRomStartAddress : RomStartAddress, isDefault);
         }
 
         public int GetRamStartAddress()
+            => GetRamStartAddressAdv().address;
+
+        public (int address, bool isDefault) GetRamStartAddressAdv()
         {
-            return RamStartAddress != -1 ? RamStartAddress : DefaultRamStartAddress;
+            bool isDefault = RamStartAddress == -1;
+            return (isDefault ? DefaultRamStartAddress : RamStartAddress, isDefault);
+        }
+
+        public int GetMaxLength()
+            => GetMaxLengthAdv().length;
+
+        public (int length, bool isDefault) GetMaxLengthAdv()
+        {
+            bool isDefault = RamStartAddress == -1;
+            return (isDefault ? DefaultMaxLength : MaxLength, isDefault);
         }
     }
 }

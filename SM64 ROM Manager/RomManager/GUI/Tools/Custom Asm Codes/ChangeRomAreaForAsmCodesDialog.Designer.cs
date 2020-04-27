@@ -35,9 +35,11 @@ namespace SM64_ROM_Manager
             this.layoutControl1 = new DevComponents.DotNetBar.Layout.LayoutControl();
             this.textBoxX_Length = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.textBoxX_RamAddress = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.buttonX1 = new DevComponents.DotNetBar.ButtonX();
             this.layoutControlItem1 = new DevComponents.DotNetBar.Layout.LayoutControlItem();
             this.layoutControlItem5 = new DevComponents.DotNetBar.Layout.LayoutControlItem();
             this.layoutControlItem4 = new DevComponents.DotNetBar.Layout.LayoutControlItem();
+            this.layoutControlItem6 = new DevComponents.DotNetBar.Layout.LayoutControlItem();
             this.layoutSpacerItem1 = new DevComponents.DotNetBar.Layout.LayoutSpacerItem();
             this.layoutControlItem2 = new DevComponents.DotNetBar.Layout.LayoutControlItem();
             this.layoutControlItem3 = new DevComponents.DotNetBar.Layout.LayoutControlItem();
@@ -92,6 +94,7 @@ namespace SM64_ROM_Manager
             this.layoutControl1.Controls.Add(this.ButtonX_Cancel);
             this.layoutControl1.Controls.Add(this.textBoxX_Length);
             this.layoutControl1.Controls.Add(this.textBoxX_RamAddress);
+            this.layoutControl1.Controls.Add(this.buttonX1);
             this.layoutControl1.Name = "layoutControl1";
             // 
             // 
@@ -100,6 +103,7 @@ namespace SM64_ROM_Manager
             this.layoutControlItem1,
             this.layoutControlItem5,
             this.layoutControlItem4,
+            this.layoutControlItem6,
             this.layoutSpacerItem1,
             this.layoutControlItem2,
             this.layoutControlItem3});
@@ -144,6 +148,15 @@ namespace SM64_ROM_Manager
             this.textBoxX_RamAddress.Name = "textBoxX_RamAddress";
             this.textBoxX_RamAddress.PreventEnterBeep = true;
             // 
+            // buttonX1
+            // 
+            resources.ApplyResources(this.buttonX1, "buttonX1");
+            this.buttonX1.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.buttonX1.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.buttonX1.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_refresh_16px;
+            this.buttonX1.Name = "buttonX1";
+            this.buttonX1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            // 
             // layoutControlItem1
             // 
             this.layoutControlItem1.Control = this.textBoxX_RomAddress;
@@ -173,6 +186,15 @@ namespace SM64_ROM_Manager
             resources.ApplyResources(this.layoutControlItem4, "layoutControlItem4");
             this.layoutControlItem4.Width = 100;
             this.layoutControlItem4.WidthType = DevComponents.DotNetBar.Layout.eLayoutSizeType.Percent;
+            // 
+            // layoutControlItem6
+            // 
+            this.layoutControlItem6.Control = this.buttonX1;
+            this.layoutControlItem6.Height = 31;
+            this.layoutControlItem6.MinSize = new System.Drawing.Size(32, 20);
+            this.layoutControlItem6.Name = "layoutControlItem6";
+            resources.ApplyResources(this.layoutControlItem6, "layoutControlItem6");
+            this.layoutControlItem6.Width = 88;
             // 
             // layoutSpacerItem1
             // 
@@ -229,5 +251,7 @@ namespace SM64_ROM_Manager
         private DevComponents.DotNetBar.Layout.LayoutSpacerItem layoutSpacerItem1;
         private DevComponents.DotNetBar.Controls.TextBoxX textBoxX_RamAddress;
         private DevComponents.DotNetBar.Layout.LayoutControlItem layoutControlItem5;
+        private DevComponents.DotNetBar.ButtonX buttonX1;
+        private DevComponents.DotNetBar.Layout.LayoutControlItem layoutControlItem6;
     }
 }

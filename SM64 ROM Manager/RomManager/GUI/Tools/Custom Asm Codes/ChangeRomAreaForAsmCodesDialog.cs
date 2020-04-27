@@ -23,16 +23,50 @@ namespace SM64_ROM_Manager
             InitializeComponent();
             UpdateAmbientColors();
 
-            textBoxX_RomAddress.Text = TextFromValue(asmBank.Config.RomStartAddress);
-            textBoxX_RamAddress.Text = TextFromValue(asmBank.Config.RamStartAddress);
-            textBoxX_Length.Text = TextFromValue(asmBank.Config.MaxLength);
+            var romAddr = asmBank.Config.GetRomStartAddressAdv();
+            if (romAddr.isDefault)
+                textBoxX_RomAddress.WatermarkText = TextFromValue(romAddr.address);
+            else
+            {
+                textBoxX_RomAddress.WatermarkText = TextFromValue(CustomAsmBankConfig.DefaultRomStartAddress);
+                textBoxX_RomAddress.Text = TextFromValue(romAddr.address);
+            }
+
+            var ramAddr = asmBank.Config.GetRamStartAddressAdv();
+            if (ramAddr.isDefault)
+                textBoxX_RamAddress.WatermarkText = TextFromValue(ramAddr.address);
+            else
+            {
+                textBoxX_RamAddress.WatermarkText = TextFromValue(CustomAsmBankConfig.DefaultRamStartAddress);
+                textBoxX_RamAddress.Text = TextFromValue(ramAddr.address);
+            }
+
+            var length = asmBank.Config.GetMaxLengthAdv();
+            if (length.isDefault)
+                textBoxX_Length.WatermarkText = TextFromValue(length.length);
+            else
+            {
+                textBoxX_Length.WatermarkText = TextFromValue(CustomAsmBankConfig.DefaultMaxLength);
+                textBoxX_Length.Text = TextFromValue(length.length);
+            }
         }
 
         private void ButtonX_Save_Click(object sender, EventArgs e)
         {
-            asmBank.Config.RomStartAddress = ValueFromText(textBoxX_RomAddress.Text);
-            asmBank.Config.RamStartAddress = ValueFromText(textBoxX_RamAddress.Text);
-            asmBank.Config.MaxLength = ValueFromText(textBoxX_Length.Text);
+            if (string.IsNullOrEmpty(textBoxX_RomAddress.Text.Trim()))
+                asmBank.Config.RomStartAddress = CustomAsmBankConfig.DefaultRomStartAddress;
+            else
+                asmBank.Config.RomStartAddress = ValueFromText(textBoxX_RomAddress.Text);
+
+            if (string.IsNullOrEmpty(textBoxX_RamAddress.Text.Trim()))
+                asmBank.Config.RamStartAddress = CustomAsmBankConfig.DefaultRamStartAddress;
+            else
+                asmBank.Config.RamStartAddress = ValueFromText(textBoxX_RamAddress.Text);
+
+            if (string.IsNullOrEmpty(textBoxX_Length.Text.Trim()))
+                asmBank.Config.MaxLength = CustomAsmBankConfig.DefaultMaxLength;
+            else
+                asmBank.Config.MaxLength = ValueFromText(textBoxX_Length.Text);
 
             DialogResult = DialogResult.OK;
         }

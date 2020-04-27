@@ -35,7 +35,9 @@ namespace SM64_ROM_Manager
 
             try
             {
-                 bytes = PatchScripts.PatchingManager.ConvertAsmToBytes(textBoxX_Hex.Text);
+                var code = ".org 0x0\n";
+                code += fastColoredTextBox_Code.Text;
+                bytes = PatchScripts.PatchingManager.ConvertAsmToBytes(code);
             }
             catch (Exception)
             {
