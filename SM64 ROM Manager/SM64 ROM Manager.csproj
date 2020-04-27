@@ -474,6 +474,12 @@
     <Compile Include="RomManager\GUI\Tools\Custom Asm Codes\AsmToHexConverter.Designer.cs">
       <DependentUpon>AsmToHexConverter.cs</DependentUpon>
     </Compile>
+    <Compile Include="RomManager\GUI\Tools\Custom Asm Codes\ChangeRomAreaForAsmCodesDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RomManager\GUI\Tools\Custom Asm Codes\ChangeRomAreaForAsmCodesDialog.Designer.cs">
+      <DependentUpon>ChangeRomAreaForAsmCodesDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="RomManager\GUI\Tools\Custom Asm Codes\CustomAsmCodesManager.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -889,6 +895,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="RomManager\GUI\Tools\Custom Asm Codes\AsmToHexConverter.resx">
       <DependentUpon>AsmToHexConverter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RomManager\GUI\Tools\Custom Asm Codes\ChangeRomAreaForAsmCodesDialog.de.resx">
+      <DependentUpon>ChangeRomAreaForAsmCodesDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RomManager\GUI\Tools\Custom Asm Codes\ChangeRomAreaForAsmCodesDialog.resx">
+      <DependentUpon>ChangeRomAreaForAsmCodesDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="RomManager\GUI\Tools\Custom Asm Codes\CustomAsmCodesManager.de.resx">
       <DependentUpon>CustomAsmCodesManager.cs</DependentUpon>

@@ -17,6 +17,7 @@ namespace SM64_ROM_Manager
         public AsmToHexConverter()
         {
             InitializeComponent();
+            UpdateAmbientColors();
         }
 
         private void ButtonX_CopyHex_Click(object sender, EventArgs e)

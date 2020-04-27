@@ -162,6 +162,7 @@ namespace SM64_ROM_Manager
             this.buttonItem1.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_support_16px;
             this.buttonItem1.Name = "buttonItem1";
             resources.ApplyResources(this.buttonItem1, "buttonItem1");
+            this.buttonItem1.Click += new System.EventHandler(this.buttonItem1_Click);
             // 
             // ButtonItem_AsmToHexConverter
             // 
