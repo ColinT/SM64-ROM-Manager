@@ -21,7 +21,7 @@ namespace SM64_ROM_Manager
     public partial class CustomAsmCodeSelector : OfficeForm
     {
         private readonly RomManager romManager;
-        public CustomAsmAreaConfig AsmArea { get; set; } = null;
+        public CustomAsmArea AsmArea { get; set; } = null;
 
         public CustomAsmCodeSelector(RomManager romManager)
         {
@@ -40,11 +40,11 @@ namespace SM64_ROM_Manager
 
             foreach (var area in romManager.GlobalCustomAsmBank.Areas)
             {
-                var n = GetNode(area.Config);
+                var n = GetNode(area);
 
                 AdvTree1.Nodes.Add(n);
 
-                if (area.Config == AsmArea)
+                if (area == AsmArea)
                     nToSelect = n;
             }
 
@@ -57,22 +57,22 @@ namespace SM64_ROM_Manager
             }
         }
 
-        private Node GetNode(CustomAsmAreaConfig area)
+        private Node GetNode(CustomAsmArea area)
         {
             var n = new Node()
             {
-                Text = area.Name,
+                Text = area.Config.Name,
                 Tag = area
             };
 
-            n.Cells.Add(new Cell(TextFromValue(area.RomAddress)));
+            n.Cells.Add(new Cell(TextFromValue(area.Config.RomAddress)));
 
             return n;
         }
 
         private void AdvTree1_AfterNodeSelect(object sender, DevComponents.AdvTree.AdvTreeNodeEventArgs e)
         {
-            AsmArea = e.Node?.Tag as CustomAsmAreaConfig;
+            AsmArea = e.Node?.Tag as CustomAsmArea;
             buttonX_Select.Enabled = AsmArea != null;
         }
 

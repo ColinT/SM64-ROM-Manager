@@ -683,6 +683,16 @@ namespace SM64_ROM_Manager.My.Resources {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap icons8_repeat_16px {
+            get {
+                object obj = ResourceManager.GetObject("icons8_repeat_16px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap icons8_save_16px {
             get {
                 object obj = ResourceManager.GetObject("icons8_save_16px", resourceCulture);
