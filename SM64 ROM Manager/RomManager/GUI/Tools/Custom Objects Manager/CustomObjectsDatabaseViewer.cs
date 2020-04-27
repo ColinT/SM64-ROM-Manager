@@ -84,7 +84,10 @@ namespace SM64_ROM_Manager
             advTree_CustomObjects.BeginUpdate();
             advTree_CustomObjects.Nodes.Clear();
 
-            if (import is object)
+            var isNotNull = import is object;
+            panel1.Enabled = isNotNull;
+
+            if (isNotNull)
             {
                 foreach (var customObject in import.CustomObjects)
                 {
@@ -106,7 +109,6 @@ namespace SM64_ROM_Manager
         {
             var isNull = customObject == null;
             textBoxX_Description.Text = isNull ? string.Empty : customObject.Description;
-            panel1.Enabled = !isNull;
         }
 
         private CustomObjectImport GetSelectedImport()
