@@ -162,7 +162,11 @@ namespace SM64Lib.Behaviors
                 foreach (var kvp in knownCustomAsmCommands.ToArray())
                 {
                     if (!Config.CustomAsmLinks.Where(n => n.CustomAsm == kvp.Key).Any())
+                    {
                         knownCustomAsmCommands.Remove(kvp.Key);
+                        Script.RemoveIfContains(kvp.Value);
+                        kvp.Value.Close();
+                    }
                 }
             }
         }
