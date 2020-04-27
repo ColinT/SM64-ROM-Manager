@@ -279,6 +279,7 @@ namespace SM64_ROM_Manager
                     foreach (var kvpMdl in kvpImport.Value.CustomModels)
                         kvpImport.Value.DestModelBanks.Add(kvpMdl.Key, rommgr.GlobalModelBank);
                     kvpImport.Value.DestBehaviorBank = rommgr.GlobalBehaviorBank;
+                    kvpImport.Value.DestCustomAsmBank = rommgr.GlobalCustomAsmBank;
                 }
 
                 var frm = new CustomObjectImportDialog(rommgr, imports);
