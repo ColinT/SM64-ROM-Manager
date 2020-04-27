@@ -17,13 +17,13 @@ namespace SM64_ROM_Manager
     {
         // F i e l d s
 
-        private readonly RomManager rommgr;
+        private readonly CustomAsmBank asmBank;
 
         // C o n s t r u c t o r
 
-        public CustomAsmCodesManager(RomManager rommgr)
+        public CustomAsmCodesManager(CustomAsmBank asmBank, RomManager rommgr)
         {
-            this.rommgr = rommgr;
+            this.asmBank = asmBank;
 
             InitializeComponent();
             UpdateAmbientColors();
@@ -52,7 +52,7 @@ namespace SM64_ROM_Manager
             AdvTree_Codes.BeginUpdate();
             AdvTree_Codes.Nodes.Clear();
 
-            foreach (var area in rommgr.GlobalCustomAsmBank.Areas)
+            foreach (var area in asmBank.Areas)
                 AdvTree_Codes.Nodes.Add(GetNode(area));
 
             AdvTree_Codes.EndUpdate();
@@ -114,7 +114,7 @@ namespace SM64_ROM_Manager
                 General.OpenHexEditor(ref buf);
                 asm.AreaBytes = buf;
 
-                rommgr.GlobalCustomAsmBank.UpdateAddresses();
+                asmBank.UpdateAddresses();
                 UpdateAsm(asm);
             }
         }
@@ -132,8 +132,8 @@ namespace SM64_ROM_Manager
             var asm = new CustomAsmArea();
 
             // Add Area
-            rommgr.GlobalCustomAsmBank.Areas.Add(asm);
-            rommgr.GlobalCustomAsmBank.UpdateAddresses();
+            asmBank.Areas.Add(asm);
+            asmBank.UpdateAddresses();
 
             // Add Node
             var n = GetNode(asm);
@@ -147,8 +147,8 @@ namespace SM64_ROM_Manager
             if (n?.Tag is CustomAsmArea asm)
             {
                 n.Remove();
-                rommgr.GlobalCustomAsmBank.Areas.Remove(asm);
-                rommgr.GlobalCustomAsmBank.UpdateAddresses();
+                asmBank.Areas.Remove(asm);
+                asmBank.UpdateAddresses();
                 UpdateAsmList();
             }
         }
@@ -168,8 +168,12 @@ namespace SM64_ROM_Manager
 
         private void ButtonItem_ChangeRomAreaForAsm_Click(object sender, EventArgs e)
         {
-            var frm = new ChangeRomAreaForAsmCodesDialog(rommgr);
-            frm.ShowDialog(this);
+            var frm = new ChangeRomAreaForAsmCodesDialog(asmBank);
+            if (frm.ShowDialog(this) == DialogResult.OK)
+            {
+                asmBank.UpdateAddresses();
+                UpdateAsmList();
+            }
         }
 
         private void ButtonItem_Add_Click(object sender, EventArgs e)

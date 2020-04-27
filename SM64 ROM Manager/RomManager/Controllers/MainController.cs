@@ -798,6 +798,15 @@ namespace SM64_ROM_Manager
             }
         }
 
+        public void OpenCustomAsmCodes()
+        {
+            if (RomManager is object)
+            {
+                var mgr = new CustomAsmCodesManager(RomManager.GlobalCustomAsmBank, RomManager);
+                mgr.Show();
+            }
+        }
+
         public void OpenPluginManager()
         {
             var frm = new SM64_ROM_Manager.PluginInstallerForm();
