@@ -48,46 +48,38 @@ namespace SM64_ROM_Manager
             // 
             // textBoxX_RomAddress
             // 
-            resources.ApplyResources(this.textBoxX_RomAddress, "textBoxX_RomAddress");
             // 
             // 
             // 
             this.textBoxX_RomAddress.Border.Class = "TextBoxBorder";
             this.textBoxX_RomAddress.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.textBoxX_RomAddress.ButtonCustom.DisplayPosition = ((int)(resources.GetObject("textBoxX_RomAddress.ButtonCustom.DisplayPosition")));
-            this.textBoxX_RomAddress.ButtonCustom.Image = ((System.Drawing.Image)(resources.GetObject("textBoxX_RomAddress.ButtonCustom.Image")));
-            this.textBoxX_RomAddress.ButtonCustom.Text = resources.GetString("textBoxX_RomAddress.ButtonCustom.Text");
-            this.textBoxX_RomAddress.ButtonCustom.Tooltip = resources.GetString("textBoxX_RomAddress.ButtonCustom.Tooltip");
-            this.textBoxX_RomAddress.ButtonCustom2.DisplayPosition = ((int)(resources.GetObject("textBoxX_RomAddress.ButtonCustom2.DisplayPosition")));
-            this.textBoxX_RomAddress.ButtonCustom2.Image = ((System.Drawing.Image)(resources.GetObject("textBoxX_RomAddress.ButtonCustom2.Image")));
-            this.textBoxX_RomAddress.ButtonCustom2.Text = resources.GetString("textBoxX_RomAddress.ButtonCustom2.Text");
-            this.textBoxX_RomAddress.ButtonCustom2.Tooltip = resources.GetString("textBoxX_RomAddress.ButtonCustom2.Tooltip");
+            resources.ApplyResources(this.textBoxX_RomAddress, "textBoxX_RomAddress");
             this.textBoxX_RomAddress.Name = "textBoxX_RomAddress";
             this.textBoxX_RomAddress.PreventEnterBeep = true;
+            this.textBoxX_RomAddress.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty;
             // 
             // ButtonX_Cancel
             // 
-            resources.ApplyResources(this.ButtonX_Cancel, "ButtonX_Cancel");
             this.ButtonX_Cancel.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.ButtonX_Cancel.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             this.ButtonX_Cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.ButtonX_Cancel.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_delete_sign_16px;
+            resources.ApplyResources(this.ButtonX_Cancel, "ButtonX_Cancel");
             this.ButtonX_Cancel.Name = "ButtonX_Cancel";
             this.ButtonX_Cancel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             // 
             // ButtonX_Save
             // 
-            resources.ApplyResources(this.ButtonX_Save, "ButtonX_Save");
             this.ButtonX_Save.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.ButtonX_Save.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             this.ButtonX_Save.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_checkmark_16px_1;
+            resources.ApplyResources(this.ButtonX_Save, "ButtonX_Save");
             this.ButtonX_Save.Name = "ButtonX_Save";
             this.ButtonX_Save.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.ButtonX_Save.Click += new System.EventHandler(this.ButtonX_Save_Click);
             // 
             // layoutControl1
             // 
-            resources.ApplyResources(this.layoutControl1, "layoutControl1");
             this.layoutControl1.BackColor = System.Drawing.Color.Transparent;
             this.layoutControl1.Controls.Add(this.textBoxX_RomAddress);
             this.layoutControl1.Controls.Add(this.ButtonX_Save);
@@ -95,6 +87,7 @@ namespace SM64_ROM_Manager
             this.layoutControl1.Controls.Add(this.textBoxX_Length);
             this.layoutControl1.Controls.Add(this.textBoxX_RamAddress);
             this.layoutControl1.Controls.Add(this.buttonX1);
+            resources.ApplyResources(this.layoutControl1, "layoutControl1");
             this.layoutControl1.Name = "layoutControl1";
             // 
             // 
@@ -107,55 +100,40 @@ namespace SM64_ROM_Manager
             this.layoutSpacerItem1,
             this.layoutControlItem2,
             this.layoutControlItem3});
-            this.layoutControl1.RootGroup.Text = resources.GetString("resource.Text");
-            this.layoutControl1.RootGroup.Tooltip = resources.GetString("resource.Tooltip");
             // 
             // textBoxX_Length
             // 
-            resources.ApplyResources(this.textBoxX_Length, "textBoxX_Length");
             // 
             // 
             // 
             this.textBoxX_Length.Border.Class = "TextBoxBorder";
             this.textBoxX_Length.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.textBoxX_Length.ButtonCustom.DisplayPosition = ((int)(resources.GetObject("textBoxX_Length.ButtonCustom.DisplayPosition")));
-            this.textBoxX_Length.ButtonCustom.Image = ((System.Drawing.Image)(resources.GetObject("textBoxX_Length.ButtonCustom.Image")));
-            this.textBoxX_Length.ButtonCustom.Text = resources.GetString("textBoxX_Length.ButtonCustom.Text");
-            this.textBoxX_Length.ButtonCustom.Tooltip = resources.GetString("textBoxX_Length.ButtonCustom.Tooltip");
-            this.textBoxX_Length.ButtonCustom2.DisplayPosition = ((int)(resources.GetObject("textBoxX_Length.ButtonCustom2.DisplayPosition")));
-            this.textBoxX_Length.ButtonCustom2.Image = ((System.Drawing.Image)(resources.GetObject("textBoxX_Length.ButtonCustom2.Image")));
-            this.textBoxX_Length.ButtonCustom2.Text = resources.GetString("textBoxX_Length.ButtonCustom2.Text");
-            this.textBoxX_Length.ButtonCustom2.Tooltip = resources.GetString("textBoxX_Length.ButtonCustom2.Tooltip");
+            resources.ApplyResources(this.textBoxX_Length, "textBoxX_Length");
             this.textBoxX_Length.Name = "textBoxX_Length";
             this.textBoxX_Length.PreventEnterBeep = true;
+            this.textBoxX_Length.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty;
             // 
             // textBoxX_RamAddress
             // 
-            resources.ApplyResources(this.textBoxX_RamAddress, "textBoxX_RamAddress");
             // 
             // 
             // 
             this.textBoxX_RamAddress.Border.Class = "TextBoxBorder";
             this.textBoxX_RamAddress.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.textBoxX_RamAddress.ButtonCustom.DisplayPosition = ((int)(resources.GetObject("textBoxX_RamAddress.ButtonCustom.DisplayPosition")));
-            this.textBoxX_RamAddress.ButtonCustom.Image = ((System.Drawing.Image)(resources.GetObject("textBoxX_RamAddress.ButtonCustom.Image")));
-            this.textBoxX_RamAddress.ButtonCustom.Text = resources.GetString("textBoxX_RamAddress.ButtonCustom.Text");
-            this.textBoxX_RamAddress.ButtonCustom.Tooltip = resources.GetString("textBoxX_RamAddress.ButtonCustom.Tooltip");
-            this.textBoxX_RamAddress.ButtonCustom2.DisplayPosition = ((int)(resources.GetObject("textBoxX_RamAddress.ButtonCustom2.DisplayPosition")));
-            this.textBoxX_RamAddress.ButtonCustom2.Image = ((System.Drawing.Image)(resources.GetObject("textBoxX_RamAddress.ButtonCustom2.Image")));
-            this.textBoxX_RamAddress.ButtonCustom2.Text = resources.GetString("textBoxX_RamAddress.ButtonCustom2.Text");
-            this.textBoxX_RamAddress.ButtonCustom2.Tooltip = resources.GetString("textBoxX_RamAddress.ButtonCustom2.Tooltip");
+            resources.ApplyResources(this.textBoxX_RamAddress, "textBoxX_RamAddress");
             this.textBoxX_RamAddress.Name = "textBoxX_RamAddress";
             this.textBoxX_RamAddress.PreventEnterBeep = true;
+            this.textBoxX_RamAddress.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty;
             // 
             // buttonX1
             // 
-            resources.ApplyResources(this.buttonX1, "buttonX1");
             this.buttonX1.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.buttonX1.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             this.buttonX1.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_refresh_16px;
+            resources.ApplyResources(this.buttonX1, "buttonX1");
             this.buttonX1.Name = "buttonX1";
             this.buttonX1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.buttonX1.Click += new System.EventHandler(this.buttonX1_Click);
             // 
             // layoutControlItem1
             // 
@@ -193,14 +171,12 @@ namespace SM64_ROM_Manager
             this.layoutControlItem6.Height = 31;
             this.layoutControlItem6.MinSize = new System.Drawing.Size(32, 20);
             this.layoutControlItem6.Name = "layoutControlItem6";
-            resources.ApplyResources(this.layoutControlItem6, "layoutControlItem6");
             this.layoutControlItem6.Width = 88;
             // 
             // layoutSpacerItem1
             // 
             this.layoutSpacerItem1.Height = 31;
             this.layoutSpacerItem1.Name = "layoutSpacerItem1";
-            resources.ApplyResources(this.layoutSpacerItem1, "layoutSpacerItem1");
             this.layoutSpacerItem1.Width = 99;
             this.layoutSpacerItem1.WidthType = DevComponents.DotNetBar.Layout.eLayoutSizeType.Percent;
             // 
@@ -210,7 +186,6 @@ namespace SM64_ROM_Manager
             this.layoutControlItem2.Height = 31;
             this.layoutControlItem2.MinSize = new System.Drawing.Size(32, 20);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            resources.ApplyResources(this.layoutControlItem2, "layoutControlItem2");
             this.layoutControlItem2.Width = 88;
             // 
             // layoutControlItem3
@@ -219,14 +194,13 @@ namespace SM64_ROM_Manager
             this.layoutControlItem3.Height = 31;
             this.layoutControlItem3.MinSize = new System.Drawing.Size(32, 20);
             this.layoutControlItem3.Name = "layoutControlItem3";
-            resources.ApplyResources(this.layoutControlItem3, "layoutControlItem3");
             this.layoutControlItem3.Width = 88;
             // 
             // ChangeRomAreaForAsmCodesDialog
             // 
             this.AcceptButton = this.ButtonX_Save;
-            resources.ApplyResources(this, "$this");
             this.CancelButton = this.ButtonX_Cancel;
+            resources.ApplyResources(this, "$this");
             this.Controls.Add(this.layoutControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "ChangeRomAreaForAsmCodesDialog";

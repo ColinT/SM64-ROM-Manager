@@ -70,5 +70,12 @@ namespace SM64_ROM_Manager
 
             DialogResult = DialogResult.OK;
         }
+
+        private void buttonX1_Click(object sender, EventArgs e)
+        {
+            textBoxX_RomAddress.Text = string.Empty;
+            textBoxX_RamAddress.Text = string.Empty;
+            textBoxX_Length.Text = string.Empty;
+        }
     }
 }
