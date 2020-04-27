@@ -54,17 +54,17 @@ namespace SM64_ROM_Manager
         private void ButtonX_Save_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(textBoxX_RomAddress.Text.Trim()))
-                asmBank.Config.RomStartAddress = CustomAsmBankConfig.DefaultRomStartAddress;
+                asmBank.Config.RomStartAddress = -1;
             else
                 asmBank.Config.RomStartAddress = ValueFromText(textBoxX_RomAddress.Text);
 
             if (string.IsNullOrEmpty(textBoxX_RamAddress.Text.Trim()))
-                asmBank.Config.RamStartAddress = CustomAsmBankConfig.DefaultRamStartAddress;
+                asmBank.Config.RamStartAddress = -1;
             else
                 asmBank.Config.RamStartAddress = ValueFromText(textBoxX_RamAddress.Text);
 
             if (string.IsNullOrEmpty(textBoxX_Length.Text.Trim()))
-                asmBank.Config.MaxLength = CustomAsmBankConfig.DefaultMaxLength;
+                asmBank.Config.MaxLength = -1;
             else
                 asmBank.Config.MaxLength = ValueFromText(textBoxX_Length.Text);
 
