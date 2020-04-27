@@ -72,6 +72,7 @@ namespace SM64_ROM_Manager
             this.AdvTree_Codes.AfterCellEdit += new DevComponents.AdvTree.CellEditEventHandler(this.AdvTree_Codes_AfterCellEdit);
             this.AdvTree_Codes.AfterCellEditComplete += new DevComponents.AdvTree.CellEditEventHandler(this.AdvTree_Codes_AfterCellEditComplete);
             this.AdvTree_Codes.AfterNodeSelect += new DevComponents.AdvTree.AdvTreeNodeEventHandler(this.AdvTree_Codes_AfterNodeSelect);
+            this.AdvTree_Codes.NodeDoubleClick += new DevComponents.AdvTree.TreeNodeMouseEventHandler(this.AdvTree_Codes_NodeDoubleClick);
             // 
             // columnHeader1
             // 

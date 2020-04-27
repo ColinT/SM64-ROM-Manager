@@ -223,5 +223,10 @@ namespace SM64_ROM_Manager
         {
             UpdateNode(e.Cell.Parent);
         }
+
+        private void AdvTree_Codes_NodeDoubleClick(object sender, TreeNodeMouseEventArgs e)
+        {
+            EditAsm(e.Node?.Tag as CustomAsmArea);
+        }
     }
 }

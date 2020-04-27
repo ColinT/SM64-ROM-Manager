@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,6 +15,7 @@ namespace SM64Lib.ASM
 
         public List<CustomAsmAreaConfig> Areas { get; } = new List<CustomAsmAreaConfig>();
         public int MaxLength { get; set; } = -1;
+        [JsonProperty]
         public int Length { get; internal set; } = -1;
         public int RomStartAddress { get; set; } = -1;
         public int RamStartAddress { get; set; } = -1;

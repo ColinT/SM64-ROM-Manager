@@ -44,10 +44,12 @@ namespace SM64Lib.ASM
 
         public void Save(RomManager romManager)
         {
+            var startAddr = Config.GetRomStartAddress();
+            var curRomAddr = startAddr;
+
             if (Areas.Any())
             {
                 var data = romManager.GetBinaryRom(System.IO.FileAccess.ReadWrite);
-                var curRomAddr = Config.GetRomStartAddress();
 
                 foreach (var area in Areas)
                     curRomAddr += area.Save(data, curRomAddr, Config);
@@ -57,15 +59,18 @@ namespace SM64Lib.ASM
 
             Config.Areas.Clear();
             Config.Areas.AddRange(Areas.Select(n => n.Config));
+            Config.Length = curRomAddr - startAddr;
         }
 
         public void UpdateAddresses()
         {
             if (Areas.Any())
             {
-                var curRomAddr = Config.GetRomStartAddress();
+                var startAddr = Config.GetRomStartAddress();
+                var curRomAddr = startAddr;
                 foreach (var area in Areas)
                     curRomAddr += area.UpdateAddresses(curRomAddr, Config);
+                Config.Length = curRomAddr - startAddr;
             }
         }
     }

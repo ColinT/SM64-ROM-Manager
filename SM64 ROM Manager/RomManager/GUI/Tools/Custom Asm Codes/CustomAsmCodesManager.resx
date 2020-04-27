@@ -177,8 +177,20 @@
   <data name="ButtonItem_Remove.Text" xml:space="preserve">
     <value>Remove</value>
   </data>
+  <data name="ButtonItem_EditHex.Text" xml:space="preserve">
+    <value>Edit Hex</value>
+  </data>
+  <data name="ButtonItem_EditName.Text" xml:space="preserve">
+    <value>Edit name</value>
+  </data>
   <data name="ButtonItem_Edit.Text" xml:space="preserve">
     <value>Edit</value>
+  </data>
+  <data name="ButtonItem_ChangeRomAreaForAsm.Text" xml:space="preserve">
+    <value>Change ROM Area for ASM Codes</value>
+  </data>
+  <data name="ButtonItem_AsmToHexConverter.Text" xml:space="preserve">
+    <value>ASM to Hex Converter</value>
   </data>
   <data name="ButtonItem_Tools.Text" xml:space="preserve">
     <value>Tools</value>
@@ -203,18 +215,6 @@
   </data>
   <data name="&gt;&gt;bar1.ZOrder" xml:space="preserve">
     <value>1</value>
-  </data>
-  <data name="ButtonItem_EditHex.Text" xml:space="preserve">
-    <value>Edit Hex</value>
-  </data>
-  <data name="ButtonItem_EditName.Text" xml:space="preserve">
-    <value>Edit name</value>
-  </data>
-  <data name="ButtonItem_ChangeRomAreaForAsm.Text" xml:space="preserve">
-    <value>Change ROM Area for ASM Codes</value>
-  </data>
-  <data name="ButtonItem_AsmToHexConverter.Text" xml:space="preserve">
-    <value>ASM to Hex Converter</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
