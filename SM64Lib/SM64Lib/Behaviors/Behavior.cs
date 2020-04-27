@@ -129,19 +129,20 @@ namespace SM64Lib.Behaviors
                 {
                     var asmPointer = link.CustomAsm.Config.RamAddress | unchecked((int)0x80000000);
                     var cmdStartLoop = Script.FirstOfType(BehaviorscriptCommandTypes.x08_LoopStart);
+                    var cmdStartLoopIndex = Script.IndexOf(cmdStartLoop);
                     int iInsert;
 
                     if (link.Loop)
                     {
                         if (cmdStartLoop is object)
-                            iInsert = Script.IndexOf(cmdStartLoop) + 1;
+                            iInsert = cmdStartLoopIndex + 1;
                         else
                             iInsert = -1;
                     }
                     else
                     {
                         if (cmdStartLoop is object)
-                            iInsert = Script.IndexOf(cmdStartLoop);
+                            iInsert = cmdStartLoopIndex;
                         else
                             iInsert = (int)Script.Length - 2;
                     }
@@ -149,7 +150,27 @@ namespace SM64Lib.Behaviors
                     if (knownCustomAsmCommands.ContainsKey(link.CustomAsm))
                     {
                         var cmd = knownCustomAsmCommands[link.CustomAsm];
+                        var cmdIndex = Script.IndexOf(cmd);
                         BehaviorscriptCommandFunctions.X0C.SetAsmPointer(cmd, asmPointer);
+
+                        if (cmdIndex != -1)
+                        {
+                            var reinsert = false;
+
+                            if (link.Loop && cmdIndex < cmdStartLoopIndex)
+                            {
+                                reinsert = true;
+                                iInsert -= 1;
+                            }
+                            else if (cmdIndex > cmdStartLoopIndex)
+                                reinsert = true;
+
+                            if (reinsert)
+                            {
+                                Script.Remove(cmd);
+                                Script.Insert(iInsert, cmd);
+                            }
+                        }
                     }
                     else if (iInsert != -1)
                     {
