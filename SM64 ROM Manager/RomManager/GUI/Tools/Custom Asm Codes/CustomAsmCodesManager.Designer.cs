@@ -41,7 +41,7 @@ namespace SM64_ROM_Manager
             this.ButtonItem_EditHex = new DevComponents.DotNetBar.ButtonItem();
             this.ButtonItem_EditName = new DevComponents.DotNetBar.ButtonItem();
             this.ButtonItem_Tools = new DevComponents.DotNetBar.ButtonItem();
-            this.buttonItem1 = new DevComponents.DotNetBar.ButtonItem();
+            this.ButtonItem_ChangeRomAreaForAsm = new DevComponents.DotNetBar.ButtonItem();
             this.ButtonItem_AsmToHexConverter = new DevComponents.DotNetBar.ButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.AdvTree_Codes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bar1)).BeginInit();
@@ -68,6 +68,10 @@ namespace SM64_ROM_Manager
             this.AdvTree_Codes.NodeStyle = this.elementStyle1;
             this.AdvTree_Codes.PathSeparator = ";";
             this.AdvTree_Codes.Styles.Add(this.elementStyle1);
+            this.AdvTree_Codes.BeforeCellEdit += new DevComponents.AdvTree.CellEditEventHandler(this.AdvTree_Codes_BeforeCellEdit);
+            this.AdvTree_Codes.AfterCellEdit += new DevComponents.AdvTree.CellEditEventHandler(this.AdvTree_Codes_AfterCellEdit);
+            this.AdvTree_Codes.AfterCellEditComplete += new DevComponents.AdvTree.CellEditEventHandler(this.AdvTree_Codes_AfterCellEditComplete);
+            this.AdvTree_Codes.AfterNodeSelect += new DevComponents.AdvTree.AdvTreeNodeEventHandler(this.AdvTree_Codes_AfterNodeSelect);
             // 
             // columnHeader1
             // 
@@ -115,6 +119,7 @@ namespace SM64_ROM_Manager
             this.ButtonItem_Add.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_plus_math_16px;
             this.ButtonItem_Add.Name = "ButtonItem_Add";
             resources.ApplyResources(this.ButtonItem_Add, "ButtonItem_Add");
+            this.ButtonItem_Add.Click += new System.EventHandler(this.ButtonItem_Add_Click);
             // 
             // ButtonItem_Remove
             // 
@@ -122,6 +127,7 @@ namespace SM64_ROM_Manager
             this.ButtonItem_Remove.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_delete_sign_16px;
             this.ButtonItem_Remove.Name = "ButtonItem_Remove";
             resources.ApplyResources(this.ButtonItem_Remove, "ButtonItem_Remove");
+            this.ButtonItem_Remove.Click += new System.EventHandler(this.ButtonItem_Remove_Click);
             // 
             // ButtonItem_Edit
             // 
@@ -140,12 +146,14 @@ namespace SM64_ROM_Manager
             this.ButtonItem_EditHex.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_edit_16px;
             this.ButtonItem_EditHex.Name = "ButtonItem_EditHex";
             resources.ApplyResources(this.ButtonItem_EditHex, "ButtonItem_EditHex");
+            this.ButtonItem_EditHex.Click += new System.EventHandler(this.ButtonItem_EditHex_Click);
             // 
             // ButtonItem_EditName
             // 
             this.ButtonItem_EditName.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_edit_16px;
             this.ButtonItem_EditName.Name = "ButtonItem_EditName";
             resources.ApplyResources(this.ButtonItem_EditName, "ButtonItem_EditName");
+            this.ButtonItem_EditName.Click += new System.EventHandler(this.ButtonItem_EditName_Click);
             // 
             // ButtonItem_Tools
             // 
@@ -153,16 +161,16 @@ namespace SM64_ROM_Manager
             this.ButtonItem_Tools.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_expand_arrow_16px;
             this.ButtonItem_Tools.Name = "ButtonItem_Tools";
             this.ButtonItem_Tools.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.buttonItem1,
+            this.ButtonItem_ChangeRomAreaForAsm,
             this.ButtonItem_AsmToHexConverter});
             resources.ApplyResources(this.ButtonItem_Tools, "ButtonItem_Tools");
             // 
-            // buttonItem1
+            // ButtonItem_ChangeRomAreaForAsm
             // 
-            this.buttonItem1.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_support_16px;
-            this.buttonItem1.Name = "buttonItem1";
-            resources.ApplyResources(this.buttonItem1, "buttonItem1");
-            this.buttonItem1.Click += new System.EventHandler(this.buttonItem1_Click);
+            this.ButtonItem_ChangeRomAreaForAsm.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_support_16px;
+            this.ButtonItem_ChangeRomAreaForAsm.Name = "ButtonItem_ChangeRomAreaForAsm";
+            resources.ApplyResources(this.ButtonItem_ChangeRomAreaForAsm, "ButtonItem_ChangeRomAreaForAsm");
+            this.ButtonItem_ChangeRomAreaForAsm.Click += new System.EventHandler(this.ButtonItem_ChangeRomAreaForAsm_Click);
             // 
             // ButtonItem_AsmToHexConverter
             // 
@@ -180,6 +188,7 @@ namespace SM64_ROM_Manager
             this.Name = "CustomAsmCodesManager";
             this.TopLeftCornerSize = 0;
             this.TopRightCornerSize = 0;
+            this.Shown += new System.EventHandler(this.CustomAsmCodesManager_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.AdvTree_Codes)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bar1)).EndInit();
             this.ResumeLayout(false);
@@ -201,6 +210,6 @@ namespace SM64_ROM_Manager
         private DevComponents.DotNetBar.ButtonItem ButtonItem_EditName;
         private DevComponents.DotNetBar.ButtonItem ButtonItem_Tools;
         private DevComponents.DotNetBar.ButtonItem ButtonItem_AsmToHexConverter;
-        private DevComponents.DotNetBar.ButtonItem buttonItem1;
+        private DevComponents.DotNetBar.ButtonItem ButtonItem_ChangeRomAreaForAsm;
     }
 }

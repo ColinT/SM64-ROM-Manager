@@ -36,13 +36,14 @@ namespace SM64Lib.ASM
         {
             data.Position = address;
             data.Write(AreaBytes);
+            return UpdateAddresses(address, bankConfig);
+        }
 
+        internal int UpdateAddresses(int address, CustomAsmBankConfig bankConfig)
+        {
             Config.RomAddress = address;
             Config.Length = AreaBytes.Length;
-            Config.RamAddress = address -
-                (bankConfig.RomStartAddress != -1 ? bankConfig.RomStartAddress : CustomAsmBankConfig.DefaultRomStartAddress) +
-                (bankConfig.RamStartAddress != -1 ? bankConfig.RamStartAddress : CustomAsmBankConfig.DefaultRamStartAddress);
-
+            Config.RamAddress = address - bankConfig.GetRomStartAddress() + bankConfig.GetRamStartAddress();
             return Config.Length;
         }
     }

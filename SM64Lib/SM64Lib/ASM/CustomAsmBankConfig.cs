@@ -17,5 +17,15 @@ namespace SM64Lib.ASM
         public int Length { get; internal set; } = -1;
         public int RomStartAddress { get; set; }
         public int RamStartAddress { get; set; }
+
+        public int GetRomStartAddress()
+        {
+            return RomStartAddress != -1 ? CustomAsmBankConfig.DefaultRomStartAddress : DefaultRomStartAddress;
+        }
+
+        public int GetRamStartAddress()
+        {
+            return RamStartAddress != -1 ? RamStartAddress : DefaultRamStartAddress;
+        }
     }
 }

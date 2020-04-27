@@ -47,7 +47,7 @@ namespace SM64Lib.ASM
             if (Areas.Any())
             {
                 var data = romManager.GetBinaryRom(System.IO.FileAccess.ReadWrite);
-                var curRomAddr = Config.RomStartAddress != -1 ? Config.RomStartAddress : CustomAsmBankConfig.DefaultMaxLength;
+                var curRomAddr = Config.GetRomStartAddress();
 
                 foreach (var area in Areas)
                     curRomAddr += area.Save(data, curRomAddr, Config);
@@ -57,6 +57,16 @@ namespace SM64Lib.ASM
 
             Config.Areas.Clear();
             Config.Areas.AddRange(Areas.Select(n => n.Config));
+        }
+
+        public void UpdateAddresses()
+        {
+            if (Areas.Any())
+            {
+                var curRomAddr = Config.GetRomStartAddress();
+                foreach (var area in Areas)
+                    curRomAddr += area.UpdateAddresses(curRomAddr, Config);
+            }
         }
     }
 }
