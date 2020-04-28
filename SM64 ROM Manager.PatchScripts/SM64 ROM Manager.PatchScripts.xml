@@ -109,6 +109,16 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="P:SM64_ROM_Manager.PatchScripts.PatchProfile.MinVersion">
+            <summary>
+            The minimum ROM Manager version requied for this tweak.
+            </summary>
+        </member>
+        <member name="P:SM64_ROM_Manager.PatchScripts.PatchProfile.MaxVersion">
+            <summary>
+            The maximum ROM Manager version allowed for this tweak.
+            </summary>
+        </member>
         <member name="P:SM64_ROM_Manager.PatchScripts.PatchProfile.Description">
             <summary>
             The description of this profile
@@ -120,6 +130,11 @@
             The Xml file for this profile.
             </summary>
             <returns></returns>
+        </member>
+        <member name="P:SM64_ROM_Manager.PatchScripts.PatchProfile.EmbeddedFiles">
+            <summary>
+            Contains files embedded into this profile.
+            </summary>
         </member>
         <member name="T:SM64_ROM_Manager.PatchScripts.PatchScript">
             <summary>

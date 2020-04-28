@@ -412,6 +412,7 @@ namespace SM64_ROM_Manager.PatchScripts
             options.ReferencedAssemblies.Add(typeof(Object3D).Assembly.Location);
             options.ReferencedAssemblies.Add(typeof(DevComponents.DotNetBar.OfficeForm).Assembly.Location);
             options.ReferencedAssemblies.Add(typeof(RomManager).Assembly.Location);
+            options.ReferencedAssemblies.Add(typeof(EmbeddedFilesContainer).Assembly.Location);
 
             // Alternative???
             // For Each asm As Assembly In AppDomain.CurrentDomain.GetAssemblies
