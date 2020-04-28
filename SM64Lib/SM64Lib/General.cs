@@ -5,6 +5,8 @@ using global::System.Drawing;
 using System.Linq;
 using Microsoft.VisualBasic.CompilerServices;
 using global::SM64Lib.Patching;
+using System.IO;
+using System.IO.Compression;
 
 namespace SM64Lib
 {
@@ -555,6 +557,28 @@ namespace SM64Lib
             }
 
             return res;
+        }
+
+        internal static byte[] CompressData(Stream input, CompressionLevel compressionLevel)
+        {
+            var output = new MemoryStream();
+            input.Position = 0;
+
+            using (var compressor = new DeflateStream(output, compressionLevel, true))
+                input.CopyTo(compressor);
+
+            var res = output.ToArray();
+            output.Close();
+            return res;
+        }
+
+        internal static void DecompressData(byte[] input, Stream output)
+        {
+            using (var sInput = new MemoryStream(input))
+            {
+                using (var decompressor = new DeflateStream(sInput, CompressionMode.Decompress, true))
+                    decompressor.CopyTo(output);
+            }
         }
     }
 }
