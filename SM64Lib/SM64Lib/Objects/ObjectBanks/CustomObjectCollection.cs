@@ -41,7 +41,7 @@ namespace SM64Lib.Objects.ObjectBanks
                 ExportDate = DateTime.UtcNow,
                 Name = exportName
             };
-            export.CustomObjects.AddRange(customObjects);
+            export.Data.CustomObjects.AddRange(customObjects);
 
             foreach (var cobj in customObjects)
             {
@@ -49,33 +49,45 @@ namespace SM64Lib.Objects.ObjectBanks
                 {
                     var behav = cobj.BehaviorProps.Behavior.FindBehavior();
                     if (behav is object)
-                        export.Behaviors.Add(cobj.BehaviorProps.Behavior, behav);
+                        export.Data.Behaviors.Add(cobj.BehaviorProps.Behavior, behav);
                 }
 
                 if (cobj.ModelProps is object)
                 {
                     var mdl = cobj.ModelProps.Model?.FindModel();
                     if (mdl is object)
-                        export.CustomModels.Add(cobj.ModelProps.Model, mdl);
+                        export.Data.CustomModels.Add(cobj.ModelProps.Model, mdl);
                 }
             }
 
-            var ser = JsonSerializer.CreateDefault();
-            ser.PreserveReferencesHandling = PreserveReferencesHandling.All;
-            File.WriteAllText(filePath, JObject.FromObject(export, ser).ToString());
+            export.Compress();
+
+            File.WriteAllText(filePath, JObject.FromObject(export).ToString());
         }
 
         public static CustomObjectImport LoadImport(string filePath)
         {
             var ser = JsonSerializer.CreateDefault();
             ser.PreserveReferencesHandling = PreserveReferencesHandling.All;
-            //ser.Converters.Add(new ArrayReferencePreservngConverter());
             return JObject.Parse(File.ReadAllText(filePath)).ToObject<CustomObjectImport>(ser);
+        }
+
+        public static void DecompressImports(CustomObjectImport[] imports)
+        {
+            foreach (var import in imports)
+                DecompressImport(import);
+        }
+
+        public static void DecompressImport(CustomObjectImport import)
+        {
+            import.Decompress();
         }
 
         public void Import(CustomObjectImport import)
         {
-            foreach (var cobj in import.CustomObjects)
+            DecompressImport(import);
+
+            foreach (var cobj in import.Data.CustomObjects)
             {
                 // Add Custom Model
                 if (cobj.BehaviorProps.Behavior is object)
@@ -86,9 +98,9 @@ namespace SM64Lib.Objects.ObjectBanks
                         cobj.BehaviorProps.Behavior = behav.Config;
                         cobj.BehaviorProps.Behavior.IsVanilla = false;
                     }
-                    else if (import.Behaviors.ContainsKey(cobj.BehaviorProps.Behavior))
+                    else if (import.Data.Behaviors.ContainsKey(cobj.BehaviorProps.Behavior))
                     {
-                        var behav = import.Behaviors[cobj.BehaviorProps.Behavior];
+                        var behav = import.Data.Behaviors[cobj.BehaviorProps.Behavior];
                         import.DestBehaviorBank.Behaviors.Add(behav);
                         if (behav.Config.CustomAsmLinks.Any())
                             import.DestCustomAsmBank.Areas.AddRangeIfNotContains(behav.Config.CustomAsmLinks.Select(n => n.CustomAsm).ToArray());
@@ -98,10 +110,10 @@ namespace SM64Lib.Objects.ObjectBanks
                 }
 
                 // Add Custom Behavior
-                if (cobj.ModelProps.Model is object && import.CustomModels.ContainsKey(cobj.ModelProps.Model) && import.DestModelBanks.ContainsKey(cobj.ModelProps.Model))
+                if (cobj.ModelProps.Model is object && import.Data.CustomModels.ContainsKey(cobj.ModelProps.Model) && import.DestModelBanks.ContainsKey(cobj.ModelProps.Model))
                 {
                     var destModelBank = import.DestModelBanks[cobj.ModelProps.Model];
-                    destModelBank.Models.Add(import.CustomModels[cobj.ModelProps.Model]);
+                    destModelBank.Models.Add(import.Data.CustomModels[cobj.ModelProps.Model]);
                     destModelBank.NeedToSave = true;
                 }
 

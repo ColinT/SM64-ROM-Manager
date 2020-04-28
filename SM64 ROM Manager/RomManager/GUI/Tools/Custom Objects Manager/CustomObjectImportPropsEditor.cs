@@ -30,8 +30,8 @@ namespace SM64_ROM_Manager
             InitializeComponent();
 
             TextBoxX_Name.Text = customObject.Name;
-            if (!customObject.ModelProps.UseCustomModelID && customObject.ModelProps.Model is object && import.CustomModels.ContainsKey(customObject.ModelProps.Model))
-                TextBoxX_ModelID.Text = TextFromValue(import.CustomModels[customObject.ModelProps.Model].ModelID);
+            if (!customObject.ModelProps.UseCustomModelID && customObject.ModelProps.Model is object && import.Data.CustomModels.ContainsKey(customObject.ModelProps.Model))
+                TextBoxX_ModelID.Text = TextFromValue(import.Data.CustomModels[customObject.ModelProps.Model].ModelID);
             else
             {
                 foreach (Control control in Controls)
@@ -48,7 +48,7 @@ namespace SM64_ROM_Manager
         private void TextBoxX_ModelID_TextChanged(object sender, EventArgs e)
         {
             if (hasInit)
-                import.CustomModels[customObject.ModelProps.Model].ModelID = (byte)ValueFromText(TextBoxX_ModelID.Text);
+                import.Data.CustomModels[customObject.ModelProps.Model].ModelID = (byte)ValueFromText(TextBoxX_ModelID.Text);
         }
 
         private void ButtonX1_Click(object sender, EventArgs e)

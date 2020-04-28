@@ -265,7 +265,11 @@ namespace SM64_ROM_Manager
             var imports = new Dictionary<string, CustomObjectImport>();
 
             foreach (var filePath in filePaths)
-                imports.Add(Path.GetFileNameWithoutExtension(filePath), CustomObjectCollection.LoadImport(filePath));
+            {
+                var import = CustomObjectCollection.LoadImport(filePath);
+                import.Decompress();
+                imports.Add(Path.GetFileNameWithoutExtension(filePath), import);
+            }
 
             ImportObjects(imports);
         }
@@ -276,7 +280,7 @@ namespace SM64_ROM_Manager
             {
                 foreach (var kvpImport in imports)
                 {
-                    foreach (var kvpMdl in kvpImport.Value.CustomModels)
+                    foreach (var kvpMdl in kvpImport.Value.Data.CustomModels)
                         kvpImport.Value.DestModelBanks.Add(kvpMdl.Key, rommgr.GlobalModelBank);
                     kvpImport.Value.DestBehaviorBank = rommgr.GlobalBehaviorBank;
                     kvpImport.Value.DestCustomAsmBank = rommgr.GlobalCustomAsmBank;
