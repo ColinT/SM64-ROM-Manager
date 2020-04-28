@@ -12,6 +12,7 @@ using Microsoft.VisualBasic.CompilerServices;
 using global::SM64_ROM_Manager.Publics;
 using Microsoft.VisualBasic;
 using static Microsoft.VisualBasic.CompilerServices.LikeOperator;
+using SM64Lib.Patching;
 
 namespace SM64_ROM_Manager.PatchScripts
 {
@@ -32,7 +33,7 @@ namespace SM64_ROM_Manager.PatchScripts
         }
 
         // E v e n t s
-
+        
         public static event TweakBeforeApplyEventHandler TweakBeforeApply;
         public delegate void TweakBeforeApplyEventHandler();
 
@@ -483,7 +484,17 @@ namespace SM64_ROM_Manager.PatchScripts
             {
                 TweakBeforeApply?.Invoke();
                 var mgr = new PatchingManager();
-                mgr.Patch(script, rommgr, owner, new Dictionary<string, object>() { { "romfile", rommgr.RomFile }, { "rommgr", rommgr }, { "profilepath", profile?.FileName }, { "files", profile.EmbeddedFiles } });
+                mgr.Patch(
+                    script,
+                    rommgr,
+                    owner,
+                    new Dictionary<string, object>() {
+                        { "romfile", rommgr.RomFile },
+                        { "rommgr", rommgr },
+                        { "profilepath", profile?.FileName },
+                        { "files", profile.EmbeddedFiles }
+                    },
+                    General.GetAdditionalReferencedAssemblied());
                 TweakAfterApply?.Invoke();
                 MessageBoxEx.Show(owner, "Patched successfully.", "Done", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }

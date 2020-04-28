@@ -1,4 +1,5 @@
 ﻿using DevComponents.DotNetBar;
+using SM64Lib.Patching;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -37,7 +38,7 @@ namespace SM64_ROM_Manager
             {
                 var code = ".org 0x0\n";
                 code += fastColoredTextBox_Code.Text;
-                bytes = PatchScripts.PatchingManager.ConvertAsmToBytes(code);
+                bytes = PatchingManager.ConvertAsmToBytes(code);
             }
             catch (Exception)
             {

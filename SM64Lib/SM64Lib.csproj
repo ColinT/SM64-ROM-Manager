@@ -68,6 +68,9 @@
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="Pilz.IO">
+      <HintPath>..\Shared Libs\Pilz.IO.dll</HintPath>
+    </Reference>
     <Reference Include="Pilz.Simple3DFileParser">
       <HintPath>..\Shared Libs\Pilz.Simple3DFileParser.dll</HintPath>
     </Reference>
@@ -210,6 +213,7 @@
     <Compile Include="SM64Lib\Objects\ObjectBanks\CustomObjectCollection.cs" />
     <Compile Include="SM64Lib\Objects\ObjectBanks\CustomObjectBehaviorProps.cs" />
     <Compile Include="SM64Lib\Objects\ObjectBanks\CustomObjectExportData.cs" />
+    <Compile Include="SM64Lib\Objects\ObjectBanks\CustomObjectExportOptions.cs" />
     <Compile Include="SM64Lib\Objects\ObjectBanks\CustomObjectImport.cs" />
     <Compile Include="SM64Lib\Objects\ObjectBanks\CustomObjectExport.cs" />
     <Compile Include="SM64Lib\Objects\ObjectBanks\CustomObjectModelProps.cs" />
@@ -217,6 +221,10 @@
     <Compile Include="SM64Lib\Objects\ObjectBanks\Data\ObjectBankDataList.cs" />
     <Compile Include="SM64Lib\Objects\ObjectBanks\Data\ObjectBankDataListCollection.cs" />
     <Compile Include="SM64Lib\Objects\ObjectBanks\Data\ObjectBankData.cs" />
+    <Compile Include="SM64Lib\Patching\InputValueType.cs" />
+    <Compile Include="SM64Lib\Patching\PatchScript.cs" />
+    <Compile Include="SM64Lib\Patching\PatchScriptManager.cs" />
+    <Compile Include="SM64Lib\Patching\PatchScriptManagerProcessingInputValueEventArgs.cs" />
     <Compile Include="SM64Lib\RomVersion.cs" />
     <Compile Include="SM64Lib\EventArguments\RomVersionEventArgs.cs" />
     <Compile Include="SM64Lib\Model\Conversion\Fast3DWriting\DisplaylistProps.cs" />

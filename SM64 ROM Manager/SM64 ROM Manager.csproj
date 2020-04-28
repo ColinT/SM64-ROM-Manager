@@ -261,6 +261,9 @@
     <Reference Include="Pilz.Drawing.Drawing3D.OpenGLFactory">
       <HintPath>..\Shared Libs\Pilz.Drawing.Drawing3D.OpenGLFactory.dll</HintPath>
     </Reference>
+    <Reference Include="Pilz.IO">
+      <HintPath>..\Shared Libs\Pilz.IO.dll</HintPath>
+    </Reference>
     <Reference Include="Pilz.Reflection.PluginSystem">
       <HintPath>..\Shared Libs\Pilz.Reflection.PluginSystem.dll</HintPath>
     </Reference>

@@ -33,7 +33,7 @@ namespace SM64Lib.Objects.ObjectBanks
         [JsonConverter(typeof(ComplexDictionarJsonConverter<BehaviorConfig, Behavior>))]
         private Dictionary<BehaviorConfig, Behavior> ObsulateBehaviors { set => Data.Behaviors = value; }
         [JsonProperty("CustomObjects")]
-        public List<CustomObject> ObsulateCustomObjects { set => Data.CustomObjects = value; }
+        private List<CustomObject> ObsulateCustomObjects { set => Data.CustomObjects = value; }
 
         [JsonIgnore]
         public bool IsCompressed

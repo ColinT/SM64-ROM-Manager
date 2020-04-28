@@ -24,24 +24,26 @@ namespace SM64Lib.Objects.ObjectBanks
                 cobj.TakeoverProperties(rommgr);
         }
 
-        public void Export(string filePath, string exportName)
+        public void Export(string filePath, CustomObjectExportOptions options)
         {
-            Export(filePath, CustomObjects.ToArray(), exportName);
+            Export(filePath, CustomObjects.ToArray(), options);
         }
 
-        public static void Export(string filePath, CustomObject customObject, string exportName)
+        public static void Export(string filePath, CustomObject customObject, CustomObjectExportOptions options)
         {
-            Export(filePath, new CustomObject[] { customObject }, exportName);
+            Export(filePath, new CustomObject[] { customObject }, options);
         }
 
-        public static void Export(string filePath, CustomObject[] customObjects, string exportName)
+        public static void Export(string filePath, CustomObject[] customObjects, CustomObjectExportOptions options)
         {
             var export = new CustomObjectExport()
             {
                 ExportDate = DateTime.UtcNow,
-                Name = exportName
+                Name = options.ExportName
             };
             export.Data.CustomObjects.AddRange(customObjects);
+            export.Data.EmbeddedFiles = options.EmbeddedFiles;
+            export.Data.Script = options.Script;
 
             foreach (var cobj in customObjects)
             {
@@ -86,7 +88,7 @@ namespace SM64Lib.Objects.ObjectBanks
         public void Import(CustomObjectImport import)
         {
             DecompressImport(import);
-
+            
             foreach (var cobj in import.Data.CustomObjects)
             {
                 // Add Custom Model

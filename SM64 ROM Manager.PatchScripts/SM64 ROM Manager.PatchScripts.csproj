@@ -89,6 +89,9 @@
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="Pilz.IO">
+      <HintPath>..\Shared Libs\Pilz.IO.dll</HintPath>
+    </Reference>
     <Reference Include="Pilz.Simple3DFileParser">
       <HintPath>..\Shared Libs\Pilz.Simple3DFileParser.dll</HintPath>
     </Reference>
@@ -126,7 +129,6 @@
   <ItemGroup>
     <Compile Include="Classes\TweakDatabaseUploadInfo.cs" />
     <Compile Include="Classes\TweakDatabaseUploadState.cs" />
-    <Compile Include="Classes\EmbeddedFilesContainer.cs" />
     <Compile Include="My Project\MyNamespace.Static.1.Designer.cs" />
     <Compile Include="My Project\MyNamespace.Static.2.Designer.cs" />
     <Compile Include="My Project\MyNamespace.Static.3.Designer.cs" />
@@ -141,12 +143,6 @@
     <Compile Include="Classes\TweakDatabasePreferences.cs" />
     <Compile Include="Classes\TweakDatabaseSyncAction.cs" />
     <Compile Include="Classes\TweakDatabaseSyncFile.cs" />
-    <Compile Include="GUI\InputDialog.Designer.cs">
-      <DependentUpon>InputDialog.cs</DependentUpon>
-    </Compile>
-    <Compile Include="GUI\InputDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="GUI\ObjectCatalog.Designer.cs">
       <DependentUpon>ObjectCatalog.cs</DependentUpon>
     </Compile>
@@ -173,8 +169,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Classes\PatchScript.cs" />
-    <Compile Include="Classes\PatchScriptManager.cs" />
     <Compile Include="GUI\TweakProfileEditor.Designer.cs">
       <DependentUpon>TweakProfileEditor.cs</DependentUpon>
     </Compile>
@@ -200,9 +194,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="GUI\InputDialog.resx">
-      <DependentUpon>InputDialog.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="GUI\ObjectCatalog.resx">
       <DependentUpon>ObjectCatalog.cs</DependentUpon>
     </EmbeddedResource>

@@ -11,6 +11,8 @@ using Microsoft.VisualBasic;
 using Microsoft.VisualBasic.CompilerServices;
 using global::SM64Lib;
 using System.Threading.Tasks;
+using SM64Lib.Patching;
+using Pilz.IO;
 
 namespace SM64_ROM_Manager.PatchScripts
 {
@@ -383,7 +385,7 @@ End Module
         private void TestScript()
         {
             var mgr = new PatchingManager();
-            var res = mgr.CompileScript(tempScript);
+            var res = mgr.CompileScript(tempScript, Publics.General.GetAdditionalReferencedAssemblied());
             string msg = "";
             eTaskDialogIcon icon;
             string title;

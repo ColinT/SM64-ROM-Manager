@@ -17,6 +17,9 @@ using System.Linq;
 using System.IO;
 using Timer = System.Timers.Timer;
 using Microsoft.WindowsAPICodePack.Dialogs.Controls;
+using SM64_ROM_Manager.PatchScripts;
+using Pilz.IO;
+using SM64Lib.Patching;
 
 namespace SM64_ROM_Manager
 {
@@ -34,6 +37,8 @@ namespace SM64_ROM_Manager
         private CustomObject customObject = null;
         private bool isLoadingProps = false;
         private Timer Timer_PropsChanged;
+        private EmbeddedFilesContainer export_EmbeddedFiles = null;
+        private PatchScript export_Script = null;
 
         // C o n s t r u c t o r
 
@@ -239,20 +244,24 @@ namespace SM64_ROM_Manager
 
         private void ExportObjects(string filePath, bool multiExport, string exportName)
         {
+            var objs = GetSelectedCustomObjects();
+            var options = new CustomObjectExportOptions
+            {
+                ExportName = exportName,
+                EmbeddedFiles = export_EmbeddedFiles,
+                Script = export_Script
+            };
+
             if (multiExport)
             {
-                var objs = GetSelectedCustomObjects();
                 foreach (var obj in objs)
                 {
                     var myFilePath = Path.Combine(filePath, obj.Name + ".rmobj");
-                    CustomObjectCollection.Export(myFilePath, obj, exportName);
+                    CustomObjectCollection.Export(myFilePath, obj, options);
                 }
             }
             else
-            {
-                var objs = GetSelectedCustomObjects();
-                CustomObjectCollection.Export(filePath, objs.ToArray(), exportName);
-            }
+                CustomObjectCollection.Export(filePath, objs.ToArray(), options);
         }
 
         private bool IsMultiselect()
@@ -387,6 +396,11 @@ namespace SM64_ROM_Manager
             var isMultiselect = IsMultiselect();
             CommonFileDialog sfd_SM64RM_ExportCustomObjectToFile;
             var tbxName = new CommonFileDialogTextBox("rmobj.name", customObject.Name);
+            var btnAddScript = new CommonFileDialogButton("rmobj.script", "Setup Script") { IsProminent = true };
+
+            btnAddScript.Click += BtnAddScript_Click;
+            export_EmbeddedFiles = new EmbeddedFilesContainer();
+            export_Script = new PatchScript();
 
             if (isMultiselect && MessageBoxEx.Show(this, "You are going to export multiple custom objects. Do you want to save all objects to one single file (Yes) or do you want to save every single object to one file (No)?", "Export Custom Objects", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
                 sfd_SM64RM_ExportCustomObjectToFile = new CommonOpenFileDialog() { IsFolderPicker = true };
@@ -395,10 +409,21 @@ namespace SM64_ROM_Manager
                 sfd_SM64RM_ExportCustomObjectToFile = new CommonSaveFileDialog() { DefaultExtension = FILTER_CUSTOM_OBJECT_EXTENSIONS };
                 sfd_SM64RM_ExportCustomObjectToFile.Filters.Add(new CommonFileDialogFilter(FILTER_CUSTOM_OBJECT_NAMES, FILTER_CUSTOM_OBJECT_EXTENSIONS));
             }
+
             sfd_SM64RM_ExportCustomObjectToFile.Controls.Add(tbxName);
+            sfd_SM64RM_ExportCustomObjectToFile.Controls.Add(btnAddScript);
 
             if (sfd_SM64RM_ExportCustomObjectToFile.ShowDialog(Handle) == CommonFileDialogResult.Ok)
                 ExportObjects(sfd_SM64RM_ExportCustomObjectToFile.FileName, isMultiselect, tbxName.Text);
+        }
+
+        private void BtnAddScript_Click(object sender, EventArgs e)
+        {
+            if (export_EmbeddedFiles is object && export_Script is object)
+            {
+                var editor = new TweakScriptEditor(export_Script, rommgr, export_EmbeddedFiles);
+                editor.ShowDialog(this);
+            }
         }
 
         private void ButtonItem_UploadToDatabase_Click(object sender, EventArgs e)

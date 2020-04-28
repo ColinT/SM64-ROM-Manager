@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
-using SM64_ROM_Manager.PatchScripts;
+using Pilz.IO;
+using SM64Lib.Patching;
 using System;
 using System.Collections.Generic;
 

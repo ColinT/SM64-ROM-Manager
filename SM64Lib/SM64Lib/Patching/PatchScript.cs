@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using global::System.Collections.Specialized;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using Pilz.IO;
 
-namespace SM64_ROM_Manager.PatchScripts
+namespace SM64Lib.Patching
 {
     public class PatchProfile
     {

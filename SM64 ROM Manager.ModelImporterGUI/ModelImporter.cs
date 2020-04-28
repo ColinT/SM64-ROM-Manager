@@ -15,6 +15,7 @@ using global::SM64Lib.Geolayout;
 using global::SM64Lib.Model;
 using global::SM64Lib.TextValueConverter;
 using Z.Collections.Extensions;
+using SM64Lib.Patching;
 
 namespace SM64_ROM_Manager.ModelImporterGUI
 {
@@ -112,8 +113,22 @@ namespace SM64_ROM_Manager.ModelImporterGUI
             int romAddr = preset.RomAddress; // ValueFromText(TextBoxX_RomAddr.Text)
             int bankAddr = preset.RamAddress; // ValueFromText(TextBoxX_BankAddr.Text)
             int maxLength = preset.MaxLength; // ValueFromText(TextBoxX_MaxLength.Text)
-            var pm = new PatchScripts.PatchingManager();
-            var scriptparams = new Dictionary<string, object>() { { "romfile", RomFile }, { "presetName", preset.Name }, { "presetDescription", preset.Description }, { "RomAddress", preset.RomAddress }, { "RamAddress", preset.RamAddress }, { "MaxLength", preset.MaxLength }, { "CollisionPointersArray", preset.CollisionPointers.ToArray() }, { "GeoPointersArray", preset.GeometryPointers.ToArray() }, { "ConvertedModelLength", mdl.Length }, { "ConvertedModel", mdl }, { "profilepath", profile.FileName }, { "files", profile.EmbeddedFiles } };
+            var pm = new PatchingManager();
+            var scriptparams = new Dictionary<string, object>() {
+                { "romfile", RomFile },
+                { "presetName", preset.Name },
+                { "presetDescription", preset.Description },
+                { "RomAddress", preset.RomAddress },
+                { "RamAddress", preset.RamAddress },
+                { "MaxLength", preset.MaxLength },
+                { "CollisionPointersArray", preset.CollisionPointers.ToArray() },
+                { "GeoPointersArray", preset.GeometryPointers.ToArray() },
+                { "ConvertedModelLength", mdl.Length },
+                { "ConvertedModel", mdl },
+                { "profilepath", profile.FileName },
+                { "files", profile.EmbeddedFiles }
+            };
+
             if (maxLength > 0 && mdl.Length > maxLength)
             {
                 MessageBoxEx.Show("Model is bigger then the max allowed length!", "Model too big", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -127,7 +142,7 @@ namespace SM64_ROM_Manager.ModelImporterGUI
             {
                 WriteOutput("Executing Script ...");
                 scriptparams.AddOrUpdate("script", preset.ScriptBefore);
-                pm.Patch(preset.ScriptBefore, this, scriptparams);
+                pm.Patch(preset.ScriptBefore, this, scriptparams, General.GetAdditionalReferencedAssemblied());
             }
 
             int col = -1;
@@ -189,7 +204,7 @@ namespace SM64_ROM_Manager.ModelImporterGUI
             {
                 WriteOutput("Executing Script ...");
                 scriptparams.AddOrUpdate("script", preset.ScriptAfter);
-                pm.Patch(preset.ScriptAfter, this, scriptparams);
+                pm.Patch(preset.ScriptAfter, this, scriptparams, General.GetAdditionalReferencedAssemblied());
             }
 
             if (col > -1)
@@ -304,10 +319,10 @@ namespace SM64_ROM_Manager.ModelImporterGUI
             Flyout1.Close();
         }
 
-        private void EditScript(ref PatchScripts.PatchScript script, ImporterProfile profile)
+        private void EditScript(ref PatchScript script, ImporterProfile profile)
         {
             if (script is null)
-                script = new PatchScripts.PatchScript();
+                script = new PatchScript();
             var editor = new PatchScripts.TweakScriptEditor(script, rommgr, profile.EmbeddedFiles);
             if (editor.ShowDialog(this) == DialogResult.OK)
             {
