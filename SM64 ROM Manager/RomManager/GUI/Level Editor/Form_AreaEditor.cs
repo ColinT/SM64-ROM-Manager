@@ -437,10 +437,10 @@ namespace SM64_ROM_Manager.LevelEditor
                 }
                 if (customObject.BehaviorProps.Behavior is object)
                 {
-                    cpBPToCombo(customObject.BehaviorProps.Behavior.ParamsInfo.BParam1, combo.BParam1);
-                    cpBPToCombo(customObject.BehaviorProps.Behavior.ParamsInfo.BParam2, combo.BParam2);
-                    cpBPToCombo(customObject.BehaviorProps.Behavior.ParamsInfo.BParam3, combo.BParam3);
-                    cpBPToCombo(customObject.BehaviorProps.Behavior.ParamsInfo.BParam4, combo.BParam4);
+                    cpBPToCombo(customObject.BehaviorProps.Behavior.ParamsInfo.Param1, combo.BParam1);
+                    cpBPToCombo(customObject.BehaviorProps.Behavior.ParamsInfo.Param2, combo.BParam2);
+                    cpBPToCombo(customObject.BehaviorProps.Behavior.ParamsInfo.Param3, combo.BParam3);
+                    cpBPToCombo(customObject.BehaviorProps.Behavior.ParamsInfo.Param4, combo.BParam4);
                 }
 
                 // Add to List
@@ -478,10 +478,10 @@ namespace SM64_ROM_Manager.LevelEditor
                 }
                 if (customObject.BehaviorProps.Behavior is object)
                 {
-                    cpBPToBehavior(customObject.BehaviorProps.Behavior.ParamsInfo.BParam1, behavInfo.BParam1);
-                    cpBPToBehavior(customObject.BehaviorProps.Behavior.ParamsInfo.BParam2, behavInfo.BParam2);
-                    cpBPToBehavior(customObject.BehaviorProps.Behavior.ParamsInfo.BParam3, behavInfo.BParam3);
-                    cpBPToBehavior(customObject.BehaviorProps.Behavior.ParamsInfo.BParam4, behavInfo.BParam4);
+                    cpBPToBehavior(customObject.BehaviorProps.Behavior.ParamsInfo.Param1, behavInfo.BParam1);
+                    cpBPToBehavior(customObject.BehaviorProps.Behavior.ParamsInfo.Param2, behavInfo.BParam2);
+                    cpBPToBehavior(customObject.BehaviorProps.Behavior.ParamsInfo.Param3, behavInfo.BParam3);
+                    cpBPToBehavior(customObject.BehaviorProps.Behavior.ParamsInfo.Param4, behavInfo.BParam4);
                 }
 
                 // Add to List

@@ -224,7 +224,7 @@ namespace SM64_ROM_Manager
                     TextBoxX_BehavName.Text = curBehav.Config.Name;
                     checkBoxX_BehavEnableColPtr.Checked = curBehav.EnableCollisionPointer;
                     textBoxX_BehavColPtr.Text = TextFromValue(curBehav.CollisionPointer);
-                    checkBoxX_BehavEnableColPtr.Enabled = !curBehav.Config.IsVanilla;
+                    ButtonX_EditParamInfos.Enabled = !curBehav.Config.IsVanilla;
                     LoadCustomAsmLinkOptionsList();
                 }
                 else if (IsEditScript)
@@ -450,6 +450,8 @@ namespace SM64_ROM_Manager
                 // Add item
                 var item = GetCustomAsmLinkOptionsItem(link);
                 ListViewEx_CustomAsmFunctions.Items.Add(item);
+                foreach (ListViewItem selitem in ListViewEx_CustomAsmFunctions.SelectedItems)
+                    selitem.Selected = false;
                 item.Selected = true;
                 item.EnsureVisible();
             }
@@ -569,6 +571,11 @@ namespace SM64_ROM_Manager
         private void ButtonX_LoopCustomAsmFunction_CheckedChanged(object sender, EventArgs e)
         {
             SaveCustomAsmLinkOptions();
+        }
+
+        private void ButtonX_EditParamInfos_Click(object sender, EventArgs e)
+        {
+            new BehaviorParameterInfoEditor(curBehav.Config.ParamsInfo).ShowDialog(this);
         }
     }
 }

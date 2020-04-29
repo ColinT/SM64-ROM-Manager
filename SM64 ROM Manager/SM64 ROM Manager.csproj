@@ -465,6 +465,12 @@
     <Compile Include="RomManager\GUI\Tools\Behavior Bank Manager\BehaviorBankManager.Designer.cs">
       <DependentUpon>BehaviorBankManager.cs</DependentUpon>
     </Compile>
+    <Compile Include="RomManager\GUI\Tools\Behavior Bank Manager\BehaviorParameterInfoEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RomManager\GUI\Tools\Behavior Bank Manager\BehaviorParameterInfoEditor.Designer.cs">
+      <DependentUpon>BehaviorParameterInfoEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="RomManager\GUI\Tools\Behavior Bank Manager\CustomAsmCodeSelector.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -886,6 +892,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="RomManager\GUI\Tools\Behavior Bank Manager\BehaviorBankManager.resx">
       <DependentUpon>BehaviorBankManager.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RomManager\GUI\Tools\Behavior Bank Manager\BehaviorParameterInfoEditor.de.resx">
+      <DependentUpon>BehaviorParameterInfoEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RomManager\GUI\Tools\Behavior Bank Manager\BehaviorParameterInfoEditor.resx">
+      <DependentUpon>BehaviorParameterInfoEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="RomManager\GUI\Tools\Behavior Bank Manager\CustomAsmCodeSelector.de.resx">
       <DependentUpon>CustomAsmCodeSelector.cs</DependentUpon>

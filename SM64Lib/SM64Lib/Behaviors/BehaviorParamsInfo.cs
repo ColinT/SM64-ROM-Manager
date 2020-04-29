@@ -8,9 +8,9 @@ namespace SM64Lib.Behaviors
 {
     public class BehaviorParamsInfo
     {
-        public BehaviorParamInfo BParam1 { get; } = new BehaviorParamInfo();
-        public BehaviorParamInfo BParam2 { get; } = new BehaviorParamInfo();
-        public BehaviorParamInfo BParam3 { get; } = new BehaviorParamInfo();
-        public BehaviorParamInfo BParam4 { get; } = new BehaviorParamInfo();
+        public BehaviorParamInfo Param1 { get; } = new BehaviorParamInfo();
+        public BehaviorParamInfo Param2 { get; } = new BehaviorParamInfo();
+        public BehaviorParamInfo Param3 { get; } = new BehaviorParamInfo();
+        public BehaviorParamInfo Param4 { get; } = new BehaviorParamInfo();
     }
 }
