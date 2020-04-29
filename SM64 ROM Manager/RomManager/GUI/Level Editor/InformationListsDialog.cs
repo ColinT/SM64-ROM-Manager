@@ -331,9 +331,9 @@ namespace SM64_ROM_Manager.LevelEditor
             foreach (object obj in CurrentCustomObjectList)
                 itemsList.Add(GetItemFrom(obj));
 
-            if (!EnableEdit && avaiableCombos is object)
+            if (!EnableEdit)
             {
-                if (EnableObjCombos)
+                if (EnableObjCombos && avaiableCombos is object)
                 {
                     foreach (ObjectCombo combo in avaiableCombos)
                     {
@@ -341,7 +341,7 @@ namespace SM64_ROM_Manager.LevelEditor
                             itemsList.Add(GetItemFrom(combo));
                     }
                 }
-                else
+                else if (EnableBehavs && avaiableBehaviors is object)
                 {
                     foreach (BehaviorInfo behav in avaiableBehaviors)
                     {
