@@ -336,7 +336,7 @@ namespace SM64_ROM_Manager.LevelEditor
 
             // Init Object Properties Helper
             PropertyTree = AdvPropertyGrid1.PropertyTree;
-            bpMgr = new AdvPropGrid_ObjectPropertiesHelper(AdvPropertyGrid1, MyObjectCombos, nameof(Managed3DObject.BehaviorID), "BParam");
+            bpMgr = new AdvPropGrid_ObjectPropertiesHelper(AdvPropertyGrid1, MyObjectCombos, MyBehaviorInfos, nameof(Managed3DObject.BehaviorID), "BParam");
 
             // Get the PropertyTree of AdvPropertyGrid1
             PropertyTree = AdvPropertyGrid1.PropertyTree;
