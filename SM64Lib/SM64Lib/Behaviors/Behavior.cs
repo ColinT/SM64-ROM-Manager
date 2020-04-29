@@ -144,7 +144,7 @@ namespace SM64Lib.Behaviors
                         if (cmdStartLoop is object)
                             iInsert = cmdStartLoopIndex;
                         else
-                            iInsert = (int)Script.Length - 2;
+                            iInsert = (int)Script.Count - 2;
                     }
 
                     if (knownCustomAsmCommands.ContainsKey(link.CustomAsm))
@@ -162,7 +162,7 @@ namespace SM64Lib.Behaviors
                                 reinsert = true;
                                 iInsert -= 1;
                             }
-                            else if (cmdIndex > cmdStartLoopIndex)
+                            else if (!link.Loop && cmdIndex > cmdStartLoopIndex)
                                 reinsert = true;
 
                             if (reinsert)

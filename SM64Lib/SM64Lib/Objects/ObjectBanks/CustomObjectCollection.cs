@@ -51,14 +51,14 @@ namespace SM64Lib.Objects.ObjectBanks
                 {
                     var behav = cobj.BehaviorProps.Behavior.FindBehavior();
                     if (behav is object)
-                        export.Data.Behaviors.Add(cobj.BehaviorProps.Behavior, behav);
+                        export.Data.Behaviors.AddIfNotContainsKey(cobj.BehaviorProps.Behavior, behav);
                 }
 
                 if (cobj.ModelProps is object)
                 {
                     var mdl = cobj.ModelProps.Model?.FindModel();
                     if (mdl is object)
-                        export.Data.CustomModels.Add(cobj.ModelProps.Model, mdl);
+                        export.Data.CustomModels.AddIfNotContainsKey(cobj.ModelProps.Model, mdl);
                 }
             }
 

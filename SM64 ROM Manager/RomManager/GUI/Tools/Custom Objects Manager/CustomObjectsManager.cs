@@ -406,6 +406,7 @@ namespace SM64_ROM_Manager
                 sfd_SM64RM_ExportCustomObjectToFile = new CommonOpenFileDialog() { IsFolderPicker = true };
             else
             {
+                isMultiselect = false;
                 sfd_SM64RM_ExportCustomObjectToFile = new CommonSaveFileDialog() { DefaultExtension = FILTER_CUSTOM_OBJECT_EXTENSIONS };
                 sfd_SM64RM_ExportCustomObjectToFile.Filters.Add(new CommonFileDialogFilter(FILTER_CUSTOM_OBJECT_NAMES, FILTER_CUSTOM_OBJECT_EXTENSIONS));
             }

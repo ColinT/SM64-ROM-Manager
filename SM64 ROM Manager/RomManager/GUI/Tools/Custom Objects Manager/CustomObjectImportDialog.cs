@@ -48,10 +48,10 @@ namespace SM64_ROM_Manager
                 {
                     flowLayoutPanel1.Controls.Add(
                         new CustomObjectImportPropsEditor(customObject, kvp.Value, romManager)
-                    {
-                        BackColor = Color.Transparent,
-                        Anchor = AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Right
-                    });
+                        {
+                            BackColor = Color.Transparent,
+                            Anchor = AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Right
+                        });
                 }
             }
         }
