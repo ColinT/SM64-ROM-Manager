@@ -214,7 +214,7 @@ namespace SM64_ROM_Manager.My.Resources {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Coloreful PAUSE ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Colorful PAUSE ähnelt.
         /// </summary>
         internal static string HUDPos_PauseMenu_ColorfulPause {
             get {
@@ -250,7 +250,7 @@ namespace SM64_ROM_Manager.My.Resources {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Filles Star Symbol ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Files Star Symbol ähnelt.
         /// </summary>
         internal static string HUDPos_PauseMenu_FilledStarSymbol {
             get {

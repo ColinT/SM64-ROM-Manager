@@ -175,7 +175,7 @@
     <value>Pause Menu Screen in Level</value>
   </data>
   <data name="HUDPos_PauseMenu_ColorfulPause" xml:space="preserve">
-    <value>Coloreful PAUSE</value>
+    <value>Colorful PAUSE</value>
   </data>
   <data name="HUDPos_PauseMenu_CurrentLevelName" xml:space="preserve">
     <value>Current Level Name</value>
@@ -187,7 +187,7 @@
     <value>Empty Star Symbol</value>
   </data>
   <data name="HUDPos_PauseMenu_FilledStarSymbol" xml:space="preserve">
-    <value>Filles Star Symbol</value>
+    <value>Files Star Symbol</value>
   </data>
   <data name="HUDPos_PauseMenu_Menu" xml:space="preserve">
     <value>Pause Menu</value>
