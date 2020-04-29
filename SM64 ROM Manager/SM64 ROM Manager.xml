@@ -685,7 +685,7 @@
         </member>
         <member name="P:SM64_ROM_Manager.My.Resources.HUDOptionsLangRes.HUDPos_PauseMenu_ColorfulPause">
             <summary>
-              Sucht eine lokalisierte Zeichenfolge, die Coloreful PAUSE ähnelt.
+              Sucht eine lokalisierte Zeichenfolge, die Colorful PAUSE ähnelt.
             </summary>
         </member>
         <member name="P:SM64_ROM_Manager.My.Resources.HUDOptionsLangRes.HUDPos_PauseMenu_CurrentLevelName">
@@ -705,7 +705,7 @@
         </member>
         <member name="P:SM64_ROM_Manager.My.Resources.HUDOptionsLangRes.HUDPos_PauseMenu_FilledStarSymbol">
             <summary>
-              Sucht eine lokalisierte Zeichenfolge, die Filles Star Symbol ähnelt.
+              Sucht eine lokalisierte Zeichenfolge, die Files Star Symbol ähnelt.
             </summary>
         </member>
         <member name="P:SM64_ROM_Manager.My.Resources.HUDOptionsLangRes.HUDPos_PauseMenu_Menu">
