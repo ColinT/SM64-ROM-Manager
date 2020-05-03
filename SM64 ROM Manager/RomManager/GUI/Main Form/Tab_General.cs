@@ -101,11 +101,11 @@ namespace SM64_ROM_Manager
 
             microChart1.PieChartStyle.SliceColors.Clear();
             microChart1.PieChartStyle.SliceColors.AddRange(new Color[] {
-                Color.DarkRed,
-                Color.DarkSlateBlue,
+                Color.IndianRed,
+                Color.Violet,
+                Color.DarkBlue,
                 Color.Brown,
-                Color.OrangeRed,
-                BackColor
+                Color.DarkOliveGreen
             });
 
             microChart1.DataPoints = new List<double>() {
