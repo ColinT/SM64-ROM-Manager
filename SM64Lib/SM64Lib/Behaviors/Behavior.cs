@@ -22,6 +22,18 @@ namespace SM64Lib.Behaviors
         public bool EnableCollisionPointer { get; set; }
         public List<int> BehaviorAddressDestinations { get; set; } = new List<int>();
 
+        [JsonIgnore]
+        public long Length
+        {
+            get
+            {
+                if (Config.FixedLength == -1)
+                    return Script.Length;
+                else
+                    return Config.FixedLength;
+            }
+        }
+
         public Behavior() : this(new BehaviorConfig())
         {
         }

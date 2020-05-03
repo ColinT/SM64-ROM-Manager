@@ -323,6 +323,17 @@ namespace SM64Lib
             return new BinaryRom(this, access);
         }
 
+        public (long totalUsedSpace, long maxSpace) GetRomSpaceInfo()
+        {
+            var maxUsedSpace = 0x4000000 - 0x1210000;
+            var usedLevelsSpace = Levels.Length;
+            var usedMusicSpace = MusicList.Length;
+            var usedGlobalBehaviorSpace = GlobalBehaviorBank.Length;
+            var usedGlobalModelsSpace = GlobalModelBank.Length;
+            var totalUsedSpace = usedLevelsSpace + usedMusicSpace + usedGlobalBehaviorSpace + usedGlobalModelsSpace;
+            return (totalUsedSpace, maxUsedSpace);
+        }
+
         public void LoadRom()
         {
             BeginLoadingRom?.Invoke(this, new EventArgs());
