@@ -50,6 +50,10 @@ namespace SM64Lib.Patching
         /// Contains files embedded into this profile.
         /// </summary>
         public EmbeddedFilesContainer EmbeddedFiles { get; } = new EmbeddedFilesContainer();
+        /// <summary>
+        /// Defines an uniquie ID to identify this tweak (e.g. for undo patch).
+        /// </summary>
+        public int ID { get; set; } = -1;
     }
 
     /// <summary>
@@ -84,6 +88,10 @@ namespace SM64Lib.Patching
         /// </summary>
         /// <returns></returns>
         public StringCollection References { get; set; } = new StringCollection();
+        /// <summary>
+        /// Defines an uniquie ID to identify this script (e.g. for undo patch).
+        /// </summary>
+        public int ID { get; set; } = -1;
     }
 
     /// <summary>
