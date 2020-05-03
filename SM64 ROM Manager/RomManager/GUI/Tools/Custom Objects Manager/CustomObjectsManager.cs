@@ -380,6 +380,7 @@ namespace SM64_ROM_Manager
 
         private void ButtonItem_DeleteObject_Click(object sender, EventArgs e)
         {
+            var customObject = this.customObject;
             var n = FindNode(customObject);
 
             if (n is object)
