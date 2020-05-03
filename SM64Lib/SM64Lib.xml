@@ -267,6 +267,11 @@
             Contains files embedded into this profile.
             </summary>
         </member>
+        <member name="P:SM64Lib.Patching.PatchProfile.ID">
+            <summary>
+            Defines an uniquie ID to identify this tweak (e.g. for undo patch).
+            </summary>
+        </member>
         <member name="T:SM64Lib.Patching.PatchScript">
             <summary>
             A Profile containing a script and some descriptions.
@@ -301,6 +306,11 @@
             A collection of Reference Assemblies to bind at compiling script.
             </summary>
             <returns></returns>
+        </member>
+        <member name="P:SM64Lib.Patching.PatchScript.ID">
+            <summary>
+            Defines an uniquie ID to identify this script (e.g. for undo patch).
+            </summary>
         </member>
         <member name="T:SM64Lib.Patching.ScriptType">
             <summary>

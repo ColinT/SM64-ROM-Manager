@@ -1097,6 +1097,11 @@ namespace SM64_ROM_Manager
             return (fn, a);
         }
 
+        public RomSpaceInfo GetRomSpaceInfo()
+        {
+            return RomManager?.GetRomSpaceInfo();
+        }
+
         // L e v e l   M a n a g e r
 
         private (Level level, LevelArea area) GetLevelAndArea(int levelIndex, int areaIndex = -1)

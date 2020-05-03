@@ -195,6 +195,13 @@
     <Reference Include="Ben.Demystifier, Version=0.1.0.0, Culture=neutral, PublicKeyToken=a6d206e05440431a, processorArchitecture=MSIL">
       <HintPath>..\packages\Ben.Demystifier.0.1.6\lib\net45\Ben.Demystifier.dll</HintPath>
     </Reference>
+    <Reference Include="DevComponents.Charts.Design">
+      <HintPath>C:\DotNetBarNew\DevComponents.Charts.Design.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevComponents.DotNetBar.Charts">
+      <HintPath>C:\DotNetBarNew\DevComponents.DotNetBar.Charts.dll</HintPath>
+    </Reference>
     <Reference Include="DevComponents.DotNetBar.Design">
       <HintPath>C:\DotNetBarNew\DevComponents.DotNetBar.Design.dll</HintPath>
     </Reference>
