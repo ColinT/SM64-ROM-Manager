@@ -14,45 +14,18 @@ using global::SM64_ROM_Manager.SettingsManager;
 using Z.Collections.Extensions;
 using Z.Core.Extensions;
 using System.Diagnostics;
+using Timer = System.Timers.Timer;
 
 namespace SM64_ROM_Manager
 {
     public partial class MainForm
     {
-        public MainForm()
-        {
-            Controller = new MainController(this);
 
-            // G u i
-
-            base.Load += Form_Main_Load;
-            base.Shown += Form_Main_Shown;
-            base.FormClosing += Form_Main_FormClosing;
-            this.Activated += MainForm_Activated;
-            // CheckForIllegalCrossThreadCalls = False
-
-            // Stop drawing
-            SuspendLayout();
-
-            // Init Components
-            InitializeComponent();
-
-            // Set instance on Tabs   
-            tabGeneral.Controller = Controller;
-            tabLevelManager.Controller = Controller;
-            tabTextManager.TMController = Controller.TextManagerController;
-            tabMusicManager.Controller = Controller;
-
-            // Set my style
-            SetStyleManagerStyle();
-            Controller.TextManagerController.SendRequestReloadTextManagerLineColors();
-
-            // Resume drawing
-            ResumeLayout();
-        }
+        private bool finishedLoading = false;
+        private bool changingTab = false;
+        Timer recentRomDoubleClick = new Timer { AutoReset = false };
 
         private MainController _Controller;
-
         private MainController Controller
         {
             get
@@ -94,7 +67,6 @@ namespace SM64_ROM_Manager
         }
 
         private WarningBox _WarningBox_RomChanged;
-
         private WarningBox WarningBox_RomChanged
         {
             get
@@ -114,15 +86,38 @@ namespace SM64_ROM_Manager
             }
         }
 
-        private bool finishedLoading = false;
-        private bool changingTab = false;
-
-        private void SetStyleManagerStyle()
+        public MainForm()
         {
-            base.UpdateAmbientColors();
-            tabTextManager.Line_TM_Green.ForeColor = Color.Green;
-            tabTextManager.Line_TM_Warning1.ForeColor = Color.Orange;
-            tabTextManager.Line_TM_Warning2.ForeColor = Color.Red;
+            Controller = new MainController(this);
+
+            // G u i
+
+            base.Load += Form_Main_Load;
+            base.Shown += Form_Main_Shown;
+            base.FormClosing += Form_Main_FormClosing;
+            this.Activated += MainForm_Activated;
+            // CheckForIllegalCrossThreadCalls = False
+
+            // Stop drawing
+            SuspendLayout();
+
+            // Init Components
+            InitializeComponent();
+            TabControl1.Dock = DockStyle.Fill;
+
+            // Set instance on Tabs   
+            tabGeneral.Controller = Controller;
+            tabLevelManager.Controller = Controller;
+            tabTextManager.TMController = Controller.TextManagerController;
+            tabMusicManager.Controller = Controller;
+
+            // Set my style
+            UpdateAmbientColors();
+            UpdatedAmbientColors += (_, __)
+                => Controller.TextManagerController.SendRequestReloadTextManagerLineColors();
+
+            // Resume drawing
+            ResumeLayout(false);
         }
 
         private void Controller_StatusTextChanged(StatusTextChangedEventArgs e)
@@ -267,6 +262,7 @@ namespace SM64_ROM_Manager
             tabGeneral.ItemPanel_RecentFiles.Items.Add(di_Open);
             int cindex = 1;
             Publics.Publics.MergeRecentFiles(Settings.RecentFiles.RecentROMs);
+
             foreach (string r in Settings.RecentFiles.RecentROMs)
             {
                 if (File.Exists(r))
@@ -294,9 +290,18 @@ namespace SM64_ROM_Manager
 
         private void MenuItem_RecentROMs_Click(object sender, EventArgs e)
         {
-            if (Controller.OpenRom(Settings.RecentFiles.RecentROMs[Conversions.ToInteger(tabGeneral.ItemPanel_RecentFiles.Items.IndexOf((BaseItem)sender) - 1)]))
+            if (!recentRomDoubleClick.Enabled)
             {
-                tabGeneral.Refresh();
+                recentRomDoubleClick.Interval = SystemInformation.DoubleClickTime;
+                recentRomDoubleClick.Start();
+
+                var index = Conversions.ToInteger(tabGeneral.ItemPanel_RecentFiles.Items.IndexOf((BaseItem)sender) - 1);
+                if (index >= 0 && index < Settings.RecentFiles.RecentROMs.Count)
+                {
+                    var file = Settings.RecentFiles.RecentROMs[index];
+                    if (Controller.OpenRom(file))
+                        tabGeneral.Refresh();
+                }
             }
         }
 
@@ -701,7 +706,21 @@ namespace SM64_ROM_Manager
 
         private void ButtonItem_GlobalBehaviorBank_Click(object sender, EventArgs e)
         {
-            Controller.OpenGlobalBehaviorManager();
+            if (Controller.HasRomLoaded())
+            {
+                var open = false;
+
+                if (Controller.IsGlobalBehaviorBankEnabled())
+                    open = true;
+                else if (MessageBoxEx.Show(this, Form_Main_Resources.MsgBox_EnableGlobalBehaviorBank, Form_Main_Resources.MsgBox_EnableGlobalBehaviorBank_Title, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    Controller.EnableGlobalBehaviorBank();
+                    open = true;
+                }
+
+                if (open)
+                    Controller.OpenGlobalBehaviorManager();
+            }
         }
 
         private void ButtonItem_CustomObjects_Click(object sender, EventArgs e)
@@ -717,6 +736,11 @@ namespace SM64_ROM_Manager
         private void ButtonItem_HackingDocuments_Click(object sender, EventArgs e)
         {
             Controller.CallPublicHackingDocuments();
+        }
+
+        private void ButtonItem_GlobalAsmCodes_Click(object sender, EventArgs e)
+        {
+            Controller.OpenCustomAsmCodes();
         }
     }
 }

@@ -129,11 +129,17 @@
   <data name="ButtonItem_RemoveBehav.Text" xml:space="preserve">
     <value>Verhalten entfernen</value>
   </data>
+  <data name="ButtonItem_Advanced.Text" xml:space="preserve">
+    <value>Erweitert</value>
+  </data>
   <data name="labelItem1.Text" xml:space="preserve">
     <value>Vorlage</value>
   </data>
   <data name="ButtonItem_NewBehav_SolidObject.Text" xml:space="preserve">
     <value>Solides Objekt</value>
+  </data>
+  <data name="ButtonItem_DisableGlobaleBehaviorBank.Text" xml:space="preserve">
+    <value>Globale Verhaltens-Bank deaktivieren</value>
   </data>
   <data name="columnHeader2.Text" xml:space="preserve">
     <value>Adresse</value>
@@ -149,16 +155,43 @@
     <value>102, 32</value>
   </data>
   <data name="textBoxX_BehavColPtr.Size" type="System.Drawing.Size, System.Drawing">
-    <value>176, 20</value>
+    <value>196, 20</value>
   </data>
   <data name="checkBoxX_BehavEnableColPtr.Text" xml:space="preserve">
     <value>Aktiviert</value>
+  </data>
+  <data name="columnHeader4.Text" xml:space="preserve">
+    <value>Wdh.</value>
+  </data>
+  <data name="ButtonX_AddCustomAsmFunction.Text" xml:space="preserve">
+    <value>Hinzufügen</value>
+  </data>
+  <data name="ButtonX_RemoveCustomAsmFunction.Text" xml:space="preserve">
+    <value>Entfernen</value>
+  </data>
+  <data name="ButtonX_LoopCustomAsmFunction.Text" xml:space="preserve">
+    <value>Wiederholung</value>
+  </data>
+  <data name="ButtonX_EditParamInfos.Location" type="System.Drawing.Point, System.Drawing">
+    <value>102, 60</value>
+  </data>
+  <data name="ButtonX_EditParamInfos.Size" type="System.Drawing.Size, System.Drawing">
+    <value>94, 23</value>
+  </data>
+  <data name="ButtonX_EditParamInfos.Text" xml:space="preserve">
+    <value>Bearbeiten</value>
   </data>
   <data name="TabItem_BehavProps.Text" xml:space="preserve">
     <value>Eigenschaften</value>
   </data>
   <data name="layoutControlItem2.Text" xml:space="preserve">
     <value>Kollisions-Pointer:</value>
+  </data>
+  <data name="layoutControlItem8.Text" xml:space="preserve">
+    <value>Parameterinfos:</value>
+  </data>
+  <data name="layoutControlItem4.Text" xml:space="preserve">
+    <value>Benutzerdefinierte ASM-Funktionen:</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

@@ -12,6 +12,8 @@ using Microsoft.VisualBasic.CompilerServices;
 using global::SM64_ROM_Manager.Publics;
 using Microsoft.VisualBasic;
 using static Microsoft.VisualBasic.CompilerServices.LikeOperator;
+using SM64Lib.Patching;
+using DevComponents.DotNetBar.Controls;
 
 namespace SM64_ROM_Manager.PatchScripts
 {
@@ -32,7 +34,7 @@ namespace SM64_ROM_Manager.PatchScripts
         }
 
         // E v e n t s
-
+        
         public static event TweakBeforeApplyEventHandler TweakBeforeApply;
         public delegate void TweakBeforeApplyEventHandler();
 
@@ -110,10 +112,15 @@ namespace SM64_ROM_Manager.PatchScripts
             string pathTweaks = General.MyTweaksPath;
             var mgr = new PatchingManager();
             myPatchs.Clear();
+
+            var nullVersion = new Version("0.0.0.0");
+            var appVersion = new Version(Application.ProductVersion);
+
             foreach (string f in Directory.GetFiles(pathTweaks, "*.xml", SearchOption.AllDirectories).Concat(Directory.GetFiles(pathTweaks, "*.json", SearchOption.AllDirectories)))
             {
                 var p = mgr.Read(f);
-                myPatchs.Add(p);
+                if (p.MinVersion <= appVersion && (p.MaxVersion == nullVersion || p.MaxVersion >= appVersion))
+                    myPatchs.Add(p);
             }
 
             myPatchs = myPatchs.OrderBy(n => n.Name).ToList();
@@ -233,6 +240,7 @@ namespace SM64_ROM_Manager.PatchScripts
         private void AddNewScript(string name, PatchProfile patch)
         {
             var script = new PatchScript();
+            script.ID.Generate();
             script.Name = name;
             patch.Scripts.Add(script);
             var comboItem = new ComboItem();
@@ -242,15 +250,19 @@ namespace SM64_ROM_Manager.PatchScripts
             ComboBoxEx_Scripts.SelectedItem = comboItem;
         }
 
-        private void AddNewPatch(string name, string description, Version version, string firstScriptName)
+        private void AddNewPatch(string name, string description, Version version, Version minAppVersion, Version maxAppVersion, string firstScriptName)
         {
             var patch = new PatchProfile()
             {
                 Name = name,
                 Description = description,
-                Version = version
+                Version = version,
+                MinVersion = minAppVersion,
+                MaxVersion = maxAppVersion
             };
+            patch.ID.Generate();
             var script = new PatchScript() { Name = firstScriptName };
+            script.ID.Generate();
             patch.Scripts.Add(script);
             var btnItem = GetButtonItemFromPatch(patch);
             ItemListBox1.Items.Add(btnItem);
@@ -299,7 +311,9 @@ namespace SM64_ROM_Manager.PatchScripts
             {
                 Titel = patch.Name,
                 Description = patch.Description,
-                Version = patch.Version
+                Version = patch.Version,
+                MinAppVersion = patch.MinVersion,
+                MaxAppVersion = patch.MaxVersion
             };
             if (editor.ShowDialog(this) == DialogResult.OK)
             {
@@ -309,6 +323,8 @@ namespace SM64_ROM_Manager.PatchScripts
                 patch.Name = editor.Titel.Trim();
                 patch.Description = editor.Description.Trim();
                 patch.Version = editor.Version;
+                patch.MinVersion = editor.MinAppVersion;
+                patch.MaxVersion = editor.MaxAppVersion;
 
                 if ((oldName ?? "") != (patch.Name ?? ""))
                 {
@@ -397,11 +413,12 @@ namespace SM64_ROM_Manager.PatchScripts
             {
                 Titel = "New Profile",
                 Description = string.Empty,
-                Version = new Version("1.0.0.0")
+                Version = new Version("1.0.0.0"),
+                MinAppVersion = new Version(Application.ProductVersion)
             };
             if (frm.ShowDialog() == DialogResult.OK)
             {
-                AddNewPatch(frm.Titel, frm.Description, frm.Version, "New Script");
+                AddNewPatch(frm.Titel, frm.Description, frm.Version, frm.MinAppVersion, frm.MaxAppVersion, "New Script");
             }
         }
 
@@ -427,9 +444,11 @@ namespace SM64_ROM_Manager.PatchScripts
         private void ButtonX6_Click(object sender, EventArgs e)
         {
             var script = GetSelectedScript();
-            if (script is object)
+            var patch = GetSelectedPatch();
+
+            if (script is object && patch is object)
             {
-                var editor = new TweakScriptEditor(script, rommgr);
+                var editor = new TweakScriptEditor(script, rommgr, patch.EmbeddedFiles);
                 Flyout1.Close();
                 editor.ShowDialog(this);
                 ComboItem ci = (ComboItem)ComboBoxEx_Scripts.SelectedItem;
@@ -469,7 +488,18 @@ namespace SM64_ROM_Manager.PatchScripts
             {
                 TweakBeforeApply?.Invoke();
                 var mgr = new PatchingManager();
-                mgr.Patch(script, rommgr, owner, new Dictionary<string, object>() { { "romfile", rommgr.RomFile }, { "rommgr", rommgr }, { "profilepath", profile?.FileName } });
+                mgr.Patch(
+                    script,
+                    rommgr,
+                    owner,
+                    new Dictionary<string, object>() {
+                        { "romfile", rommgr.RomFile },
+                        { "rommgr", rommgr },
+                        { "profilepath", profile?.FileName },
+                        { "files", profile.EmbeddedFiles },
+                        { "owner", owner }
+                    },
+                    General.GetAdditionalReferencedAssemblied());
                 TweakAfterApply?.Invoke();
                 MessageBoxEx.Show(owner, "Patched successfully.", "Done", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -482,7 +512,53 @@ namespace SM64_ROM_Manager.PatchScripts
 
         private void ItemListBox1_ItemMouseClick(object sender, EventArgs e)
         {
-            Flyout1.Show(new Rectangle(new Point((int)(Cursor.Position.X - Flyout1.Content.Width / (double)2), Cursor.Position.Y), Size.Empty), DevComponents.DotNetBar.Controls.ePointerSide.Top, (int)(Flyout1.Content.Width / (double)2), ItemListBox1);
+            var contentSize = Flyout1.GetFlyoutFormSize();
+            var cursorPosition = Cursor.Position;
+            var pos = ePointerSide.Top;
+            var screen = Screen.FromPoint(cursorPosition);
+            var workingArea = screen.Bounds;
+            Rectangle rectContent = default;
+            var success = false;
+
+            bool checkIfInBounds(Rectangle rectangle)
+            {
+                if (rectangle.Bottom < workingArea.Bottom &&
+                    rectangle.Right < workingArea.Right &&
+                    rectangle.Top >= workingArea.Top &&
+                    rectangle.Left >= workingArea.Left)
+                    return true;
+                else
+                    return false;
+            }
+
+            foreach (var testpost in new[] { ePointerSide.Top, ePointerSide.Bottom })
+            {
+                if (!success)
+                {
+                    switch (testpost)
+                    {
+                        case ePointerSide.Top:
+                            rectContent = new Rectangle(new Point((int)(cursorPosition.X - contentSize.Width / 2.0), cursorPosition.Y), contentSize);
+                            break;
+                        case ePointerSide.Bottom:
+                            rectContent = new Rectangle(new Point((int)(cursorPosition.X - contentSize.Width / 2.0), cursorPosition.Y - contentSize.Height), contentSize);
+                            break;
+                    }
+
+                    if (checkIfInBounds(rectContent))
+                    {
+                        success = true;
+                        pos = testpost;
+                    }
+                }
+            }
+
+            if (success)
+            {
+                var rectShowBounds = new Rectangle(rectContent.Location, Size.Empty);
+                var pointerOffset = (int)(Flyout1.Content.Width / 2.0 - FlyoutForm.PointerSize.Width / 2.0);
+                Flyout1.Show(rectShowBounds, pos, pointerOffset, ItemListBox1);
+            }
         }
 
         private void ButtonX7_Click(object sender, EventArgs e)

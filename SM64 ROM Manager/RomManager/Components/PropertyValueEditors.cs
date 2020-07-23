@@ -17,6 +17,7 @@ namespace SM64_ROM_Manager.PropertyValueEditors
     internal enum SelectedTypes
     {
         SelectedItem,
+        SelectedComboItem,
         SelectedIndex
     }
 
@@ -47,6 +48,7 @@ namespace SM64_ROM_Manager.PropertyValueEditors
             editor.Items.AddRange((object[])Items);
             editor.DropDownWidth = DropDownWidth;
             editor.SelectedType = SelectedType;
+            editor.DisplayMember = "Text";
             return editor;
         }
 
@@ -56,23 +58,13 @@ namespace SM64_ROM_Manager.PropertyValueEditors
 
             public Font EditorFont
             {
-                get
-                {
-                    return Font;
-                }
-
-                set
-                {
-                    Font = value;
-                }
+                get => Font;
+                set => Font = value;
             }
 
             public bool IsEditorFocused
             {
-                get
-                {
-                    return Focused;
-                }
+                get => Focused;
             }
 
             public object EditValue
@@ -85,38 +77,37 @@ namespace SM64_ROM_Manager.PropertyValueEditors
                         switch (switchExpr)
                         {
                             case SelectedTypes.SelectedIndex:
-                                {
-                                    return SelectedIndex.ToString(); // SelectedTypes.SelectedItem
-                                }
-
-                            default:
-                                {
-                                    return SelectedItem;
-                                }
+                                return SelectedIndex.ToString(); // SelectedTypes.SelectedItem
+                            case SelectedTypes.SelectedComboItem:
+                                return (SelectedItem as ComboItem)?.Tag;
+                            case SelectedTypes.SelectedItem:
+                                return SelectedItem;
                         }
                     }
-                    else
-                    {
-                        return null;
-                    }
+                    return null;
                 }
-
                 set
                 {
                     var switchExpr = SelectedType;
                     switch (switchExpr)
                     {
                         case SelectedTypes.SelectedIndex:
+                            SelectedIndex = Conversions.ToInteger(value);
+                            break;
+                        case SelectedTypes.SelectedComboItem:
+                            var found = false;
+                            foreach (ComboItem item in Items)
                             {
-                                SelectedIndex = Conversions.ToInteger(value);
-                                break;
+                                if (!found && item.Tag == value)
+                                {
+                                    SelectedItem = item;
+                                    found = true;
+                                }
                             }
-
+                            break;
                         case SelectedTypes.SelectedItem:
-                            {
-                                SelectedItem = value;
-                                break;
-                            }
+                            SelectedItem = value;
+                            break;
                     }
                 }
             }
@@ -355,51 +346,51 @@ namespace SM64_ROM_Manager.PropertyValueEditors
                         }
                     }
 
-                    var switchExpr = ValueType;
-                    switch (switchExpr)
+                    try
+                    {
+                        switch (ValueType)
+                        {
+                            case TypeCode.Int32:
+                                return Conversions.ToInteger(val);
+                            case TypeCode.UInt32:
+                                return Conversions.ToUInteger(val);
+                            case TypeCode.Byte:
+                                return Conversions.ToByte(val);
+                            case TypeCode.SByte:
+                                return Conversions.ToSByte(val);
+                            case TypeCode.Int16:
+                                return Conversions.ToShort(val);
+                            case TypeCode.UInt16:
+                                return Conversions.ToUShort(val);
+                            case TypeCode.Int64:
+                                return Conversions.ToLong(val);
+                            case TypeCode.UInt64:
+                                return Conversions.ToULong(val);
+                        }
+                    }
+                    catch (OverflowException) { }
+
+                    switch (ValueType)
                     {
                         case TypeCode.Int32:
-                            {
-                                return Conversions.ToInteger(val);
-                            }
-
+                            return 0;
                         case TypeCode.UInt32:
-                            {
-                                return Conversions.ToUInteger(val);
-                            }
-
+                            return 0U;
                         case TypeCode.Byte:
-                            {
-                                return Conversions.ToByte(val);
-                            }
-
+                            return (byte)0;
                         case TypeCode.SByte:
-                            {
-                                return Conversions.ToSByte(val);
-                            }
-
+                            return (sbyte)0;
                         case TypeCode.Int16:
-                            {
-                                return Conversions.ToShort(val);
-                            }
-
+                            return (short)0;
                         case TypeCode.UInt16:
-                            {
-                                return Conversions.ToUShort(val);
-                            }
-
+                            return (ushort)0;
                         case TypeCode.Int64:
-                            {
-                                return Conversions.ToLong(val);
-                            }
-
+                            return 0L;
                         case TypeCode.UInt64:
-                            {
-                                return Conversions.ToULong(val);
-                            }
+                            return 0UL;
+                        default:
+                            return 0;
                     }
-
-                    return 0;
                 }
 
                 set
@@ -502,19 +493,6 @@ namespace SM64_ROM_Manager.PropertyValueEditors
             }
         }
     }
-
-    // Friend Class PropertyIntegerEditorX
-    // Inherits PropertyIntegerEditor
-
-    // Public Overrides Function CreateEditor(propertyDescriptor As PropertyDescriptor, targetObject As Object) As IPropertyValueEditor
-    // Dim editor As IPropertyValueEditor = MyBase.CreateEditor(propertyDescriptor, targetObject)
-
-    // 'Set Horizontal Text Alignment
-    // editor.SetValue("InputHorizontalAlignment", eHorizontalAlignment.Left)
-
-    // Return editor
-    // End Function
-    // End Class
 
     internal class PropertyIntegerEditorX : PropertyValueEditor
     {

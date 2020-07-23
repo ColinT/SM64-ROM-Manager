@@ -59,8 +59,8 @@
     <DefineConstants>TRACE;RelMono</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EPPlus, Version=5.1.0.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
-      <HintPath>..\packages\EPPlus.5.1.0\lib\net45\EPPlus.dll</HintPath>
+    <Reference Include="EPPlus, Version=5.1.2.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.5.1.2\lib\net45\EPPlus.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="DevComponents.DotNetBar.Design, Version=14.0.0.3, Culture=neutral, PublicKeyToken=2c9ff1fddc42653c, processorArchitecture=MSIL">
@@ -69,7 +69,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="DevComponents.DotNetBar.Layout">
-      <HintPath>C:\DotNetBarNew\DevComponents.DotNetBar.Layout.dll</HintPath>
+      <HintPath>..\Shared Libs\DotNetBarNew\DevComponents.DotNetBar.Layout.dll</HintPath>
     </Reference>
     <Reference Include="DevComponents.DotNetBar.Layout.Design">
       <HintPath>..\Shared Libs\DotNetBarNew\DevComponents.DotNetBar.Layout.Design.dll</HintPath>
@@ -300,6 +300,9 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{94E38DFF-614B-4CBD-B67C-F211BB35CE8B}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_folder_16px.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

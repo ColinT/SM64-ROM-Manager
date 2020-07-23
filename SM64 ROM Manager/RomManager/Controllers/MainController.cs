@@ -45,17 +45,10 @@ namespace SM64_ROM_Manager
 
         // E v e n t s
 
-        public event RomLoadingEventHandler RomLoading;
-        public delegate void RomLoadingEventHandler();
-
-        public event RomLoadedEventHandler RomLoaded;
-        public delegate void RomLoadedEventHandler();
-
-        public event RomMusicLoadedEventHandler RomMusicLoaded;
-        public delegate void RomMusicLoadedEventHandler();
-
-        public event RomLevelsLoadedEventHandler RomLevelsLoaded;
-        public delegate void RomLevelsLoadedEventHandler();
+        public event Action RomLoading;
+        public event Action RomLoaded;
+        public event Action RomMusicLoaded;
+        public event Action RomLevelsLoaded;
 
         public event StatusTextChangedEventHandler StatusTextChanged;
         public delegate void StatusTextChangedEventHandler(EventArguments.StatusTextChangedEventArgs e);
@@ -63,59 +56,26 @@ namespace SM64_ROM_Manager
         public event OtherStatusInfosChangedEventHandler OtherStatusInfosChanged;
         public delegate void OtherStatusInfosChangedEventHandler(EventArguments.OtherStatusInfosChangedEventArgs e);
 
-        public event RecentFilesChangedEventHandler RecentFilesChanged;
-        public delegate void RecentFilesChangedEventHandler();
-
-        public event RomFileRenamedEventHandler RomFileRenamed;
-        public delegate void RomFileRenamedEventHandler();
-
-        public event RomFileDeletedEventHandler RomFileDeleted;
-        public delegate void RomFileDeletedEventHandler();
-
-        public event RomFileChangedEventHandler RomFileChanged;
-        public delegate void RomFileChangedEventHandler();
+        public event Action RecentFilesChanged;
+        public event Action RomFileRenamed;
+        public event Action RomFileDeleted;
+        public event Action RomFileChanged;
 
         public event RomChangesAvailableEventHandler RomChangesAvailable;
         public delegate void RomChangesAvailableEventHandler(EventArguments.RomChangesAvaiableEventArgs e);
 
-        public event MusicSequenceRemovedEventHandler MusicSequenceRemoved;
-        public delegate void MusicSequenceRemovedEventHandler(EventArguments.MusicSequenceEventArgs e);
-
-        public event MusicSequenceAddedEventHandler MusicSequenceAdded;
-        public delegate void MusicSequenceAddedEventHandler(EventArguments.MusicSequenceEventArgs e);
-
-        public event MusicSequenceChangedEventHandler MusicSequenceChanged;
-        public delegate void MusicSequenceChangedEventHandler(EventArguments.MusicSequenceEventArgs e);
+        public event MusicSequenceEventHandler MusicSequenceRemoved;
+        public event MusicSequenceEventHandler MusicSequenceAdded;
+        public event MusicSequenceEventHandler MusicSequenceChanged;
+        public delegate void MusicSequenceEventHandler(EventArguments.MusicSequenceEventArgs e);
 
         public event RequestIsChangingTabEventHandler RequestIsChangingTab;
         public delegate void RequestIsChangingTabEventHandler(EventArguments.EnabledEventArgs e);
 
-        public event LevelSpecialItemAddedEventHandler LevelSpecialItemAdded;
-        public delegate void LevelSpecialItemAddedEventHandler(EventArguments.SpecialItemEventArgs e);
-
-        public event LevelSpecialItemRemovedEventHandler LevelSpecialItemRemoved;
-        public delegate void LevelSpecialItemRemovedEventHandler(EventArguments.SpecialItemEventArgs e);
-
-        public event LevelSpecialItemChangedEventHandler LevelSpecialItemChanged;
-        public delegate void LevelSpecialItemChangedEventHandler(EventArguments.SpecialItemEventArgs e);
-
-        public event LevelAddedEventHandler LevelAdded;
-        public delegate void LevelAddedEventHandler(EventArguments.LevelEventArgs e);
-
-        public event LevelRemovedEventHandler LevelRemoved;
-        public delegate void LevelRemovedEventHandler(EventArguments.LevelEventArgs e);
-
-        public event LevelAreaAddedEventHandler LevelAreaAdded;
-        public delegate void LevelAreaAddedEventHandler(EventArguments.LevelAreaEventArgs e);
-
-        public event LevelAreaRemovedEventHandler LevelAreaRemoved;
-        public delegate void LevelAreaRemovedEventHandler(EventArguments.LevelAreaEventArgs e);
-
-        public event LevelIDChangedEventHandler LevelIDChanged;
-        public delegate void LevelIDChangedEventHandler(EventArguments.LevelEventArgs e);
-
-        public event LevelCustomNameChangedEventHandler LevelCustomNameChanged;
-        public delegate void LevelCustomNameChangedEventHandler(EventArguments.LevelEventArgs e);
+        public event SpecialItemEventHandler LevelSpecialItemAdded;
+        public event SpecialItemEventHandler LevelSpecialItemRemoved;
+        public event SpecialItemEventHandler LevelSpecialItemChanged;
+        public delegate void SpecialItemEventHandler(EventArguments.SpecialItemEventArgs e);
 
         public event LevelBackgroundModeChangedEventHandler LevelBackgroundModeChanged;
         public delegate void LevelBackgroundModeChangedEventHandler(EventArguments.LevelBackgroundModeChangedEventArgs e);
@@ -126,27 +86,27 @@ namespace SM64_ROM_Manager
         public event LevelAreaBackgroundModeChangedEventHandler LevelAreaBackgroundModeChanged;
         public delegate void LevelAreaBackgroundModeChangedEventHandler(EventArguments.LevelAreaBackgroundModeChangedEventArgs e);
 
-        public event LevelCustomObjectsCountChangedEventHandler LevelCustomObjectsCountChanged;
-        public delegate void LevelCustomObjectsCountChangedEventHandler(EventArguments.LevelEventArgs e);
+        public event LevelEventHandler LevelAdded;
+        public event LevelEventHandler LevelRemoved;
+        public event LevelEventHandler LevelIDChanged;
+        public event LevelEventHandler LevelCustomNameChanged;
+        public event LevelEventHandler LevelCustomObjectsCountChanged;
+        public delegate void LevelEventHandler(EventArguments.LevelEventArgs e);
 
-        public event LevelAreaScrollingTextureCountChangedEventHandler LevelAreaScrollingTextureCountChanged;
-        public delegate void LevelAreaScrollingTextureCountChangedEventHandler(EventArguments.LevelAreaEventArgs e);
+        public event LevelAreaEventHandler LevelAreaAdded;
+        public event LevelAreaEventHandler LevelAreaRemoved;
+        public event LevelAreaEventHandler LevelAreaScrollingTextureCountChanged;
+        public event LevelAreaEventHandler LevelAreaIDChanged;
+        public delegate void LevelAreaEventHandler(EventArguments.LevelAreaEventArgs e);
 
-        public event ObjectBankDataChangedEventHandler ObjectBankDataChanged;
-        public delegate void ObjectBankDataChangedEventHandler();
-
-        public event ErrorBecauseNoRomLoadedEventHandler ErrorBecauseNoRomLoaded;
-        public delegate void ErrorBecauseNoRomLoadedEventHandler();
-
-        public event RomSavedEventHandler RomSaved;
-        public delegate void RomSavedEventHandler();
-
-        public event RomSavingEventHandler RomSaving;
-        public delegate void RomSavingEventHandler();
+        public event Action ObjectBankDataChanged;
+        public event Action ErrorBecauseNoRomLoaded;
+        public event Action RomSaved;
+        public event Action RomSaving;
 
         // C o n s t a n t s
 
-        public const string UPDATE_URL = "https://pilzinsel64.com/pilzcloud/index.php/s/sm64rm-allupdatepackages/download?path=%2F&files=CurrentUpdates.json";
+        public const string UPDATE_URL = "https://pilzinsel64.com/pilzcloud/s/sm64rm-allupdatepackages/download?path=%2F&files=CurrentUpdates.json";
 
         // F i e l d s
 
@@ -625,6 +585,8 @@ namespace SM64_ROM_Manager
                     {
                         throw new RomCompatiblityException("Rom Length is incompatible!");
                     }
+                    else
+                        newrommgr.WritingNewProgramVersion += RomManager_WritingNewRomVersion;
                 }
 
                 if (!newrommgr.CheckROM())
@@ -635,6 +597,8 @@ namespace SM64_ROM_Manager
                 {
                     throw new RomCompatiblityException(SM64_ROM_Manager.My.Resources.Form_Main_Resources.Exception_RomWasUsedBySM64E);
                 }
+                
+                newrommgr.WritingNewProgramVersion -= RomManager_WritingNewRomVersion;
 
                 loadRecentROM = true;
                 Publics.Publics.AddRecentFile(Settings.RecentFiles.RecentROMs, Romfile);
@@ -654,6 +618,10 @@ namespace SM64_ROM_Manager
                 catch (ReadOnlyException ex)
                 {
                     MessageBoxEx.Show(ex.Message, "Loading ROM", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                catch (InvalidMD5HashException ex)
+                {
+                    MessageBoxEx.Show(string.Format(Form_Main_Resources.MsgBox_InvalidRomHash, RomManager.SUPER_MARIO_64_U_MD5HASH), "Loading ROM", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 catch (Exception)
                 {
@@ -798,6 +766,15 @@ namespace SM64_ROM_Manager
             }
         }
 
+        public void OpenCustomAsmCodes()
+        {
+            if (RomManager is object)
+            {
+                var mgr = new CustomAsmCodesManager(RomManager.GlobalCustomAsmBank, RomManager);
+                mgr.Show();
+            }
+        }
+
         public void OpenPluginManager()
         {
             var frm = new SM64_ROM_Manager.PluginInstallerForm();
@@ -808,6 +785,22 @@ namespace SM64_ROM_Manager
         {
             var frmHUD = new SM64_ROM_Manager.HUDOptionsForm(RomManager);
             frmHUD.ShowDialog();
+        }
+
+        public bool IsGlobalBehaviorBankEnabled()
+        {
+            return RomManager.RomConfig.GlobalBehaviorBank.Enabled;
+        }
+
+        public void EnableGlobalBehaviorBank()
+        {
+            if (RomManager is object)
+                RomManager.LoadGlobalBehaviorBank(true);
+        }
+
+        public bool HasRomLoaded()
+        {
+            return RomManager is object;
         }
 
         // T o o l s
@@ -1015,8 +1008,8 @@ namespace SM64_ROM_Manager
 
         public void OpenThankYouPage()
         {
-            var frm = new SM64_ROM_Manager.ThankYouForm();
-            frm.ShowDialog(mainForm);
+            const string webAddress = "https://pilzinsel64.com/thank-you/";
+            Process.Start(webAddress);
         }
 
         private void RomWatcher_Changed(object sender, FileSystemEventArgs e)
@@ -1075,7 +1068,8 @@ namespace SM64_ROM_Manager
             var myVersion = new Version(Application.ProductVersion);
             if (Settings.General.LastThankYouPageSeen is null || Settings.General.LastThankYouPageSeen < myVersion)
             {
-                OpenThankYouPage();
+                if (!Debugger.IsAttached)
+                    OpenThankYouPage();
                 Settings.General.LastThankYouPageSeen = myVersion;
             }
         }
@@ -1086,6 +1080,11 @@ namespace SM64_ROM_Manager
             var fn = Path.GetFileName(fp);
             var a = RomManager.IsNewROM || File.Exists(fp);
             return (fn, a);
+        }
+
+        public RomSpaceInfo GetRomSpaceInfo()
+        {
+            return RomManager?.GetRomSpaceInfo();
         }
 
         // L e v e l   M a n a g e r
@@ -1121,7 +1120,7 @@ namespace SM64_ROM_Manager
 
         public void OpenAreaEditor(int levelIndex, int areaIndex)
         {
-            if (levelIndex >= 0)
+            if (levelIndex >= 0 && areaIndex >= 0)
             {
                 var curLvl = RomManager.Levels[levelIndex];
                 LevelEditor.Form_AreaEditor openAreaEditor = (LevelEditor.Form_AreaEditor)GetAreaEditor(curLvl);
@@ -1202,13 +1201,16 @@ namespace SM64_ROM_Manager
         public void EditLevelAreaSpecialItem(int levelIndex, int areaIndex, int sbIndex)
         {
             var lvl = GetLevelAndArea(levelIndex, areaIndex);
-            var sb = lvl.area.SpecialBoxes[sbIndex];
-            void method()
+            var sb = lvl.area.SpecialBoxes.ElementAt(sbIndex);
+            if (lvl.area is object && sb is object)
             {
-                this.SetLevelscriptNeedToSave(lvl.level);
-                LevelSpecialItemChanged?.Invoke(new SM64_ROM_Manager.EventArguments.SpecialItemEventArgs(sbIndex, levelIndex, areaIndex));
-            };
-            AddEditLevelAreaSpecialItem(sb, method);
+                void method()
+                {
+                    this.SetLevelscriptNeedToSave(lvl.level);
+                    LevelSpecialItemChanged?.Invoke(new SM64_ROM_Manager.EventArguments.SpecialItemEventArgs(sbIndex, levelIndex, areaIndex));
+                };
+                AddEditLevelAreaSpecialItem(sb, method);
+            }
         }
 
         private void AddEditLevelAreaSpecialItem(SpecialBox sb, Action finishMethod)
@@ -1375,6 +1377,35 @@ namespace SM64_ROM_Manager
             }
         }
 
+        public bool ChangeAreaID(int levelIndex, int areaIndex, byte newID)
+        {
+            var setted = false;
+            var lva = GetLevelAndArea(levelIndex, areaIndex);
+            var isUsed = false;
+            
+            foreach (var area in lva.level.Areas)
+            {
+                if (!isUsed && area.AreaID == newID)
+                    isUsed = true;
+            }
+
+            if (!isUsed)
+            {
+                if (lva.area is object)
+                    lva.area.AreaID = newID;
+
+                LevelAreaIDChanged?.Invoke(new EventArguments.LevelAreaEventArgs(levelIndex, areaIndex, newID));
+                setted = true;
+            }
+
+            return setted;
+        }
+
+        public byte GetLevelAreaID(int levelIndex, int areaIndex)
+        {
+            return GetLevelAndArea(levelIndex, areaIndex).area?.AreaID ?? default;
+        }
+
         public byte GetLevelAreasCount(int levelIndex)
         {
             return Conversions.ToByte(GetLevelAndArea(levelIndex, -1).level.Areas.Count);
@@ -1448,7 +1479,7 @@ namespace SM64_ROM_Manager
         public void SetLevelBackgroundMode(int levelIndex, int mode)
         {
             var lvl = GetLevelAndArea(levelIndex, -1).level;
-            Image image = null;
+
             switch (mode)
             {
                 case 0: // Game Image
@@ -1458,13 +1489,13 @@ namespace SM64_ROM_Manager
                         break;
                     }
 
-                case 1: // Custom Image
-                    {
-                        lvl.Background.Enabled = true;
-                        lvl.Background.IsCustom = true;
-                        image = lvl.Background.GetImage();
-                        break;
-                    }
+                //case 1: // Custom Image
+                //    {
+                //        lvl.Background.Enabled = true;
+                //        lvl.Background.IsCustom = true;
+                //        lvl.Background.GetImage();
+                //        break;
+                //    }
 
                 case 2: // Disable
                     {
@@ -1536,7 +1567,7 @@ namespace SM64_ROM_Manager
             }
         }
 
-        public void SaveLevelAreaSettings(int levelIndex, int areaIndex, TerrainTypes terrainTypes, byte musicID, EnvironmentEffects environmentEffects, CameraPresets cameraPrset, bool enable2DCamera, bool enableShowMsg, byte showMsgDialogID)
+        public void SaveLevelAreaSettings(int levelIndex, int areaIndex, TerrainTypes terrainTypes, byte musicID, EnvironmentEffects environmentEffects, CameraPresets cameraPrset, bool enable2DCamera, bool enableShowMsg, byte showMsgDialogID, AreaReverbLevel reverbLevel)
         {
             var lvl = GetLevelAndArea(levelIndex, areaIndex);
             var area = lvl.area;
@@ -1547,6 +1578,8 @@ namespace SM64_ROM_Manager
             area.Enable2DCamera = enable2DCamera;
             area.ShowMessage.Enabled = enableShowMsg;
             area.ShowMessage.DialogID = showMsgDialogID;
+            if (area is RMLevelArea)
+                ((RMLevelArea)area).ReverbLevel = reverbLevel;
             this.SetLevelscriptNeedToSave(lvl.level);
         }
 
@@ -1694,15 +1727,22 @@ namespace SM64_ROM_Manager
             StatusText = string.Empty;
         }
 
-        public (TerrainTypes terrainType, byte bgMusic, CameraPresets camPreset, EnvironmentEffects envEffect, bool enable2DCam, AreaBGs bgType, Color bgColor, bool enableShowMsg, byte showMsgDialogID) GetLevelAreaSettings(int levelIndex, int areaIndex)
+        public (byte areaID, TerrainTypes terrainType, byte bgMusic, CameraPresets camPreset, EnvironmentEffects envEffect, bool enable2DCam, AreaBGs bgType, Color bgColor, bool enableShowMsg, byte showMsgDialogID, AreaReverbLevel reverbLevel) GetLevelAreaSettings(int levelIndex, int areaIndex)
         {
             var area = GetLevelAndArea(levelIndex, areaIndex).area;
 
             // Set Area Segmented Banks
             area.SetSegmentedBanks(RomManager);
 
+            // Get Reverb level
+            AreaReverbLevel reverbLevel;
+            if (area is RMLevelArea)
+                reverbLevel = ((RMLevelArea)area).ReverbLevel;
+            else
+                reverbLevel = AreaReverbLevel.None;
+
             // Get Area Settings
-            return (area.TerrainType, area.BGMusic, area.Geolayout.CameraPreset, area.Geolayout.EnvironmentEffect, area.Enable2DCamera, area.Background.Type, area.Background.Color, area.ShowMessage.Enabled, area.ShowMessage.DialogID);
+            return (area.AreaID, area.TerrainType, area.BGMusic, area.Geolayout.CameraPreset, area.Geolayout.EnvironmentEffect, area.Enable2DCamera, area.Background.Type, area.Background.Color, area.ShowMessage.Enabled, area.ShowMessage.DialogID, reverbLevel);
         }
 
         public int GetLevelAreaScrollingTexturesCount(int levelIndex, int areaIndex)

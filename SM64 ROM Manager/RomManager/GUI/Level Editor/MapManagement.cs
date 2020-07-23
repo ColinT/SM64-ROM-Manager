@@ -91,30 +91,23 @@ namespace SM64_ROM_Manager.LevelEditor
         {
             Ogl.MakeCurrent();
             bool loadAreaIDs = false;
+
             if (Main.CArea is null)
-            {
                 loadAreaIDs = true;
-            }
 
             if (Main.CLevel.Areas.Count != Main.ComboBoxItem_Area.Items.Count)
-            {
                 loadAreaIDs = true;
-            }
             else
             {
                 foreach (ComboItem ci in Main.ComboBoxItem_Area.Items)
                 {
                     if (!Main.CLevel.Areas.Contains((LevelArea)ci.Tag))
-                    {
                         loadAreaIDs = true;
-                    }
                 }
             }
 
             if (loadAreaIDs)
-            {
                 Main.LoadAreaIDs();
-            }
             else
             {
                 bool loadAreaMdl = false;
@@ -123,9 +116,7 @@ namespace SM64_ROM_Manager.LevelEditor
                     hashCollisionMap = 0;
                     cCollisionMap = null;
                     if (Ogl.CurrentModelDrawMod == ModelDrawMod.Collision)
-                    {
                         loadAreaMdl = true;
-                    }
                 }
 
                 if (hashVisualMap != Main.CArea.AreaModel.Fast3DBuffer.GetBuffer().GetHashCode())
@@ -133,15 +124,13 @@ namespace SM64_ROM_Manager.LevelEditor
                     hashVisualMap = 0;
                     cVisualMap = null;
                     if (Ogl.CurrentModelDrawMod == ModelDrawMod.VisualMap)
-                    {
                         loadAreaMdl = true;
-                    }
                 }
 
                 if (loadAreaMdl)
-                {
                     Maps.LoadAreaModel();
-                }
+                else
+                    Ogl.Invalidate();
             }
         }
 
@@ -233,26 +222,31 @@ namespace SM64_ROM_Manager.LevelEditor
 
         internal void UpdateTexturesOfCurrentModel(Dictionary<Material, Image> snapshot)
         {
-            if (cVisualMap is object && Maps.rndrVisualMap is object)
+            void updateTextures(Renderer rndr)
             {
                 foreach (var kvp in snapshot)
                 {
                     if (kvp.Value != kvp.Key.Image)
-                    {
-                        rndrVisualMap.UpdateTexture(kvp.Value, kvp.Key.Image);
-                    }
+                        rndr.UpdateTexture(kvp.Value, kvp.Key.Image);
                 }
-
-                Ogl.Invalidate();
             }
+
+            if (cVisualMap is object && Maps.rndrVisualMap is object)
+                updateTextures(rndrVisualMap);
+
+            foreach (var rndrObj in Main.ObjectModels.Values)
+                updateTextures(rndrObj);
+
+            Ogl.Invalidate();
         }
 
         internal Dictionary<Material, Image> TakeSnapshotOfCurrentModelTextures()
         {
             var dic = new Dictionary<Material, Image>();
-            if (cVisualMap is object)
+
+            void addTextures(Object3D obj3d)
             {
-                foreach (var kvp in cVisualMap.Materials)
+                foreach (var kvp in obj3d.Materials)
                 {
                     var img = kvp.Value.Image;
                     if (img is object)
@@ -261,6 +255,12 @@ namespace SM64_ROM_Manager.LevelEditor
                     }
                 }
             }
+
+            if (cVisualMap is object)
+                addTextures(cVisualMap);
+
+            foreach (var rndrObj in Main.ObjectModels.Values)
+                addTextures(rndrObj.Model);
 
             return dic;
         }

@@ -18,6 +18,7 @@ namespace SM64Lib.Levels
 {
     public class LevelManager : ILevelManager
     {
+        public bool EnableLoadingAreaReverb { get; set; } = true;
 
         /// <summary>
         /// Loads a ROM Manager Level from ROM.
@@ -80,7 +81,7 @@ namespace SM64Lib.Levels
                         var scrollTexAddrs = new List<int>(new[] { 0x400000, 0x401700 });
                         if (rommgr.RomConfig.ScrollTexConfig.UseCustomBehavior)
                             scrollTexAddrs.Add(rommgr.RomConfig.ScrollTexConfig.CustomBehaviorAddress);
-                        if (scrollTexAddrs.Contains(Conversions.ToInteger(clNormal3DObject.GetSegBehaviorAddr(c))))
+                        if (scrollTexAddrs.Contains((int)clNormal3DObject.GetSegBehaviorAddr(c)))
                             tArea.ScrollingTextures.Add(new ManagedScrollingTexture(c));
                         else
                             tArea.Objects.Add(c);
@@ -106,7 +107,7 @@ namespace SM64Lib.Levels
                                 customBGEnd = endAddr - 0x140;
                                 break;
                             case 0x7: // Global Object Bank
-                                if (rommgr.GlobalModelBank is object && startAddr == rommgr.GlobalModelBank.CurSeg.RomStart && endAddr == rommgr.GlobalModelBank.CurSeg.RomEnd)
+                                if (rommgr.GlobalModelBank?.CurSeg is object && startAddr == rommgr.GlobalModelBank.CurSeg.RomStart && endAddr == rommgr.GlobalModelBank.CurSeg.RomEnd)
                                 {
                                     lvl.EnableGlobalObjectBank = true;
                                     lvl.LastGobCmdSegLoad = c;
@@ -247,8 +248,7 @@ namespace SM64Lib.Levels
                 a.SpecialBoxes.AddRange(SpecialBoxList.ReadTable(brToUse.BaseStream, SpecialBoxType.ToxicHaze, bank0x19RomStart, bank0x19RomStart + 0x6280 + 0x50 * a.AreaID));
                 a.SpecialBoxes.AddRange(SpecialBoxList.ReadTable(brToUse.BaseStream, SpecialBoxType.Mist, bank0x19RomStart, bank0x19RomStart + 0x6500 + 0x50 * a.AreaID));
 
-                // Load boxdata from collision
-                for (int i = 0, loopTo = a.SpecialBoxes.Count - 1; i <= loopTo; i++)
+                for (int i = 0; i < a.SpecialBoxes.Count; i++)
                 {
                     var boxdata = a.AreaModel.Collision.SpecialBoxes.ElementAtOrDefault(i);
                     if (boxdata is object)
@@ -267,6 +267,20 @@ namespace SM64Lib.Levels
 
             // Hardcoded Camera
             lvl.HardcodedCameraSettings = General.PatchClass.get_HardcodedCamera_Enabled(LevelID);
+
+            // Area Reverb
+            if (EnableLoadingAreaReverb)
+            {
+                foreach (var area in lvl.Areas)
+                {
+                    if (area is RMLevelArea && area.AreaID >= 1 && area.AreaID <= 3)
+                    {
+                        fs.Position = 0xEE0C0 + lvl.LevelID * 3 + area.AreaID - 1;
+                        ((RMLevelArea)area).ReverbLevel = (AreaReverbLevel)fs.ReadByte();
+                    }
+                }
+            }
+
             fs.Close();
         }
 
@@ -285,49 +299,45 @@ namespace SM64Lib.Levels
             var lid = rommgr.LevelInfoData.GetByLevelID(lvl.LevelID);
 
             // Write Area Model & Update Scrolling Texture Vertex Pointers & Write Custom Object Bank
+            var CollisionBoxTableIndex = new[] { 0, 0x32, 0x33 };
             foreach (LevelArea a in lvl.Areas)
             {
+                a.SpecialBoxes.SortByHeight();
                 a.Bank0x0EOffset = curOff;
+
                 int oldModelStart = a.AreaModel.Fast3DBuffer.Fast3DBankStart;
                 int newModelStart;
                 int modelOffset;
 
                 // Add the new water boxes
                 a.AreaModel.Collision.SpecialBoxes.Clear();
-                var TableIndex = new[] { 0, 0x32, 0x33 };
                 foreach (SpecialBox sp in a.SpecialBoxes)
                 {
-                    var boxdata = new Model.Collision.BoxData();
-                    boxdata.X1 = sp.X1;
-                    boxdata.X2 = sp.X2;
-                    boxdata.Z1 = sp.Z1;
-                    boxdata.Z2 = sp.Z2;
-                    boxdata.Y = sp.Y;
-                    boxdata.Index = Conversions.ToShort(TableIndex[(int)sp.Type]);
-                    var switchExpr = sp.Type;
-                    switch (switchExpr)
+                    var boxdata = new Model.Collision.BoxData
+                    {
+                        X1 = sp.X1,
+                        X2 = sp.X2,
+                        Z1 = sp.Z1,
+                        Z2 = sp.Z2,
+                        Y = sp.Y,
+                        Index = (short)CollisionBoxTableIndex[(int)sp.Type]
+                    };
+
+                    switch (sp.Type)
                     {
                         case SpecialBoxType.Water:
-                            {
-                                boxdata.Type = Model.Collision.BoxDataType.Water;
-                                break;
-                            }
-
+                            boxdata.Type = Model.Collision.BoxDataType.Water;
+                            break;
                         case SpecialBoxType.Mist:
-                            {
-                                boxdata.Type = Model.Collision.BoxDataType.Mist;
-                                break;
-                            }
-
+                            boxdata.Type = Model.Collision.BoxDataType.Mist;
+                            break;
                         case SpecialBoxType.ToxicHaze:
-                            {
-                                boxdata.Type = Model.Collision.BoxDataType.ToxicHaze;
-                                break;
-                            }
+                            boxdata.Type = Model.Collision.BoxDataType.ToxicHaze;
+                            break;
                     }
 
                     a.AreaModel.Collision.SpecialBoxes.Add(boxdata);
-                    TableIndex[(int)sp.Type] += 1;
+                    CollisionBoxTableIndex[(int)sp.Type] += 1;
                 }
 
                 // Write Area Model
@@ -815,22 +825,25 @@ namespace SM64Lib.Levels
             {
                 var TableIndex = new[] { 0, 0x32, 0x33 };
                 var TableOffset = new[] { 0x6000 + 0x50 * a.AreaID, 0x6280 + 0x50 * a.AreaID, 0x6500 + 0x50 * a.AreaID };
-                a.SpecialBoxes.SortByHeight();
-                foreach (SpecialBox w in a.SpecialBoxes)
+                
+                foreach (SpecialBoxType t in Enum.GetValues(typeof(SpecialBoxType)))
                 {
-                    // Write Table Entry
-                    bwToUse.Position = TableOffset[(int)w.Type];
-                    bwToUse.Write(Conversions.ToShort(TableIndex[(int)w.Type]));
-                    bwToUse.Write(Conversions.ToShort(0x0));
-                    bwToUse.Write(Conversions.ToInteger(CurrentBoxOffset + lvl.Bank0x19.BankAddress));
-                    TableOffset[(int)w.Type] = Conversions.ToInteger(bwToUse.Position);
+                    foreach (SpecialBox w in a.SpecialBoxes.Where(n => n.Type == t))
+                    {
+                        // Write Table Entry
+                        bwToUse.Position = TableOffset[(int)w.Type];
+                        bwToUse.Write(Conversions.ToShort(TableIndex[(int)w.Type]));
+                        bwToUse.Write(Conversions.ToShort(0x0));
+                        bwToUse.Write(Conversions.ToInteger(CurrentBoxOffset + lvl.Bank0x19.BankAddress));
+                        TableOffset[(int)w.Type] = Conversions.ToInteger(bwToUse.Position);
 
-                    // Write Box Data
-                    bwToUse.Position = CurrentBoxOffset;
-                    foreach (byte b in w.ToArrayBoxData())
-                        bwToUse.Write(b);
-                    TableIndex[(int)w.Type] += 1;
-                    CurrentBoxOffset += 0x20;
+                        // Write Box Data
+                        bwToUse.Position = CurrentBoxOffset;
+                        foreach (byte b in w.ToArrayBoxData())
+                            bwToUse.Write(b);
+                        TableIndex[(int)w.Type] += 1;
+                        CurrentBoxOffset += 0x20;
+                    }
                 }
 
                 foreach (int i in TableOffset)
@@ -855,6 +868,20 @@ namespace SM64Lib.Levels
             output.Write(Conversions.ToUInteger(lvl.Bank0x19.RomEnd));
             output.Write(Conversions.ToUInteger(0x1900001C));
             output.Write(Conversions.ToUInteger(0x7040000));
+
+            // Write Area Reverb
+            if (EnableLoadingAreaReverb)
+            {
+                foreach (var area in lvl.Areas)
+                {
+                    if (area is RMLevelArea && area.AreaID >= 1 && area.AreaID <= 3)
+                    {
+                        output.Position = 0xEE0C0 + lvl.LevelID * 3 + area.AreaID - 1;
+                        output.Write((byte)((RMLevelArea)area).ReverbLevel);
+                    }
+                }
+            }
+
             return saveres;
         }
     }

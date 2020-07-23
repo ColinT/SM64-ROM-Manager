@@ -2,6 +2,7 @@
 using System.Linq;
 using global::DevComponents.DotNetBar;
 using global::DevComponents.DotNetBar.Metro.ColorTables;
+using Newtonsoft.Json;
 
 namespace SM64_ROM_Manager.SettingsManager
 {
@@ -9,23 +10,27 @@ namespace SM64_ROM_Manager.SettingsManager
     {
         public bool AlwaysKeepBlueColors { get; set; }
         public MetroColorGeneratorParameters MetroColorParams { get; set; }
-        public bool UseWindows10Style { get; set; }
+        [JsonProperty("UseWindows10Style")]
+        public bool UseSystemTheme { get; set; }
+        [JsonIgnore]
+        public MetroColorGeneratorParameters ActiveMetroColorParams
+        { get => StyleManager.MetroColorGeneratorParameters; }
 
         public void ResetValues()
         {
             AlwaysKeepBlueColors = false;
             MetroColorParams = VisualThemeLight; // MetroColorGeneratorParameters.Office2016Purple
-            UseWindows10Style = true;
+            UseSystemTheme = true;
         }
 
         public bool IsDarkTheme()
         {
-            return IsDarkTheme(MetroColorParams);
+            return IsDarkTheme(ActiveMetroColorParams);
         }
 
         public bool IsWhiteTheme()
         {
-            return IsWhiteTheme(MetroColorParams);
+            return IsWhiteTheme(ActiveMetroColorParams);
         }
 
         public static bool IsDarkTheme(MetroColorGeneratorParameters theme)
@@ -50,7 +55,7 @@ namespace SM64_ROM_Manager.SettingsManager
         {
             get
             {
-                return new MetroColorGeneratorParameters(ColorScheme.GetColor("c0c0c0"), ColorScheme.GetColor("662D62"), "Gray");
+                return new MetroColorGeneratorParameters(ColorScheme.GetColor("EFEFF2"), ColorScheme.GetColor("662D62"), "Gray");
             }
         }
 

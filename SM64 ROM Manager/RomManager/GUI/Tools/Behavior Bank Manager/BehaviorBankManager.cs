@@ -12,6 +12,7 @@ using DevComponents.DotNetBar;
 using DevComponents.DotNetBar.Validator;
 using SM64_ROM_Manager.My.Resources;
 using SM64Lib;
+using SM64Lib.ASM;
 using SM64Lib.Behaviors;
 using SM64Lib.Behaviors.Script;
 using SM64Lib.Data;
@@ -33,7 +34,9 @@ namespace SM64_ROM_Manager
         private readonly RomManager rommgr;
         private BehaviorBank bank;
         private Behavior curBehav = null;
+        private CustomAsmAreaLinkOptions curAsmLinkOption = null;
         private bool loadingBehavior = false;
+        private bool loadingCustomAsmLinkOptions = false;
         private Timer Timer_PropsChanged;
 
         // C o n s t r u c t o r
@@ -57,6 +60,8 @@ namespace SM64_ROM_Manager
             UpdateAmbientColors();
             StyleManager.UpdateAmbientColors(RichTextBoxEx_Script);
             TabControl_Behav.Enabled = false;
+            ButtonItem_DisableGlobaleBehaviorBank.Visible = IsEditingGlobalBehaviorBank();
+            ButtonItem_Advanced.Visible = ButtonItem_Advanced.VisibleSubItems != 0;
 
             // Default Nodes
             AdvTree_Behaviors.Nodes.AddRange(new[] { nBehavCustom, nBehavVanilla });
@@ -221,7 +226,8 @@ namespace SM64_ROM_Manager
                     TextBoxX_BehavName.Text = curBehav.Config.Name;
                     checkBoxX_BehavEnableColPtr.Checked = curBehav.EnableCollisionPointer;
                     textBoxX_BehavColPtr.Text = TextFromValue(curBehav.CollisionPointer);
-                    checkBoxX_BehavEnableColPtr.Enabled = !curBehav.Config.IsVanilla;
+                    ButtonX_EditParamInfos.Enabled = !curBehav.Config.IsVanilla;
+                    LoadCustomAsmLinkOptionsList();
                 }
                 else if (IsEditScript)
                 {
@@ -346,6 +352,7 @@ namespace SM64_ROM_Manager
         {
             // Create behavior
             var behav = new Behavior(type);
+            behav.Config.ID.Generate();
             bank.Behaviors.Add(behav);
             rommgr.CalculateGlobalBehaviorBankAddresses();
 
@@ -355,6 +362,120 @@ namespace SM64_ROM_Manager
             n.EnsureVisible();
             AdvTree_Behaviors.SelectedNode = n;
         }
+
+        private void LoadCustomAsmLinkOptionsList()
+        {
+            ListViewEx_CustomAsmFunctions.BeginUpdate();
+            ListViewEx_CustomAsmFunctions.Items.Clear();
+
+            foreach (var link in curBehav.Config.CustomAsmLinks)
+                ListViewEx_CustomAsmFunctions.Items.Add(GetCustomAsmLinkOptionsItem(link));
+
+            ListViewEx_CustomAsmFunctions.EndUpdate();
+
+            curAsmLinkOption = null;
+            LoadCustomAsmLinkOptions();
+        }
+
+        private ListViewItem GetCustomAsmLinkOptionsItem(CustomAsmAreaLinkOptions link)
+        {
+            var item = new ListViewItem
+            {
+                Tag = link
+            };
+            item.SubItems.Add(new ListViewItem.ListViewSubItem());
+            UpdateCustomAsmLinkOptionsItem(item);
+            return item;
+        }
+
+        private ListViewItem FindCustomAsmLinkOptionsItem(CustomAsmAreaLinkOptions link)
+        {
+            ListViewItem item = null;
+
+            foreach (ListViewItem iitem in ListViewEx_CustomAsmFunctions.Items)
+            {
+                if (iitem.Tag == link)
+                    item = iitem;
+            }
+
+            return item;
+        }
+
+        private void UpdateCustomAsmLinkOptionsItem(CustomAsmAreaLinkOptions link)
+        {
+            UpdateCustomAsmLinkOptionsItem(FindCustomAsmLinkOptionsItem(link));
+        }
+
+        private void UpdateCustomAsmLinkOptionsItem(ListViewItem item)
+        {
+            if (item?.Tag is CustomAsmAreaLinkOptions link)
+            {
+                item.SubItems[0].Text = link.CustomAsm.Config.Name;
+                item.SubItems[1].Text = link.Loop.ToString();
+            }
+        }
+
+        private void LoadCustomAsmLinkOptions()
+        {
+            bool isNotNull = curAsmLinkOption is object;
+
+            ButtonX_LoopCustomAsmFunction.Enabled = isNotNull;
+            ButtonX_RemoveCustomAsmFunction.Enabled = isNotNull;
+
+            if (isNotNull)
+            {
+                loadingCustomAsmLinkOptions = true;
+                ButtonX_LoopCustomAsmFunction.Checked = curAsmLinkOption.Loop;
+                loadingCustomAsmLinkOptions = false;
+            }
+        }
+
+        private void SaveCustomAsmLinkOptions()
+        {
+            if (!loadingCustomAsmLinkOptions && curAsmLinkOption is object)
+            {
+                curAsmLinkOption.Loop = ButtonX_LoopCustomAsmFunction.Checked;
+                UpdateCustomAsmLinkOptionsItem(curAsmLinkOption);
+            }
+        }
+
+        private void AddCustomAsmLinkOptions(CustomAsmArea asm)
+        {
+            if (curBehav is object)
+            {
+                // Add link options
+                var link = new CustomAsmAreaLinkOptions
+                {
+                    CustomAsm = asm
+                };
+                curBehav.Config.CustomAsmLinks.Add(link);
+
+                // Add item
+                var item = GetCustomAsmLinkOptionsItem(link);
+                ListViewEx_CustomAsmFunctions.Items.Add(item);
+                foreach (ListViewItem selitem in ListViewEx_CustomAsmFunctions.SelectedItems)
+                    selitem.Selected = false;
+                item.Selected = true;
+                item.EnsureVisible();
+            }
+        }
+
+        private void RemoveCustomAsmLinkOptions(CustomAsmAreaLinkOptions link)
+        {
+            // Remove item
+            var item = FindCustomAsmLinkOptionsItem(link);
+            if (item is object)
+                ListViewEx_CustomAsmFunctions.Items.Remove(item);
+
+            // Remove link options
+            curBehav?.Config.CustomAsmLinks.RemoveIfContains(link);
+        }
+
+        private bool IsEditingGlobalBehaviorBank()
+            => rommgr is object && rommgr.GlobalBehaviorBank == bank;
+
+        private void DisableGlobalBehaviorBank()
+            => rommgr.DisableGlobalBehaviorBank();
 
         // G U I
 
@@ -431,6 +552,48 @@ namespace SM64_ROM_Manager
         private void BehaviorBankManager_FormClosing(object sender, FormClosingEventArgs e)
         {
             rommgr.AfterRomSave -= Rommgr_AfterRomSave;
+        }
+
+        private void ListViewEx_CustomAsmFunctions_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var selItems = ListViewEx_CustomAsmFunctions.SelectedItems;
+            if (selItems.Count > 0)
+                curAsmLinkOption = selItems[0].Tag as CustomAsmAreaLinkOptions;
+            else
+                curAsmLinkOption = null;
+
+            LoadCustomAsmLinkOptions();
+        }
+
+        private void ButtonX_AddCustomAsmFunction_Click(object sender, EventArgs e)
+        {
+            var selector = new CustomAsmCodeSelector(rommgr);
+            if (selector.ShowDialog(this) == DialogResult.OK)
+                AddCustomAsmLinkOptions(selector.AsmArea);
+        }
+
+        private void ButtonX_RemoveCustomAsmFunction_Click(object sender, EventArgs e)
+        {
+            RemoveCustomAsmLinkOptions(curAsmLinkOption);
+        }
+
+        private void ButtonX_LoopCustomAsmFunction_CheckedChanged(object sender, EventArgs e)
+        {
+            SaveCustomAsmLinkOptions();
+        }
+
+        private void ButtonX_EditParamInfos_Click(object sender, EventArgs e)
+        {
+            new BehaviorParameterInfoEditor(curBehav.Config.ParamsInfo).ShowDialog(this);
+        }
+
+        private void ButtonItem_DisableGlobaleBehaviorBank_Click(object sender, EventArgs e)
+        {
+            if (MessageBoxEx.Show(this, BehaviorBankManagerLangRes.Msg_DisableGlobalBehaviorBank, BehaviorBankManagerLangRes.Msg_DisableGlobalBehaviorBank_Titel, MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            {
+                DisableGlobalBehaviorBank();
+                Close();
+            }
         }
     }
 }

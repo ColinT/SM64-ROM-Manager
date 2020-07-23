@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Pilz.Cryptography;
+using Pilz.Json.Converters;
 
 namespace SM64Lib.Behaviors
 {
@@ -12,10 +14,14 @@ namespace SM64Lib.Behaviors
         internal delegate void RequestModelEventHandler(BehaviorConfig config, RequestBehaviorEventArgs request);
         internal static event RequestModelEventHandler RequestBehavior;
 
+        [JsonConverter(typeof(UniquiIDStringJsonConverter<BehaviorConfig>))]
+        public UniquieID<BehaviorConfig> ID { get; set; } = new UniquieID<BehaviorConfig>();
         public int BankAddress { get; set; } = -1;
         public bool IsVanilla { get; set; } = false;
         public string Name { get; set; } = string.Empty;
         public int FixedLength { get; set; } = -1;
+        public List<CustomAsmAreaLinkOptions> CustomAsmLinks { get; } = new List<CustomAsmAreaLinkOptions>();
+        public BehaviorParamsInfo ParamsInfo { get; } = new BehaviorParamsInfo();
 
         public Behavior FindBehavior()
         {

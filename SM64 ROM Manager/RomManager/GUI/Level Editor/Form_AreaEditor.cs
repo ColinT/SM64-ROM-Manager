@@ -65,6 +65,8 @@ namespace SM64_ROM_Manager.LevelEditor
         internal Dictionary<byte, Renderer> ObjectModels { get; private set; } = new Dictionary<byte, Renderer>();
         internal Dictionary<ManagedSpecialBox, Renderer> SpecialBoxRenderers { get; private set; } = new Dictionary<ManagedSpecialBox, Renderer>();
         internal ObjectComboList MyObjectCombos { get; private set; } = new ObjectComboList();
+        internal ObjectComboList CustomObjectsObjectCombos { get; } = new ObjectComboList();
+        internal BehaviorInfoList MyBehaviorInfos { get; private set; } = new BehaviorInfoList();
         internal Dictionary<byte, object> ObjectModelsToParse { get; private set; } = new Dictionary<byte, object>();
         internal List<string> MyLevelsList { get; private set; } = new List<string>();
         internal List<byte> KnownModelIDs { get; private set; } = new List<byte>();
@@ -287,6 +289,21 @@ namespace SM64_ROM_Manager.LevelEditor
             }
         }
 
+        private ObjectComboList allObjectCombos = new ObjectComboList();
+        internal ObjectComboList AllObjectCombos
+        {
+            get
+            {
+                if (!allObjectCombos.Any())
+                {
+                    allObjectCombos.AddRange(General.ObjectCombos);
+                    allObjectCombos.AddRange(General.ObjectCombosCustom);
+                    allObjectCombos.AddRange(BuildObjectCombos(Rommgr.CustomObjects));
+                }
+                return allObjectCombos;
+            }
+        }
+
         public Form_AreaEditor(SM64Lib.RomManager rommgr, Level Level, byte LevelID, byte AreaID)
         {
             Timer_ListViewEx_Objects_SelectionChanged = new System.Timers.Timer() { AutoReset = false, SynchronizingObject = this, Interval = 40 };
@@ -300,7 +317,7 @@ namespace SM64_ROM_Manager.LevelEditor
             // Initialize Components
             InitializeComponent();
             SelectedList = ListViewEx_Objects;
-
+            
             // Create Modules
             ogl = new OpenGLManager(this, Panel_GLControl);
             objectControlling = new ObjectControlling(this);
@@ -320,11 +337,14 @@ namespace SM64_ROM_Manager.LevelEditor
             WindowState = Settings.AreaEditor.DefaultWindowMode;
 
             // Setup some Styles
-            if (Settings.StyleManager.AlwaysKeepBlueColors)
+            if (Settings.StyleManager.AlwaysKeepBlueColors && !Settings.StyleManager.IsDarkTheme())
             {
                 PanelEx1.Style.BackColor1.Color = Color.LightSteelBlue;
                 PanelEx1.Style.BackColor2.Color = Color.LightSteelBlue;
             }
+            RibbonControl1.Size = new Size(
+                RibbonControl1.Size.Width,
+                StyleManager.Style == eStyle.Office2016 ? 155 : 150);
 
             // Add Groups to ListView Controls
             ListViewEx_Warps.Groups.AddRange(new[] { lvg_ConnectedWarps, lvg_WarpsForGame, lvg_PaintingWarps, lvg_InstantWarps });
@@ -335,7 +355,7 @@ namespace SM64_ROM_Manager.LevelEditor
 
             // Init Object Properties Helper
             PropertyTree = AdvPropertyGrid1.PropertyTree;
-            bpMgr = new AdvPropGrid_ObjectPropertiesHelper(AdvPropertyGrid1, MyObjectCombos, nameof(Managed3DObject.BehaviorID), "BParam");
+            bpMgr = new AdvPropGrid_ObjectPropertiesHelper(AdvPropertyGrid1, MyObjectCombos, MyBehaviorInfos, nameof(Managed3DObject.BehaviorID), "BParam");
 
             // Get the PropertyTree of AdvPropertyGrid1
             PropertyTree = AdvPropertyGrid1.PropertyTree;
@@ -345,6 +365,8 @@ namespace SM64_ROM_Manager.LevelEditor
 
             // Resume drawing
             ResumeLayout();
+
+            RibbonControl1.AutoSyncSize();
 
             // Add event to remember loaded area displaylist dumps
             General.LoadedAreaVisualMapDisplayLists += General_LoadedAreaVisualMapDisplayLists;
@@ -367,6 +389,7 @@ namespace SM64_ROM_Manager.LevelEditor
             General.LoadObjectCombosIfEmpty();
             await LoadObjectModels();
             LoadOtherObjectCombos();
+            LoadOtherBehaviorInfos();
             SortObjectCombosAlphabetlicly();
             LoadComboBoxObjComboEntries();
             LoadLevelsStringList();
@@ -377,16 +400,7 @@ namespace SM64_ROM_Manager.LevelEditor
 
         internal void LoadComboBoxObjComboEntries()
         {
-            var myObjectCombosString = new List<string>();
-            foreach (ObjectCombo c in MyObjectCombos)
-                myObjectCombosString.Add(c.Name);
-
-            // Set Property Settings on AdvPropertyGrid1
-            var propSet = new PropertySettings("ObjectCombo");
-            var editor = new ComboBoxPropertyEditor(myObjectCombosString.ToArray());
-            editor.DropDownWidth = 300;
-            propSet.ValueEditor = editor;
-            AdvPropertyGrid1.PropertySettings.Add(propSet);
+            bpMgr.LoadComboBoxObjComboEntries(MyObjectCombos);
         }
 
         internal void SortObjectCombosAlphabetlicly()
@@ -407,19 +421,93 @@ namespace SM64_ROM_Manager.LevelEditor
             MyObjectCombos.AddRange(BuildObjectCombos(Rommgr.CustomObjects));
         }
 
-        internal static ObjectComboList BuildObjectCombos(CustomObjectCollection customObjectCollection)
+        internal void LoadOtherBehaviorInfos()
         {
-            var list = new ObjectComboList();
+            MyBehaviorInfos.AddRange(General.BehaviorInfos.Concat(General.BehaviorInfosCustom));
+            MyBehaviorInfos.AddRange(BuildBehaviorInfos(Rommgr.CustomObjects));
+        }
 
-            foreach (var customObject in customObjectCollection.CustomObjects)
+        internal ObjectComboList BuildObjectCombos(CustomObjectCollection customObjectCollection)
+        {
+            if (!CustomObjectsObjectCombos.Any() && customObjectCollection?.CustomObjects is object)
             {
-                var combo = new ObjectCombo
+                foreach (var customObject in customObjectCollection.CustomObjects)
                 {
-                    Name = customObject.Name,
-                    BehaviorAddress = (uint)customObject.BehaviorProps.BehaviorAddress,
-                    ModelID = customObject.ModelProps.ModelID
-                };
-                list.Add(combo);
+                    // Create Object Combo
+                    var combo = new ObjectCombo
+                    {
+                        Name = customObject.Name,
+                        BehaviorAddress = (uint)customObject.BehaviorProps.BehaviorAddress,
+                        ModelID = customObject.ModelProps.ModelID
+                    };
+
+                    // Copy B. Params
+                    void cpBPToCombo(SM64Lib.Behaviors.BehaviorParamInfo source, ObjectCombo.BParam destination)
+                    {
+                        if (source is object && destination is object)
+                        {
+                            destination.Name = source.Name;
+                            destination.Description = source.Description;
+                        }
+                    }
+                    if (!customObject.BehaviorProps.UseCustomAddress && customObject.BehaviorProps.Behavior is object)
+                    {
+                        cpBPToCombo(customObject.BehaviorProps.Behavior.ParamsInfo?.Param1, combo.BParam1);
+                        cpBPToCombo(customObject.BehaviorProps.Behavior.ParamsInfo?.Param2, combo.BParam2);
+                        cpBPToCombo(customObject.BehaviorProps.Behavior.ParamsInfo?.Param3, combo.BParam3);
+                        cpBPToCombo(customObject.BehaviorProps.Behavior.ParamsInfo?.Param4, combo.BParam4);
+                    }
+
+                    // Add to List
+                    CustomObjectsObjectCombos.Add(combo);
+                }
+            }
+
+            return CustomObjectsObjectCombos;
+        }
+
+        internal static BehaviorInfoList BuildBehaviorInfos(CustomObjectCollection customObjectCollection)
+        {
+            var list = new BehaviorInfoList();
+
+            if (customObjectCollection?.CustomObjects is object)
+            {
+                foreach (var customObject in customObjectCollection.CustomObjects)
+                {
+                    if (!customObject.BehaviorProps.UseCustomAddress && customObject.BehaviorProps.Behavior is object)
+                    {
+                        // Create Behavior Info
+                        var behavInfo = new BehaviorInfo
+                        {
+                            Name = customObject.BehaviorProps.Behavior.Name,
+                            BehaviorAddress = (uint)customObject.BehaviorProps.BehaviorAddress
+                        };
+
+                        // Copy B. Params
+                        void cpBPToBehavior(SM64Lib.Behaviors.BehaviorParamInfo source, BehaviorInfo.BParam destination)
+                        {
+                            if (source is object && destination is object)
+                            {
+                                destination.Name = source.Name;
+                                foreach (var srcVals in source.Values)
+                                {
+                                    destination.Values.Add(new BehaviorInfo.BParamValue
+                                    {
+                                        Name = srcVals.Name,
+                                        Value = srcVals.Value
+                                    });
+                                }
+                            }
+                        }
+                        cpBPToBehavior(customObject.BehaviorProps.Behavior.ParamsInfo?.Param1, behavInfo.BParam1);
+                        cpBPToBehavior(customObject.BehaviorProps.Behavior.ParamsInfo?.Param2, behavInfo.BParam2);
+                        cpBPToBehavior(customObject.BehaviorProps.Behavior.ParamsInfo?.Param3, behavInfo.BParam3);
+                        cpBPToBehavior(customObject.BehaviorProps.Behavior.ParamsInfo?.Param4, behavInfo.BParam4);
+
+                        // Add to List
+                        list.Add(behavInfo);
+                    }
+                }
             }
 
             return list;
@@ -582,8 +670,8 @@ namespace SM64_ROM_Manager.LevelEditor
         {
             if (isDeactivated)
             {
-                maps.CheckAndLoadNew();
                 isDeactivated = false;
+                maps.CheckAndLoadNew();
             }
         }
 
@@ -670,12 +758,21 @@ namespace SM64_ROM_Manager.LevelEditor
         private async Task LoadCustomObjectBankModel(CustomModel obj)
         {
             var mdl = new Object3D();
+            var data = new BinaryStreamData(obj.Model.Fast3DBuffer);
             foreach (Geopointer gp in obj.Geolayout.Geopointers)
-                await LoadDisplaylist(gp, mdl);
+                await LoadDisplaylist(data, gp, mdl);
             AddObject3DWithRendererIfNotNull(mdl, obj.ModelID);
         }
 
         private async Task<DisplayList> LoadDisplaylist(Geopointer pointer, Object3D mdl)
+        {
+            var dl = new DisplayList();
+            await dl.TryFromStreamAsync(pointer, Rommgr, default);
+            await dl.TryToObject3DAsync(mdl, Rommgr, default);
+            return dl;
+        }
+
+        private async Task<DisplayList> LoadDisplaylist(BinaryData data, Geopointer pointer, Object3D mdl)
         {
             var dl = new DisplayList();
             await dl.TryFromStreamAsync(pointer, Rommgr, default);
@@ -1329,7 +1426,7 @@ namespace SM64_ROM_Manager.LevelEditor
             int i = 0;
             foreach (var objj in CArea.Objects)
             {
-                var objNew = new Managed3DObject(objj, MyObjectCombos);
+                var objNew = new Managed3DObject(objj, AllObjectCombos);
                 ManagedObjects.Add(objNew);
                 var lvi = new ListViewItem();
                 lvi.Tag = objNew;
@@ -1488,7 +1585,7 @@ namespace SM64_ROM_Manager.LevelEditor
         {
             if (objIndex > -1)
                 lvi.SubItems[0].Text = Conversions.ToString(objIndex + 1);
-            var combo = MyObjectCombos.GetObjectComboOfObject(obj);
+            var combo = AllObjectCombos.GetObjectComboOfObject(obj);
             string txt = "";
             if (combo is null || combo == ObjectComboList.UnknownCombo)
             {
@@ -1804,27 +1901,22 @@ namespace SM64_ROM_Manager.LevelEditor
 
         internal void ButtonItem_AddArea_Click(object sender, EventArgs e)
         {
-            var ReamingIDs = new List<byte>(new byte[] { 0x1, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7, 0x0 });
-            foreach (LevelArea a in CLevel.Areas)
-                ReamingIDs.Remove(a.AreaID);
-            if (ReamingIDs.Count == 0)
-            {
-                // MessageBoxEx.Show("The maximum count of Areas per Level is 8.", "Maximum reached", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                Publics.General.ShowToastnotification(Panel_GLControl, "The maximum amount of areas per level is 8.", eToastGlowColor.Red);
-                ButtonItem_AddArea.Enabled = false;
-                return;
-            }
+            var newID = Publics.General.GetNextAreaID(CLevel);
 
-            byte newAreaID = ReamingIDs[0];
-            var tArea = new RMLevelArea(newAreaID);
-            var res = PublicFunctions.GetModelViaModelConverter(false, false, inputsKey: General.GetKeyForConvertAreaModel(Rommgr.GameName, Conversions.ToShort(CLevel.LevelID), newAreaID));
-            if (res is object)
+            if (newID.isAnyFree)
             {
-                tArea.AreaModel = res?.mdl;
-                CLevel.Areas.Add(tArea);
-                AreaIdToLoad = tArea.AreaID;
-                LoadAreaIDs();
+                var tArea = new RMLevelArea((byte)newID.newID);
+                var res = PublicFunctions.GetModelViaModelConverter(false, false, inputsKey: General.GetKeyForConvertAreaModel(Rommgr.GameName, Conversions.ToShort(CLevel.LevelID), (byte)newID.newID));
+                if (res is object)
+                {
+                    tArea.AreaModel = res?.mdl;
+                    CLevel.Areas.Add(tArea);
+                    AreaIdToLoad = tArea.AreaID;
+                    LoadAreaIDs();
+                }
             }
+            else
+                MessageBoxEx.Show(Form_Main_Resources.MsgBox_MaxCountAreasReached, Form_Main_Resources.MsgBox_MaxCountAreasReached_Title, MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
         internal void ButtonItem_RemoveArea_Click(object sender, EventArgs e)
@@ -2257,7 +2349,7 @@ namespace SM64_ROM_Manager.LevelEditor
             var objs = SelectedObjects;
             if (objs.Any())
             {
-                var dialog = new InformationListDialog(InformationListDialog.EditModes.EnableObjComboTab, MyObjectCombos);
+                var dialog = new InformationListDialog(InformationListDialog.EditModes.EnableObjComboTab, MyObjectCombos, null);
                 dialog.SelectedObjectCombo = MyObjectCombos.GetObjectComboOfObject(objs.First());
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
@@ -2266,7 +2358,7 @@ namespace SM64_ROM_Manager.LevelEditor
 
                     // Change Object Combo by Name
                     foreach (Managed3DObject obj in SelectedObjects)
-                        obj.ObjectCombo = dialog.SelectedObjectCombo.Name;
+                        obj.ObjectCombo = dialog.SelectedObjectCombo;
 
                     UpdateObjectListViewItems();
                     ShowObjectProperties();
@@ -2279,8 +2371,8 @@ namespace SM64_ROM_Manager.LevelEditor
             var objs = SelectedObjects;
             if (objs.Any())
             {
-                var dialog = new InformationListDialog(InformationListDialog.EditModes.EnableBehavTab, MyObjectCombos);
-                dialog.SelectedBehavior = General.BehaviorInfos.GetByBehaviorAddress(objs.First().BehaviorID);
+                var dialog = new InformationListDialog(InformationListDialog.EditModes.EnableBehavTab, null, MyBehaviorInfos);
+                dialog.SelectedBehavior = MyBehaviorInfos.GetByBehaviorAddress(objs.First().BehaviorID);
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
                     // Store History Point
@@ -2330,7 +2422,7 @@ namespace SM64_ROM_Manager.LevelEditor
             {
                 var newObjCmd = new LevelscriptCommand(LevelArea.DefaultNormal3DObject);
                 CArea.Objects.Add(newObjCmd);
-                var newObj = new Managed3DObject(newObjCmd, MyObjectCombos);
+                var newObj = new Managed3DObject(newObjCmd, AllObjectCombos);
                 ManagedObjects.Add(newObj);
                 newobjects.Add(newObj);
                 var lvi = new ListViewItem();
@@ -2357,7 +2449,7 @@ namespace SM64_ROM_Manager.LevelEditor
             foreach (int index in ListViewEx_Objects.SelectedIndices)
             {
                 var newObj = new LevelscriptCommand(LevelArea.DefaultNormal3DObject);
-                var new3DObj = new Managed3DObject(newObj, MyObjectCombos);
+                var new3DObj = new Managed3DObject(newObj, AllObjectCombos);
                 CArea.Objects[index] = newObj;
                 ManagedObjects[index] = new3DObj;
                 oldObjects.Add(ManagedObjects[index]);
@@ -2499,45 +2591,6 @@ namespace SM64_ROM_Manager.LevelEditor
             byte found = 0;
             bool foundLevel = false;
 
-            // For Each obj As Managed3DObject In managedObjects
-            // If myWarpObjCombos.Where(Function(n) n.BehaviorID = obj.BehaviorID).Count > 0 _
-            // AndAlso obj.BParam2 = warp.DestWarpID Then
-            // found += 1
-            // End If
-            // If found = 0 Then
-            // Return WarpDestinationValidationResult.WarpSourceNotFound
-            // ElseIf found > 1 Then
-            // Return WarpDestinationValidationResult.WarpSourceUsedMultipleTimes
-            // Else
-            // foundLevel = True
-            // Exit For
-            // End If
-            // Next
-
-            // If found = 0 Then
-            // For Each level As Level In rommgr.Levels
-            // If Not foundLevel AndAlso level IsNot cLevel Then
-            // For Each area As LevelArea In level.Areas
-            // For Each obj As LevelscriptCommand In area.Objects
-            // Dim behavID As Integer = clNormal3DObject.GetSegBehaviorAddr(obj)
-            // If myWarpObjCombos.Where(Function(n) n.BehaviorID = behavID).Count > 0 _
-            // AndAlso clNormal3DObject.GetParams(obj).BParam2 = warp.DestWarpID Then
-            // found += 1
-            // End If
-            // Next
-            // If found = 0 Then
-            // Return WarpDestinationValidationResult.WarpSourceNotFound
-            // ElseIf found > 1 Then
-            // Return WarpDestinationValidationResult.WarpSourceUsedMultipleTimes
-            // Else
-            // foundLevel = True
-            // Exit For
-            // End If
-            // Next
-            // End If
-            // Next
-            // End If
-
             var lvl = Rommgr.Levels.FirstOrDefault(n => n.LevelID == (ushort)warp.DestLevelID);
             if (lvl is object)
             {
@@ -2546,29 +2599,25 @@ namespace SM64_ROM_Manager.LevelEditor
                     if (area.AreaID == warp.DestAreaID)
                     {
                         found = 0;
+
                         foreach (LevelscriptCommand cmd in area.Warps)
                         {
                             if (clWarp.GetWarpID(cmd) == warp.DestWarpID)
-                            {
                                 found += 1;
-                            }
                         }
 
                         if (found == 0)
-                        {
                             return WarpDestinationValidationResult.WarpDestNotFound;
-                        }
                         else if (found == 1)
                         {
                             found = 0;
+
                             if (lvl == CLevel)
                             {
                                 foreach (Managed3DObject obj in ManagedObjects)
                                 {
                                     if (myWarpObjCombos.Where(n => n.BehaviorAddress == obj.BehaviorID).Count() > 0 && obj.BParam2 == warp.DestWarpID)
-                                    {
                                         found += 1;
-                                    }
                                 }
                             }
                             else
@@ -2577,38 +2626,25 @@ namespace SM64_ROM_Manager.LevelEditor
                                 {
                                     int behavID = Conversions.ToInteger(clNormal3DObject.GetSegBehaviorAddr(obj));
                                     if (myWarpObjCombos.Where(n => n.BehaviorAddress == behavID).Count() > 0 && clNormal3DObject.GetParams(obj).BParam2 == warp.DestWarpID)
-                                    {
                                         found += 1;
-                                    }
                                 }
                             }
 
                             if (found == 0)
-                            {
                                 return WarpDestinationValidationResult.WarpDestNotUsed;
-                            }
                             else if (found == 1)
-                            {
                                 return WarpDestinationValidationResult.WarpFoundInCustomLevel;
-                            }
                             else
-                            {
                                 return WarpDestinationValidationResult.WarpDestUsedMultipleTimes;
-                            }
                         }
                         else
-                        {
                             return WarpDestinationValidationResult.DuplicatedWarpIDsAtDestination;
-                        }
                     }
                 }
-
                 return WarpDestinationValidationResult.AreaNotFound;
             }
             else
-            {
                 return WarpDestinationValidationResult.LevelNotFound;
-            }
         }
 
         internal Color GetColorOfWarpDestinationValidationResult(IManagedLevelscriptCommand warp)
@@ -2621,24 +2657,15 @@ namespace SM64_ROM_Manager.LevelEditor
                     case WarpDestinationValidationResult.DuplicatedWarpIDsAtDestination:
                     case WarpDestinationValidationResult.WarpDestUsedMultipleTimes:
                     case WarpDestinationValidationResult.WarpSourceUsedMultipleTimes:
-                        {
-                            return Color.FromArgb(-4754112);
-                        }
-
+                        return Color.FromArgb(-4754112); // Orange
                     case WarpDestinationValidationResult.WarpFoundInCustomLevel:
-                        {
-                            return Color.FromArgb(-9073592);
-                        }
-
+                        return Color.FromArgb(-9073592); // Green
                     case WarpDestinationValidationResult.AreaNotFound:
                     case WarpDestinationValidationResult.WarpDestNotFound:
                     case WarpDestinationValidationResult.WarpDestNotUsed:
-                        {
-                            return Color.FromArgb(-7324615);
-                        }
+                        return Color.FromArgb(-7324615); // Green
                 }
             }
-
             return default;
         }
 
@@ -2824,7 +2851,7 @@ namespace SM64_ROM_Manager.LevelEditor
             var obj = SelectedObject;
             if (obj is object)
             {
-                var info = General.BehaviorInfos.GetByBehaviorAddress(obj.BehaviorID);
+                var info = MyBehaviorInfos.GetByBehaviorAddress(obj.BehaviorID);
                 for (byte i = 1; i <= 4; i++)
                 {
                     Node n = AdvPropertyGrid1.GetPropertyNode($"BParam{i}");
@@ -2851,37 +2878,29 @@ namespace SM64_ROM_Manager.LevelEditor
             var switchExpr = e.PropertyName;
             switch (switchExpr)
             {
-                case "AllActs":
-                case "Act1":
-                case "Act2":
-                case "Act3":
-                case "Act4":
-                case "Act5":
-                case "Act6":
-                    {
-                        AdvPropertyGrid1_RefreshPropertyValues();
-                        break;
-                    }
-
-                case "Rotation":
-                case "Position":
-                    {
-                        ogl.UpdateOrbitCamera();
-                        ogl.Invalidate();
-                        break;
-                    }
-
-                case "ObjectCombo":
-                case "ModelID":
-                case "BehaviorID":
-                    {
-                        CheckObjCombo();
-                        UpdateBParamNames();
-                        AdvPropertyGrid1_RefreshPropertyValues();
-                        ogl.UpdateOrbitCamera();
-                        ogl.Invalidate();
-                        break;
-                    }
+                case nameof(Managed3DObject.AllActs):
+                case nameof(Managed3DObject.Act1):
+                case nameof(Managed3DObject.Act2):
+                case nameof(Managed3DObject.Act3):
+                case nameof(Managed3DObject.Act4):
+                case nameof(Managed3DObject.Act5):
+                case nameof(Managed3DObject.Act6):
+                    AdvPropertyGrid1_RefreshPropertyValues();
+                    break;
+                case nameof(Managed3DObject.Rotation):
+                case nameof(Managed3DObject.Position):
+                    ogl.UpdateOrbitCamera();
+                    ogl.Invalidate();
+                    break;
+                case nameof(Managed3DObject.ObjectComboID):
+                case nameof(Managed3DObject.ModelID):
+                case nameof(Managed3DObject.BehaviorID):
+                    CheckObjCombo();
+                    UpdateBParamNames();
+                    AdvPropertyGrid1_RefreshPropertyValues();
+                    ogl.UpdateOrbitCamera();
+                    ogl.Invalidate();
+                    break;
             }
 
             UpdateObjectListViewItems();
@@ -2896,19 +2915,14 @@ namespace SM64_ROM_Manager.LevelEditor
             var switchExpr = e.PropertyName;
             switch (switchExpr)
             {
-                case "ObjectCombo":
-                case "ModelID":
-                case "BehaviorID":
-                    {
-                        StoreObjectHistoryPoint(AdvPropertyGrid1.SelectedObjects, new[] { "ModelID", "BehaviorID" });
-                        break;
-                    }
-
+                case nameof(Managed3DObject.ObjectComboID):
+                case nameof(Managed3DObject.ModelID):
+                case nameof(Managed3DObject.BehaviorID):
+                    StoreObjectHistoryPoint(AdvPropertyGrid1.SelectedObjects, new[] { "ModelID", "BehaviorID" });
+                    break;
                 default:
-                    {
-                        StoreObjectHistoryPoint(AdvPropertyGrid1.SelectedObjects, e.PropertyName);
-                        break;
-                    }
+                    StoreObjectHistoryPoint(AdvPropertyGrid1.SelectedObjects, e.PropertyName);
+                    break;
             }
         }
 
@@ -2935,12 +2949,12 @@ namespace SM64_ROM_Manager.LevelEditor
         /* TODO ERROR: Skipped RegionDirectiveTrivia */
         internal void ButtonItem8_Click(object sender, EventArgs e)
         {
-            var input = new Form_SetUpPoint("Death Floor Height", false, true, false, 0, 0, 0);
-            if (input.ShowDialog() == DialogResult.OK)
-            {
-                short height = Conversions.ToShort(input.IntegerInput_Y.Value);
-                AddDeathFloorAt(height);
-            }
+            AddDeathFloor(true);
+        }
+
+        private void ButtonItem_ButtonItem_AddDeathFloorWithExtBounds_Click(object sender, EventArgs e)
+        {
+            AddDeathFloor(false);
         }
 
         internal void ButtonItem4_Click(object sender, EventArgs e)
@@ -2961,7 +2975,17 @@ namespace SM64_ROM_Manager.LevelEditor
             }
         }
 
-        internal void AddDeathFloorAt(short height)
+        internal void AddDeathFloor(bool vanillaBounds)
+        {
+            var input = new Form_SetUpPoint("Death Floor Height", false, true, false, 0, 0, 0);
+            if (input.ShowDialog() == DialogResult.OK)
+            {
+                short height = Conversions.ToShort(input.IntegerInput_Y.Value);
+                AddDeathFloorAt(height, vanillaBounds);
+            }
+        }
+
+        internal void AddDeathFloorAt(short height, bool vanillaBounds)
         {
             // Create vertices
             var v1 = new SM64Lib.Model.Collision.Vertex();
@@ -2986,18 +3010,19 @@ namespace SM64_ROM_Manager.LevelEditor
             f2.CollisionType = 0xA;
 
             // Set coordinates to vertices
-
-            v1.X = short.MaxValue;
-            v1.Z = short.MaxValue;
+            var minVal = vanillaBounds ? (short)-8192 : short.MinValue;
+            var maxVal = vanillaBounds ? (short)8192 : short.MaxValue;
+            v1.X = maxVal;
+            v1.Z = maxVal;
             v1.Y = height;
-            v2.X = short.MaxValue;
-            v2.Z = short.MinValue;
+            v2.X = maxVal;
+            v2.Z = minVal;
             v2.Y = height;
-            v3.X = short.MinValue;
-            v3.Z = short.MinValue;
+            v3.X = minVal;
+            v3.Z = minVal;
             v3.Y = height;
-            v4.X = short.MinValue;
-            v4.Z = short.MaxValue;
+            v4.X = minVal;
+            v4.Z = maxVal;
             v4.Y = height;
 
             // Create collections
@@ -3106,9 +3131,7 @@ namespace SM64_ROM_Manager.LevelEditor
                 foreach (var kvp in maps.cVisualMap.Materials)
                 {
                     if (kvp.Value.Image is object)
-                    {
                         block.Textures.Add(kvp.Value);
-                    }
                 }
 
                 catLevelTextures.Blocks.Add(block);
@@ -3117,6 +3140,7 @@ namespace SM64_ROM_Manager.LevelEditor
             // Add all other textures
             if (ObjectModels.Any())
             {
+                var addedTextureAddresses = new List<int>();
                 var block = new TextureEditor.TextureBlock();
                 block.Name = "Object Models";
                 foreach (var kvpp in ObjectModels)
@@ -3125,7 +3149,13 @@ namespace SM64_ROM_Manager.LevelEditor
                     {
                         if (kvp.Value.Image is object)
                         {
-                            block.Textures.Add(kvp.Value);
+                            var info = kvp.Value.Tag as SM64Lib.Model.Conversion.Fast3DParsing.TextureLoadedInfos;
+                            var hasInfo = info is object;
+                            if (!hasInfo || !addedTextureAddresses.Contains(info.TextureRomAddress))
+                            {
+                                block.Textures.AddIfNotContains(kvp.Value);
+                                if (hasInfo) addedTextureAddresses.Add(info.TextureRomAddress);
+                            }
                         }
                     }
                 }
@@ -3134,9 +3164,7 @@ namespace SM64_ROM_Manager.LevelEditor
             }
 
             if (catLevelTextures.Blocks.Any())
-            {
                 categories.Add(catLevelTextures);
-            }
 
             return categories;
         }
@@ -3289,6 +3317,5 @@ namespace SM64_ROM_Manager.LevelEditor
 
             frm.Show();
         }
-
     }
 }

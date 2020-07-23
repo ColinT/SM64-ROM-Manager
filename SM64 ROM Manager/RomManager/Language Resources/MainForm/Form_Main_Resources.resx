@@ -129,6 +129,12 @@
   <data name="MsgBox_BankSizeChangedSuccess_Title" xml:space="preserve">
     <value>Size changed</value>
   </data>
+  <data name="MsgBox_ChangeAreaID" xml:space="preserve">
+    <value>This area ID is already used in this level. Please use another one.</value>
+  </data>
+  <data name="MsgBox_ChangeAreaID_Title" xml:space="preserve">
+    <value>Change Area ID</value>
+  </data>
   <data name="MsgBox_ConvertToMidi_Failed" xml:space="preserve">
     <value>An error occurred while converting .m64 to .midi!</value>
   </data>
@@ -140,6 +146,12 @@
   </data>
   <data name="MsgBox_ConvertToMidi_Succes_Titel" xml:space="preserve">
     <value>M64 to MIDI success</value>
+  </data>
+  <data name="MsgBox_EnableGlobalBehaviorBank" xml:space="preserve">
+    <value>The Global Behavior Bank is disabled right now. Do you want to enable it?&lt;br/&gt;Note:&lt;br/&gt;- You will not be able to disable it again.&lt;br/&gt;- If you enable it, all existing behaviors will be copied to a new Segmented Bank replacing the vanilla one.&lt;br/&gt;- All existing behaviors that get copied will not be re-aligned while saving the ROM.</value>
+  </data>
+  <data name="MsgBox_EnableGlobalBehaviorBank_Title" xml:space="preserve">
+    <value>Enable Global Behavior Bank</value>
   </data>
   <data name="MsgBox_ErrorSavingSequence" xml:space="preserve">
     <value>An error occurred while saving the sequence.</value>
@@ -165,6 +177,10 @@
   <data name="MsgBox_InvalidBgImageSize_Title" xml:space="preserve">
     <value>Invalid size</value>
   </data>
+  <data name="MsgBox_InvalidRomHash" xml:space="preserve">
+    <value>The MD5 Hash of your ROM is invalid. Please try getting your ROM from an other site. It has to be 8MB and following MD5 checksum:
+{0}</value>
+  </data>
   <data name="MsgBox_LimitSequenceCountReached" xml:space="preserve">
     <value>The limit of possible music sequences in the original game is 127. Do you want to add more anyway?</value>
   </data>
@@ -184,7 +200,7 @@
     <value>Maximum reached</value>
   </data>
   <data name="MsgBox_PrepaireRom" xml:space="preserve">
-    <value>The ROM will be prepared for use with SM64 ROM Manager.</value>
+    <value>The ROM will be prepared for use with SM64 ROM Manager.&lt;br/&gt;&lt;br/&gt;Please Note:&lt;br/&gt;While prepairing your ROM, an additional file will be created. It will be named like your ROM but with a ".config" extension.&lt;br/&gt;This file contains many important settings and other stuff to provide some features in the SM64 ROM Manager.&lt;br/&gt;If you delete this .config file, you might get &lt;u&gt;some errors or unwanted behaviors&lt;/u&gt; in ROM Manager.&lt;br/&gt;So, if &lt;u&gt;you rename your ROM file&lt;/u&gt;, &lt;u&gt;always rename the config file&lt;/u&gt; to match your ROM file name.&lt;br/&gt;If you &lt;u&gt;copy your ROM&lt;/u&gt; file, also &lt;u&gt;copy the config&lt;/u&gt; file and ensure the file name matches the copied ROM file.</value>
   </data>
   <data name="MsgBox_PrepaireRom_Title" xml:space="preserve">
     <value>Prepare ROM</value>
@@ -233,6 +249,42 @@
   </data>
   <data name="Notify_ShouldLoadRomFirst" xml:space="preserve">
     <value>You must open a ROM first!</value>
+  </data>
+  <data name="SoundEffect_BobOmb" xml:space="preserve">
+    <value>Bob-Omb</value>
+  </data>
+  <data name="SoundEffect_Boo" xml:space="preserve">
+    <value>Boo</value>
+  </data>
+  <data name="SoundEffect_BowserFight" xml:space="preserve">
+    <value>Bowser Fight</value>
+  </data>
+  <data name="SoundEffect_BowserIntroDoors" xml:space="preserve">
+    <value>Bowser (Intro/Doors)</value>
+  </data>
+  <data name="SoundEffect_KingBobOmb" xml:space="preserve">
+    <value>King Bob-Omb</value>
+  </data>
+  <data name="SoundEffect_KoopaTheQuick" xml:space="preserve">
+    <value>Koopa The Quick</value>
+  </data>
+  <data name="SoundEffect_Monkey" xml:space="preserve">
+    <value>Monkey</value>
+  </data>
+  <data name="SoundEffect_Penguin" xml:space="preserve">
+    <value>Penguin</value>
+  </data>
+  <data name="SoundEffect_Sign" xml:space="preserve">
+    <value>Sign</value>
+  </data>
+  <data name="SoundEffect_WhompKing" xml:space="preserve">
+    <value>Whomp King</value>
+  </data>
+  <data name="SoundEffect_Wiggler" xml:space="preserve">
+    <value>Wiggler</value>
+  </data>
+  <data name="SoundEffect_Yoshi" xml:space="preserve">
+    <value>Yoshi</value>
   </data>
   <data name="Status_CalculatingTextSpace" xml:space="preserve">
     <value>Calculating space...</value>

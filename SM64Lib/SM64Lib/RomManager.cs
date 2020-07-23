@@ -18,6 +18,8 @@ using global::SM64Lib.Objects.ModelBanks;
 using global::SM64Lib.SegmentedBanking;
 using SM64Lib.Behaviors;
 using SM64Lib.Objects.ObjectBanks;
+using SM64Lib.ASM;
+using SM64Lib.Exceptions;
 
 namespace SM64Lib
 {
@@ -50,6 +52,10 @@ namespace SM64Lib
         public event WritingNewProgramVersionEventHandler WritingNewProgramVersion;
         public delegate void WritingNewProgramVersionEventHandler(RomManager sender, RomVersionEventArgs e);
 
+        // C o n s t a n t s
+
+        public const string SUPER_MARIO_64_U_MD5HASH = "20b854b239203baf6c961b850a4a51a2";
+
         // F i e l d s
 
         private readonly Dictionary<byte, SegmentedBank> segBankList = new Dictionary<byte, SegmentedBank>();
@@ -69,8 +75,9 @@ namespace SM64Lib
         public bool IsSM64EditorMode { get; private set; } = false;
         public Text.Profiles.TextProfileInfo TextInfoProfile { get; set; }
         public MusicList MusicList { get; private set; } = new MusicList();
-        public CustomModelBank GlobalModelBank { get; set; } = new CustomModelBank();
-        public BehaviorBank GlobalBehaviorBank { get; set; } = null;
+        public CustomModelBank GlobalModelBank { get; private set; } = new CustomModelBank();
+        public BehaviorBank GlobalBehaviorBank { get; private set; } = null;
+        public CustomAsmBank GlobalCustomAsmBank { get; private set; } = null;
         public ILevelManager LevelManager { get; private set; }
         public RomConfig RomConfig { get; private set; }
         public bool IsNewROM { get; private set; } = false;
@@ -99,7 +106,6 @@ namespace SM64Lib
                     {
                         ver = LoadVersion();
                     }
-
                     programVersion_loadedVersion = true;
                 }
                 else
@@ -321,9 +327,23 @@ namespace SM64Lib
             return new BinaryRom(this, access);
         }
 
+        public RomSpaceInfo GetRomSpaceInfo()
+        {
+            var info = new RomSpaceInfo();
+            info.MaxAvailableSpace = 0x4000000 - 0x1210000;
+            info.UsedLevelsSpace = Levels.Length;
+            info.UsedMusicSpace = MusicList.Length;
+            info.UsedGlobalBehaviorSpace = GlobalBehaviorBank.Length;
+            info.UsedGlobalModelsSpace = GlobalModelBank is object ? GlobalModelBank.Length : 0;
+            return info;
+        }
+
         public void LoadRom()
         {
             BeginLoadingRom?.Invoke(this, new EventArgs());
+
+            // Load Global Custom Asm Bank
+            LoadGlobalCustomAsmBank();
 
             // Load Global Behavior Bank
             LoadGlobalBehaviorBank();
@@ -345,7 +365,8 @@ namespace SM64Lib
         /// </summary>
         /// <param name="IgnoreNeedToSave">If True, everything will be saved even if there are no changes.</param>
         /// <param name="DontPatchUpdates">If True, Update Patches will be ignored.</param>
-        public void SaveRom(bool IgnoreNeedToSave = false, bool DontPatchUpdates = false)
+        /// <param name="recalcChecksumBehavior"></param>
+        public void SaveRom(bool IgnoreNeedToSave = false, bool DontPatchUpdates = false, RecalcChecksumBehavior recalcChecksumBehavior = RecalcChecksumBehavior.Auto)
         {
             if (!RaiseBeforeRomSave())
             {
@@ -355,17 +376,13 @@ namespace SM64Lib
                     // Patch update-patches
                     foreach (KeyValuePair<string, RomVersion> kvp in dicUpdatePatches.Where(n => n.Value > ProgramVersion).OrderBy(n => n.Key))
                     {
-                        /* TODO ERROR: Skipped WarningDirectiveTrivia */
                         General.PatchClass.ApplyPPF(RomFile, Path.Combine(General.MyFilePaths["Update Patches Folder"], kvp.Value.Filename));
-                        /* TODO ERROR: Skipped WarningDirectiveTrivia */
                         needUpdateChecksum = true;
                     }
                 }
 
                 // Write Version
-                var romVerEventArgs = new RomVersionEventArgs(ProgramVersion);
-                WritingNewProgramVersion?.Invoke(this, romVerEventArgs);
-                WriteVersion(romVerEventArgs.RomVersion);
+                WriteNewVersion();
 
                 // Texts
                 SaveAllTextGroups(ref needUpdateChecksum);
@@ -376,7 +393,7 @@ namespace SM64Lib
                 General.HexRoundUp2(ref lastpos);
 
                 // Global Model Bank
-                SaveGlobalModelBank(ref lastpos);
+                SaveGlobalModelBank(ref lastpos, ref needUpdateChecksum);
                 General.HexRoundUp2(ref lastpos);
 
                 // Calc behavior bank addresses
@@ -388,12 +405,18 @@ namespace SM64Lib
                 // Custom Object Combos
                 CustomObjects.TakeoverProperties(this);
 
+                // Global Asm Bank
+                GlobalCustomAsmBank.Save(this);
+
                 // Global Behavior Bank
-                SaveGlobalBehaviorBank(ref lastpos);
-                General.HexRoundUp2(ref lastpos);
+                if (RomConfig.GlobalBehaviorBank.Enabled)
+                {
+                    SaveGlobalBehaviorBank(ref lastpos);
+                    General.HexRoundUp2(ref lastpos);
+                }
 
                 // Update checksum
-                if (needUpdateChecksum)
+                if (recalcChecksumBehavior == RecalcChecksumBehavior.Always || (recalcChecksumBehavior == RecalcChecksumBehavior.Auto && needUpdateChecksum))
                     General.PatchClass.UpdateChecksum(RomFile);
 
                 // Write Rom.config
@@ -407,6 +430,29 @@ namespace SM64Lib
         public void CalculateGlobalBehaviorBankAddresses()
         {
             GlobalBehaviorBank.CalculateBehaviorBankAddresses(0x13000000, this);
+        }
+
+        public void DisableGlobalBehaviorBank()
+        {
+            if (GlobalBehaviorBank.Config.Enabled)
+            {
+                // Reset Pointers
+                var rom = GetBinaryRom(FileAccess.ReadWrite);
+                rom.Position = 0x2ABCD4;
+                rom.Write(0x219E00);
+                rom.Write(0x21F4C0);
+                rom.Close();
+
+                // Set enabled false
+                GlobalBehaviorBank.Config.Disable();
+            }
+        }
+
+        private void WriteNewVersion()
+        {
+            var romVerEventArgs = new RomVersionEventArgs(ProgramVersion);
+            WritingNewProgramVersion?.Invoke(this, romVerEventArgs);
+            WriteVersion(romVerEventArgs.RomVersion);
         }
 
         private void WriteVersion(RomVersion newVersion)
@@ -708,7 +754,7 @@ namespace SM64Lib
             return seg;
         }
 
-        private void SaveGlobalModelBank(ref int offset)
+        private void SaveGlobalModelBank(ref int offset, ref bool needToRecalcChecksum)
         {
             var seg = GenerateAndGetGlobalObjectBank();
 
@@ -725,31 +771,50 @@ namespace SM64Lib
 
             // Write Bank Address & Length to Rom
             rom.Position = 0x120FFF0;
-            rom.Write(seg.RomStart);
-            rom.Write(seg.RomEnd);
+            void checkAndSet(int value, ref bool needToRecalcChecksum2)
+            {
+                if (rom.ReadInt32() != value)
+                {
+                    rom.Position -= 4;
+                    rom.Write(value);
+                    needToRecalcChecksum2 = true;
+                }
+            }
+            checkAndSet(seg.RomStart, ref needToRecalcChecksum);
+            checkAndSet(seg.RomEnd, ref needToRecalcChecksum);
             rom.Close();
         }
 
-        public void LoadGlobalBehaviorBank()
+        public void LoadGlobalBehaviorBank(bool enableAndLoadIfDisabled = false)
         {
-            var rom = GetBinaryRom(FileAccess.Read);
-
-            // Get Bank Address & Length from ROM
-            rom.Position = 0x2ABCD4;
-            var seg = new SegmentedBank(0x13)
-            {
-                RomStart = rom.ReadInt32(),
-                RomEnd = rom.ReadInt32()
-            };
-            seg.ReadData(rom.BaseStream);
-            rom.Close();
-
-            // Read Behavior Bank
             GlobalBehaviorBank = new BehaviorBank(RomConfig.GlobalBehaviorBank);
-            if(RomConfig.GlobalBehaviorBank.IsVanilla)
-                GlobalBehaviorBank.ReadVanillaBank(seg);
-            else
-                GlobalBehaviorBank.ReadBank(seg, 0);
+
+            if (!GlobalBehaviorBank.Config.Enabled && enableAndLoadIfDisabled)
+            {
+                RomConfig.GlobalBehaviorBank.Enable();
+                LoadGlobalBehaviorBank();
+            }
+
+            if (GlobalBehaviorBank.Config.Enabled)
+            {
+                var rom = GetBinaryRom(FileAccess.Read);
+
+                // Get Bank Address & Length from ROM
+                rom.Position = 0x2ABCD4;
+                var seg = new SegmentedBank(0x13)
+                {
+                    RomStart = rom.ReadInt32(),
+                    RomEnd = rom.ReadInt32()
+                };
+                seg.ReadData(rom.BaseStream);
+                rom.Close();
+
+                // Read Behavior Bank
+                if (RomConfig.GlobalBehaviorBank.IsVanilla)
+                    GlobalBehaviorBank.ReadVanillaBank(seg);
+                else
+                    GlobalBehaviorBank.ReadBank(seg, 0);
+            }
         }
 
         private void SaveGlobalBehaviorBank(ref int offset)
@@ -776,6 +841,12 @@ namespace SM64Lib
 
             rom.Close();
             RomConfig.GlobalBehaviorBank.IsVanilla = false;
+        }
+
+        public void LoadGlobalCustomAsmBank()
+        {
+            GlobalCustomAsmBank = new CustomAsmBank(RomConfig.GlobalCustomAsmBank);
+            GlobalCustomAsmBank.Load(this);
         }
 
         /// <summary>
@@ -912,6 +983,9 @@ namespace SM64Lib
 
             // Update Checksum
             General.PatchClass.UpdateChecksum(RomFile);
+
+            WriteNewVersion();
+            SaveRomConfig();
         }
 
         /// <summary>
@@ -920,6 +994,14 @@ namespace SM64Lib
         /// <param name="IsSecondTry">If True, no new try will be executed, if failed.</param>
         public void CreateROM(bool IsSecondTry = false)
         {
+            // Check md5 hash of ROM
+            if (!IsSecondTry)
+            {
+                var md5 = General.ComputeMD5Hash(RomFile);
+                if (md5 != SUPER_MARIO_64_U_MD5HASH)
+                    throw new InvalidMD5HashException();
+            }
+
             // Extend to 64MB
             var proc = new Process();
             {
@@ -932,22 +1014,23 @@ namespace SM64Lib
 
             proc.Start();
             proc.WaitForExit();
-            if (new FileInfo(RomFile).Length == 8 * 1024 * 1024)
-            {
-                if (IsSecondTry)
-                {
-                    throw new Exception("Your ROM is invalid, it isn't possible to extend it.");
-                }
-                else
-                {
-                    var fs = new BinaryRom(this, FileAccess.Write);
-                    fs.Position = 0x10;
-                    foreach (string b in "63 5A 2B FF 8B 02 23 26".Split(' '))
-                        fs.WriteByte(Conversions.ToByte("&H" + b));
-                    fs.Close();
-                    CreateROM(true);
-                }
-            }
+
+            //if (new FileInfo(RomFile).Length == 8 * 1024 * 1024)
+            //{
+            //    if (IsSecondTry)
+            //    {
+            //        throw new Exception("Your ROM is invalid, it isn't possible to extend it.");
+            //    }
+            //    else
+            //    {
+            //        var fs = new BinaryRom(this, FileAccess.Write);
+            //        fs.Position = 0x10;
+            //        foreach (string b in "63 5A 2B FF 8B 02 23 26".Split(' '))
+            //            fs.WriteByte(Conversions.ToByte("&H" + b));
+            //        fs.Close();
+            //        CreateROM(true);
+            //    }
+            //}
         }
 
         /// <summary>

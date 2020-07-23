@@ -2322,20 +2322,23 @@
   <data name="ButtonItem_ModelImporter.Text" xml:space="preserve">
     <value>Model-Importer</value>
   </data>
-  <data name="ButtonItem_TrajectoryEditor.Text" xml:space="preserve">
-    <value>Pfad-Editor</value>
-  </data>
-  <data name="ButtonItem14.Text" xml:space="preserve">
-    <value>Itembox-Content-Editor</value>
-  </data>
-  <data name="ButtonItem13.Text" xml:space="preserve">
-    <value>Sternposition-Editor</value>
+  <data name="ButtonItem_CustomObjects.Text" xml:space="preserve">
+    <value>Eigene Objekte</value>
   </data>
   <data name="ButtonItem16.Text" xml:space="preserve">
     <value>Münzeigenschaften</value>
   </data>
-  <data name="buttonItem26.Text" xml:space="preserve">
-    <value>Eigene Objekte</value>
+  <data name="ButtonItem_TrajectoryEditor.Text" xml:space="preserve">
+    <value>Pfad-Editor</value>
+  </data>
+  <data name="ButtonItem13.Text" xml:space="preserve">
+    <value>Sternposition-Editor</value>
+  </data>
+  <data name="labelItem4.Text" xml:space="preserve">
+    <value>Expertenmodule:</value>
+  </data>
+  <data name="ButtonItem14.Text" xml:space="preserve">
+    <value>Itembox-Content-Editor</value>
   </data>
   <data name="ButtonItem18.Text" xml:space="preserve">
     <value>Globale Modell-Bank</value>
@@ -4268,9 +4271,5 @@
         MDEtMDU6MDDkOlH3AAAAJXRFWHRkYXRlOm1vZGlmeQAyMDEyLTExLTIwVDA5OjAzOjUzLTA2OjAwpVUc
         +QAAAABJRU5ErkJggg==
 </value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
 </root>
