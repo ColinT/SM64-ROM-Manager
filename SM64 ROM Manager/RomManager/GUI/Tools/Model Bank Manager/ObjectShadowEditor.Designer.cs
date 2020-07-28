@@ -170,7 +170,6 @@
             this.ButtonX_Save.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.ButtonX_Save.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             this.ButtonX_Save.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.ButtonX_Save.Enabled = false;
             this.ButtonX_Save.Image = global::SM64_ROM_Manager.My.Resources.MyIcons.icons8_checkmark_16px_1;
             this.ButtonX_Save.Location = new System.Drawing.Point(68, 88);
             this.ButtonX_Save.Margin = new System.Windows.Forms.Padding(0, 0, 0, 0);
